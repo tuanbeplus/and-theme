@@ -1,0 +1,203 @@
+.team {
+    margin-top: -20px;
+    order: 1;
+    .heading {
+        margin-bottom: 36px;
+    }
+    .area {
+        .tile {
+            margin-bottom: 56px;
+            .inner {
+                border-radius: 0 0 6px 6px;
+                box-shadow: 0px 14px 28px rgba(0, 0, 0, 0.08);
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                .image {
+                    img {
+                        width: 100%;
+                    }
+                }
+                
+                .details{
+                    padding: 12px 12px 29px 12px;
+                    display: flex;
+                    flex-direction: column;
+                    background: #fff;
+                    height: 100%;
+                    .name {
+                        margin-bottom: 8px;
+                        p {
+                            font-size: 22px;
+                        }
+                    }
+                    .position{
+                        margin-bottom: 20px;
+                        p {
+                            font-size: 16px;
+                        }
+                    }
+                    .cta {
+                        button {
+                            background: $purple;
+                            border-radius: 50px;
+                            padding: 12px 24px;
+                            color: #fff;
+                            width: auto;
+                            border: none;
+                            display: inline-block;
+                            &:hover {
+                                text-decoration: none;
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+
+.fancybox__nav {
+    display: none!important;
+}
+.fancybox__carousel .is-draggable {
+    cursor: default;
+}
+.lightbox {
+    img {
+        max-width: 216px;
+        margin-bottom: 25px;
+    }
+    .name {
+        p {
+            font-size: 24px;
+            line-height: 32px;
+            font-family: $medium;
+        }
+    }
+    .position {
+        margin-bottom: 40px;
+        p {
+            font-size: 16px;
+            line-height: 20px;
+        }
+    }
+    .description {
+        margin-bottom: 32px;
+        p {
+            font-size: 16px;
+            line-height: 24px;
+            margin-bottom: 16px;
+        }
+        a {
+            text-decoration: none;
+            color: $purple;
+        }
+    }
+    .cta {
+        button {
+            background: $purple;
+            border-radius: 50px;
+            padding: 12px 24px;
+            border: none;
+            color: #fff;
+            width: auto;
+            display: inline-block;
+            &:hover {
+                color: #fff;
+                text-decoration: none;
+            }
+        }
+    }
+    .is-close {
+        top: 10px!important;
+        right: 20px!important;
+        &:after {
+            content: 'Close';
+            color: #702A7C;
+            text-decoration: underline;
+        }
+        svg {
+            display: none;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .team {
+        .area {
+            .tile {
+                .inner {
+                    .image {
+                        background: none!important;
+                        // img {
+                        //     visibility: hidden;
+                        // }
+                        // background: none!important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 991px) {
+    .team {
+        margin-top: 25px;
+        order: 4;
+    }
+}
+
+
+@media (max-width: 767px) {
+    .team {
+        margin-top: -30px;
+        .container {
+            padding: 0;
+        }
+        .heading {
+            h2 {
+                text-transform: none;
+            }
+        }
+        .area {
+            .tile {
+                margin-bottom: 20px;
+                .inner {
+                    flex-direction: row;
+                    .image {
+                        background-size: cover;
+                        background-position: top center;
+                        width: 200px;
+                        img {
+                            visibility: hidden;
+                        }
+                    }
+                    
+                    .details {
+                        width: 100%;
+                        .name {
+                            p {
+                                font-size: 20px;
+                            }
+                        }
+                        .position {
+                            p {
+                                font-size: 16px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    .fancybox__content {
+        padding: 17px!important;
+        min-width: 350px;
+    }
+}

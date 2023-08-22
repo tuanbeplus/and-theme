@@ -1,0 +1,217 @@
+.tfa-form {
+    .saveAndResume,
+    .secondaryAction,
+    .wFormFooter {
+        display: none;
+    }
+    
+    .wForm {
+        .htmlSection,
+        .htmlContent {
+            overflow: hidden;
+            font-family: $roman;
+            font-size: 18px;
+            line-height: 24px;
+            padding: 0;
+        }
+        .errMsg {
+            margin-top: 10px;
+        }
+        
+        .list {
+            p,
+            * {
+                font-family: $roman;
+                font-size: 18px!important;
+                line-height: 24px;
+                margin-bottom: 10px;
+            }
+        }
+
+        .wFormTitle {
+            padding: 0;
+        }
+        fieldset.section {
+            background: #fff;
+            padding: 40px 10px;
+            box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 0.05);
+            border: none;
+            position: relative;
+            &:before {
+                content: '';
+                position: absolute;
+                height: 6px;
+                width: 100%;
+                background: #8D2556;
+                top: -32px;
+                left: 0;
+            }
+        }
+
+        fieldset {
+            legend {
+                top: 50px;
+                position: relative;
+                font-size: 24px;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
+            .group {
+                .oneField.field-container-D {
+                    width: 100% !important;
+                    .inputWrapper {
+                        input[type="text"] {
+                            width: 100%!important;
+                            border: 1px solid #000;
+                            border-radius: 30px;
+                            padding: 10px 15px;
+                        }
+                    }
+                }
+            }
+        }
+
+        label {
+            &.label {
+                color: #3D3D3D!important;
+                text-transform: initial!important;
+                font-family: $roman;
+                font-size: 16px;
+                opacity: 1;
+                font-weight: normal!important;
+            }
+        }
+
+        .inputWrapper {
+            width: 75%;
+            input[type="text"],
+            textarea {
+                width: 100%!important;
+                border: 1px solid #000;
+                border-radius: 30px;
+                padding: 10px 15px;
+            }
+            textarea {
+                border-radius: 11px;
+                height: 150px;
+            }
+            select {
+                width: 100%;
+                &[multiple] {
+                    padding: 10px;
+                }
+            }
+        }
+        
+        .oneField {
+            input[type="radio"] {
+                -webkit-appearance: auto!important;   
+                top: 4px;
+                position: relative;                     
+            }
+           
+        }
+        .oneChoice {
+            span,
+            label {
+                font-size: 14px!important;
+                line-height: 30px!important;
+            }
+        }
+
+        input[type="submit"] {
+            @include ctaButton;
+            background: #663077;
+            max-width: 200px;
+        }
+    }
+
+    /* Side by side */
+    #tfa_2502-D,
+    #tfa_2503-D {
+        width: 33.3%!important;
+        .inputWrapper {
+            width: 100%!important;
+        }
+    }
+
+    #tfa_2604 {
+        margin-top: -40px;
+        &:before {
+            display: none;
+        }
+    }
+}
+
+.selectric {
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 30px;
+    padding: 0 10px;
+}
+
+.selectric-items {
+    background: #fff; 
+    top: 20px;
+    border-radius: 10px;
+    padding-top: 24px!important;
+    ul {
+        margin: 0!important;
+        padding: 10px 0;
+        li {
+            padding: 5px 10px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+
+    .tfa-form {
+        .col-12 {
+            padding: 0;
+        }
+        .wForm {
+            .inputWrapper {
+                width: 100%;
+            }
+
+            /* Side by side */
+            #tfa_2502-D,
+            #tfa_2503-D {
+                width: 100%!important;
+            }
+        }        
+
+    }
+
+}
+
+.file-upload {
+    .inputWrapper {
+        float: left;
+        width: 260px!important;
+    }
+}
+.file-upload{display:block;text-align:center;font-family: Helvetica, Arial, sans-serif;font-size: 12px;}
+.file-upload .file-select{display:block;}
+.file-upload .file-select .file-select-button{    height: 40px;
+    width: 100%;
+    text-align: center;
+    background: none;
+    font-size: 16px;
+    border-radius: 30px;
+    border: 1px solid #000;
+    color: #000;
+    line-height: 40px;}
+.file-upload .file-select .file-select-name{line-height:40px;padding: 0 10px;
+    width: 100%;
+    font-size: 16px;}
+.file-upload .file-select:hover{border-color:#34495e;transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;}
+.file-upload .file-select:hover .file-select-button{color:#fff;background:#34495e;transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;}
+.file-upload.active .file-select{transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;}
+.file-upload.active .file-select .file-select-button{transition:all .2s ease-in-out;-moz-transition:all .2s ease-in-out;-webkit-transition:all .2s ease-in-out;-o-transition:all .2s ease-in-out;}
+.file-upload .file-select input[type=file]{z-index:100;cursor:pointer;position:absolute;height:100%;width:100%;top:0;left:0;opacity:0;filter:alpha(opacity=0);}
+.file-upload .file-select.file-select-disabled{opacity:0.65;}
+.file-upload .file-select.file-select-disabled:hover{cursor:default;display:block;border: 2px solid #dce4ec;color: #34495e;cursor:pointer;height:40px;line-height:40px;margin-top:5px;text-align:left;background:#FFFFFF;overflow:hidden;position:relative;}
+.file-upload .file-select.file-select-disabled:hover .file-select-button{background:#dce4ec;color:#666666;padding:0 10px;display:inline-block;height:40px;line-height:40px;}
+.file-upload .file-select.file-select-disabled:hover .file-select-name{line-height:40px;display:inline-block;padding:0 10px;}

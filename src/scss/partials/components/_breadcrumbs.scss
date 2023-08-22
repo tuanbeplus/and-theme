@@ -1,0 +1,77 @@
+.breadcrumbs-top {
+    background: $red; 
+    padding: 20px 0; 
+    margin-bottom: 80px;
+    &.amount-4 {
+        span {
+            &[property="itemListElement"] {
+                &:nth-of-type(1),
+                &:nth-of-type(2),
+                &:nth-of-type(3){
+                    display: none;
+                }
+            }
+            &.material-icons {
+                &:nth-of-type(1),
+                &:nth-of-type(2),
+                &:nth-of-type(3),
+                &:nth-of-type(4) {
+                    display: none;
+                }
+            }
+        }
+    }
+    &.amount-5 {
+        span {
+            &[property="itemListElement"] {
+                &:nth-of-type(1),
+                &:nth-of-type(2),
+                &:nth-of-type(3),
+                &:nth-of-type(4),
+                &:nth-of-type(5) {
+                    display: none;
+                }
+            }
+            &.material-icons {
+                &:nth-of-type(1),
+                &:nth-of-type(2),
+                &:nth-of-type(3),
+                &:nth-of-type(4),
+                &:nth-of-type(5),
+                &:nth-of-type(6) {
+                    display: none;
+                }
+            }
+        }
+    }
+    span {
+        color: #fff;
+        display: inline-block;
+        line-height: 4px;
+        &.material-icons {
+            position: relative;
+            top: 7px;
+            margin: 0 20px;
+        }
+        &.current-item {
+            display: inline-block;
+            padding: 0;
+            margin-top: -2px;
+            margin-left: -4px;
+            vertical-align: middle;
+            line-height: 30px;
+            max-width: 280px;
+            white-space: nowrap;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .breadcrumbs-top {
+        margin-bottom: 0;
+        padding: 2px;
+        span {
+            display: none;
+        }
+    }
+}

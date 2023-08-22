@@ -1,0 +1,32 @@
+.content-horizontal {
+    padding-top: 200px;
+    .text-content-block { 
+        p {
+            margin-bottom: 20px;
+        }
+        &.left {
+            padding-right: 70px;
+        }
+        &.right {
+            padding-top: 68px;
+        }
+        a {
+            color: $red2;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .content-horizontal {
+        padding-top: 0;
+        .text-content-block {
+            &.left {
+                padding-right: 0;
+            }
+            &.right {
+                padding-top: 0px;
+                margin-top: -20px;
+            }
+        }
+    }
+}

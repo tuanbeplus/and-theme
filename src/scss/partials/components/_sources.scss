@@ -1,0 +1,115 @@
+.sources {
+    margin-top: 100px;
+    margin-bottom: 70px;
+    order: 5;
+    .text-content-block {
+        margin-bottom: 50px;
+        p {
+            margin-bottom: 20px;
+        }
+    }
+    &.source-list {
+        p {
+            margin-bottom: 15px;
+        }
+        a {
+            color: $red;
+            display: inline;
+        }
+        .text-content-block {
+            margin-bottom: 0;
+        }
+    }
+    a {
+        &.circle {
+            span {
+                &.material-icons {
+                    border: 1px solid $red2;
+                    color: $red2;
+                }
+                color: $red2;
+            }
+        }
+    }
+}
+
+.back-page {
+    margin-bottom: 70px;
+    &.bottom {
+        margin-top: 80px;
+        order: 10;
+    }
+    a {
+        &.circle {
+            span {
+                vertical-align: top;
+                &.material-icons {
+                    border: 1px solid $red2;
+                    color: $red2;
+                    display: inline-block;
+                }
+                &.text {
+                    display: inline-block;
+                    text-align: left;
+                    line-height: 41px;
+                }
+                color: $red2;
+            }
+        }
+    }
+}
+
+
+@media (max-width: 991px) {
+    .sources {
+        &.source-list {
+            order: 4;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .sources {
+        margin-top: 10px;
+        margin-bottom: 40px;
+        .text-content-block {
+            margin-bottom: 20px;
+        }
+        &.source-list {
+            padding: 0 30px;
+            .text-content-block {
+                margin-bottom: 20px;
+            }
+        }
+        a {
+            &.circle {
+                span {
+                    display: inline-block;
+                    vertical-align: top;
+                    &.text {
+                        max-width: 240px;
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+    .back-page {
+        .text-content-block {
+            margin-bottom: 0;
+        }
+        &.bottom {
+            margin-top: 20px;
+        }
+        a {
+            &.circle {
+                span {
+                    &.text { 
+                        line-height: 40px;
+                        max-width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

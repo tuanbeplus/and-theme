@@ -1,0 +1,67 @@
+.side-arrow {
+    .site-content {
+        position: relative;
+        &:before {
+            content: ''; 
+            position: absolute;
+            left: 0;
+            top: 20%;
+            background: url("/wp-content/themes/and/assets/imgs/side-arrow.svg") no-repeat;
+            width: 180px;
+            height: 460px;
+            background-size: cover;
+        }
+    }
+    &.over-banner {
+        .site-content {
+            &:before {
+                display: none;
+            }
+        }
+        .hero {
+            .image {
+                position: relative;
+                &:before {
+                    content: ''; 
+                    position: absolute;
+                    background: url("/wp-content/themes/and/assets/imgs/side-arrow-banner.svg") no-repeat;
+                    z-index: 99;
+                    top: 48%;
+                    width: 180px;
+                    height: 460px;
+                    background-size: cover;
+                }
+            }
+            
+        }
+        &.single {
+            .hero {
+                .image {
+                    &:before {
+                        background: url("/wp-content/themes/and/assets/imgs/side-arrow-red.svg") no-repeat; 
+                        background-size: cover;
+                    }
+                }
+                
+            }
+        }
+    }
+}
+
+
+@media (max-width: 767px) {
+    .side-arrow {
+        .site-content {
+            &:before {
+                display: none;
+            }
+        }
+        .hero {
+            .image {
+                &:before {
+                    display: none;
+                }
+            }
+        }
+    }
+}

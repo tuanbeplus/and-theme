@@ -1,0 +1,101 @@
+@mixin button($background, $width:auto, $display:null) {
+    padding: 10px 12px;
+	border-radius: 38px;
+	-moz-border-radius: 38px;
+	-ms-border-radius: 38px;
+	background: $background;
+	color: #fff;
+	width: $width;
+	display: $display;
+	text-decoration: none;
+	text-align: center;
+	&:hover {
+		// background: #b13f35;
+    }
+    span {
+        margin-left: 3px;
+        font-size: 18px;
+    }
+}
+
+@mixin clearButton($width, $color) {
+	border: 1.5px solid $color;
+	background: none;
+	color: $color;
+	text-decoration: none;
+	display: block;
+	text-align: center;
+	margin: 0 auto;
+	clear: both;
+	$textColour: null;
+	@if $color == #3f3f3f {
+		$textColour: #fff;
+    } @else {
+       $textColour: #3f3f3f;
+    }
+}
+
+
+a,
+div { 
+    &.btn-text { 
+        @include button($purple);
+    }
+    &.white {
+        @include clearButton(20%, #3f3f3f);
+        &.circle {
+            text-align: left;
+            border: none;
+            span {
+                &.material-icons {
+                    border: 1px solid #fff;
+                    color: #fff;
+                }
+                &.text {
+                    color: #fff;
+                }
+            }
+        }
+    }
+    &.circle {
+        background: none;
+        padding-left: 0;
+        span {
+            &.material-icons {
+                border: 1px solid $purple;
+                color: $purple;
+                border-radius: 50%;
+                font-size: 18px;
+                padding: 10px;
+            }
+            &.text {
+                font-size: 18px;
+                line-height: 28px;
+                color: $purple;
+                margin-left: 15px;
+            }
+        } 
+        &.red {
+            span {
+                &.material-icons {
+                    border: 1px solid $red2;
+                    color: $red2;
+                }
+                &.text {
+                    color:  $red2;
+                }
+            }
+        }
+        &.dark-red {
+            span {
+                &.material-icons {
+                    border: 1px solid $red!important;
+                    color: $red!important;
+                }
+                &.text {
+                    color:  $red;
+                }
+            }
+        }
+    }
+}

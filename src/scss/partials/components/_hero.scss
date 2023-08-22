@@ -1,0 +1,190 @@
+.hero {
+    position: relative;
+    margin-bottom: 100px;
+    .title {
+        margin-bottom: 65px;
+    }
+    .image {
+        background-size: cover; 
+        img {
+            visibility: hidden;
+        }
+    } 
+    &.no-image {
+        margin-bottom: 0px;   
+        &.breadcrumbs {
+            .title {
+                margin-bottom: 35px;
+            }
+        }
+        
+    }
+    &.breadcrumbs {
+        margin-top: 0;
+        .backlink {
+            a {
+                &.circle {
+                    span {
+                        color: $red;
+                        display: inline-block;
+                        vertical-align: top;
+                        &.material-icons {
+                            border: 1px solid $red; 
+                            color: $red;
+                        }
+                        &.text {
+                            font-size: 18px;
+                            line-height: 31px;
+                            max-width: 160px;
+                            text-align: left;
+                            vertical-align: middle;
+                        }
+                    }
+                }
+            }
+        }
+        .title {
+            margin-bottom: 83px;
+        }
+        &.overlays {
+            margin-top: -93px;
+            .overlay-text {
+                background: rgba(162, 47, 44, 0.9);
+                padding: 77px 100px;
+                margin: 90px 0px;
+                padding: 77px 100px 77px 77px;
+                * {
+                    color: #fff;
+                }
+                h1 {
+                    margin-bottom: 35px;
+                }
+            }
+            .image {
+                background-position: top center;
+            }
+        }
+    }
+    &.with-shape {
+        margin-bottom: 56px;
+        .shape {
+            position: absolute;
+            top: 0;
+            right: 0;
+            @media (max-width: 1500px) {
+                width: 16%;
+            }
+        }
+    }
+}
+
+.hero-text {
+    padding: 0 0 45px 0;
+    p {
+        margin-bottom: 20px;
+        &:first-of-type {
+            margin-top: 40px;
+        }
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.over-banner {
+    .hero {
+        margin-bottom: 50px; 
+    }
+}
+
+
+@media (max-width: 1300px) {
+    .hero {
+        &.breadcrumbs {
+            .backlink {
+                a {
+                    &.circle {
+                        span {
+                            &.text {
+                                max-width: 130px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .hero {
+        &.breadcrumbs {
+            &.overlays {
+                .overlay-text {
+                    padding: 40px 30px 40px 37px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .hero {
+        margin-bottom: 40px;
+        margin-top: 50px;
+        h1 {
+            text-transform: inherit;
+        }
+        &.breadcrumbs {
+            margin-top: 10px;
+            .backlink,
+            .title{
+                padding-left: 30px;
+            }
+            .backlink {
+                margin-bottom: 10px;
+                a {
+                    &.circle {
+                        span {
+                            &.text {
+                                font-size: 16px;
+                                max-width: 82%;
+                                line-height: 40px;
+                            }
+                        }
+                    }
+                }
+            }
+            .title {
+                margin-bottom: 30px;
+            }
+            &.overlays {
+                .image {
+                    background-position: top center;
+                    padding: 50px 0 0 0;
+                    h3 {
+                        font-size: 16px;
+                    }
+                }
+                .overlay-text {
+                    padding: 30px;
+                    margin: 100px 0 0 0;
+                    h1 {
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+        }
+    }
+    .hero-text {
+        padding: 30px 0;
+        h1 {
+            margin-bottom: 30px;
+        }
+    }
+    .over-banner {
+        .hero {
+            margin-bottom: -10px;
+        }
+    }
+}

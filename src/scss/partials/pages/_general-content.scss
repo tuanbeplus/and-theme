@@ -1,0 +1,50 @@
+.page-template-general-content {
+    #hero {
+        h1 {
+            font-size: 72px;
+            margin-bottom: 100px;
+        }
+        p {
+            font-size: 22px;
+            color: #FFF;
+            margin-bottom: 20px;
+        }
+        a {
+            font-size: 17px;
+            font-family: $roman;
+            color: #DA9BAF;
+            text-decoration: underline;
+        }
+
+        .terms {
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6,
+            a {
+                color: #fff;
+            }
+            h1 {
+                line-height: 80px;
+            }
+            p {
+                font-size: 18px;
+                font-family: $roman;
+                line-height: 24px;
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .page-template-general-content {
+        #hero {
+            h1 {
+                font-size: 52px;
+                margin-bottom: 40px;
+            }
+        }
+    }
+}

@@ -1,0 +1,214 @@
+.membership-table {
+    margin-top: 38px;
+    margin-bottom: 68px;
+    .heading {
+        border-bottom: 2px solid #3D3D3D;
+        padding-bottom: 10px;
+        p {
+            font-size: 24px;
+            line-height: 32px;
+            font-family: $heavy;
+            color: #3D3D3D;
+            &.price {
+                font-size: 18px;
+                line-height: 26px;
+                font-family: $roman;
+            }
+        }
+
+        .icons {
+            margin-bottom: 4px;
+            img,
+            p {
+                display: inline-block;
+                vertical-align: top;
+            }
+        }
+        > div {
+            padding: 0;
+        }
+        .level {
+            text-align: center; 
+        }
+    }
+
+    .feature-row {
+        border-bottom: 1px solid #DFDFDF;
+        padding: 23px 0;
+        > div {
+            padding: 0;
+        }
+        &:nth-last-child(2) {
+            border: none;
+        }
+        &:last-of-type {
+            border: none;
+            > div {
+                padding: 0 15px;
+                &.left {
+                    padding-left: 0;
+                }
+            }
+            .feature {
+                &.left {
+                    p {
+                        font-family: $heavy;
+                    }
+                }
+                &:nth-of-type(3),
+                &:nth-of-type(4) {
+                    a.cta {
+                        padding: 12px 55px;
+                    }
+                }
+            }
+        }
+        .feature {
+            text-align: center;
+            p {
+                font-family: $book;
+            }
+            &.left {
+                text-align: left;
+                padding-right: 0;
+            }
+            a.cta {
+                background: $purple;
+                border-radius: 50px;
+                padding: 12px 24px;
+                color: #fff;
+                font-family: $roman;
+                width: auto;
+                font-size: 16px;
+                display: inline-block;
+                text-decoration: none;
+                &.d-md-inline {
+                    display: inline-block!important;
+                }
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 1365px) {
+    
+    .membership-table {
+
+        .feature-row {
+            &:last-of-type {
+                .feature {
+                    &:nth-of-type(3),
+                    &:nth-of-type(4) {
+                        a.cta {
+                            padding: 12px 8px;
+                        }
+                    }
+                }
+            }
+            .feature {
+                a.cta {
+                    padding: 12px 8px;
+                    font-size: 15px;
+                    border-radius: 21px;
+                }
+            }
+        }
+
+    }
+
+} 
+
+
+@media (max-width: 991px) {
+
+    .membership-table {
+
+        .feature-row {
+
+            .feature {
+                a {
+                    &.cta {
+                        padding: 12px 9px!important;
+                        font-size: 13px;
+                    }
+                }
+            }
+
+        }
+
+    }
+
+}
+
+
+@media (max-width: 767px) {
+
+    .membership-table {
+        margin-top: -40px;
+        .heading {
+            .level {
+                text-align: left;
+            }
+            .icons {
+                img {
+                    margin-bottom: 10px;
+                }
+                p {
+                    display: block;
+                    font-size: 20px;
+                }
+            }
+            p {
+                &.price {
+                    font-size: 14px;
+                }
+            }
+        }
+        .feature-row {
+            padding: 13px 0;
+            > div {
+                padding: 0!important;
+            }
+            &:nth-last-child(2) {
+                border-bottom: 1px solid #DFDFDF;
+            }
+            &:last-of-type {
+                .feature {
+                    &:nth-child(4) {
+                        a.cta {
+                            padding: 12px 38px;
+                        }
+                    }
+                }
+            }
+            .feature {
+                text-align: left;
+                &.left {
+                    margin-bottom: 10px;
+                    p {
+                        font-family: $heavy;
+                    }
+                }
+                a.cta {
+                    padding: 12px 38px;
+                    font-size: 15px;
+                    &.d-md-inline {
+                        display: none!important;
+                    }
+                    &.d-inline {
+                        width: 110px;
+                        text-align: center;
+                        padding: 12px 20px!important;
+                        display: inline-block!important;
+                    }
+                }
+            }
+        }
+        
+    }
+
+}

@@ -1,0 +1,33 @@
+.pagination {
+    .number {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 10px;
+        span,
+        a {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            text-align: center;
+            padding-top: 10px;
+            font-size: 14px;
+            font-family: $heavy;
+            font-weight: normal;
+            color: $black;
+            &:hover {
+                text-decoration: none;
+            }
+            &.prev,
+            &.next {
+                margin-top: -5px;
+            }
+        }
+        &.selected {
+            * {
+                color: #fff;
+                background: $black;
+                font-weight: bold;
+            }
+        }
+    }
+}

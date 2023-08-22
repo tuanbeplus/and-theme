@@ -1,0 +1,18 @@
+.error404 {
+  padding: 0px 0; }
+  .error404 .breadcrumbs-top {
+    display: none; }
+  .error404 h2 {
+    float: left;
+    margin-top: 150px;
+    position: relative; }
+    .error404 h2 span {
+      display: block;
+      color: #A1A1A1; }
+  .error404 .global-footer {
+    display: none; }
+
+@media (max-width: 767px) {
+  .error404 h2 {
+    margin-top: 50px;
+    margin-bottom: 50px; } }

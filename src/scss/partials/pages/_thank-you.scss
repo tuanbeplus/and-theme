@@ -1,0 +1,21 @@
+.thank-you {
+    padding-top: 90px;
+    margin-bottom: 100px;
+}
+
+.page-id-1204,
+.page-id-1207 {
+    .breadcrumbs-top {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .thank-you {
+        padding-top: 90px;
+        margin-bottom: 50px;
+        h1 {
+            margin-bottom: 24px;
+        }
+    }
+}

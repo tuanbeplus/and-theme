@@ -1,0 +1,35 @@
+.upcoming-events {
+    .info {
+        margin-bottom: 20px;
+        span {
+            display: inline-block;
+            letter-spacing: 1px;
+            &.number {
+                font-family: $book;
+            }
+            &.month {
+                font-family: $heavy;
+            }
+        } 
+        .time {
+            span {
+                text-transform: uppercase;
+                font-family: $heavy;
+                font-size: 14px;
+            }
+        }
+    }
+    .number {
+        color:$red2;
+        font-size: 40px;
+    }
+    .cards {
+        .the-card {
+            .detail {
+                h3 {
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+}

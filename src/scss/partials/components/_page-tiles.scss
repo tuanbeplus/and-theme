@@ -1,0 +1,197 @@
+.purple {
+    .page-tiles {
+        .cards {
+            .the-card {
+                .detail {
+                    border-top: 4px solid $purple;
+                }
+                a,
+                div {
+                    &.circle.dark-red .material-icons {
+                        border: 1px solid $purple!important;
+                        color: $purple!important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.page-tiles {
+    // margin-top: -53px;
+    .container {
+        padding: 0 20px;
+    }
+    &.narrow {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        .container {
+            padding: 0 100px;
+        }
+    }
+    &.sf-data {
+        .cards {
+            .the-card {
+                cursor: default;
+            }
+        }
+    }
+    .cards {
+        .the-card {
+            margin-bottom:81px; 
+            cursor: pointer;
+            .inner {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+            .detail {
+                border-top: 4px solid $red;
+                flex-grow: 1;
+                h3,
+                h2 {
+                    margin-bottom: 15px;
+                }
+                h2 {
+                    font-size: 24px;
+                    line-height: 32px;
+                    font-weight: 400;
+                    a {
+                        text-decoration: none!important;
+                        color: inherit;
+                        font-weight: 400;
+                        font-family: $heavy;
+                    }
+                }
+                p {
+                    font-family: 'Avenir-Roman'; 
+                }
+            }
+            .circle {
+                padding: 0 20px 30px;
+                text-align: left;
+            }
+        }
+    }
+    &.sf-data {
+        margin-top: 50px;
+        .title {
+            margin-bottom: 40px;
+        }
+        .cards {
+            .the-card {
+                margin-bottom: 41px;
+                .detail {
+                    h3 {
+                        text-transform: uppercase;
+                        font-size: 14px;
+                        color: $purple;
+                    }
+                }
+                .inner {
+                    height: auto;
+                }
+                span {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+    p {
+        &.category {
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: bold;
+            color: #663077;
+            margin-bottom: 20px;
+        }
+        &.date {
+            font-size: 14px;
+            color: #545454;
+        }
+    }
+    &.news {
+        margin-top: 40px;
+        .cards {
+            .the-card {
+                .inner {
+                    height: auto;
+                }
+                .detail {
+                    h3 {
+                        font-family: $roman;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// News page
+.single.postid-1901 {
+    .title-area {
+        h1 {
+            margin-bottom: 40px;
+        }
+    }
+    #primary {
+        .container {
+            .main-area {
+                flex: 0 0 91.666667%;
+                max-width: 91.666667%;
+                .single-column-content,
+                .page-tiles {
+                    .container {
+                        padding-left: 10px;
+                    }
+                }
+                
+            }
+        }
+    }
+}
+
+@media (max-width: 991px) {
+    .page-tiles {
+        &.narrow {
+            .container {
+                padding: 0 20px;
+            }
+            .cards {
+                .the-card {
+                    margin-bottom: 26px;
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 767px) {
+    .page-tiles {
+        margin-top: 10px;
+        &.narrow {
+            margin-top: 0;
+        }
+        .cards {
+            .the-card {
+                margin-bottom: 46px;
+                .detail {
+                    min-height: auto;
+                    h2 {
+                        text-transform: none;
+                    }
+                }
+                .circle {
+                    padding-left: 20px;
+                }
+            }
+        }
+        &.sf-data {
+            margin-top: 0;
+            > .container {
+                padding: 0;
+            }
+        }
+    }
+}

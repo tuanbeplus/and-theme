@@ -1,0 +1,42 @@
+
+
+section {
+	z-index: 1;
+}
+
+.container {
+    max-width: 1400px;
+    padding: 0 20px;
+}
+
+@media (max-width: 1120px) {
+    .container {
+        padding: 0 20px;
+    }
+	.content-container {
+		max-width: 960px;
+	}	
+}
+
+@media (max-width:960px) {
+    .container {
+        padding: 0 20px;
+    }
+	.content-container {
+		max-width: 768px; 
+		padding: 30px 20px 0;
+	}
+}
+
+@media (max-width:767px) {
+    .container {
+        padding: 0 20px;
+    }
+	.content-container {
+		padding: 0 20px;
+		max-width: 100%;
+		h3 {
+			line-height: 30px;
+		}
+	}
+}

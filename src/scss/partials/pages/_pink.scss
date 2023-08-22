@@ -1,0 +1,94 @@
+.pink {
+    a {
+        &.btn-text {
+            background: $pink;
+            &.white {
+                background: none;
+            }
+        }
+    }
+    .breadcrumbs-top {
+        background: $pink;
+    }
+    .site-content {
+        position: relative;
+        &:before {
+            background: url("/wp-content/themes/and/assets/imgs/side-arrow-pink.svg") no-repeat;
+            background-size: cover;
+        }
+    }
+    .text-content-block {
+        a {
+            color: $pink;
+        } 
+    }
+    .hero {
+        &.breadcrumbs {
+            .backlink {
+                a {
+                    &.circle {
+                        span {
+                            &.text {
+                                color: $pink;
+                            }
+                            &.material-icons {
+                                border: 1px solid $pink!important;
+                                color: $pink!important;
+                            }
+                        }
+                        &.dark-red {
+                            span {
+                                &.material-icons {
+                                    border: 1px solid $pink!important;
+                                    color: $pink!important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .back-page {
+        a {
+            &.circle {
+                span {
+                    &.text {
+                        color: $pink;
+                    }
+                    &.material-icons {
+                        border: 1px solid $pink!important;
+                        color: $pink!important;
+                    }
+                }
+                &.dark-red {
+                    span {
+                        &.material-icons {
+                            border: 1px solid $pink!important;
+                            color: $pink!important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.side-arrow {
+        &.over-banner {
+            .hero {
+                .image {
+                    &:before {
+                        background: url('/wp-content/themes/and/assets/imgs/side-arrow-pink.svg') no-repeat;
+                        background-size: cover;
+                    }
+                }
+            }
+        }
+    }
+    .gform_wrapper {
+        input {
+            &[type="submit"] {
+                background: $pink;
+            }
+        }
+    }
+}

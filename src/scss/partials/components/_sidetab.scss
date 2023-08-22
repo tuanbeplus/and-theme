@@ -1,0 +1,110 @@
+.sidetab {
+    position: relative;
+    &.latest-news {
+        padding: 24px 0 0 0;
+        background: #fff;
+        float: right;
+        border-radius: 10px;
+        p {
+            padding-left: 24px;
+            font-size: 24px; 
+        }
+        li {
+            list-style-type: none;
+            padding: 10px 24px 10px 10px;
+            a.circle {
+                span.text {
+                    max-width: 200px;
+                }
+            }
+            &.pink {
+                background: #9F2063;
+                a {
+                    img {
+                        width: 40px;
+                        margin-left: 10px;
+                    }
+                    span.material-iccons {
+                        color: #fff;
+                        border: 1px solid #fff;
+                    }
+                    span.text {
+                        color: #fff;
+                        margin-top: 0px;
+                    }
+                }
+            }
+        }
+    }
+    &:not(.latest-news) {
+        a {
+            background: $red;
+            border-radius: 50px;
+            padding: 20px 50px 20px 30px;
+            color: #fff;
+            width: auto;
+            right: -30px;
+            position: absolute;
+            top: 0;
+            float: right;
+            &:hover,
+            &:focus {
+                text-decoration: none;
+            }
+            &.opportunities,
+            &.internship {
+                display: inline-block;
+                background: #F8A81C;
+                color: #3D3D3D;
+            }
+            &.internship {
+                span {
+                    margin-top: 3px;
+                }
+            }
+        } 
+    }
+   
+    img,
+    span {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    span {
+        margin: 12px 0 0 10px;
+    }
+}
+
+
+.single-students-jobseekers {
+    .sidetab {
+        a {
+            &.opportunities,
+            &.internship {
+                display: inline-block;
+            }
+            &.member {
+                display: none;
+            }
+        }
+    }
+}
+
+.postid-749 {
+    .on-this-page {
+        .member {
+            display: none;
+        }
+    }
+}
+.postid-752 {
+    .sidetab {
+        display: none;
+    }
+}
+@media (max-width: 1023px) {
+    .sidetab {
+        display: none;
+    }
+}

@@ -1,0 +1,45 @@
+.content-with-asset {
+    .text-content-block {
+        padding-right: 80px;
+        p {
+            margin-bottom: 30px;
+        }
+    }
+    .caption {
+        border-top: 3px solid $red;
+        margin-top: -3px;
+        padding: 15px 0;
+        font-family: $roman;
+        font-size: 16px;
+        line-height: 22px;
+    }
+    a,
+    div {
+        &.circle {
+            span {
+                &.material-icons {
+                    border: 1px solid $red2;
+                    color: $red2;
+                }
+                color: $red2;
+            }
+        }
+    }
+}
+
+@media (max-width:991px) {
+    .content-with-asset {
+        .text-content-block {
+            padding-right: 50px;
+        }
+    }
+}
+
+@media (max-width:767px) {
+    .content-with-asset {
+        margin-bottom: 100px;
+        .text-content-block {
+            padding-right: 20px;
+        }
+    }
+}

@@ -1,0 +1,94 @@
+
+.accordion {
+    background: #fff;
+    box-shadow: 0px 14px 28px rgba(0, 0, 0, 0.08);
+    .accordion-title {
+        cursor: pointer;
+        border-bottom: 1px solid #DFDFDF;
+        h1 {
+            font-size: 20px; 
+            padding: 22px 20px; 
+            line-height: 28px;
+            font-family: $heavy!important;
+            font-weight: 900!important;
+            display: inline-block;
+        }
+        &.open {
+            border-bottom: none;
+        }
+        .chevron {
+            bottom: 0;
+            display: inline-block;
+            text-align: right;
+            float: right;
+            margin-top: 20px;
+            margin-right: 20px;
+            &.up {
+                &:before {
+                    transform: rotate(-44deg);
+                    top: 10px;
+                }
+            }
+            &:before {
+                color: #663077;
+                opacity: 1;
+                top: 7px;
+                transform: rotate(133deg);
+            }
+        }
+    }
+    .accordion-content {
+        border-bottom: 1px solid #DFDFDF;
+        padding: 30px 20px; 
+        padding-top: 0;
+        display: none;
+        &.open {
+            display: block;
+        }
+        p {
+            font-size: 16px;
+            cursor: pointer;
+        } 
+        img {
+            max-width: 20px;
+            margin-right: 10px;
+            margin-top: 6px;
+        }
+        span,
+        img {
+            display: inline-block;
+            vertical-align: top;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 25px;
+            li {
+                font-size: 18px;
+                line-height: 28px;
+            }
+        }
+    }
+}
+
+.our-members-data {
+    margin-top: 60px;
+}
+
+@media (max-width: 991px) {
+    .our-members-data {
+        order: 4;
+    }
+}
+
+@media (max-width: 767px) {
+    .our-members-data {
+        margin-top: -30px;
+        order: 4;
+        .container {
+            padding: 0;
+        }
+    }
+    .accordion {
+        margin-bottom: 30px;
+    }
+}

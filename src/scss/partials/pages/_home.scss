@@ -1,0 +1,194 @@
+.home {
+    header {
+        margin-bottom: 80px;
+    }
+    .hero-text {
+        margin-bottom: 31px;
+        h2,
+        h1 {
+            font-family: $book;
+            font-size: 30px;
+            line-height: 48px;
+        }
+    }
+    .hero {
+        &.with-shape {
+            .shape {
+                top: -210px;
+                right: 0;
+            }
+        }
+    }
+    
+    .single-column-content {
+        .text-content-block {
+            max-width: 65%;
+            margin-bottom: 40px;
+        }
+        p {
+            font-size: 22px;
+            line-height: 32px;
+        }
+    }
+}
+
+
+@media (max-width: 1500px) {
+    .home {
+        header {
+            border-bottom: 5px solid #663077;
+        }
+        .hero {
+            &.with-shape {
+                .shape {
+                    top: -160px;
+                    right: 0;
+                    width: 36%;
+                    img {
+                        float: right;
+                    }
+                }
+            }
+        }
+        .content {
+            &.with-image {
+                padding-bottom: 0px;
+                .text-content-block {
+                    padding-left: 30px;
+                    margin-left: 0;
+                    // order: 2;
+                }
+                .image {
+                    margin-top: 50px;
+                    // order: 1;
+                    img {
+                        margin-right: -70px;
+                        &.mobile-size {
+                            width: 100%;
+                        }
+                    }
+                }
+            }
+        }
+        .quotes {
+            .quote-area {
+                &:nth-of-type(even) {
+                    .quote {
+                        padding-right: 5%;
+                    }
+                    .shape {
+                        width: 34%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .home {
+        header {
+            margin-bottom: -10px;
+        }
+        .hero {
+            &:after {
+                top: 30px;
+                width: 100px;
+                height: 390px;
+                background-size: 65%;
+                background-position: top right;
+            }
+            &.with-shape {
+                .shape {
+                    top: -60px;
+                    right: 0;
+                    width: 29%;
+                }
+            }
+        }
+        .hero-text {
+            margin-bottom: -39px;
+            h2,
+            h1 {
+                font-size: 24px;
+                line-height: 36px;
+                text-transform: initial;
+            }
+        }
+        .single-column-content {
+            .text-content-block {
+                padding: 0 15px;
+                max-width: 100%;
+                h2 {
+                    text-transform: inherit;
+                }
+            }
+            .image {
+                img {
+                    float: none;
+                    margin-right: 0;
+                }
+            }
+        }
+        .content.with-image {
+            .image {
+                order: 1;
+                padding: 0;
+                margin-top: 0;
+                text-align: center;
+                img {
+                    margin-right: 0;
+                    float: none;
+                }
+            }
+            p,
+            ul li {
+                font-size: 20px;
+                line-height: 32px;
+                &:before {
+                    top: 10px;
+                }
+            }
+            .text-content-block {
+                padding-bottom: 0;
+                order: 2;
+                padding-right: 20px;
+                h2 {
+                    text-transform: initial;
+                }
+                a {
+                    display: inline;
+                    &.cta {
+                        padding: 7px 55px;
+                    }
+                }
+            }
+        }
+        .quotes {
+            .quote-area {
+                .quote {
+                    width: 100%;
+                    flex: 0 0 100%;
+                    max-width: 100%;
+                }
+                .shape {
+                    max-width: 60px;
+                }
+                &:nth-of-type(even) {
+                    display: flex;
+                    flex-direction: column;
+                    margin-top: -90px;
+                    .quote {
+                        order: 2;
+                    }
+                    .shape {
+                        order: 1;
+                        width: 100%;
+                        max-width: 75%;
+                        margin-bottom: 20px;
+                    }
+                }
+            }
+        }
+    }
+}

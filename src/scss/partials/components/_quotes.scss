@@ -1,0 +1,58 @@
+.quotes {
+    padding-top: 64px;
+    background: #fff;
+    .container {
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+        .row {
+            margin: 0;
+        }
+    }
+    .quote-area {
+        width: 100%;
+    }
+    .quote {
+        margin-bottom: 56px;
+        width: 65%;
+        float: left;
+        padding-left: 5%;
+    }
+    h3 {
+        font-size: 28px;
+        line-height: 44px;
+        font-family: $roman;
+        margin-bottom: 12px;
+    }
+    blockquote {
+        margin-bottom: 12px;
+        margin-top: 0;
+        p {
+            color: #3D3D3D;
+            font-size: 28px;
+            line-height: 44px;
+            color: #3D3D3D!important;
+            font-family: 'Avenir-Roman';
+        }
+        &:after,
+        &:before {
+            display: none;
+        }
+    }
+    .quote-area {
+        .shape {
+            float: right;
+        }
+        &:nth-of-type(even) {
+            margin-top: 50px;
+            .quote {
+                width: 65%;
+                float: right;
+                padding-right: 15%;
+            }
+            .shape {
+                float: left;
+            }
+        }
+    }
+}

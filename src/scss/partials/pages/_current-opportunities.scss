@@ -1,0 +1,161 @@
+.current-opportunities {
+
+    .search {
+        h1 {
+            margin-bottom: 84px;
+        }
+        .form-row {
+            margin-bottom: 54px;
+        }
+        label {
+            display: block;
+            width: 100%;
+            font-family: $heavy;
+            font-size: 20px;
+            line-height: 28px;
+            text-transform: initial;
+            color: $grey;
+            opacity: 1;
+            margin-bottom: 8px;
+        }
+        .selectric-wrapper {
+            opacity: 1!important;
+            width: 100%;
+            .selectric {
+                border: none;
+                box-shadow: 0px 14px 28px rgba(0, 0, 0, 0.08);
+            }
+        }
+        .selectric-hover {
+            .selectric {
+                border: none;
+                border-color: #000!important;
+            }
+        }
+        .button {
+            background: url('/wp-content/themes/and/assets/imgs/chev.svg') no-repeat;
+            background-position: 10px 16px;
+            &:after {
+                display: none;
+            }
+        }
+
+        .toggle {
+            width: 100%;
+            label {
+                display: inline-block;
+                width: 47%;
+                text-align: center;
+                background: #fff;
+                border-radius: 100px;
+                padding: 10px;
+                cursor: pointer;
+                border: 2px solid white;
+                font-family: $roman;
+                font-size: 18px;
+                box-shadow: 0px 14px 28px rgba(0, 0, 0, 0.08);
+                &:nth-of-type(2) {
+                    margin-left: 20px;
+                }
+            }
+            input[type="radio"] {
+                display: none;
+                &:checked + label {
+                    border: 2px solid $purple;
+                }
+            }
+        }
+
+        .submit {
+            input {
+                background: $purple;
+                padding: 10px;
+                text-align: center;
+                color: #fff;
+                max-width: 200px;
+                border-radius: 40px;
+            }
+        }
+
+    }
+
+    .results {
+        margin-top: 50px;
+        margin-bottom: 100px;
+        .job {
+            border-top: 2px solid $purple; 
+            background: #fff;
+            padding: 23px 20px;
+            overflow: hidden;
+            margin-bottom: 56px;
+            box-shadow: 0px 14px 28px rgba(0, 0, 0, 0.08);
+            &.hide {
+                display: none;
+            }
+            .length {
+                text-transform: uppercase;
+                color: $purple;
+                font-size: 14px;
+                font-family: $heavy;
+            }
+            .logo {
+                display: inline-block;
+                vertical-align: top;
+                float: right;
+            }
+            .title {
+                color: $grey;
+                top: -50px;
+                position: relative;
+            }
+            .sub {
+                font-size: 16px;
+                color: $grey;
+                margin-top: -30px;
+            }
+            .description {
+                font-size: 16px;
+                line-height: 28px;
+                color: $grey;
+                margin-bottom: 30px;
+                ul {
+                    margin-left: 15px;
+                    margin-bottom: 30px;
+                    li {
+                        font-size: 16px;
+                        list-style-type: disc;
+                        line-height: 28px;
+                        color: $grey;
+                    }
+                }
+            }
+        }
+
+    }
+
+}
+
+@media (max-width: 767px) {
+    .single-students-jobseekers {
+        .back-page {
+            margin-bottom: 40px;
+            margin-top: 30px;
+        }   
+        .search {
+            h1 {
+                margin-bottom: 50px;
+                margin-left: -10px;
+            }
+            form {
+                margin-left: -5px;
+            }
+        }
+        .form-row {
+            margin-bottom: 50px;
+        }
+        .results {
+            margin-top: 0;
+            margin-left: -5px;
+        }
+    }
+}

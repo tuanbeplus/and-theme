@@ -1,0 +1,35 @@
+.latest-news {
+    padding: 100px 0;
+    p {
+        &.caption {
+            color: $purple;
+            text-transform: uppercase;
+            font-family: $heavy;
+            margin-bottom: 15px;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        &.date { 
+            color: $grey2;
+            margin-bottom: 30px;
+            font-size: 14px;
+        } 
+    }
+    .cards {
+        .the-card {
+            .detail {
+                border-radius: 4px;
+                h3 {
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}
+
+
+@media (max-width: 767px) {
+    .latest-news {
+        padding-bottom: 50px;
+    }
+}

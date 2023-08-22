@@ -1,0 +1,134 @@
+.purple {
+    .breadcrumbs-top {
+    background: $purple;
+    }
+    .site-content { 
+        position: relative;
+        &:before {
+            background: url("/wp-content/themes/and/assets/imgs/side-arrow-purple.svg") no-repeat;
+            background-size: cover;
+        }
+    }
+    .text-content-block {
+        a {
+            color: $purple;
+            &.cta {
+                color: #fff;
+                border: 1px solid #633077;
+                &.clear {
+                    background: none;
+                    color: $purple;
+                }
+                &.red {
+                    background: $red;
+                    padding-left: 50px;
+                    border: none;
+                    &:before {
+                        content: '';
+                        background: url('/wp-content/themes/and/assets/imgs/mem-prof.svg') no-repeat;
+                        width: 40px;
+                        height: 40px;
+                        position: absolute;
+                        left: 15px;
+                    }
+                }
+            }
+        }
+    }
+    blockquote {
+        &:before,
+        &:after {
+            color: $purple;
+        }
+        p {
+            color: $purple!important;
+        }
+        &.yellow {
+            p {
+                color: #3C3D3C!important;
+            }
+        }
+    }
+    .hero {
+        &.breadcrumbs {
+            .backlink {
+                a {
+                    &.circle {
+                        span {
+                            &.text {
+                                color: $purple;
+                            }
+                            &.material-icons {
+                                border: 1px solid $purple!important;
+                                color: $purple!important;
+                            }
+                        }
+                        &.dark-red {
+                            span {
+                                &.material-icons {
+                                    border: 1px solid $purple!important;
+                                    color: $purple!important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .text-content-block {
+        ul {
+            li {
+                &:before {
+                    background: $grey;
+                }
+            }
+        }
+    }
+
+    .back-page {
+        a {
+            &.circle {
+                span {
+                    &.text {
+                        color: $purple;
+                    }
+                    &.material-icons {
+                        border: 1px solid $purple!important;
+                        color: $purple!important;
+                    }
+                }
+                &.dark-red {
+                    span {
+                        &.material-icons {
+                            border: 1px solid $purple!important;
+                            color: $purple!important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .on-this-page {
+       ul {
+           li {
+               a {
+                   color: $purple;
+                   * {
+                       color: $purple!important;
+                   }
+                   &.dark-red {
+                        span {
+                            &.material-icons {
+                                border: 1px solid $purple!important;
+                                color: $purple!important;
+                            }
+                        }
+                    }
+               }
+           }
+       } 
+    }
+}
