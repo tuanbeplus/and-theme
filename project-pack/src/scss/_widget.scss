@@ -1,0 +1,130 @@
+.__sidebar-sticky {
+  position: sticky;
+  top: 40px;
+}
+
+.pp-widget {
+  background: white;
+  box-shadow: 0 7px 16px 0px rgba(1, 1, 1, 0.1);
+  margin-bottom: 3rem;
+
+  &__title {
+    padding: 1rem;
+
+    h4 {
+      font-size: 1.3rem;
+      font-weight: bold;
+      margin: 0;
+      line-height: normal;
+    }
+  }
+
+  .pp-wg-wrap-content {
+    padding: 0 1rem;
+  }
+
+  .pp-wg-table {
+    margin-bottom: 2rem;
+
+    tr:not(:last-child) {
+
+      > * {
+        border-bottom: solid 1px #eee;
+      }
+    }
+
+    tr:last-child {
+
+      > * {
+        border-bottom: none;
+      }
+    }
+
+    .__value {
+      text-align: right;
+      padding-right: 0;
+      width: 72% !important;
+    }
+  }
+
+  .pp-nav {
+    padding: 0 1rem;
+
+    &__item {
+      padding: 1rem 0;
+      
+      &:not(:last-child) {
+        border-bottom: solid 1px #c5c5c5;
+      }
+
+      a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        line-height: normal;
+      }
+    }
+
+    &__item-icon {
+      width: 34px;
+      height: 34px;
+      min-width: 34px;
+      border: solid 1px;
+      border-radius: 34px;
+      margin-right: 0.5rem;
+      line-height: 0;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+
+      svg {
+        width: 50%;
+
+        polyline,
+        line,
+        circle,
+        path {
+          stroke: var(--accent-color) !important;
+        }
+      }
+    }
+
+    .__cart {
+      background: #a6352e;
+      box-shadow: -1rem 0 0 #a6352e, 1rem 0 0 #a6352e;
+
+      .quantity-cart {
+        margin-left: auto;
+        width: 34px;
+        height: 34px;
+        border: solid 1px white;
+        background: white;
+        color: #a6352e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 34px;
+        line-height: 0;
+      }
+
+      a {
+        color: white !important;
+      }
+
+      svg {
+        width: 80%;
+
+        circle,
+        path {
+          stroke: white !important;
+        }
+
+        circle {
+          fill: transparent !important;
+        }
+      }
+    }
+  }
+}

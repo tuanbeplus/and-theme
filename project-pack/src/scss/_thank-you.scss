@@ -1,0 +1,17 @@
+.woocommerce-order-received {
+  
+  .woocommerce-thankyou-order-received {
+    margin-bottom: 1rem;
+  }
+
+  .woocommerce-order-details__title,
+  .woocommerce-column__title {
+    font-size: 1.5rem;
+    margin-bottom: 1em;
+  }
+
+  address {
+    padding: 1rem !important;
+    line-height: 1.5rem;
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "project-pack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx mix watch",
+    "build": "npx mix --production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "laravel-mix": "^6.0.49",
+    "tippy.js": "^6.3.7"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.22.5",
+    "resolve-url-loader": "^5.0.0",
+    "sass": "^1.62.1",
+    "sass-loader": "^12.6.0"
+  }
+}

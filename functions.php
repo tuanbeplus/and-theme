@@ -8,6 +8,13 @@
  * @package WP_Bootstrap_Starter
  */
 
+{
+/**
+ * Project pack
+ */
+require( get_stylesheet_directory() . '/project-pack/functions.php' );
+}
+
 if (!function_exists('wp_bootstrap_starter_setup')) :
 	/**
 	 * Sets up theme defaults and registers support for various WordPress features.

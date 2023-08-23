@@ -1,0 +1,38 @@
+.pp-product-variable-custom-field {
+  width: 100%;
+  border: solid #eee;
+  border-width: 1px 0;
+  padding: 1em 0;
+  margin: 1em 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.pp-product-variable-custom-field > * {
+  width: 48%;
+}
+.pp-product-variable-custom-field input[type=text],
+.pp-product-variable-custom-field input[type=month],
+.pp-product-variable-custom-field input[type=date] {
+  width: 100%;
+  padding: 5px;
+  margin-top: 2px;
+}
+
+.form-table#org-details__box td ul {
+  margin: 0;
+  list-style: disc;
+  padding-left: 18px;
+}
+.form-table#org-details__box td ul li.completed {
+  position: relative;
+}
+.form-table#org-details__box td ul li.completed:before {
+  content: "";
+  background: url(../../images/check.svg) no-repeat center center, white;
+  width: 20px;
+  height: 20px;
+  display: block;
+  position: absolute;
+  left: -22px;
+}

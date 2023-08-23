@@ -1,0 +1,252 @@
+.woocommerce-checkout {
+
+  a {
+    width: fit-content;
+    color: var(--accent-color);
+
+    &:hover {
+      color: var(--accent-color);
+      opacity: .95;
+    }
+  }
+
+  form label {
+    opacity: 1;
+  }
+
+  .woocommerce-form-coupon-toggle {
+
+    .showcoupon {
+      margin-top: 6px;
+      display: flex;
+      text-decoration: none;
+      border: 2px solid transparent;
+    }
+    .showcoupon::after {
+      content: "\f347";
+      font-family: dashicons;
+      font-size: 1.125rem;
+    }
+  }
+}
+
+form.woocommerce-checkout {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .woocommerce-NoticeGroup-checkout {
+    width: 100%;
+  }
+
+  #customer_details {
+    width: 48% !important;
+
+    h3 {
+      margin-bottom: 1rem;
+    }
+  }
+
+  .pp-order-review {
+    width: 48%;
+    margin-bottom: 1.68rem;
+
+    h3 {
+      margin-bottom: 1rem;
+    }
+
+    .pp-order-review__inner {
+      position: sticky;
+      top: 40px;
+    }
+  }
+
+  @media(max-width: 768px) {
+
+    #customer_details,
+    .pp-order-review {
+      width: 100% !important;
+    }
+  }
+}
+
+#customer_details {
+  display: inline-block;
+
+  .col-12 {
+    padding: 0 !important;
+  }
+
+  > * {
+    margin-bottom: 1.5rem;
+  }
+  
+  &:before, &::after {
+    display: none;
+  }
+
+  .col-1,
+  .col-2 {
+    float: none;
+    width: 100%;
+    max-width: initial;
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="password"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    border-color: #c5c5c5;
+    border-radius: 0;
+    height: 46px;
+    color: black;
+
+    &::placeholder {
+      color: black;
+    }
+  }
+
+  textarea {
+    height: 180px;
+  }
+
+  .form-row {
+
+    .control-label,
+    .woocommerce-input-wrapper {
+      width: 100%;
+    }
+
+    .selectric {
+      border-radius: 0;
+      border-color: #ddd;
+
+      .label {
+        margin-left: 0;
+      }
+    }
+
+    .button,
+    .select2-selection--single,
+    .select2-selection__rendered,
+    .select2-selection__arrow {
+      height: 46px !important;
+      line-height: 46px !important;
+      border-radius: 0;
+    }
+
+    .control-label {
+      width: 100%;
+      text-transform: initial;
+      font-size: 1rem;
+      color: black;
+      opacity: 1;
+      font-weight: normal;
+    }
+    
+  }
+}
+
+.checkout_coupon.woocommerce-form-coupon {
+  border-radius: 0 !important;
+  background: white;
+  border-color: #ddd !important;
+
+  p {
+    margin-bottom: 1rem;
+  }
+
+  .form-row {
+    padding: 0;
+    margin-bottom: .5rem;
+  }
+
+  input[name=coupon_code] {
+    height: 40px;
+    padding: 0 1rem;
+    border: solid 1px #777;
+    border-radius: 40px;
+    font-size: 1rem;
+
+    &::placeholder {
+      color: black;
+    }
+  }
+
+  button[name=apply_coupon] {
+    height: 40px;
+    border-radius: 40px;
+    background: var(--accent-color);
+    color: white;
+    font-weight: normal;
+    font-size: 1rem;
+    min-width: 220px;
+    max-width: 100%;
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+}
+
+#order_review {
+
+}
+
+table.woocommerce-checkout-review-order-table {
+
+  th, td {
+    font-size: 1rem;
+    line-height: normal !important;
+  }
+
+  th.product-name {
+    width: 70%;
+  }
+
+  td.product-name {
+    text-decoration: underline;
+  }
+
+  th.product-total, td.product-total {
+
+  }
+
+  td:last-of-type {
+    display: table-cell !important;
+  }
+}
+
+#payment {
+  border-radius: 1px !important;
+  border: 1px solid #d3ced2;
+
+  .woocommerce-privacy-policy-text {
+    margin-bottom: 1rem;
+    line-height: normal !important;
+
+    p {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+button#place_order {
+  width: 100%;
+  background: var(--accent-color);
+  padding: 1.2rem;
+  text-transform: capitalize;
+
+  &:hover {
+    opacity: .8;
+  }
+}
+
+.woocommerce form .form-row.woocommerce-invalid .select2-container, 
+.woocommerce form .form-row.woocommerce-invalid input.input-text, 
+.woocommerce form .form-row.woocommerce-invalid select {
+  border-color: #a00 !important;
+}
