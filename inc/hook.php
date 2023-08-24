@@ -106,9 +106,9 @@ function and_salesforce_auth_url( $url ) {
 add_filter( 'wpf_salesforce_auth_url', 'and_salesforce_auth_url' );
 
 
-// if ($_GET['test'] == 'test') {
-//     echo "<pre>";
-//     print_r(getOpportunity());
-//     echo "</pre>";
-// }
+if ($_GET['test'] == 'test') {
+    echo "<pre>";
+    print_r(getOpportunity());
+    echo "</pre>";
+}
 

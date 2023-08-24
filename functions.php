@@ -698,10 +698,10 @@ function and_create_entry_table(){
    	$wpdb->query("ALTER TABLE $table_name_sp ADD step INT(10) NULL");
 	 }
 }
-add_action('init', 'and_create_entry_table');
+// add_action('init', 'and_create_entry_table');
 
-add_action('wp_ajax_control_data_entry_gform', 'control_data_entry_gform'); // wp_ajax_{action}
-add_action('wp_ajax_nopriv_control_data_entry_gform', 'control_data_entry_gform'); // wp_ajax_nopriv_{action}
+// add_action('wp_ajax_control_data_entry_gform', 'control_data_entry_gform'); // wp_ajax_{action}
+// add_action('wp_ajax_nopriv_control_data_entry_gform', 'control_data_entry_gform'); // wp_ajax_nopriv_{action}
 function control_data_entry_gform(){
 	global $wpdb;
 	$table_name = $wpdb->prefix. 'and_data_entries_gform';
@@ -728,8 +728,8 @@ function control_data_entry_gform(){
 	die();
 }
 
-add_action('wp_ajax_and_apply_data_to_form', 'and_apply_data_to_form'); // wp_ajax_{action}
-add_action('wp_ajax_nopriv_and_apply_data_to_form', 'and_apply_data_to_form'); // wp_ajax_nopriv_{action}
+// add_action('wp_ajax_and_apply_data_to_form', 'and_apply_data_to_form'); // wp_ajax_{action}
+// add_action('wp_ajax_nopriv_and_apply_data_to_form', 'and_apply_data_to_form'); // wp_ajax_nopriv_{action}
 function and_apply_data_to_form(){
 	global $wpdb;
 	$username = $_POST['usernameId'];
@@ -758,8 +758,8 @@ function and_apply_data_to_form(){
 	die();
 }
 
-add_action('wp_ajax_and_clear_data_gform', 'and_clear_data_gform'); // wp_ajax_{action}
-add_action('wp_ajax_nopriv_and_clear_data_gform', 'and_clear_data_gform'); // wp_ajax_nopriv_{action}
+// add_action('wp_ajax_and_clear_data_gform', 'and_clear_data_gform'); // wp_ajax_{action}
+// add_action('wp_ajax_nopriv_and_clear_data_gform', 'and_clear_data_gform'); // wp_ajax_nopriv_{action}
 function and_clear_data_gform(){
 	$userID = $_POST['userID'];
 
@@ -770,8 +770,8 @@ function and_clear_data_gform(){
 	die();
 }
 
-add_action('wp_ajax_and_save_data_next_step', 'and_save_data_next_step'); // wp_ajax_{action}
-add_action('wp_ajax_nopriv_and_save_data_next_step', 'and_save_data_next_step'); // wp_ajax_nopriv_{action}
+// add_action('wp_ajax_and_save_data_next_step', 'and_save_data_next_step'); // wp_ajax_{action}
+// add_action('wp_ajax_nopriv_and_save_data_next_step', 'and_save_data_next_step'); // wp_ajax_nopriv_{action}
 function and_save_data_next_step(){
 	$username = $_POST['userId'];
 	$data     = $_POST['data'];

@@ -2,9 +2,9 @@
 
 if( get_row_layout() == 'dashboard_history' ):
 
-  $response = getTasks();
-  $history_heading = get_sub_field('history_heading');
-  ?>
+    $response = getTasks();
+    $history_heading = get_sub_field('history_heading');
+?>
 <section class="dashboard tasks history">
     <div class="container">
         <div class="inner">
@@ -22,11 +22,11 @@ if( get_row_layout() == 'dashboard_history' ):
                 <div class="col-12 the-details">
                     <ul>
                         <?php
-                          $i = 0;
-                          $str_email = "Email:";
-                          if ($response->records[0]->Status !== 'Completed') {
+                            $i = 0;
+                            $str_email = "Email:";
+                            if ($response->records[0]->Status !== 'Completed') {
                           ?>
-                        <p>No latest completed Task</p>
+                            <p>No latest completed Task</p>
                         <?php
                           }
                           foreach ($response->records as $task_completed):

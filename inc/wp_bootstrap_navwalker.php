@@ -38,65 +38,64 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 		 * @param stdClass $args   An object of wp_nav_menu() arguments.
 		 */
 		public function start_lvl( &$output, $depth = 0, $args = array() ) {
-					if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
-						$t = '';
-						$n = '';
-					} else {
-						$t = "\t";
-						$n = "\n";
-					}
-					$indent = str_repeat( $t, $depth );
-					// Default class to add to the file.
-					$classes = array( 'dropdown-menu' );
+			if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
+				$t = '';
+				$n = '';
+			} else {
+				$t = "\t";
+				$n = "\n";
+			}
+			$indent = str_repeat( $t, $depth );
+			// Default class to add to the file.
+			$classes = array( 'dropdown-menu' );
 
-					/**
-					 * Filters the CSS class(es) applied to a menu list element.
-					 *
-					 * @since WP 4.8.0
-					 *
-					 * @param array    $classes The CSS classes that are applied to the menu `<ul>` element.
-					 * @param stdClass $args    An object of `wp_nav_menu()` arguments.
-					 * @param int      $depth   Depth of menu item. Used for padding.
-					 */
-					$class_names = join( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
-					$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+			/**
+			 * Filters the CSS class(es) applied to a menu list element.
+			 *
+			 * @since WP 4.8.0
+			 *
+			 * @param array    $classes The CSS classes that are applied to the menu `<ul>` element.
+			 * @param stdClass $args    An object of `wp_nav_menu()` arguments.
+			 * @param int      $depth   Depth of menu item. Used for padding.
+			 */
+			$class_names = join( ' ', apply_filters( 'nav_menu_submenu_css_class', $classes, $args, $depth ) );
+			$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
 
-					/*
-					 * The `.dropdown-menu` container needs to have a labelledby
-					 * attribute which points to it's trigger link.
-					 *
-					 * Form a string for the labelledby attribute from the the latest
-					 * link with an id that was added to the $output.
-					 */
-					$labelledby = '';
-					// Find all links with an id in the output.
-					preg_match_all( '/(<a.*?id=\"|\')(.*?)\"|\'.*?>/im', $output, $matches );
-					// With pointer at end of array check if we got an ID match.
-					if ( end( $matches[2] ) ) {
-							// Build a string to use as aria-labelledby.
-							$labelledby = 'aria-labelledby="' . esc_attr( end( $matches[2] ) ) . '"';
-					}
-          if($matches[2][0] == 'menu-item-dropdown-26') {
-              $menuTitle = '<a href="/how-we-can-help-you">How we can help you</a>';
-          }
-          if($matches[2][2] == 'menu-item-dropdown-719') {
-              $menuTitle = '<a href="/join-us">Join us</a>';
-          }
-          if($matches[2][4] == 'menu-item-dropdown-27') {
-              $menuTitle = '<a href="/resources">Resources</a>';
-          }
-					if($matches[2][6] == 'menu-item-dropdown-13777') {
-							$menuTitle = '<a href="#!">Career development</a>';
-					}
-          if($matches[2][8] == 'menu-item -dropdown-28') {
-              $menuTitle = '<a href="/news-and-events">News & events</a>';
-          }
-          if($matches[2][11] == 'menu-item-dropdown-13852') {
-              $menuTitle = '<a href="/about-us">About us</a>';
-          }
-					$output .= "{$n}{$indent}<ul$class_names $labelledby role=\"menu\">$n";
-          //$output .= "<div class='top-area'><div class='close'><img src='/wp-content/themes/and/assets/imgs/the-close.svg' alt='Close'/><span>Close</span></div><h3>$menuTitle</h3></div>";
-					$output .= "<div class='top-area'><div class='close'><img src='/wp-content/themes/and/assets/imgs/the-close.svg' alt='Close'/><span>Close</span></div></div>";
+			/*
+				* The `.dropdown-menu` container needs to have a labelledby
+				* attribute which points to it's trigger link.
+				*
+				* Form a string for the labelledby attribute from the the latest
+				* link with an id that was added to the $output.
+				*/
+			$labelledby = '';
+			// Find all links with an id in the output.
+			preg_match_all( '/(<a.*?id=\"|\')(.*?)\"|\'.*?>/im', $output, $matches );
+			// With pointer at end of array check if we got an ID match.
+			if ( end( $matches[2] ) ) {
+				// Build a string to use as aria-labelledby.
+				$labelledby = 'aria-labelledby="' . esc_attr( end( $matches[2] ) ) . '"';
+			}
+			if(isset($matches[2][0]) && $matches[2][0] == 'menu-item-dropdown-26') {
+				$menuTitle = '<a href="/how-we-can-help-you">How we can help you</a>';
+			}
+			if(isset($matches[2][2]) && $matches[2][2] == 'menu-item-dropdown-719') {
+				$menuTitle = '<a href="/join-us">Join us</a>';
+			}
+			if(isset($matches[2][4]) && $matches[2][4] == 'menu-item-dropdown-27') {
+				$menuTitle = '<a href="/resources">Resources</a>';
+			}
+			if(isset($matches[2][6]) && $matches[2][6] == 'menu-item-dropdown-13777') {
+				$menuTitle = '<a href="#!">Career development</a>';
+			}
+			if(isset($matches[2][8]) && $matches[2][8] == 'menu-item -dropdown-28') {
+				$menuTitle = '<a href="/news-and-events">News & events</a>';
+			}
+			if(isset($matches[2][11]) && $matches[2][11] == 'menu-item-dropdown-13852') {
+				$menuTitle = '<a href="/about-us">About us</a>';
+			}
+			$output .= "{$n}{$indent}<ul$class_names $labelledby role=\"menu\">$n";
+			$output .= "<div class='top-area'><div class='close'><img src='/wp-content/themes/and/assets/imgs/the-close.svg' alt='Close'/><span>Close</span></div></div>";
 		}
 
 		/**
