@@ -105,10 +105,45 @@ function and_salesforce_auth_url( $url ) {
 }
 add_filter( 'wpf_salesforce_auth_url', 'and_salesforce_auth_url' );
 
+/**
+ * Hide single Members from front
+ * 
+ */
+add_action( 'template_redirect', function () {
+  if ( is_singular( 'members' ) ) :
+    wp_redirect( home_url(), 301 );
+    exit;
+  endif;
+});
 
-if ($_GET['test'] == 'test') {
-    echo "<pre>";
-    print_r(getOpportunity());
-    echo "</pre>";
+/**
+ * NoIndex for Members
+ * 
+ */
+add_action('wp_head', function () {
+    if ( is_singular( 'members' ) ) {
+        return '<meta name="robots" content="noindex, follow">';
+    }
+});
+
+/**
+ * Get user's capabilities.
+ *
+ * @param  int|WP_User $user The user ID or object. Default is the current user.
+ *
+ * @return array             The user's capabilities or empty array if none or user doesn't exist.
+ */
+function and_get_user_capabilities( $user = null ) {
+
+	$user = $user ? new WP_User( $user ) : wp_get_current_user();
+
+	return array_keys( $user->allcaps );
 }
+
+
+// if ($_GET['test'] == 'test') {
+//     echo "<pre>";
+//     print_r(and_get_user_capabilities(12));
+//     echo "</pre>";
+// }
 

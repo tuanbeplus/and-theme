@@ -107,8 +107,8 @@ function fn_sync_user($user_id = 0, $access_token = '') {
     }
   
     # Auto login
-    wp_set_current_user($WP_UserID); 
-    wp_set_auth_cookie($WP_UserID);
+    // wp_set_current_user($WP_UserID); 
+    // wp_set_auth_cookie($WP_UserID);
 }
   
 function fn_set_role_by_profileid($user_id, $profile_id) {
@@ -282,7 +282,9 @@ function sf_user_info( $access_token ) {
  * 
  */
 function sf_oauth_login() {
-    if( isset($_REQUEST['code']) && $_REQUEST['code'] ){
+    
+    if( isset($_REQUEST['code']) && isset($_REQUEST['sfdc_community_url']) ){
+
         $data = sf_request_token( $_REQUEST['code'] );
         if($data){
             $user_info = sf_user_info( $data['access_token'] );

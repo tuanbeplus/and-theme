@@ -117,11 +117,10 @@ function andorgau_list_recent_posts_template($atts){
             </section>';
 
     endif;
-
 }
 
 /**
- * refresh Salesforce access token when it expired
+ * refresh Salesforce access token when it expired or invalid
  * 
  */
 function sf_refresh_token($response_error) {
@@ -602,61 +601,3 @@ function get_elearn_modules_purchased($modules, $bundles)
 	}
 }
 
-function sf_query_obj_data_test($query_url)
-{
-	$access_token = '00D28000001Ez0g!AQEAQKw_NNk99FsQ9KkYCSvPEWQe0DdqLGy2fAKz_RjsiZO7ebYZ7qWHUZY44VTgTvfCRHP4Q4fkfGEw94q3Z6dYhLvC306h';
-	$curl = curl_init();
-
-  	curl_setopt_array($curl, array(
-		CURLOPT_URL => $query_url,
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_ENCODING => '',
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 0,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => 'GET',
-		CURLOPT_HTTPHEADER => array(
-			'Authorization: Bearer '.$access_token,
-			'Cookie: BrowserId=gRbOFTL-Eey5HuWIRJTEZw; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1'
-		),
-	));
-
-	$response = curl_exec($curl);
-	curl_close($curl);
-	$response = json_decode($response);
-
-	return $response;
-}
-
-function getObjTest() {
-
-	$sf_endpoint_url = 'https://andau.my.salesforce.com';
-	$sf_api_ver = get_field('salesforce_api_version', 'option');
-	$sql = "SELECT Id FROM Contact";
-
-	$query_url = $sf_endpoint_url.'/services/data/'.$sf_api_ver.'/query/?q='. urlencode($sql);
-
-	$response = sf_query_obj_data_test($sf_endpoint_url.'/services/data/v53.0/query/0r8xx233InIG28yAID-4000');
-	return $response;
-
-	if(isset($response->nextRecordsUrl)) {
-		$response_arr = array();
-		// $response_arr[0] = $response->records;  // Save first 2000 records to array
-		$count = ceil($response->totalSize/ 2000);
-
-		for ($i=1; $i < $count; $i++) { 
-			$next_records_url = substr($response->nextRecordsUrl, 1, strpos($response->nextRecordsUrl, '-'));
-			$query_url = $sf_endpoint_url.$next_records_url.($i*2000);
-			$response_arr[$i] = sf_query_obj_data_test($query_url)->records;
-			print_r($query_url);
-			break;
-		}
-
-		// return $response_arr;
-
-	}
-	else {
-		return $response;
-	}
-}
