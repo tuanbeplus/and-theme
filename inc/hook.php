@@ -110,19 +110,22 @@ add_filter( 'wpf_salesforce_auth_url', 'and_salesforce_auth_url' );
  * 
  */
 add_action( 'template_redirect', function () {
-  if ( is_singular( 'members' ) ) :
-    wp_redirect( home_url(), 301 );
-    exit;
-  endif;
+    if ( is_singular( 'members' ) ) {
+        get_template_part( '404' );
+        exit;
+    }
 });
 
 /**
- * NoIndex for Members
+ * NoIndex for Saturn 
  * 
  */
-add_action('wp_head', function () {
-    if ( is_singular( 'members' ) ) {
-        return '<meta name="robots" content="noindex, follow">';
+add_action('wp_head', function () { 
+    if ( is_singular('assessments') 
+        || is_singular('submissions') 
+        || is_singular('reports') 
+        || is_singular('members') ) {
+            return '<meta name="robots" content="noindex, follow">';
     }
 });
 
