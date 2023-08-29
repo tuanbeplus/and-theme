@@ -1053,7 +1053,8 @@ body.__pp-offcanvas-active .pp-offcanvas__container {
   display: none !important;
 }
 .pp-product-single-add-to-cart .pp-button-choose-slots,
-.pp-product-single-add-to-cart .add_to_cart_button {
+.pp-product-single-add-to-cart .add_to_cart_button,
+.pp-product-single-add-to-cart .pp-button-book-slot {
   width: 100%;
   background: #a6352e !important;
   color: white !important;
@@ -1066,7 +1067,8 @@ body.__pp-offcanvas-active .pp-offcanvas__container {
   text-align: left !important;
 }
 .pp-product-single-add-to-cart .pp-button-choose-slots:after,
-.pp-product-single-add-to-cart .add_to_cart_button:after {
+.pp-product-single-add-to-cart .add_to_cart_button:after,
+.pp-product-single-add-to-cart .pp-button-book-slot:after {
   content: "" !important;
   position: absolute !important;
   left: 1rem;
@@ -1084,7 +1086,8 @@ body.__pp-offcanvas-active .pp-offcanvas__container {
   margin: 0 !important;
 }
 .pp-product-single-add-to-cart .pp-button-choose-slots.loading,
-.pp-product-single-add-to-cart .add_to_cart_button.loading {
+.pp-product-single-add-to-cart .add_to_cart_button.loading,
+.pp-product-single-add-to-cart .pp-button-book-slot.loading {
   pointer-events: none;
   opacity: 0.5 !important;
 }

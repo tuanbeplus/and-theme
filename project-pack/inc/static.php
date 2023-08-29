@@ -4,6 +4,11 @@
  */
 
 function pp_enqueue_scripts() {
+
+  # Calendly
+  wp_enqueue_style('pp-calendly', 'https://assets.calendly.com/assets/external/widget.css' );
+  wp_enqueue_script('pp-calendly', 'https://assets.calendly.com/assets/external/widget.js' );
+
   wp_enqueue_script( 'pp-script', PP_URI . '/dist/project-pack.main.bundle.js', ['jquery'], PP_VER, true );
   wp_enqueue_style( 'pp-style', PP_URI . '/dist/css/project-pack.main.bundle.css', false, PP_VER );
 

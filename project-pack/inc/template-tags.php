@@ -260,7 +260,7 @@ function pp_product_single_widget_buy_tag($product) {
             <?php foreach($buyItems as $_index => $item) : ?>
             <tr class="<?php echo $_index; ?>">
               <th class="__label"><?php echo $item['label'] ?></th>
-              <td class="__value"><?php echo $item['value'] ?></td>
+              <td class="__value"><?php echo $item['value'] ? $item['value'] : '—' ?></td>
             </tr>
             <?php endforeach; ?>
           </tbody>
@@ -285,6 +285,14 @@ function pp_product_button_add_to_cart_tag($product) {
       '</button>';
   } else if( $product->is_type( 'simple' ) ) {
     echo do_shortcode('[add_to_cart id="'. get_the_ID() .'"]');
+  } else if( $product->is_type( 'calendly' ) ) {
+    echo '<a 
+    href="" 
+    onclick="Calendly.initPopupWidget({url: \''. get_post_meta( get_the_ID(), '_calendly_booking_url', true ) .'\'});return false;" 
+    data-text-init="' . __('Book Slot', 'pp') . '"
+    class="pp-button pp-button-book-slot">'
+      . __('Book Slot', 'pp') .
+    '</a>';
   }
   ?>
   </div>
