@@ -69,3 +69,13 @@ function pp_add_custom_field_to_order_item_meta( $item_id, $item_values, $item_k
 add_action('woocommerce_add_order_item_meta','pp_add_custom_field_to_order_item_meta', 9, 3 );
 
 // add_filter( 'woocommerce_checkout_coupon_message', 'bt_rename_coupon_message_on_checkout' );
+
+add_action( 'pp/script_data', function($data = []) {
+
+  if(isset($_GET['invitee_uuid'])) {
+    $data['calendly_return'] = true;
+    $data['calendly_response'] = $_GET;
+  }
+
+  return $data;
+} );

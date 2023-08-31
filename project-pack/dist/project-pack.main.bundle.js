@@ -4125,6 +4125,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***/ }),
 
+/***/ "./src/js/product-type-calendly.js":
+/*!*****************************************!*\
+  !*** ./src/js/product-type-calendly.js ***!
+  \*****************************************/
+/***/ (() => {
+
+;
+(function (w, $) {
+  'use strict';
+
+  var calendlyReturn = function calendlyReturn() {
+    function isCalendlyEvent(e) {
+      return e.origin === "https://calendly.com" && e.data.event && e.data.event.indexOf("calendly.") === 0;
+    }
+    ;
+    w.addEventListener("message", function (e) {
+      if (isCalendlyEvent(e)) {
+        /* Example to get the name of the event */
+        console.log("Event name:", e.data.event);
+
+        /* Example to get the payload of the event */
+        console.log("Event details:", e.data.payload);
+      }
+    });
+  };
+  var onClickButtonBookingSlot = function onClickButtonBookingSlot() {
+    $(document.body).on('click', '.pp-button-book-slot', function () {
+      var $btn = $(this);
+      var pid = $btn.data('pid');
+      localStorage.setItem('__product_booking_current_id', pid);
+    });
+  };
+  $(function () {
+    onClickButtonBookingSlot();
+    calendlyReturn();
+  });
+})(window, jQuery);
+
+/***/ }),
+
 /***/ "./src/js/product-variations-form.js":
 /*!*******************************************!*\
   !*** ./src/js/product-variations-form.js ***!
@@ -4392,9 +4432,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_product_variations_form__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./js/product-variations-form */ "./src/js/product-variations-form.js");
 /* harmony import */ var _js_product__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/product */ "./src/js/product.js");
 /* harmony import */ var _js_outlook_calendar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/outlook-calendar */ "./src/js/outlook-calendar.js");
+/* harmony import */ var _js_product_type_calendly__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/product-type-calendly */ "./src/js/product-type-calendly.js");
+/* harmony import */ var _js_product_type_calendly__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_js_product_type_calendly__WEBPACK_IMPORTED_MODULE_9__);
 /**
  * Project pack
  */
+
 
 
 

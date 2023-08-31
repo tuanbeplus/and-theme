@@ -11,3 +11,4 @@ import './js/cart';
 import './js/product-variations-form';
 import './js/product';
 import './js/outlook-calendar';
+import './js/product-type-calendly';

@@ -44,11 +44,24 @@ function pp_calendly_product_type_options_product_tab_content() {
 	?><div id='calendly_options' class='panel woocommerce_options_panel'><?php
 		?><div class='options_group'><?php
 			woocommerce_wp_text_input([
+				'id'          => '_slot_price',
+				'label'       => __( 'Slot Price', 'pp' ),
+				'placeholder' => '',
+				'desc_tip'    => 'true',
+				'description' => __( 'Enter Price.', 'pp' ),
+				'type' 				=> 'number',
+				'custom_attributes' => [
+					'step' 	=> 'any',
+					'min' 	=> '0'
+				]
+			]);
+		
+			woocommerce_wp_text_input([
         'id'          => '_calendly_booking_url',
         'label'       => __( 'Calendly Booking URL', 'pp' ),
         'placeholder' => '',
-        'desc_tip'    => 'true',
-        'description' => __( 'Enter Calendly Booking URL. (https://calendly.com/event_types/user/me)', 'pp' ),
+        // 'desc_tip'    => 'true',
+        'description' => __( 'Enter Calendly Booking URL. (Get it here: https://calendly.com/event_types/user/me)', 'pp' ),
       ]);
 		?></div>
 	</div><?php
@@ -57,6 +70,10 @@ function pp_calendly_product_type_options_product_tab_content() {
 add_action( 'woocommerce_process_product_meta', 'pp_save_calendly_product_type_options_field' );
 
 function pp_save_calendly_product_type_options_field( $post_id ) {
+
+	if ( isset( $_POST['_slot_price'] ) ) :
+		update_post_meta( $post_id, '_slot_price', sanitize_text_field( $_POST['_slot_price'] ) );
+	endif;
 
 	if ( isset( $_POST['_calendly_booking_url'] ) ) :
 		update_post_meta( $post_id, '_calendly_booking_url', sanitize_text_field( $_POST['_calendly_booking_url'] ) );
@@ -72,9 +89,20 @@ function pp_calendly_product_type_template () {
 
 		$template_path = plugin_dir_path( __FILE__ ) . 'templates/';
 		// Load the template
-		wc_get_template( 'single-product/add-to-cart/gift_card.php',
+		wc_get_template( 'single-product/add-to-cart/....php',
 			'',
 			'',
 			trailingslashit( $template_path ) );
 	}
+}
+
+add_filter( 'woocommerce_get_price', 'pr_reseller_price', 10, 2 );
+
+function pr_reseller_price( $price, $product ) {
+
+	if($product->is_type( 'calendly' )) {
+		return get_post_meta( $product->get_id(), '_slot_price', true );
+	} 
+
+	return $price;
 }

@@ -290,6 +290,7 @@ function pp_product_button_add_to_cart_tag($product) {
     href="" 
     onclick="Calendly.initPopupWidget({url: \''. get_post_meta( get_the_ID(), '_calendly_booking_url', true ) .'\'});return false;" 
     data-text-init="' . __('Book Slot', 'pp') . '"
+    data-pid="'. get_the_ID() .'" 
     class="pp-button pp-button-book-slot">'
       . __('Book Slot', 'pp') .
     '</a>';
