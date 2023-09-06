@@ -1,9 +1,15 @@
 ;((w, $) => {
   'use strict';
+  let currentPID = null;
 
   const calendlyEvents = {
-    'calendly.event_scheduled': (payload) => {
-      console.log(payload)
+    'calendly.event_type_viewed': (payload, currentPID) => {
+      // init
+      console.log(payload, currentPID)
+    },
+    'calendly.event_scheduled': (payload, currentPID) => {
+      // Booking completed
+
     }
   };
 
@@ -14,15 +20,15 @@
     
     w.addEventListener("message", function(e) {
       if(isCalendlyEvent(e)) {
-        /* Example to get the name of the event */
         if(calendlyEvents[e.data.event]) {
-          calendlyEvents[e.data.event].call('', e.data.payload);
+          calendlyEvents[e.data.event].call('', e.data.payload, currentPID);
         }
-        
-        console.log("Event name:", e.data.event);
+
+        /* Example to get the name of the event */
+        // console.log("Event name:", e.data.event);
         
         // /* Example to get the payload of the event */
-        console.log("Event details:", e.data.payload);
+        // console.log("Event details:", e.data.payload);
       }
     });
   }
@@ -31,7 +37,7 @@
     $(document.body).on('click', '.pp-button-book-slot', function() {
       let $btn = $(this);
       let pid = $btn.data('pid');
-      localStorage.setItem('__product_booking_current_id', pid);
+      currentPID = pid;
     })
   }
 

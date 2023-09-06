@@ -4135,6 +4135,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 (function (w, $) {
   'use strict';
 
+  var currentPID = null;
+  var calendlyEvents = {
+    'calendly.event_type_viewed': function calendlyEvent_type_viewed(payload, currentPID) {
+      // init
+      console.log(payload, currentPID);
+    },
+    'calendly.event_scheduled': function calendlyEvent_scheduled(payload, currentPID) {
+      // Booking completed
+    }
+  };
   var calendlyReturn = function calendlyReturn() {
     function isCalendlyEvent(e) {
       return e.origin === "https://calendly.com" && e.data.event && e.data.event.indexOf("calendly.") === 0;
@@ -4142,19 +4152,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     ;
     w.addEventListener("message", function (e) {
       if (isCalendlyEvent(e)) {
-        /* Example to get the name of the event */
-        console.log("Event name:", e.data.event);
+        if (calendlyEvents[e.data.event]) {
+          calendlyEvents[e.data.event].call('', e.data.payload, currentPID);
+        }
 
-        /* Example to get the payload of the event */
-        console.log("Event details:", e.data.payload);
+        /* Example to get the name of the event */
+        // console.log("Event name:", e.data.event);
+
+        // /* Example to get the payload of the event */
+        // console.log("Event details:", e.data.payload);
       }
     });
   };
+
   var onClickButtonBookingSlot = function onClickButtonBookingSlot() {
     $(document.body).on('click', '.pp-button-book-slot', function () {
       var $btn = $(this);
       var pid = $btn.data('pid');
-      localStorage.setItem('__product_booking_current_id', pid);
+      currentPID = pid;
     });
   };
   $(function () {
