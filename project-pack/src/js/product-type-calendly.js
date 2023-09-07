@@ -5,11 +5,15 @@
   const calendlyEvents = {
     'calendly.event_type_viewed': (payload, currentPID) => {
       // init
-      console.log(payload, currentPID)
+      console.log(payload, currentPID);
+
+
     },
     'calendly.event_scheduled': (payload, currentPID) => {
       // Booking completed
-
+      setTimeout(() => {
+        Calendly.closePopupWidget();
+      }, 2000)
     }
   };
 

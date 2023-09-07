@@ -4143,6 +4143,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     'calendly.event_scheduled': function calendlyEvent_scheduled(payload, currentPID) {
       // Booking completed
+      setTimeout(function () {
+        Calendly.closePopupWidget();
+      }, 2000);
     }
   };
   var calendlyReturn = function calendlyReturn() {

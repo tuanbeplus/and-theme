@@ -13,7 +13,7 @@ function pp_register_calendly_product_type () {
   class WC_Product_Calendly extends WC_Product {
 
     public function __construct( $product ) {
-      $this->product_type = 'calendly'; // name of your custom product type
+      @$this->product_type = 'calendly'; // name of your custom product type
       parent::__construct( $product );
     }
   }
@@ -96,7 +96,8 @@ function pp_calendly_product_type_template () {
 	}
 }
 
-add_filter( 'woocommerce_get_price', 'pr_reseller_price', 10, 2 );
+add_filter( 'woocommerce_product_get_price', 'pr_reseller_price', 10, 2 );
+// add_filter( 'woocommerce_get_price', 'pr_reseller_price', 10, 2 );
 
 function pr_reseller_price( $price, $product ) {
 

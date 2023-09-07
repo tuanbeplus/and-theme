@@ -276,7 +276,7 @@ function wp_bootstrap_starter_password_form()
 }
 add_filter('the_password_form', 'wp_bootstrap_starter_password_form');
 
-
+define( 'AND_IMG_URI', get_template_directory_uri() . '/assets/imgs/' );
 
 /**
  * Implement the Custom Header feature.
