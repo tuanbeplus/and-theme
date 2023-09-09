@@ -96,10 +96,10 @@ function pp_calendly_product_type_template () {
 	}
 }
 
-add_filter( 'woocommerce_product_get_price', 'pr_reseller_price', 10, 2 );
+add_filter( 'woocommerce_product_get_price', 'pp_reseller_price', 10, 2 );
 // add_filter( 'woocommerce_get_price', 'pr_reseller_price', 10, 2 );
 
-function pr_reseller_price( $price, $product ) {
+function pp_reseller_price( $price, $product ) {
 
 	if($product->is_type( 'calendly' )) {
 		return get_post_meta( $product->get_id(), '_slot_price', true );
@@ -107,3 +107,62 @@ function pr_reseller_price( $price, $product ) {
 
 	return $price;
 }
+
+add_action( 'wp_ajax_pp_add_product_calendly_to_cart', 'pp_add_product_calendly_to_cart' );
+add_action( 'wp_ajax_nopriv_pp_add_product_calendly_to_cart', 'pp_add_product_calendly_to_cart' );
+
+function pp_add_product_calendly_to_cart() {
+	global $woocommerce;
+	$pid = (int) $_POST['payload']['product_id'];
+	$custom_data = [
+		'calendly_data' => $_POST['payload']['extra_data']
+	];
+
+	$result = $woocommerce->cart->add_to_cart($pid, 1, 0, [], $custom_data);
+	wp_send_json( [
+		'success' => true, 
+		'payload' => $result,
+	] );
+}
+
+/**
+ * Add custom meta data to order item
+ */
+add_action('woocommerce_add_order_item_meta','pp_add_custom_data_to_order_item_meta', 20, 3 );
+
+function pp_add_custom_data_to_order_item_meta($item_id, $item_values, $item_key) {
+  $custom_meta_field = 'calendly_data';
+
+  if( isset($item_values[$custom_meta_field]) )
+    wc_update_order_item_meta( 
+      $item_id, 
+      $custom_meta_field, 
+      $item_values[$custom_meta_field] );
+}
+
+add_action( 'woocommerce_before_order_itemmeta', 'pp_before_order_itemmeta', 10, 3 );
+function pp_before_order_itemmeta( $item_id, $item, $_product ){
+	if(!isset($item['calendly_data'])) return;
+	?>
+	<br />
+	<p>
+		Event URL: <a href="<?php echo $item['calendly_data']['event']['uri']; ?>" target="_blank"><?php echo $item['calendly_data']['event']['uri']; ?></a> <br />
+		Invitee URL: <a href="<?php echo $item['calendly_data']['invitee']['uri']; ?>" target="_blank"><?php echo $item['calendly_data']['invitee']['uri']; ?></a>
+	</p>
+	<?php
+}
+
+add_action( 'init', function() {
+	// if(!isset($_GET['__showcart'])) return; 
+	// global $woocommerce;
+	// $items = $woocommerce->cart->get_cart();
+	// foreach($items as $item => $values) { 
+	// 	echo '<pre>'; print_r($values); echo '</pre>';
+	// } 
+
+	// $order=wc_get_order(30799);
+	// foreach ( $order->get_items() as $item_id => $item ) {
+	// 	var_dump($item['item_meta']);
+	// }
+} );
+

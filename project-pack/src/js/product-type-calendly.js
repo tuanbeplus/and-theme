@@ -1,19 +1,36 @@
 ;((w, $) => {
   'use strict';
+  const { ajax_url } = PP_DATA;
   let currentPID = null;
 
+  const addProductToCart = async (product_id, extra_data) => {
+    const responsive = await $.ajax({
+      method: 'POST',
+      url: ajax_url,
+      data: {
+        action: 'pp_add_product_calendly_to_cart',
+        payload: {
+          product_id, extra_data
+        }
+      },
+      error: e => console.log(e)
+    });
+
+    return responsive;
+  }
+
   const calendlyEvents = {
-    'calendly.event_type_viewed': (payload, currentPID) => {
-      // init
-      console.log(payload, currentPID);
-
-
+    'calendly.event_type_viewed': (payload, currentPID) => { // init
+      
     },
-    'calendly.event_scheduled': (payload, currentPID) => {
-      // Booking completed
-      setTimeout(() => {
+    'calendly.event_scheduled': async (payload, currentPID) => { // Booking completed
+      
+      setTimeout(() => { 
         Calendly.closePopupWidget();
       }, 2000)
+
+      await addProductToCart(currentPID, payload);
+      w.location.href = '/cart';
     }
   };
 
