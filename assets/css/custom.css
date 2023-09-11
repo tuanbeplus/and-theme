@@ -414,9 +414,9 @@ header #main-nav .navbar-nav {
 header #main-nav .navbar-nav li a {
   color: inherit;
 }
-.site-header .buttons #login {
+/* .site-header .buttons #login {
   visibility: hidden;
-}
+} */
 @media (min-width: 1024px) and (max-width: 1200px){
   header .navbar #main-nav{
     max-width: 100%;

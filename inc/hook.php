@@ -143,10 +143,45 @@ function and_get_user_capabilities( $user = null ) {
 	return array_keys( $user->allcaps );
 }
 
+function get_user_saturn_table() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'user_quiz_submissions';
+    $sql_query_user = "SELECT user_id FROM $table_name";
+    $result = $wpdb->get_results($sql_query_user);
+
+    $user_arr = array();
+    
+    foreach ($result as $row) {
+        $user_arr[] = $row->user_id;
+    }
+    
+    $user_arr = array_unique($user_arr);
+    
+    foreach ($user_arr as $user_id) {
+        update_org_saturn_table($user_id);
+    }
+}
+
+function update_org_saturn_table($user_id) {
+
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'user_quiz_submissions';
+    $user_data = getUser($user_id);
+    $account_id = $user_data->records[0]->AccountId;
+
+    if (isset($account_id)) {
+        $wpdb->query($wpdb->prepare(
+            "UPDATE $table_name
+            SET organisation_id='$account_id'
+            WHERE user_id='$user_id'"
+            )
+        );
+    }
+}
 
 // if ($_GET['test'] == 'test') {
 //     echo "<pre>";
-//     print_r(and_get_user_capabilities(12));
+    
 //     echo "</pre>";
 // }
 

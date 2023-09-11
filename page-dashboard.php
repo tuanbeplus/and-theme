@@ -4,16 +4,6 @@
 */
 get_header();
 
-$wp_assessment = new WP_Assessment();
-$sf_login_redirect_url = $wp_assessment->get_data_value_local_storage('sf_login_redirect_url');
-
-if ($sf_login_redirect_url && $_COOKIE['userId']) {
-    wp_redirect($sf_login_redirect_url);
-}
-elseif ($sf_login_redirect_url && empty($_COOKIE['userId'])){
-    $wp_assessment->save_data_local_storage('sf_login_redirect_url', null);
-}
-
 $organisationData = getAccountMember();
 $user_data = getUser($_COOKIE['userId']);
 
@@ -30,9 +20,7 @@ const NONE_MEMBER = '00e9q000000LrVRAA0';
 
 $welcome_text = '';
 if(isset($_COOKIE['userId']) && $_COOKIE['userId']):
-    $parts = explode(" ", $_COOKIE['sf_name']);
-    $lastname = array_pop($parts);
-    $firstname = implode(" ", $parts);
+    $firstname = $user_data->records[0]->FirstName;
     $welcome_text = '<h1>Welcome back, '.$firstname.'</h1>';
 else:
     $welcome_text = '<h3 style="text-align:center;">Welcome back, You must be login to see your Dashboard.</h3>';

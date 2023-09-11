@@ -60,7 +60,7 @@ jQuery.curCSS = function (element, prop, val) {
     var cookie_user_id = (document.cookie.match(/^(?:.*;)?\s*userId\s*=\s*([^;]+)(?:.*)?$/) || [, null])[1]
     // console.log(document.cookie);
     if (cookie_user_id) {
-        $('body .site-header .buttons').html("<a id='logout' href='/?force_logout' class='btn-text change logout'><img src='https://www.and.org.au/wp-content/themes/and/assets/imgs/user-icon.svg'><span>Logout</span></a><a id='dashboard' href='/dashboard' class='btn-text change'><span>Dashboard</span></a>");
+        $('body .site-header .buttons').html("<a id='logout' href='/?force_logout' class='btn-text change logout' aria-label='Logout button'><img src='/wp-content/themes/and/assets/imgs/user-icon.svg'><span>Logout</span></a><a id='dashboard' href='/dashboard' class='btn-text change' aria-label='Go to your Dashboard'><span>Dashboard</span></a>");
     }
     else {
         $('body .site-header .buttons #login').css("visibility", "visible")

@@ -5229,6 +5229,9 @@ header {
       margin-left: 5px; }}
 
 @media (max-width: 1023px) {
+  header .navbar.is-active {
+    margin-bottom: 40px;
+  }
   header .buttons {
     display: none; }
   header .desktop {
@@ -5241,6 +5244,8 @@ header {
   header .navbar-brand img {
     width: 186px; }
   header .is-active .buttons {
+    position: absolute;
+    bottom: -56px;
     display: flex;
     gap: 16px;
     margin-left: 10px; }

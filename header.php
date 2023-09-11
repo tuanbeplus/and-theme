@@ -167,27 +167,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         <span class="text">Menu</span>
                     </span>
                 </button>
-                <?php
-                wp_nav_menu(array(
-                    'theme_location'    => 'primary',
-                    'container'       => 'div',
-                    'container_id'    => 'main-nav',
-                    'container_class' => 'collapse navbar-collapse justify-content-end',
-                    'menu_id'         => false,
-                    'menu_class'      => 'navbar-nav',
-                    'depth'           => 3,
-                    'fallback_cb'     => 'wp_bootstrap_navwalker::fallback',
-                    'walker'          => new wp_bootstrap_navwalker()
-                ));
-                
-                ?>
                 <div class="buttons">
-                    <a id="login" href="/login" class="btn-text change">
-                        <img src="<?php echo get_template_directory_uri().'/assets/imgs/user-icon.svg'; ?>" alt="Member Login Button" />
+                    <a id="login" href="/login" class="btn-text change" aria-label="Member Login" role="button">
+                        <img src="<?php echo get_template_directory_uri().'/assets/imgs/user-icon.svg'; ?>" alt="Member Login" />
                         <span>Login</span>
                     </a>
                 </div>
-
+                <?php
+                    wp_nav_menu(array(
+                        'theme_location'    => 'primary',
+                        'container'       => 'div',
+                        'container_id'    => 'main-nav',
+                        'container_class' => 'collapse navbar-collapse justify-content-end',
+                        'menu_id'         => false,
+                        'menu_class'      => 'navbar-nav',
+                        'depth'           => 3,
+                        'fallback_cb'     => 'wp_bootstrap_navwalker::fallback',
+                        'walker'          => new wp_bootstrap_navwalker()
+                    ));
+                ?>
             </nav>
         </div>
         <div class="template-form-search-genrenal"> <?php get_template_part( 'searchform-autocomplete') ?> </div>
@@ -334,4 +332,4 @@ function onLogin(identity) {
 	</script>
 
 	<div id="content" class="site-content">
-                <?php endif; ?>
+    <?php endif; ?>
