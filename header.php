@@ -167,12 +167,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                         <span class="text">Menu</span>
                     </span>
                 </button>
-                <div class="buttons">
-                    <a id="login" href="/login" class="btn-text change" aria-label="Member Login" role="button">
-                        <img src="<?php echo get_template_directory_uri().'/assets/imgs/user-icon.svg'; ?>" alt="Member Login" />
-                        <span>Login</span>
-                    </a>
-                </div>
+
+                <?php 
+                    // Group Login/logout buttons
+                    pp_header_button_actions(); 
+                ?>
+
                 <?php
                     wp_nav_menu(array(
                         'theme_location'    => 'primary',
@@ -209,9 +209,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </style>
 <script>
 
-	jQuery(document).on('click', '#sfid-login-button', function(e){
-		jQuery('#sfid-username').focus();
-	})
+jQuery(document).on('click', '#sfid-login-button', function(e){
+    jQuery('#sfid-username').focus();
+})
 
 function createCookie(name,value,days) {
     var expires = "";
@@ -238,16 +238,15 @@ function eraseCookie(name) {
 
 function onLogin(identity) {
 
+    jQuery('.buttons a#login').attr('href','javascript:SFIDWidget.logout()');
+    jQuery('.buttons a#login span').text('Logout');
 
-        jQuery('.buttons a#login').attr('href','javascript:SFIDWidget.logout()');
-		jQuery('.buttons a#login span').text('Logout');
+    jQuery('<a id="dashboard" href="/dashboard" class="btn-text change"><span>Dashboard</span></a>').insertBefore('.buttons a#login');
 
-        jQuery('<a id="dashboard" href="/dashboard" class="btn-text change"><span>Dashboard</span></a>').insertBefore('.buttons a#login');
-
-        if(jQuery('.dashboard').length > 1) {
-            jQuery('.welcome h1').text('Welcome back, ' +identity.first_name);
-        }
-  if(getCookie('lgi') !== "true") {
+    if(jQuery('.dashboard').length > 1) {
+        jQuery('.welcome h1').text('Welcome back, ' +identity.first_name);
+    }
+    if(getCookie('lgi') !== "true") {
              window.location = '/dashboard/';
         }
 
@@ -257,7 +256,6 @@ function onLogin(identity) {
             createCookie('userId', identity.user_id);
         }
 	}
-
 
 	function showIdentityOverlay() {
 
@@ -290,7 +288,6 @@ function onLogin(identity) {
 		community.setAttribute("style", "float:left");
 		content.appendChild(community);
 
-
 		var logout = document.createElement('a');
 	 	logout.href = "javascript:SFIDWidget.logout();SFIDWidget.cancel();";
 		logout.innerHTML = "logout";
@@ -307,14 +304,11 @@ function onLogin(identity) {
 
 		content.appendChild(t);
 
-
 		wrapper.appendChild(content);
 		lightbox.appendChild(wrapper);
 
 		document.body.appendChild(lightbox);
-
 	}
-
 
 	function onLogout() {
 			SFIDWidget.init();
@@ -326,10 +320,7 @@ function onLogin(identity) {
          window.location = '/';
 	}
 
+</script>
 
-
-
-	</script>
-
-	<div id="content" class="site-content">
-    <?php endif; ?>
+<div id="content" class="site-content">
+<?php endif; ?>

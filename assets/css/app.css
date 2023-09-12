@@ -5230,7 +5230,7 @@ header {
 
 @media (max-width: 1023px) {
   header .navbar.is-active {
-    margin-bottom: 40px;
+    margin-bottom: 60px;
   }
   header .buttons {
     display: none; }

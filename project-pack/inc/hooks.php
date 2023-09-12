@@ -44,3 +44,21 @@ add_action( 'wp_head', function() {
     endif;
   endif;
 } );
+
+/**
+ * Remove COOKIE & redirect after logout
+ * 
+ */
+add_action('wp_logout', function (){
+  // Remove all Salesforce COOKIE
+  setcookie('lgi', null, time() - 3600 * 24, '/');
+  setcookie('userId', null, time() - 3600 * 24, '/');
+  setcookie('sf_name', null, time() - 3600 * 24, '/');
+  setcookie('sf_user_email', null, time() - 3600 * 24, '/');
+  setcookie('sf_access_token', null, time() - 3600 * 24, '/');
+
+  // redirect to Home page
+  wp_redirect( home_url() );
+  exit();
+});
+

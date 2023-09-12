@@ -107,8 +107,8 @@ function fn_sync_user($user_id = 0, $access_token = '') {
     }
   
     # Auto login
-    // wp_set_current_user($WP_UserID); 
-    // wp_set_auth_cookie($WP_UserID);
+    wp_set_current_user($WP_UserID); 
+    wp_set_auth_cookie($WP_UserID);
 }
   
 function fn_set_role_by_profileid($user_id, $profile_id) {

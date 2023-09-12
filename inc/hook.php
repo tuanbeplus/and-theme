@@ -179,9 +179,12 @@ function update_org_saturn_table($user_id) {
     }
 }
 
-// if ($_GET['test'] == 'test') {
-//     echo "<pre>";
-    
-//     echo "</pre>";
+if ($_GET['test'] == 'test') {
+    echo "<pre>";
+    echo "</pre>";
+}
+
+// if(is_user_logged_in()) {
+//     echo 'true';
 // }
 

@@ -235,13 +235,15 @@ function sf_get_object_metadata($obj_name, $obj_id) {
 	curl_close($curl);
 	$response = json_decode($response);
 
-	if (isset($response->records)) {
-		return $response;
-	}
-	elseif (isset($response[0]->errorCode)) {
-		if ($response[0]->errorCode == 'INVALID_SESSION_ID') {
-			sf_refresh_token($response);
+	if (is_array($response)) {
+		if (isset($response[0]->errorCode)) {
+			if ($response[0]->errorCode == 'INVALID_SESSION_ID') {
+				sf_refresh_token($response);
+			}
 		}
+	}
+	else {
+		return $response;
 	}
 }
 

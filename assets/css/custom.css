@@ -488,7 +488,7 @@ header #main-nav .navbar-nav li a {
 @media (max-width: 1023px) {
   #menu-header > li.cta-search {
     padding-bottom: 0;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 }
 

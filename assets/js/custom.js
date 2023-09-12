@@ -59,30 +59,6 @@ jQuery.curCSS = function (element, prop, val) {
 
     var cookie_user_id = (document.cookie.match(/^(?:.*;)?\s*userId\s*=\s*([^;]+)(?:.*)?$/) || [, null])[1]
     // console.log(document.cookie);
-    if (cookie_user_id) {
-        $('body .site-header .buttons').html("<a id='logout' href='/?force_logout' class='btn-text change logout' aria-label='Logout button'><img src='/wp-content/themes/and/assets/imgs/user-icon.svg'><span>Logout</span></a><a id='dashboard' href='/dashboard' class='btn-text change' aria-label='Go to your Dashboard'><span>Dashboard</span></a>");
-    }
-    else {
-        $('body .site-header .buttons #login').css("visibility", "visible")
-    }
-
-    $("body .site-header #logout").on("click", function () {
-        $.ajax({
-            type: 'POST',
-            url: elearn_ajax_params.ajax_url,
-            data: {
-                'action': 'and_remove_cookie',
-            },
-            beforeSend: function (xhr) {
-                $("body").css('opacity', '0.8')
-            },
-            success: function (response) {
-                window.location.href = '/';
-            }
-        });
-
-        return false;
-    });
 
     $(document).on('click', 'body.how_we_can_help_you-template-default a.cta', function (e) {
         e.preventDefault();

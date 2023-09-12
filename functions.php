@@ -276,7 +276,7 @@ function wp_bootstrap_starter_password_form()
 }
 add_filter('the_password_form', 'wp_bootstrap_starter_password_form');
 
-define( 'AND_IMG_URI', get_template_directory_uri() . '/assets/imgs/' );
+define( 'AND_IMG_URI', get_template_directory_uri() . '/assets/imgs/');
 
 /**
  * Implement the Custom Header feature.
@@ -552,7 +552,7 @@ add_filter('admin_post_thumbnail_html', 'swd_admin_post_thumbnail_add_label', 10
 
 
 // implement salesforce logout
-add_action('init', 'bt_salesforce_logout');
+// add_action('init', 'bt_salesforce_logout');
 function bt_salesforce_logout(){
 	if(isset($_REQUEST['force_logout'])){
 		setcookie('lgi', null, time() - 3600 * 24, '/');
@@ -562,8 +562,8 @@ function bt_salesforce_logout(){
 	}
 }
 
-add_action( 'wp_ajax_and_remove_cookie', 'and_remove_cookie' );
-add_action( 'wp_ajax_nopriv_and_remove_cookie', 'and_remove_cookie' );
+// add_action( 'wp_ajax_and_remove_cookie', 'and_remove_cookie' );
+// add_action( 'wp_ajax_nopriv_and_remove_cookie', 'and_remove_cookie' );
 function and_remove_cookie() {
 	setcookie('lgi', null, time() - 3600 * 24, '/');
 	setcookie('userId', null, time() - 3600 * 24, '/');
