@@ -407,7 +407,6 @@ require get_template_directory() . '/post-types/campaigns.php';
 require get_template_directory() . '/post-types/news-and-events.php';
 require get_template_directory() . '/post-types/join-us.php';
 require get_template_directory() . '/post-types/students-and-jobseekers.php';
-require get_template_directory() . '/post-types/members.php';
 
 /**
  * Login to Salesforce to get a Session Token using CURL
@@ -550,26 +549,6 @@ function swd_admin_post_thumbnail_add_label($content, $post_id, $thumbnail_id)
 }
 add_filter('admin_post_thumbnail_html', 'swd_admin_post_thumbnail_add_label', 10, 3);
 
-
-// implement salesforce logout
-// add_action('init', 'bt_salesforce_logout');
-function bt_salesforce_logout(){
-	if(isset($_REQUEST['force_logout'])){
-		setcookie('lgi', null, time() - 3600 * 24, '/');
-		setcookie('userId', null, time() - 3600 * 24, '/');
-		setcookie('sf_name', null, time() - 3600 * 24, '/');
-		wp_redirect(home_url('/'));die;
-	}
-}
-
-// add_action( 'wp_ajax_and_remove_cookie', 'and_remove_cookie' );
-// add_action( 'wp_ajax_nopriv_and_remove_cookie', 'and_remove_cookie' );
-function and_remove_cookie() {
-	setcookie('lgi', null, time() - 3600 * 24, '/');
-	setcookie('userId', null, time() - 3600 * 24, '/');
-	setcookie('sf_name', null, time() - 3600 * 24, '/');
-	die;
-}
 
 // Function get cookie ajax
 add_action( 'wp_ajax_get_cookie_share', 'get_cookie_share' );

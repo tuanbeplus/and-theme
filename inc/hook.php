@@ -14,86 +14,6 @@ function is_member_exist($user_id)
     return $member_id;
 }
 
-// Create Member SF by SF API
-// add_action( 'init', 'create_members_sf' );
-function create_members_sf()
-{
-    $all_user_sf = getAllUsers();
-
-    foreach ($all_user_sf as $user) {
-
-        $args = array(
-            'fields' => 'ids',
-            'post_type'   => 'members',
-            'meta_query'  => array(
-                array(
-                    'key' => 'sf_user_id',
-                    'value' => $user->Id,
-                    'compare' => '=',    
-                )
-            )
-        );
-        $my_query = new WP_Query( $args );
-        if( empty($my_query->have_posts()) ) {
-
-            $post_id = wp_insert_post( array (
-                'post_type' => 'members',
-                'post_title' => $user->Name,
-                'post_status' => 'publish',
-                'post_author' => 5,
-            ));
-
-            if ($post_id) {
-                // insert post meta
-                update_post_meta($post_id, 'sf_user_id', $user->Id);
-                update_post_meta($post_id, 'user_name', $user->Name);
-                update_post_meta($post_id, 'email', $user->Email);
-                update_post_meta($post_id, 'contact_id', $user->ContactId);
-                update_post_meta($post_id, 'account_id', $user->AccountId);
-                update_post_meta($post_id, 'profile_id', $user->ProfileId);
-            }
-        }
-        wp_reset_query();
-        wp_reset_postdata();
-    }
-}
-
-function init_meta_boxes_members_admin_view()
-{
-    add_meta_box('assessments_purchased_view', 'Assessments', 'assessments_purchased_section_admin', 'members', 'normal', 'default');
-}
-add_action('admin_init', 'init_meta_boxes_members_admin_view');
-
-function assessments_purchased_section_admin()
-{
-    get_template_part('members/assessments-purchased');
-}
-
-function member_admin_meta_box_save($post_id)
-{
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
-        return;
-
-    if (!current_user_can('edit_post', $post_id) || get_post_type($post_id) != 'members')
-        return;
-
-    $dcr_list = $_POST['dcr_list'] ?? null;
-
-    update_post_meta($post_id, 'dcr_list', $dcr_list);
-}
-// add_action('save_post', 'member_admin_meta_box_save');
-
-// Exclude pages from wp search
-function and_exclude_posts_from_search($query) {
-
-    if ( !$query->is_admin && $query->is_search) {
-        $query->set('post__not_in', array(18192) ); // id of page or post
-    }
-
-    return $query;
-}
-add_filter( 'pre_get_posts', 'and_exclude_posts_from_search' );
-
 /**
  * Change WP Fusion auth URL to Sandbox
  * 
@@ -143,48 +63,72 @@ function and_get_user_capabilities( $user = null ) {
 	return array_keys( $user->allcaps );
 }
 
-function get_user_saturn_table() {
-    global $wpdb;
-    $table_name = $wpdb->prefix . 'user_quiz_submissions';
-    $sql_query_user = "SELECT user_id FROM $table_name";
-    $result = $wpdb->get_results($sql_query_user);
-
-    $user_arr = array();
-    
-    foreach ($result as $row) {
-        $user_arr[] = $row->user_id;
-    }
-    
-    $user_arr = array_unique($user_arr);
-    
-    foreach ($user_arr as $user_id) {
-        update_org_saturn_table($user_id);
-    }
+/**
+ * Add Exclude from search field to Submit box
+ *
+ */
+// add_action( 'post_submitbox_misc_actions', 'add_excluded_post_from_search_field');
+function add_excluded_post_from_search_field($post)
+{
+    $value = get_post_meta($post->ID, 'exclude_post_from_search', true);
+    ?>
+    <div class="misc-pub-section misc-pub-section-last">
+         <span id="exclude-post-from-search">
+            <label>
+                <input type="checkbox" 
+                    <?php if ($value == true) echo 'checked'; ?>
+                    value="1" 
+                    name="exclude_post_from_search"/> 
+                Exclude from Internal Search
+            </label>
+        </span>
+    </div>
+    <?php
 }
 
-function update_org_saturn_table($user_id) {
+/**
+ * Save Exclude from search meta
+ *
+ */
+// add_action('save_post', 'save_exclude_post_from_search');
+function save_exclude_post_from_search($post_id)
+{   
+    if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return false;
+    if ( !current_user_can( 'edit_page', $post_id ) ) return false;
 
-    global $wpdb;
-    $table_name = $wpdb->prefix . 'user_quiz_submissions';
-    $user_data = getUser($user_id);
-    $account_id = $user_data->records[0]->AccountId;
+    $is_exclude_from_search = $_POST['exclude_post_from_search'] ?? 0;
+    update_post_meta($post_id, 'exclude_post_from_search', $is_exclude_from_search);
+}
 
-    if (isset($account_id)) {
-        $wpdb->query($wpdb->prepare(
-            "UPDATE $table_name
-            SET organisation_id='$account_id'
-            WHERE user_id='$user_id'"
-            )
+/**
+ * Exclude posts from Search
+ *
+ */
+add_filter( 'pre_get_posts', 'and_exclude_posts_from_search' );
+function and_exclude_posts_from_search($query) {
+    
+    if ( !$query->is_admin && $query->is_search) {
+        $query->set(
+            'meta_query', array(
+            'relation' => 'OR',
+                array(
+                    'key' => 'exclude_post_from_search',
+                    'value' => '',
+                    'compare' => 'NOT EXISTS',
+                ),
+                array(
+                    'key' => 'exclude_post_from_search',
+                    'value' => 0,
+                    'compare' => '=',
+                ),
+            ),
         );
     }
+
+    return $query;
 }
 
-if ($_GET['test'] == 'test') {
-    echo "<pre>";
-    echo "</pre>";
-}
-
-// if(is_user_logged_in()) {
-//     echo 'true';
+// if ($_GET['test'] == 'test') {
+//     echo "<pre>";
+//     echo "</pre>";
 // }
-

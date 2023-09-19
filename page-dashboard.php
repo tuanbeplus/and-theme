@@ -17,22 +17,18 @@ global $contact_id, $account_id, $profile_id;
 const PRIMARY_MEMBER = '00e9q000000LrVSAA0';
 const GENERAL_MEMBER = '00e9q000000Lqn7AAC';
 const NONE_MEMBER = '00e9q000000LrVRAA0';
-
-$welcome_text = '';
-if(isset($_COOKIE['userId']) && $_COOKIE['userId']):
-    $firstname = $user_data->records[0]->FirstName;
-    $welcome_text = '<h1>Welcome back, '.$firstname.'</h1>';
-else:
-    $welcome_text = '<h3 style="text-align:center;">Welcome back, You must be login to see your Dashboard.</h3>';
-endif;
-
 ?>
+
+<?php if(isset($_COOKIE['userId']) && is_user_logged_in()): ?>
     <div class="main-dashboard container">
         <div class="dashboard welcome">
             <div class="container">
-                <?php echo $welcome_text; ?>
+                <?php 
+                    $firstname = $user_data->records[0]->FirstName;
+                    echo '<h1>Welcome back, '.$firstname.'</h1>';
+                ?>
                 <?php if ($organisationData['hours_remain'] && $profile_id == PRIMARY_MEMBER): ?>
-                  <h3>You have <?php echo $organisationData['hours_remain']; ?> hours remaining</h3>
+                    <h3>You have <?php echo $organisationData['hours_remain']; ?> hours remaining</h3>
                 <?php endif; ?>
             </div>
         </div>
@@ -107,7 +103,15 @@ endif;
             </div>
         </div>
     </div>
-
+<?php else: ?>
+    <div class="main-dashboard container">
+        <div class="dashboard welcome">
+            <div class="container">
+                <h3 style="text-align:center;">Welcome back, You must be login to see your Dashboard.</h3>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
 <?php
 get_footer();
 ?>
