@@ -233,14 +233,12 @@ function wp_bootstrap_starter_scripts()
 	wp_enqueue_style('jquery-ui', '//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css');
 	wp_enqueue_script('jquery-ui', 'https://code.jquery.com/ui/1.13.2/jquery-ui.js',array('jquery'), '', true);
 	wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/custom.js',array('jquery-ui'), rand(), true);
-	wp_localize_script( 'custom-js', 'elearn_ajax_params', array(
-			'ajax_url' => admin_url( 'admin-ajax.php' ), // WordPress AJAX
-		) );
 
+	// Owl Carousel
+	wp_enqueue_style('owl-carousel', get_template_directory_uri() . '/assets/owl-carousel/owl.carousel.css?r=' . rand());
+	wp_enqueue_script('owl-carousel', get_template_directory_uri() . '/assets/owl-carousel/owl.carousel.min.js', array('jquery-ui'), rand(), true);
 }
 add_action('wp_enqueue_scripts', 'wp_bootstrap_starter_scripts');
-
-
 
 /**
  * Add Preload for CDN scripts and stylesheet

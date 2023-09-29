@@ -42,7 +42,9 @@ if(is_single()) {
     }
     $postType = str_replace('_','-',$postType);
     $page = get_page_by_path( $postType );
-    $colourScheme = get_field('colour_scheme', $page->ID);
+    if (isset($page->ID)) {
+        $colourScheme = get_field('colour_scheme', $page->ID);
+    }
 }
 
 echo '<script type="text/javascript">

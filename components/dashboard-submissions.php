@@ -11,11 +11,6 @@ $args = array(
             'value' => $user_id,
             'compare' => '=',
         ),
-        // array(
-        //     'key' => 'assessment_status',
-        //     'value' => 'accepted',
-        //     'compare' => '=',
-        // ),
     ),
 );
 $all_submissions = get_posts($args);
@@ -45,9 +40,9 @@ if( get_row_layout() == 'dashboard_submissions' && !empty( $all_submissions ) ):
                                 // Show submissions
                                 foreach ($all_submissions as $key => $subs) { ?>
                                     <li>
-                                      <a href="<?php echo get_permalink($subs->ID) ?>" target="_blank" style="color:#A22F2C;">
-                                         <?php echo $subs->post_title; ?>
-                                      </a>
+                                        <a href="<?php echo get_permalink($subs->ID) ?>" target="_blank" style="color:#A22F2C;">
+                                            <?php echo $subs->post_title; ?>
+                                        </a>
                                     </li>
                                 <?php
                                 }

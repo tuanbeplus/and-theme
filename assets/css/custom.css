@@ -1291,6 +1291,59 @@ section.error-404 {
   margin-top: 3px;
 }
 
+/* Text blocks component */
+section.text-blocks {
+  margin: 50px 0;
+}
+
+.text-blocks .container {
+  max-width: 1064px;
+}
+
+.text-blocks .blocks-wrapper {
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(240px,1fr) );
+  gap: 66px;
+}
+
+.blocks-wrapper .block {
+  padding: 36px 26px 32px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.blocks-wrapper .block .label {
+  margin-bottom: 4px;
+  font-size: 15px;
+}
+
+.blocks-wrapper .block .headline {
+  margin-bottom: 24px;
+  font-size: 20px;
+  font-family: "Avenir-black";
+}
+
+.blocks-wrapper .block .description {
+  margin-bottom: 50px;
+  font-size: 16px;
+}
+
+.blocks-wrapper .block .block-cta {
+  width: fit-content;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 16px;
+  font-family: "Avenir-Medium";
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 991px) {
+  .text-blocks .blocks-wrapper {
+    gap: 36px;
+  }
+}
+
 /* Footer */
 body footer.site-footer .bottom hr {
   padding: 0;

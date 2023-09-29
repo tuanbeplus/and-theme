@@ -44,6 +44,7 @@ if( get_row_layout() == 'wp_data_feeds' ):
     } else {
         $cardClass = 'col-lg-4';
     }
+    $feedDataHtml = '';
 
     foreach($feedDatas as $feedData) {
         $feedImage = get_the_post_thumbnail_url($feedData);
