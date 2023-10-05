@@ -794,73 +794,140 @@ function list_searcheable_acf(){
 		"text_content",
 	);
 	return $list_searcheable_acf;
-  }
+}
 
-  /**
-   * [advanced_custom_search search that encompasses ACF/advanced custom fields and taxonomies and split expression before request]
-   * @param  [query-part/string]      $where    [the initial "where" part of the search query]
-   * @param  [object]                 $wp_query []
-   * @return [query-part/string]      $where    [the "where" part of the search query as we customized]
-   */
+/**
+ * [advanced_custom_search search that encompasses ACF/advanced custom fields and taxonomies and split expression before request]
+ * @param  [query-part/string]      $where    [the initial "where" part of the search query]
+ * @param  [object]                 $wp_query []
+ * @return [query-part/string]      $where    [the "where" part of the search query as we customized]
+ */
 
-  add_filter( 'posts_search', 'and_advanced_custom_search', 500, 2 );
-  function and_advanced_custom_search( $where, $wp_query ) {
-		global $wpdb;
-	
-		if ( empty( $where ))
-			return $where;
-	
-		// get search expression
-		$terms = $wp_query->query_vars[ 's' ];
-	
-		// explode search expression to get search terms
-		$exploded = explode( ' ', $terms );
-		if( $exploded === FALSE || count( $exploded ) == 0 )
-			$exploded = array( 0 => $terms );
-	
-		// reset search in order to rebuilt it as we whish
-		$where = '';
-	
-		// get searcheable_acf, a list of advanced custom fields you want to search content in
-		$list_searcheable_acf = list_searcheable_acf();
-		foreach( $exploded as $tag ) :
-			$where .= " 
-				AND (
-				(wp_posts.post_title LIKE '%$tag%')
-				OR (wp_posts.post_content LIKE '%$tag%')
-				OR EXISTS (
-					SELECT * FROM wp_postmeta
-						WHERE post_id = wp_posts.ID
-						AND (";
-			foreach ($list_searcheable_acf as $searcheable_acf) :
-				if ($searcheable_acf == $list_searcheable_acf[0]):
-					$where .= " (meta_key LIKE '%" . $searcheable_acf . "%' AND meta_value LIKE '%$tag%') ";
-				else :
-					$where .= " OR (meta_key LIKE '%" . $searcheable_acf . "%' AND meta_value LIKE '%$tag%') ";
-				endif;
-			endforeach;
-				$where .= ")
-				)
-				OR EXISTS (
-					SELECT * FROM wp_comments
-					WHERE comment_post_ID = wp_posts.ID
-					AND comment_content LIKE '%$tag%'
-				)
-				OR EXISTS (
-					SELECT * FROM wp_terms
-					INNER JOIN wp_term_taxonomy
-					ON wp_term_taxonomy.term_id = wp_terms.term_id
-					INNER JOIN wp_term_relationships
-					ON wp_term_relationships.term_taxonomy_id = wp_term_taxonomy.term_taxonomy_id
-					WHERE (
-					taxonomy = 'post_tag'
-						OR taxonomy = 'category'                
-						OR taxonomy = 'myCustomTax'
-					)
-					AND object_id = wp_posts.ID
-					AND wp_terms.name LIKE '%$tag%'
-				)
-			)";
-		endforeach;
+add_filter( 'posts_search', 'and_advanced_custom_search', 500, 2 );
+function and_advanced_custom_search( $where, $wp_query ) {
+	global $wpdb;
+
+	if ( empty( $where ))
 		return $where;
-  }
+
+	// get search expression
+	$terms = $wp_query->query_vars[ 's' ];
+
+	// explode search expression to get search terms
+	$exploded = explode( ' ', $terms );
+	if( $exploded === FALSE || count( $exploded ) == 0 )
+		$exploded = array( 0 => $terms );
+
+	// reset search in order to rebuilt it as we whish
+	$where = '';
+
+	// get searcheable_acf, a list of advanced custom fields you want to search content in
+	$list_searcheable_acf = list_searcheable_acf();
+	foreach( $exploded as $tag ) :
+		$where .= " 
+			AND (
+			(wp_posts.post_title LIKE '%$tag%')
+			OR (wp_posts.post_content LIKE '%$tag%')
+			OR EXISTS (
+				SELECT * FROM wp_postmeta
+					WHERE post_id = wp_posts.ID
+					AND (";
+		foreach ($list_searcheable_acf as $searcheable_acf) :
+			if ($searcheable_acf == $list_searcheable_acf[0]):
+				$where .= " (meta_key LIKE '%" . $searcheable_acf . "%' AND meta_value LIKE '%$tag%') ";
+			else :
+				$where .= " OR (meta_key LIKE '%" . $searcheable_acf . "%' AND meta_value LIKE '%$tag%') ";
+			endif;
+		endforeach;
+			$where .= ")
+			)
+			OR EXISTS (
+				SELECT * FROM wp_comments
+				WHERE comment_post_ID = wp_posts.ID
+				AND comment_content LIKE '%$tag%'
+			)
+			OR EXISTS (
+				SELECT * FROM wp_terms
+				INNER JOIN wp_term_taxonomy
+				ON wp_term_taxonomy.term_id = wp_terms.term_id
+				INNER JOIN wp_term_relationships
+				ON wp_term_relationships.term_taxonomy_id = wp_term_taxonomy.term_taxonomy_id
+				WHERE (
+				taxonomy = 'post_tag'
+					OR taxonomy = 'category'                
+					OR taxonomy = 'myCustomTax'
+				)
+				AND object_id = wp_posts.ID
+				AND wp_terms.name LIKE '%$tag%'
+			)
+		)";
+	endforeach;
+	return $where;
+}
+
+
+/**
+ * Get posts array for component
+ * 
+ * @param string $post_type		Post type name
+ * @param int $number_posts		Number posts to show
+ * @param string $order			order ASC or DESC
+ * 
+ */
+function get_posts_grid_component($post_type, $number_posts, $order) {
+	$posts = array();
+
+	$args = array(
+		'post_type' => $post_type,
+		'posts_per_page' => $number_posts,
+		'post_status' => 'publish',
+		'orderby' => 'date',
+		'order' => $order,
+	);
+	$posts_obj = get_posts($args);
+	foreach ($posts_obj as $post) {
+		$posts[] = $post->ID;
+	}
+	wp_reset_postdata();
+
+	return $posts;
+}
+
+/**
+ * Get loop posts card item
+ * 
+ * @param array $posts			Array posts ID
+ * @param int $cards_per_row	Number cards per row
+ * 
+ */
+function get_template_posts_card($posts) {
+	?>
+	<ul class="cards">
+		<?php foreach ($posts as $post_id): ?>
+			<li class="post-card">
+				<div>
+					<?php 
+						$img_url = get_the_post_thumbnail_url($post_id, 'medium_large');
+						if(empty($img_url)) {
+							$img_url = AND_IMG_URI .'footer-bg.jpg';
+						}
+					?>
+					<img class="card__thumb" src="<?php echo $img_url; ?>" alt="Post feature image" loading="lazy">
+					<div class="card__body">
+						<span class="card__meta">Inclusivity • <?php echo get_the_date('d/m/Y', $post_id) ?></span>
+						<h3 class="card__title">
+							<a class="card__action" href="<?php echo get_the_permalink($post_id); ?>">
+								<?php echo get_the_title($post_id); ?>
+							</a>
+						</h3>
+					</div>
+				</div>
+				<div class="card__footer">
+					<p class="card__description"><?php echo get_the_excerpt($post_id); ?>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore semet magna aliqua...</p>
+					<span class="card__btn">Read more</span>
+				</div>
+			</li>
+		<?php endforeach; ?>
+	</ul>
+	<?php
+}

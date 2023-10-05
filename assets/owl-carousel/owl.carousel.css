@@ -199,6 +199,7 @@
 }
 
 .slides .slides-wrapper .slide-item {
+  position: relative;
   width: 100%;
   padding: 40px 0;
 }
@@ -239,6 +240,13 @@
 
 .slides-wrapper .slide-item .slide-img {
   width: 100%;
+}
+
+.slides-wrapper .slide-item .slide-img img{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  max-width: 900px;
 }
 
 .slides-wrapper .slide-content .cta:hover {

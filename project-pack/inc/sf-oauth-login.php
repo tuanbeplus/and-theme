@@ -63,8 +63,11 @@ function fn_sync_user($user_id = 0, $access_token = '') {
         }
 
         update_user_meta($WP_UserID, 'salesforce_contact_id', $ContactId);
-        update_user_meta($WP_UserID, '__salesforce_user_meta', wp_json_encode( $userData ));
+        update_user_meta($WP_UserID, '__salesforce_profile_id', $ProfileId);
+        update_user_meta($WP_UserID, '__salesforce_user_meta', wp_json_encode($userData));
         update_user_meta($WP_UserID, '__salesforce_access_token', $access_token);
+        update_user_meta($WP_UserID, '__salesforce_account_id', $AccountId);
+
     } else {
         # not exists (Add new)
     
@@ -98,12 +101,12 @@ function fn_sync_user($user_id = 0, $access_token = '') {
       
         update_user_meta($WP_UserID, '__salesforce_user_id', $user_id );
         update_user_meta($WP_UserID, '__salesforce_profile_id', $ProfileId );
-        update_user_meta($WP_UserID, '__salesforce_user_meta', wp_json_encode( $userData ));
+        update_user_meta($WP_UserID, '__salesforce_user_meta', wp_json_encode($userData));
         update_user_meta($WP_UserID, '__salesforce_access_token', $access_token);
     
         update_user_meta($WP_UserID, 'salesforce_contact_id', $ContactId);
         update_user_meta($WP_UserID, '__salesforce_account_id', $AccountId);
-        update_user_meta($WP_UserID, '__salesforce_account_json', wp_json_encode( $accountInfo ));
+        update_user_meta($WP_UserID, '__salesforce_account_json', wp_json_encode($accountInfo));
     }
   
     # Auto login

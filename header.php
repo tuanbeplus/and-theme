@@ -23,15 +23,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/wp-content/themes/and/assets/imgs/favicon-16x16-1.png">
 <?php wp_head();
 
-$path = $_SERVER['REQUEST_URI'];
-if($path == '/global-footer.php') {
-    $area = 'global-footer';
-}
-if($path == '/global-header.php') {
-    $area = 'global-header';
-}
-
-
 $colourScheme = get_field('colour_scheme');
 
 if(is_single()) {
@@ -142,57 +133,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script id="UsableNetSeal" data-color="dark" data-position="left" async="true" src="https://a11ystatus.usablenet.com/lv/and/6c89cc217d5b3efdeaa9328a94b157ed2ba13ef1d4/status"></script>
 
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'wp-bootstrap-starter' ); ?></a>
+
     <?php if(!is_page_template( 'blank-page.php' ) && !is_page_template( 'blank-page-with-container.php' )): ?>
 
-    <?php if(!isset($_COOKIE['loginIssue'])): ?>
-    <!-- <div class="notice" style="padding: 10px;background: #a22f2c;color: #fff;">
-        <div class="container">
-            <p style="display:inline-block;"><a href="/member-logon-help/" style="color:#fff;text-decoration: none;">If you are having login issues then please check here</a></p>
-            <span class="closer" style="display:inline-block;float:right;cursor:pointer;" onClick="setCookie('loginIssue',true);">x</span>
-        </div>
-    </div> -->
-    <?php endif; ?>
-	<header class="site-header <?php echo $area; ?>" role="banner">
-        <div class="container">
-            <nav class="navbar navbar-expand-xl p-0">
-                <div class="navbar-brand">
-                    <a href="<?php echo esc_url( home_url( '/' )); ?>" class="desktop">
-                        <img src="<?php echo get_template_directory_uri().'/assets/imgs/logo.svg'; ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
-                    </a>
-                    <a href="<?php echo esc_url( home_url( '/' )); ?>" class="mobile">
-                        <img src="<?php echo get_template_directory_uri().'/assets/imgs/logo-mobile.svg'; ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
-                    </a>
-                </div>
-                <button class="hamburger hamburger--spring" type="button" data-target="#primary-menu-wrap" aria-controls="primary-menu-wrap" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="hamburger-box">
-                        <span class="hamburger-inner"></span>
-                        <span class="text">Menu</span>
-                    </span>
-                </button>
-
-                <?php 
-                    // Group Login/logout buttons
-                    pp_header_button_actions(); 
-                ?>
-
-                <?php
-                    wp_nav_menu(array(
-                        'theme_location'    => 'primary',
-                        'container'       => 'div',
-                        'container_id'    => 'main-nav',
-                        'container_class' => 'collapse navbar-collapse justify-content-end',
-                        'menu_id'         => false,
-                        'menu_class'      => 'navbar-nav',
-                        'depth'           => 3,
-                        'fallback_cb'     => 'wp_bootstrap_navwalker::fallback',
-                        'walker'          => new wp_bootstrap_navwalker()
-                    ));
-                ?>
-            </nav>
-        </div>
-        <div class="template-form-search-genrenal"> <?php get_template_part( 'searchform-autocomplete') ?> </div>
-
-	</header><!-- #masthead -->
+	<?php 
+        $header_ver = get_field('header_template', 'option')['version'];
+        if ($header_ver == 'version_1') {
+            get_template_part('template-parts/header');
+        }
+        elseif ($header_ver == 'version_2') {
+            get_template_part('template-parts/header-v2');
+        }
+    ?>
     <?php
         if(!is_front_page()):
         echo '<div class="breadcrumbs-top">
