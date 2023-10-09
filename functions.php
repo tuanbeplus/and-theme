@@ -896,38 +896,15 @@ function get_posts_grid_component($post_type, $number_posts, $order) {
 /**
  * Get loop posts card item
  * 
+ * @param int $post_type		Post type name
  * @param array $posts			Array posts ID
- * @param int $cards_per_row	Number cards per row
  * 
  */
-function get_template_posts_card($posts) {
-	?>
-	<ul class="cards">
-		<?php foreach ($posts as $post_id): ?>
-			<li class="post-card">
-				<div>
-					<?php 
-						$img_url = get_the_post_thumbnail_url($post_id, 'medium_large');
-						if(empty($img_url)) {
-							$img_url = AND_IMG_URI .'footer-bg.jpg';
-						}
-					?>
-					<img class="card__thumb" src="<?php echo $img_url; ?>" alt="Post feature image" loading="lazy">
-					<div class="card__body">
-						<span class="card__meta">Inclusivity • <?php echo get_the_date('d/m/Y', $post_id) ?></span>
-						<h3 class="card__title">
-							<a class="card__action" href="<?php echo get_the_permalink($post_id); ?>">
-								<?php echo get_the_title($post_id); ?>
-							</a>
-						</h3>
-					</div>
-				</div>
-				<div class="card__footer">
-					<p class="card__description"><?php echo get_the_excerpt($post_id); ?>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore semet magna aliqua...</p>
-					<span class="card__btn">Read more</span>
-				</div>
-			</li>
-		<?php endforeach; ?>
-	</ul>
-	<?php
+function get_template_posts_card($post_type, $posts) {
+	set_query_var( 'post_type', $post_type);
+	set_query_var( 'posts', $posts);
+	if (isset($post_type) && isset($posts)) {
+		get_template_part('template-parts/posts-grid/posts-card-loop');
+		get_template_part('template-parts/posts-grid/posts-card-carousel');
+	}
 }

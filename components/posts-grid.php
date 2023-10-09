@@ -33,11 +33,7 @@ if( get_row_layout() == 'posts_grid' ):
                 <?php endif; ?>
             </div>
             <div class="posts-grid-wrapper">
-                <?php if ($post_type == 'product'): ?>
-                    <?php echo pp_product_landing_load_init(); ?>
-                <?php else: ?>
-                    <?php echo get_template_posts_card($posts); ?>
-                <?php endif ?>
+                <?php echo get_template_posts_card($post_type, $posts); ?>
             </div>
         </div>
     </section>

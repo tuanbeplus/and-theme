@@ -139,10 +139,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<?php 
         $header_ver = get_field('header_template', 'option')['version'];
         if ($header_ver == 'version_1') {
-            get_template_part('template-parts/header');
+            get_template_part('template-parts/header/header');
         }
         elseif ($header_ver == 'version_2') {
-            get_template_part('template-parts/header-v2');
+            get_template_part('template-parts/header/header-v2');
         }
     ?>
     <?php

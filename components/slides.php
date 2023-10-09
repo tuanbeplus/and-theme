@@ -28,18 +28,20 @@ if( get_row_layout() == 'slides' ):
                                 <?php endif; ?>
                                 <?php if($item['cta_link']): ?>
                                     <?php $cta_id = rand(1, 999); ?>
-                                    <a id="cta-<?php echo $cta_id; ?>" class="cta" role="button" href="<?php echo $item['cta_link']; ?>">
-                                        <?php echo $item['cta_text']; ?>
-                                    </a>
-                                    <style>
-                                        #cta-<?php echo $cta_id; ?> {
-                                            background-color: <?php echo $item['background_color']; ?>;
-                                        }
-                                        #cta-<?php echo $cta_id; ?>:hover {
-                                            color: <?php echo $item['background_color']; ?>;
-                                            background-color: #fff;
-                                        }
-                                    </style>
+                                    <div class="cta-field">
+                                        <a id="cta-<?php echo $cta_id; ?>" class="cta" role="button" href="<?php echo $item['cta_link']; ?>">
+                                            <?php echo $item['cta_text']; ?>
+                                        </a>
+                                        <style>
+                                            #cta-<?php echo $cta_id; ?> {
+                                                background-color: <?php echo $item['background_color']; ?>;
+                                            }
+                                            #cta-<?php echo $cta_id; ?>:hover {
+                                                color: <?php echo $item['background_color']; ?>;
+                                                background-color: #fff;
+                                            }
+                                        </style>
+                                    </div>
                                 <?php endif; ?>
                             </div>
                             

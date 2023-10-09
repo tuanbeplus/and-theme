@@ -17,15 +17,11 @@ if($path == '/global-header.php') {
     $area = 'global-header';
 }
 ?>
-
 <header class="site-header version-2 <?php echo $area; ?>" role="banner">
     <div class="container">
         <nav class="navbar navbar-expand-xl p-0">
             <div class="navbar-brand">
-                <a href="<?php echo esc_url( home_url( '/' )); ?>" class="desktop">
-                    <img src="<?php echo $logo_url; ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
-                </a>
-                <a href="<?php echo esc_url( home_url( '/' )); ?>" class="mobile">
+                <a href="<?php echo esc_url( home_url( '/' )); ?>" class="logo">
                     <img src="<?php echo $logo_url; ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
                 </a>
             </div>
