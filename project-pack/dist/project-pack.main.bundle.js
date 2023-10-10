@@ -4215,7 +4215,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         if (calendlyEvents[e.data.event]) {
           calendlyEvents[e.data.event].call('', e.data.payload, currentPID);
         }
-
+        console.log(e.data);
         /* Example to get the name of the event */
         // console.log("Event name:", e.data.event);
 
