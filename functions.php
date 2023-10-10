@@ -233,14 +233,12 @@ function wp_bootstrap_starter_scripts()
 	wp_enqueue_style('jquery-ui', '//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css');
 	wp_enqueue_script('jquery-ui', 'https://code.jquery.com/ui/1.13.2/jquery-ui.js',array('jquery'), '', true);
 	wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/custom.js',array('jquery-ui'), rand(), true);
-	wp_localize_script( 'custom-js', 'elearn_ajax_params', array(
-			'ajax_url' => admin_url( 'admin-ajax.php' ), // WordPress AJAX
-		) );
 
+	// Owl Carousel
+	wp_enqueue_style('owl-carousel', get_template_directory_uri() . '/assets/owl-carousel/owl.carousel.css?r=' . rand());
+	wp_enqueue_script('owl-carousel', get_template_directory_uri() . '/assets/owl-carousel/owl.carousel.min.js', array('jquery-ui'), rand(), true);
 }
 add_action('wp_enqueue_scripts', 'wp_bootstrap_starter_scripts');
-
-
 
 /**
  * Add Preload for CDN scripts and stylesheet
@@ -276,7 +274,7 @@ function wp_bootstrap_starter_password_form()
 }
 add_filter('the_password_form', 'wp_bootstrap_starter_password_form');
 
-define( 'AND_IMG_URI', get_template_directory_uri() . '/assets/imgs/' );
+define( 'AND_IMG_URI', get_template_directory_uri() . '/assets/imgs/');
 
 /**
  * Implement the Custom Header feature.
@@ -407,7 +405,6 @@ require get_template_directory() . '/post-types/campaigns.php';
 require get_template_directory() . '/post-types/news-and-events.php';
 require get_template_directory() . '/post-types/join-us.php';
 require get_template_directory() . '/post-types/students-and-jobseekers.php';
-require get_template_directory() . '/post-types/members.php';
 
 /**
  * Login to Salesforce to get a Session Token using CURL
@@ -550,26 +547,6 @@ function swd_admin_post_thumbnail_add_label($content, $post_id, $thumbnail_id)
 }
 add_filter('admin_post_thumbnail_html', 'swd_admin_post_thumbnail_add_label', 10, 3);
 
-
-// implement salesforce logout
-add_action('init', 'bt_salesforce_logout');
-function bt_salesforce_logout(){
-	if(isset($_REQUEST['force_logout'])){
-		setcookie('lgi', null, time() - 3600 * 24, '/');
-		setcookie('userId', null, time() - 3600 * 24, '/');
-		setcookie('sf_name', null, time() - 3600 * 24, '/');
-		wp_redirect(home_url('/'));die;
-	}
-}
-
-add_action( 'wp_ajax_and_remove_cookie', 'and_remove_cookie' );
-add_action( 'wp_ajax_nopriv_and_remove_cookie', 'and_remove_cookie' );
-function and_remove_cookie() {
-	setcookie('lgi', null, time() - 3600 * 24, '/');
-	setcookie('userId', null, time() - 3600 * 24, '/');
-	setcookie('sf_name', null, time() - 3600 * 24, '/');
-	die;
-}
 
 // Function get cookie ajax
 add_action( 'wp_ajax_get_cookie_share', 'get_cookie_share' );
@@ -817,73 +794,117 @@ function list_searcheable_acf(){
 		"text_content",
 	);
 	return $list_searcheable_acf;
-  }
+}
 
-  /**
-   * [advanced_custom_search search that encompasses ACF/advanced custom fields and taxonomies and split expression before request]
-   * @param  [query-part/string]      $where    [the initial "where" part of the search query]
-   * @param  [object]                 $wp_query []
-   * @return [query-part/string]      $where    [the "where" part of the search query as we customized]
-   */
+/**
+ * [advanced_custom_search search that encompasses ACF/advanced custom fields and taxonomies and split expression before request]
+ * @param  [query-part/string]      $where    [the initial "where" part of the search query]
+ * @param  [object]                 $wp_query []
+ * @return [query-part/string]      $where    [the "where" part of the search query as we customized]
+ */
 
-  add_filter( 'posts_search', 'and_advanced_custom_search', 500, 2 );
-  function and_advanced_custom_search( $where, $wp_query ) {
-		global $wpdb;
-	
-		if ( empty( $where ))
-			return $where;
-	
-		// get search expression
-		$terms = $wp_query->query_vars[ 's' ];
-	
-		// explode search expression to get search terms
-		$exploded = explode( ' ', $terms );
-		if( $exploded === FALSE || count( $exploded ) == 0 )
-			$exploded = array( 0 => $terms );
-	
-		// reset search in order to rebuilt it as we whish
-		$where = '';
-	
-		// get searcheable_acf, a list of advanced custom fields you want to search content in
-		$list_searcheable_acf = list_searcheable_acf();
-		foreach( $exploded as $tag ) :
-			$where .= " 
-				AND (
-				(wp_posts.post_title LIKE '%$tag%')
-				OR (wp_posts.post_content LIKE '%$tag%')
-				OR EXISTS (
-					SELECT * FROM wp_postmeta
-						WHERE post_id = wp_posts.ID
-						AND (";
-			foreach ($list_searcheable_acf as $searcheable_acf) :
-				if ($searcheable_acf == $list_searcheable_acf[0]):
-					$where .= " (meta_key LIKE '%" . $searcheable_acf . "%' AND meta_value LIKE '%$tag%') ";
-				else :
-					$where .= " OR (meta_key LIKE '%" . $searcheable_acf . "%' AND meta_value LIKE '%$tag%') ";
-				endif;
-			endforeach;
-				$where .= ")
-				)
-				OR EXISTS (
-					SELECT * FROM wp_comments
-					WHERE comment_post_ID = wp_posts.ID
-					AND comment_content LIKE '%$tag%'
-				)
-				OR EXISTS (
-					SELECT * FROM wp_terms
-					INNER JOIN wp_term_taxonomy
-					ON wp_term_taxonomy.term_id = wp_terms.term_id
-					INNER JOIN wp_term_relationships
-					ON wp_term_relationships.term_taxonomy_id = wp_term_taxonomy.term_taxonomy_id
-					WHERE (
-					taxonomy = 'post_tag'
-						OR taxonomy = 'category'                
-						OR taxonomy = 'myCustomTax'
-					)
-					AND object_id = wp_posts.ID
-					AND wp_terms.name LIKE '%$tag%'
-				)
-			)";
-		endforeach;
+add_filter( 'posts_search', 'and_advanced_custom_search', 500, 2 );
+function and_advanced_custom_search( $where, $wp_query ) {
+	global $wpdb;
+
+	if ( empty( $where ))
 		return $where;
-  }
+
+	// get search expression
+	$terms = $wp_query->query_vars[ 's' ];
+
+	// explode search expression to get search terms
+	$exploded = explode( ' ', $terms );
+	if( $exploded === FALSE || count( $exploded ) == 0 )
+		$exploded = array( 0 => $terms );
+
+	// reset search in order to rebuilt it as we whish
+	$where = '';
+
+	// get searcheable_acf, a list of advanced custom fields you want to search content in
+	$list_searcheable_acf = list_searcheable_acf();
+	foreach( $exploded as $tag ) :
+		$where .= " 
+			AND (
+			(wp_posts.post_title LIKE '%$tag%')
+			OR (wp_posts.post_content LIKE '%$tag%')
+			OR EXISTS (
+				SELECT * FROM wp_postmeta
+					WHERE post_id = wp_posts.ID
+					AND (";
+		foreach ($list_searcheable_acf as $searcheable_acf) :
+			if ($searcheable_acf == $list_searcheable_acf[0]):
+				$where .= " (meta_key LIKE '%" . $searcheable_acf . "%' AND meta_value LIKE '%$tag%') ";
+			else :
+				$where .= " OR (meta_key LIKE '%" . $searcheable_acf . "%' AND meta_value LIKE '%$tag%') ";
+			endif;
+		endforeach;
+			$where .= ")
+			)
+			OR EXISTS (
+				SELECT * FROM wp_comments
+				WHERE comment_post_ID = wp_posts.ID
+				AND comment_content LIKE '%$tag%'
+			)
+			OR EXISTS (
+				SELECT * FROM wp_terms
+				INNER JOIN wp_term_taxonomy
+				ON wp_term_taxonomy.term_id = wp_terms.term_id
+				INNER JOIN wp_term_relationships
+				ON wp_term_relationships.term_taxonomy_id = wp_term_taxonomy.term_taxonomy_id
+				WHERE (
+				taxonomy = 'post_tag'
+					OR taxonomy = 'category'                
+					OR taxonomy = 'myCustomTax'
+				)
+				AND object_id = wp_posts.ID
+				AND wp_terms.name LIKE '%$tag%'
+			)
+		)";
+	endforeach;
+	return $where;
+}
+
+
+/**
+ * Get posts array for component
+ * 
+ * @param string $post_type		Post type name
+ * @param int $number_posts		Number posts to show
+ * @param string $order			order ASC or DESC
+ * 
+ */
+function get_posts_grid_component($post_type, $number_posts, $order) {
+	$posts = array();
+
+	$args = array(
+		'post_type' => $post_type,
+		'posts_per_page' => $number_posts,
+		'post_status' => 'publish',
+		'orderby' => 'date',
+		'order' => $order,
+	);
+	$posts_obj = get_posts($args);
+	foreach ($posts_obj as $post) {
+		$posts[] = $post->ID;
+	}
+	wp_reset_postdata();
+
+	return $posts;
+}
+
+/**
+ * Get loop posts card item
+ * 
+ * @param int $post_type		Post type name
+ * @param array $posts			Array posts ID
+ * 
+ */
+function get_template_posts_card($post_type, $posts) {
+	set_query_var( 'post_type', $post_type);
+	set_query_var( 'posts', $posts);
+	if (isset($post_type) && isset($posts)) {
+		get_template_part('template-parts/posts-grid/posts-card-loop');
+		get_template_part('template-parts/posts-grid/posts-card-carousel');
+	}
+}

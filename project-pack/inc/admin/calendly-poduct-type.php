@@ -10,13 +10,14 @@ add_action( 'init', 'pp_register_calendly_product_type' );
 
 function pp_register_calendly_product_type () {
 
-  class WC_Product_Calendly extends WC_Product {
-
-    public function __construct( $product ) {
-      @$this->product_type = 'calendly'; // name of your custom product type
-      parent::__construct( $product );
-    }
-  }
+	if (class_exists('WC_Product')) {
+		class WC_Product_Calendly extends WC_Product {
+			public function __construct( $product ) {
+			  @$this->product_type = 'calendly'; // name of your custom product type
+			  parent::__construct( $product );
+			}
+		}
+	}
 }
 
 add_filter( 'product_type_selector', 'pp_add_calendly_product_type' );

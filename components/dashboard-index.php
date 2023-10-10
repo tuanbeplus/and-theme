@@ -1,7 +1,9 @@
 <?php
 
 $user_id = $_COOKIE['userId'];
-$assessments_accessible_all_users = get_assessments_accessible_all_users();
+$arr_terms = array('self-assessed','index');
+$organisation_id = get_user_meta( get_current_user_id(), '__salesforce_account_id', true);
+$assessments_accessible_all_users = get_assessments_accessible_all_users($arr_terms);
 $sf_product_id_opp = getProductIdByOpportunity();
 $index_product_id = isset($sf_product_id_opp['index_product_id']) ? $sf_product_id_opp['index_product_id'] : null;
 $index_assessments_list = get_assessments_related_sf_products($index_product_id, 'index') ?? null;
@@ -9,13 +11,13 @@ $accessible_list = array();
 $index_list = array();
 
 foreach ($index_assessments_list as $index_id) {
-    $submission_completed = get_submissions_completed($user_id, $index_id);
+    $submission_completed = get_submissions_completed($organisation_id, $index_id);
     if (empty($submission_completed)){
         $index_list[] = $index_id;
     }
 }
 foreach ($assessments_accessible_all_users as $assessment_id) {
-    $submission_completed = get_submissions_completed($user_id, $assessment_id);
+    $submission_completed = get_submissions_completed($organisation_id, $assessment_id);
     if (empty($submission_completed)){
         $accessible_list[] = $assessment_id;
     }

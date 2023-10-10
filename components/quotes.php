@@ -2,6 +2,7 @@
 
 if( get_row_layout() == 'quotes' ):
     $quotes = get_sub_field('quotes');
+    $contentPosition = '';
     $html = '';
     foreach($quotes as $quote) {
         $html .= '<div class="quote-area">

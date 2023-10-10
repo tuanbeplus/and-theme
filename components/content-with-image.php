@@ -5,6 +5,7 @@ if( get_row_layout() == 'content_with_image' ):
     $image = get_sub_field('image');
     $mobileImage = get_sub_field('image_mobile');
     $contentPosition = get_sub_field('content_position');
+    $html = '';
 
     if($contentPosition == 'right') {
         $html = '<div class="col-12 col-md-4 col-lg-4 image">

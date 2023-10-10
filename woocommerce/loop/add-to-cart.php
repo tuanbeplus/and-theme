@@ -43,7 +43,7 @@ global $product;
         );
     ?>
         <div class="loading-wrapper">
-            <img src="<?php echo AND_IMG_URI . 'Spinner-per.svg'; ?>" alt="Spinner">
+            <img style="display:none;" src="<?php echo AND_IMG_URI . 'Spinner-per.svg'; ?>" alt="Spinner">
         </div>
     </div>
 </div>

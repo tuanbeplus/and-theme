@@ -550,6 +550,10 @@ if( have_rows('page_builder') ):
     get_template_part('components/resources-data-feed');
     get_template_part('components/form-embed');
     get_template_part('components/form-search');
+    get_template_part('components/slides');
+    get_template_part('components/text-blocks');
+    get_template_part('components/posts-grid');
+    get_template_part('components/icons-list');
 
 
 endwhile;

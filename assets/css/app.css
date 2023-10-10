@@ -26,7 +26,7 @@
 .hamburger-box {
   width: 27px;
   height: 24px;
-  display: inline-block;
+  display: flex;
   position: relative; }
 
 .hamburger-inner {
@@ -2506,6 +2506,16 @@ figure.wp-caption {
 #content.site-content {
   padding-top: 0;
   padding-bottom: 0; }
+
+body.home #content.site-content {
+  padding-bottom: 60px;
+}
+
+@media only screen and (max-width: 400px) {
+  body.home #content.site-content {
+    padding-bottom: 0;
+  }
+}
 
 .titles {
   padding-bottom: 30px; }
@@ -5210,7 +5220,7 @@ header {
   header .buttons a.btn-text span {
     font-size: 1rem; } }
 
-@media (min-width: 1024px) and (max-width: 1200px) {
+@media (min-width: 1025px) and (max-width: 1200px) {
   header #main-nav {
     flex-basis: auto;
     display: inline-block;
@@ -5228,7 +5238,10 @@ header {
     header .buttons a {
       margin-left: 5px; }}
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
+  header .navbar.is-active {
+    margin-bottom: 60px;
+  }
   header .buttons {
     display: none; }
   header .desktop {
@@ -5241,6 +5254,8 @@ header {
   header .navbar-brand img {
     width: 186px; }
   header .is-active .buttons {
+    position: absolute;
+    bottom: -56px;
     display: flex;
     gap: 16px;
     margin-left: 10px; }
@@ -5361,7 +5376,7 @@ footer.site-footer {
       font-size: 1rem;
       margin-right: 21px; }
     footer.site-footer .social a {
-      margin-right: 27px; }
+      margin-right: 20px; }
   footer.site-footer #footer-menu-wrap {
     width: 100%;
     float: left; }
@@ -5462,6 +5477,7 @@ footer.site-footer {
       flex: 0 0 100%;
       max-width: 100%; }
     footer.site-footer .social {
+      display: flex;
       border-top: 1px solid #787878 !important;
       padding-top: 30px;
       text-align: left; }

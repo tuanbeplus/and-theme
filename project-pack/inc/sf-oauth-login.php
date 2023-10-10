@@ -63,8 +63,11 @@ function fn_sync_user($user_id = 0, $access_token = '') {
         }
 
         update_user_meta($WP_UserID, 'salesforce_contact_id', $ContactId);
-        update_user_meta($WP_UserID, '__salesforce_user_meta', wp_json_encode( $userData ));
+        update_user_meta($WP_UserID, '__salesforce_profile_id', $ProfileId);
+        update_user_meta($WP_UserID, '__salesforce_user_meta', wp_json_encode($userData));
         update_user_meta($WP_UserID, '__salesforce_access_token', $access_token);
+        update_user_meta($WP_UserID, '__salesforce_account_id', $AccountId);
+
     } else {
         # not exists (Add new)
     
@@ -98,17 +101,17 @@ function fn_sync_user($user_id = 0, $access_token = '') {
       
         update_user_meta($WP_UserID, '__salesforce_user_id', $user_id );
         update_user_meta($WP_UserID, '__salesforce_profile_id', $ProfileId );
-        update_user_meta($WP_UserID, '__salesforce_user_meta', wp_json_encode( $userData ));
+        update_user_meta($WP_UserID, '__salesforce_user_meta', wp_json_encode($userData));
         update_user_meta($WP_UserID, '__salesforce_access_token', $access_token);
     
         update_user_meta($WP_UserID, 'salesforce_contact_id', $ContactId);
         update_user_meta($WP_UserID, '__salesforce_account_id', $AccountId);
-        update_user_meta($WP_UserID, '__salesforce_account_json', wp_json_encode( $accountInfo ));
+        update_user_meta($WP_UserID, '__salesforce_account_json', wp_json_encode($accountInfo));
     }
   
     # Auto login
-    // wp_set_current_user($WP_UserID); 
-    // wp_set_auth_cookie($WP_UserID);
+    wp_set_current_user($WP_UserID); 
+    wp_set_auth_cookie($WP_UserID);
 }
   
 function fn_set_role_by_profileid($user_id, $profile_id) {
@@ -320,4 +323,21 @@ function sf_oauth_login() {
         }
     }
 }
+
+/**
+ * Remove COOKIE & redirect after logout
+ * 
+ */
+add_action('wp_logout', function (){
+    // Remove all Salesforce COOKIE
+    setcookie('lgi', null, time() - 3600 * 24, '/');
+    setcookie('userId', null, time() - 3600 * 24, '/');
+    setcookie('sf_name', null, time() - 3600 * 24, '/');
+    setcookie('sf_user_email', null, time() - 3600 * 24, '/');
+    setcookie('sf_access_token', null, time() - 3600 * 24, '/');
+  
+    // redirect to Home page
+    wp_redirect( home_url() );
+    exit();
+  });
 
