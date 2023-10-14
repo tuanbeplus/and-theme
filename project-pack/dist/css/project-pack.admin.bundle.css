@@ -1,3 +1,133 @@
+#PP_EVENT_IMPORT_PAGE {
+  font-family: Arial, Helvetica, sans-serif;
+}
+#PP_EVENT_IMPORT_PAGE > h2 {
+  background: white;
+  margin: 0;
+  padding: 1em 0;
+  box-shadow: -100px 0 0 0 #FFF;
+}
+#PP_EVENT_IMPORT_PAGE h4 {
+  margin: 0 0 0.5em 0;
+}
+#PP_EVENT_IMPORT_PAGE p {
+  margin: 0 0 0.5em;
+}
+
+.pp-container {
+  width: 960px;
+  max-width: 100%;
+  margin: 5vw auto;
+}
+
+.pp-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.pp-panel__content {
+  width: calc(100% - 280px);
+  padding: 2em;
+  background-color: white;
+  box-sizing: border-box;
+  border: solid 1px #e2e2e2;
+}
+.pp-panel__sidebar {
+  width: 250px;
+}
+
+.pp-table {
+  border-collapse: collapse;
+  border: solid #e0e0e0;
+  border-width: 1px 1px 0 1px;
+  max-width: 100%;
+  margin: 1.5em 0;
+  background: white;
+}
+.pp-table th, .pp-table td {
+  padding: 0.5em;
+  border: solid #e0e0e0;
+  border-width: 0 1px 1px 0;
+  box-sizing: border-box;
+}
+.pp-table thead th {
+  text-align: left;
+  background-color: #f9f9f9;
+}
+
+.junction-table {
+  width: 100%;
+}
+
+.pp-button,
+a.pp-button {
+  text-decoration: none;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 0.5em 1em;
+  border: none;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  border-radius: 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.pp-button:hover,
+a.pp-button:hover {
+  opacity: 0.7;
+}
+.pp-button svg,
+a.pp-button svg {
+  margin-left: 6px;
+  width: 14px;
+}
+
+.popover-box {
+  background: white;
+  border-radius: 1px;
+  box-shadow: 0 0 10px 0 rgba(1, 1, 1, 0.1);
+  max-width: 260px;
+}
+.popover-box > .__label,
+.popover-box > .__entry {
+  padding: 0.5em 1em;
+}
+.popover-box .__label {
+  background: black;
+  display: block;
+  width: 100%;
+  margin: 0;
+  color: white;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 0.9em;
+  padding: 0.7em 1em;
+}
+.popover-box .__entry {
+  font-size: 0.9em;
+}
+.popover-box .__entry ul {
+  margin: 0;
+  padding: 0;
+}
+.popover-box .__entry ul li {
+  margin: 0;
+  padding: 4px 0;
+  display: inline-block;
+  margin-right: 10px;
+  border-bottom: solid 1px black;
+}
+
+.btn-disable {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .pp-product-variable-custom-field {
   width: 100%;
   border: solid #eee;

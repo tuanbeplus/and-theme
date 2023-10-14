@@ -1,0 +1,144 @@
+#PP_EVENT_IMPORT_PAGE {
+  font-family: Arial, Helvetica, sans-serif;
+
+  > h2 {
+    background: white;
+    margin: 0;
+    padding: 1em 0;
+    box-shadow: -100px 0 0 0 #FFF;
+  }
+
+  h4 {
+    margin: 0 0 .5em 0;
+  }
+
+  p {
+    margin: 0 0 .5em;
+  }
+}
+
+.pp-container {
+  width: 960px;
+  max-width: 100%;
+  margin: 5vw auto;
+}
+
+.pp-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  
+  &__content {
+    width: calc(100% - 280px);
+    padding: 2em;
+    background-color: white;
+    box-sizing: border-box;
+    border: solid 1px #e2e2e2;
+  }
+
+  &__sidebar {
+    width: 250px;
+  }
+}
+
+.pp-table {
+  border-collapse: collapse;
+  border: solid #e0e0e0;
+  border-width: 1px 1px 0 1px;
+  max-width: 100%;
+  margin: 1.5em 0;
+  background: white;
+
+  th, td {
+    padding: .5em;
+    border: solid #e0e0e0;
+    border-width: 0 1px 1px 0;
+    box-sizing: border-box;
+  }
+
+  thead {
+    
+    th {
+      text-align: left;
+      background-color: #f9f9f9;
+    }
+  }
+}
+
+.junction-table {
+  width: 100%;
+}
+
+.pp-button,
+a.pp-button {
+  text-decoration: none;
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 0.5em 1em;
+  border: none;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  border-radius: 1px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    opacity: .7;
+  }
+
+  svg {
+    margin-left: 6px;
+    width: 14px;
+  }
+}
+
+.popover-box {
+  background: white;
+  border-radius: 1px;
+  box-shadow: 0 0 10px 0 rgba(1,1,1,.1);
+  max-width: 260px;
+
+  > .__label,
+  > .__entry {
+    padding: .5em 1em;
+  }
+
+  .__label {
+    background: black;
+    display: block;
+    width: 100%;
+    margin: 0;
+    color: white;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-size: .9em;
+    padding: .7em 1em;
+  }
+
+  .__entry {
+    font-size: .9em;
+
+    ul {
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin: 0;
+        padding: 4px 0;
+        display: inline-block;
+        margin-right: 10px;
+        border-bottom: solid 1px black;
+      }
+    }
+  }
+}
+
+.btn-disable {
+  opacity: .5;
+  pointer-events: none;
+}
