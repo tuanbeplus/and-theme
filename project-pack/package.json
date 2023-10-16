@@ -7,7 +7,7 @@
     "dev": "npx mix watch",
     "build": "npx mix --production"
   },
-  "keywords": [],
+  "keywords": [], 
   "author": "",
   "license": "ISC",
   "dependencies": {

@@ -5,8 +5,17 @@
  * @author Mike
  */
 
-add_action('admin_menu', 'pp_register_sf_event_import_page');
+add_action('init', 'pp_register_sfevent_cpt');
+function pp_register_sfevent_cpt() {
+  $args = [
+    'public'    => true,
+    'label'     => __( 'SF Events', 'pp' ),
+    'menu_icon' => 'dashicons-block-default',
+  ];
+  register_post_type( 'sf-event', $args );
+}
 
+add_action('admin_menu', 'pp_register_sf_event_import_page');
 function pp_register_sf_event_import_page() {
   add_submenu_page( 
     'edit.php?post_type=product',   //or 'options.php'
@@ -59,7 +68,7 @@ function ppsf_import_by_junction_id($junction_id) {
   $res = ppsf_get_junction_item($junction_id);
 
   # validate data
-  if(isset($res['Id'])) {
+  if(!isset($res['Id'])) {
     pp_log('ERROR: fn ppsf_import_by_junction_id('. $junction_id .') => ' . wp_json_encode($res));
     return false;
   }
@@ -79,7 +88,10 @@ function ppsf_import_by_junction_id($junction_id) {
   $parent_id = ppsf_add_product_variable_by_event_id($res['Parent_Event__c']);
 
   // Add child product (Variation)
-  $variation_id = ppsf_add_product_variation_by_event_id($res['Child_Event__c']);
+  $variation_id_p = ppsf_add_product_variation_by_event_id($res['Parent_Event__c'], $parent_id);
+  $variation_id_c = ppsf_add_product_variation_by_event_id($res['Child_Event__c'], $parent_id);
+
+  pp_log('Product IDs: '. $parent_id .' & ' . $variation_id);
 }
 
 function ppsf_find_product_exists_by_event_id($event_id) {
@@ -105,12 +117,44 @@ function ppsf_add_product_variable_by_event_id($event_id) {
     pp_log('ERROR: fn ppsf_add_product_variable_by_event_id | Parent event '. $res['Parent_Event__c'] .' not found ' . wp_json_encode($eventData));
     return false;
   }
+
+  // pp_log('INFO Parent Event: ' . wp_json_encode($eventData));
+  return ppwc_create_variable_product([
+    'sf_event_id' => $eventData['Id'],
+    'name' => $eventData['Subject'],
+  ]);
 }
 
-function ppsf_add_product_variation_by_event_id($event_id, $product_parent_id) {
+function ppsf_add_product_variation_by_event_id($event_id, $product_parent_id = 0) {
+  if(empty($product_parent_id)) {
+    pp_log('ERROR: ppsf_add_product_variation_by_event_id => $product_parent_id empty');
+    return;
+  }
+
   $eventData = ppsf_get_event($event_id);
   if(!isset($eventData['Id'])) {
     pp_log('ERROR: fn ppsf_add_product_variation_by_event_id | Children event '. $res['Child_Event__c'] .' not found ' . wp_json_encode($eventData));
     return false;
-  }
-}
+  } 
+
+  // pp_log('INFO Children Event: ' . wp_json_encode($eventData));
+  return ppwc_add_variation_product([
+    'sf_event_id' => $eventData['Id'],
+    'name' => $eventData['Subject'],
+  ], (int) $product_parent_id);
+}   
+
+add_action( 'init', function() {
+  if(!isset($_GET['test_import'])) return;
+
+  ppsf_import_by_junction_id('a1y9h000000Ar6HAAS');
+  echo 'TEST...!';
+  // $test_id = 31055;
+  // $_product = wc_get_product( $test_id );
+  // echo '<pre>'; print_r($_product->get_attributes()); echo '</pre>'; die;
+
+  // $tmpBk = get_post_meta($test_id, '_product_attributes',true);
+  // echo '<pre>'; print_r($tmpBk); echo '</pre>';
+  // $tmpBk['events']['value'] = $tmpBk['events']['value'] . '| Event add by PHP ';
+  // update_post_meta($test_id, '_product_attributes', $tmpBk);
+} );

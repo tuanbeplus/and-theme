@@ -13,6 +13,9 @@ export default function JunctionTable() {
   return <div className="junction-table-container">
     <h4>Junction Listing</h4>
     <p>This object used in Salesforce to create the link between Workshop Events.</p>
+    {/* {
+      JSON.stringify(Junctions)
+    } */}
     <table className="pp-table junction-table">
       <thead>
         <tr>
