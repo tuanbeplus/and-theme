@@ -6,10 +6,10 @@
  * @author Mike
  */
 
-function ppwc_create_variable_product($args = []) {
+function ppwc_event_create_variable_product($args = []) {
   $default = [
+    'junction_id' => 0,
     'name' => '',
-    'image_id' => 0, // attachment image id
   ];
 
   $_args = wp_parse_args($args, $default);
@@ -17,7 +17,7 @@ function ppwc_create_variable_product($args = []) {
   // Name and image would be enough
   $product->set_name($_args['name']);
 
-  // Set default attributes
+  // Event attribute
   $attribute = new WC_Product_Attribute();
   $attribute->set_name('Events');
   $attribute->set_options([]);
@@ -25,13 +25,15 @@ function ppwc_create_variable_product($args = []) {
   $attribute->set_visible(1);
   $attribute->set_variation(1); // here it is
   
-  $product->set_attributes([$attribute]);
+  $product->set_attributes([$attribute]); 
   $product->save();
+
+  update_post_meta($product->get_id(), '_junction_id', $_args['junction_id']);
 
   return $product->get_id();
 }
 
-function ppwc_add_variation_product($args = [], $parent_id) {
+function ppwc_event_add_variation_product($args = [], $parent_id) {
   $default = [
     'sf_event_id' => '',
     'name' => '',
