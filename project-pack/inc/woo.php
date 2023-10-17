@@ -79,3 +79,16 @@ add_action( 'pp/script_data', function($data = []) {
 
   return $data;
 } );
+
+add_action( 'woocommerce_thankyou', 'pp_and_woo_auto_complete_order' );
+function pp_and_woo_auto_complete_order( $order_id ) { 
+  if ( ! $order_id ) {
+    return;
+  }
+
+  $order = wc_get_order( $order_id );
+
+  if( $order->has_status( 'processing' ) && $order->is_paid() ) {
+    $order->update_status( 'completed' );
+  }
+}

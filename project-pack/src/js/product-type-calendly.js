@@ -45,6 +45,7 @@
           calendlyEvents[e.data.event].call('', e.data.payload, currentPID);
         }
 
+        console.log(e.data)
         /* Example to get the name of the event */
         // console.log("Event name:", e.data.event);
         

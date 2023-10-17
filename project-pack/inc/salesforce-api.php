@@ -101,3 +101,39 @@ function ppsf_get_opportunity($accountID) {
 
   return json_decode( wp_remote_retrieve_body( $response ), true );
 }
+
+function ppsf_get_junctions() {
+  list(
+    'endpoint' => $endpoint,
+    'version' => $version,
+  ) = ppsf_api_info();
+
+  $sql = "SELECT Id, Name, CreatedDate, Child_Event__c, Parent_Event__c 
+          FROM Junction_Workshop_Event__c 
+          ORDER BY CreatedDate DESC";
+  $url = $endpoint . '/services/data/'. $version .'/query/?q=' . urlencode($sql);
+  $response = ppsf_remote_post($url);
+  return json_decode( wp_remote_retrieve_body( $response ), true );
+}
+
+function ppsf_get_junction_item($junction_id) {
+  list(
+    'endpoint' => $endpoint,
+    'version' => $version,
+  ) = ppsf_api_info();
+
+  $url = $endpoint . '/services/data/'. $version .'/sobjects/Junction_Workshop_Event__c/' . $junction_id;
+  $response = ppsf_remote_post($url);
+  return json_decode( wp_remote_retrieve_body( $response ), true );
+}
+
+function ppsf_get_event($eventID) {
+  list(
+    'endpoint' => $endpoint,
+    'version' => $version,
+  ) = ppsf_api_info();
+  
+  $url = $endpoint . '/services/data/'. $version .'/sobjects/Event/' . $eventID;
+  $response = ppsf_remote_post($url);
+  return json_decode( wp_remote_retrieve_body( $response ), true );
+}

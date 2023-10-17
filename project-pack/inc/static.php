@@ -28,6 +28,8 @@ add_action( 'wp_enqueue_scripts', 'pp_enqueue_scripts' );
 function pp_admin_enqueue_scripts() {
   wp_enqueue_script( 'pp-admin-script', PP_URI . '/dist/project-pack.admin.bundle.js', ['jquery'], PP_VER, true );
   wp_enqueue_style( 'pp-admin-style', PP_URI . '/dist/css/project-pack.admin.bundle.css', false, PP_VER );
+
+  wp_enqueue_script( 'pp-salesforce-admin-script', PP_URI . '/dist/salesforce.admin.bundle.js', ['jquery'], PP_VER, true );
 }
 
 add_action( 'admin_enqueue_scripts', 'pp_admin_enqueue_scripts' );

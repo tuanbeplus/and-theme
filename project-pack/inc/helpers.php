@@ -238,5 +238,17 @@ function pp_organisation_details_template($wp_user_id) {
   }
 }
 
+function pp_log($log_msg) {
+  $upload_dir = wp_upload_dir();
+  $log_filename = $upload_dir['basedir']."/pp-log";
+  $current_time = current_time('mysql'); 
 
+  if (!file_exists($log_filename)) {
+    // create directory/folder uploads.
+    mkdir($log_filename, 0777, true);
+  }
+  
+  $log_file_data = $log_filename.'/log_' . date('d-M-Y') . '.log';
+  file_put_contents($log_file_data, $current_time .  ' — ' . $log_msg . "\n", FILE_APPEND);
+}
 
