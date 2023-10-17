@@ -15,8 +15,8 @@
 }
 
 .pp-container {
-  width: 960px;
-  max-width: 100%;
+  width: 1160px;
+  max-width: calc(100% - 40px);
   margin: 5vw auto;
 }
 

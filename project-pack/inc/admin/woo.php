@@ -5,35 +5,49 @@
 
 function pp_woo_add_btn_custom_date_data_to_variations($loop, $variation_data, $variation) {
   echo '<div class="pp-product-variable-custom-field">';
+  // woocommerce_wp_text_input( array(
+  //   'id' => 'start_date[' . $loop . ']',
+  //   'class' => 'short',
+  //   'label' => __( 'Start Date', 'pp' ),
+  //   'type' => 'date',
+  //   'value' => get_post_meta( $variation->ID, 'start_date', true )
+  // ) );
+
+  // woocommerce_wp_text_input( array(
+  //   'id' => 'start_time[' . $loop . ']',
+  //   'class' => 'short',
+  //   'label' => __( 'Start Time', 'pp' ),
+  //   'value' => get_post_meta( $variation->ID, 'start_time', true )
+  // ) );
+
+
+  // woocommerce_wp_text_input( array(
+  //   'id' => 'end_date[' . $loop . ']',
+  //   'class' => 'short',
+  //   'label' => __( 'End Date', 'pp' ),
+  //   'type' => 'date',
+  //   'value' => get_post_meta( $variation->ID, 'end_date', true )
+  // ) );
+
+  // woocommerce_wp_text_input( array(
+  //   'id' => 'end_time[' . $loop . ']',
+  //   'class' => 'short',
+  //   'label' => __( 'End Time', 'pp' ),
+  //   'value' => get_post_meta( $variation->ID, 'end_time', true )
+  // ) );
+
   woocommerce_wp_text_input( array(
-    'id' => 'start_date[' . $loop . ']',
+    'id' => 'wp_parent_event_id[' . $loop . ']',
     'class' => 'short',
-    'label' => __( 'Start Date', 'pp' ),
-    'type' => 'date',
-    'value' => get_post_meta( $variation->ID, 'start_date', true )
+    'label' => __( 'WP Event Parent ID', 'pp' ),
+    'value' => get_post_meta( $variation->ID, 'wp_parent_event_id', true )
   ) );
 
   woocommerce_wp_text_input( array(
-    'id' => 'start_time[' . $loop . ']',
+    'id' => 'wp_child_event_id[' . $loop . ']',
     'class' => 'short',
-    'label' => __( 'Start Time', 'pp' ),
-    'value' => get_post_meta( $variation->ID, 'start_time', true )
-  ) );
-
-
-  woocommerce_wp_text_input( array(
-    'id' => 'end_date[' . $loop . ']',
-    'class' => 'short',
-    'label' => __( 'End Date', 'pp' ),
-    'type' => 'date',
-    'value' => get_post_meta( $variation->ID, 'end_date', true )
-  ) );
-
-  woocommerce_wp_text_input( array(
-    'id' => 'end_time[' . $loop . ']',
-    'class' => 'short',
-    'label' => __( 'End Time', 'pp' ),
-    'value' => get_post_meta( $variation->ID, 'end_time', true )
+    'label' => __( 'WP Event Children ID', 'pp' ),
+    'value' => get_post_meta( $variation->ID, 'wp_child_event_id', true )
   ) );
 
   echo '</div>';
@@ -42,7 +56,8 @@ function pp_woo_add_btn_custom_date_data_to_variations($loop, $variation_data, $
 add_action( 'woocommerce_variation_options_pricing', 'pp_woo_add_btn_custom_date_data_to_variations', 50, 3 );
 
 function pp_woo_save_date_field_variations( $variation_id, $i ) {
-  $updateFields = ['start_date', 'start_time', 'end_date', 'end_time'];
+  // $updateFields = ['start_date', 'start_time', 'end_date', 'end_time'];
+  $updateFields = ['wp_parent_event_id', 'wp_child_event_id'];
 
   foreach($updateFields as $_idnex => $field) {
     $value = $_POST[$field][$i];
@@ -55,7 +70,8 @@ add_action( 'woocommerce_save_product_variation', 'pp_woo_save_date_field_variat
 
 
 function pp_woo_add_date_field_variation_data( $variations ) {
-  $dateFields = ['start_date', 'start_time', 'end_date', 'end_time'];
+  // $dateFields = ['start_date', 'start_time', 'end_date', 'end_time'];
+  $dateFields = ['wp_parent_event_id', 'wp_child_event_id'];
   
   foreach($dateFields as $_idnex => $field) {
     $value = get_post_meta( $variations[ 'variation_id' ], $field, true );

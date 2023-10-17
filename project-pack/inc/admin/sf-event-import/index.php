@@ -32,7 +32,7 @@ function pp_event_import_page_callback() {
   <div id="PP_EVENT_IMPORT_PAGE">
     <h2><?php _e('Salesforce Event Import Page 📅', 'pp') ?></h2>
     <div class="container" id="PP_EVENT_IMPORT_PAGE_CONATAINER">
-
+      <!-- React render -->
     </div>
   </div> <!-- #PP_EVENT_IMPORT_PAGE -->
   <?php
@@ -101,16 +101,40 @@ function ppsf_import_by_junction_id($junction_id) {
     return false;
   }
 
-  $product_parent_id = ppwc_event_create_variable_product([
-    'junction_id' => $junction_id,
-    'name' => $parent_event['Subject'],
+  $product_exists = ppsf_check_product_create_by_junction_exists($junction_id);
+  if($product_exists == false) {
+    # Create variable product
+    $product_parent_id = ppwc_event_create_variable_product([
+      'junction_id' => $junction_id,
+      'name' => $parent_event['Subject'],
+    ]);
+
+    # Create variation product
+    ppwc_event_add_variation_product([
+      'name' => $parent_event['Subject'],
+      'wp_parent_event_id' => $wp_parent_event_id, 
+      'wp_child_event_id' => $wp_child_event_id
+    ], $product_parent_id);
+
+    return $product_parent_id;
+  } else {
+    pp_log('Message: Product exists #' . $product_exists);
+    return $product_exists;
+  }
+}
+
+function ppsf_check_product_create_by_junction_exists($junction_id) {
+  $res = get_posts([
+    'post_type' => 'product',  
+    'post_status' => 'any',
+    'meta_query' => [
+      'key' => '_junction_id', // meta key name here
+      'value' => $junction_id, 
+      'compare' => '=',
+    ]
   ]);
 
-  ppwc_event_add_variation_product([
-    'name' => $parent_event['Subject'],
-    'wp_parent_event_id' => $wp_parent_event_id, 
-    'wp_child_event_id' => $wp_child_event_id
-  ], $product_parent_id);
+  return ($res && count($res) > 0) ? $res[0]->ID : false;
 }
 
 function ppsf_add_event($event_data) {
@@ -118,7 +142,9 @@ function ppsf_add_event($event_data) {
   if($event_id == false) {
     // add new event
     $event_id = wp_insert_post([
+      'post_type' => 'sf-event',
       'post_title' => wp_strip_all_tags($event_data['Subject']),
+      'post_status' => 'publish',
     ]);
 
     $custom_fields = apply_filters('PPSF/EVENT_CUSTOM_FIELDS_FILTER', [
@@ -154,20 +180,16 @@ function ppsf_find_event_by_sfevent_id($sf_event_id) {
     ]
   ]);
 
-  return count($_posts) > 0 ? $_posts[0]->ID : false;
+  return (($_posts && count($_posts)) > 0 ? $_posts[0]->ID : false);
 }
 
+# For test
 add_action( 'init', function() {
   if(!isset($_GET['test_import'])) return;
 
-  ppsf_import_by_junction_id('a1y9h000000Ar6HAAS');
-  echo 'TEST...!';
-  // $test_id = 31055;
-  // $_product = wc_get_product( $test_id );
-  // echo '<pre>'; print_r($_product->get_attributes()); echo '</pre>'; die;
-
-  // $tmpBk = get_post_meta($test_id, '_product_attributes',true);
-  // echo '<pre>'; print_r($tmpBk); echo '</pre>';
-  // $tmpBk['events']['value'] = $tmpBk['events']['value'] . '| Event add by PHP ';
-  // update_post_meta($test_id, '_product_attributes', $tmpBk);
+  $junction_id = 'a1y9h000000Ar6HAAS';
+  // print_r(ppsf_check_product_create_by_junction_exists($junction_id));
+  // ppsf_import_by_junction_id($junction_id);
+  echo 'TEST import...!'; 
 } );
+# End for test

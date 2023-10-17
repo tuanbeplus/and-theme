@@ -27,6 +27,7 @@ function ppwc_event_create_variable_product($args = []) {
   
   $product->set_attributes([$attribute]); 
   $product->save();
+  pp_log('Message: Added product variable successfully #' . $product->get_id());
 
   update_post_meta($product->get_id(), '_junction_id', $_args['junction_id']); 
   do_action( 'PPSF/after_add_variable_hook', $product, $product->get_id(), $_args);
@@ -38,7 +39,7 @@ function ppwc_event_add_variation_product($args = [], $parent_id) {
     'name' => $parent_event['Subject'],
     'wp_parent_event_id' => $wp_parent_event_id, 
     'wp_child_event_id' => $wp_child_event_id
-  ];
+  ]; 
 
   // add attribute for each
   $_args = wp_parse_args($args, $default);
@@ -51,12 +52,13 @@ function ppwc_event_add_variation_product($args = [], $parent_id) {
   $variation->set_name($_args['name']);   
 
   $variation->save(); 
+  pp_log('Message: Added product variation successfully #' . $variation->get_id());
 
   // Update meta fields
   $meta_fields = apply_filters( 'PPSF/event_import_meta_fields_filter', [
     'wp_parent_event_id' => $_args['wp_parent_event_id'],
-    'wp_child_event_id' => $_args['wp_child_event_id'],
-  ], $_args);
+    'wp_child_event_id' => $_args['wp_child_event_id'], 
+  ], $_args); 
 
   foreach($meta_fields as $name => $value) {
     update_post_meta($variation->get_id(), $name, $value);
