@@ -35,9 +35,9 @@ function ppwc_event_create_variable_product($args = []) {
 
 function ppwc_event_add_variation_product($args = [], $parent_id) {
   $default = [
-    'sf_event_id' => '',
-    'name' => '',
-    'image_id' => 0, // attachment image id
+    'name' => $parent_event['Subject'],
+    'wp_parent_event_id' => $wp_parent_event_id, 
+    'wp_child_event_id' => $wp_child_event_id
   ];
 
   // add attribute for each
