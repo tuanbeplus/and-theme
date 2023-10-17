@@ -57,7 +57,7 @@
                     echo do_shortcode('[add_to_cart id="'.$post_id.'"]'); 
                 }
                 else {
-                    echo '<span class="card__btn">Read more</span>';
+                    echo '<a href="'.get_permalink( $post_id ).'" class="card__btn">Read more</a>';
                 }
             ?>
         </div>

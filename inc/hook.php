@@ -329,8 +329,8 @@ function get_old_attachments_exist()
 }
 
 // if (($_GET['test'] == 'test')) {
-//     $azure = new WP_Azure_Storage();
 //     echo "<pre>";
+//     print_r();
 //     echo "</pre>";
 // }
 

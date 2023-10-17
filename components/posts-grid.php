@@ -19,7 +19,7 @@ if( get_row_layout() == 'posts_grid' ):
         $posts = get_posts_grid_component($post_type, $number_cards, $dynamic_order);
     }
     ?>
-    <section class="posts-grid">
+    <section class="posts-grid <?php echo $post_type; ?>">
         <div class="container">
             <div class="grid-top">
                 <?php if ($headline): ?>

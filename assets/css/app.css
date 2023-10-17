@@ -2379,7 +2379,7 @@ h2 {
   font-family: "Avenir-Heavy";
   font-size: 2.25rem;
   font-weight: 300;
-  line-height: 116%;
+  line-height: 125%;
   color: #3D3D3D; }
 
 h3 {
@@ -2509,6 +2509,12 @@ figure.wp-caption {
 
 body.home #content.site-content {
   padding-bottom: 60px;
+}
+
+@media only screen and (max-width: 1024px) {
+  body.home #content.site-content {
+    padding-bottom: 10px;
+  }
 }
 
 @media only screen and (max-width: 400px) {
@@ -5000,7 +5006,7 @@ header {
     padding: 45px 0 30px;
     background: #fff; }
   header .navbar-brand img {
-    width: 146px; }
+    width: 133px; }
   header .mobile {
     display: none; }
   header .hamburger {
@@ -5043,7 +5049,7 @@ header {
     header .hamburger.is-active .text {
       display: none; }
   header #main-nav {
-    margin-top: 7px; }
+    margin-top: 26px; }
   header .dropdown-toggle::after {
     display: none; }
   header .navbar-nav .dropdown-menu {
@@ -5255,7 +5261,7 @@ header {
     width: 186px; }
   header .is-active .buttons {
     position: absolute;
-    bottom: -56px;
+    bottom: -65px;
     display: flex;
     gap: 16px;
     margin-left: 10px; }
@@ -5517,8 +5523,6 @@ footer.site-footer {
   line-height: 140%; }
 
 @media (max-width: 1500px) {
-  .home header {
-    border-bottom: 5px solid #663077; }
   .home .hero.with-shape .shape {
     top: -160px;
     right: 0;

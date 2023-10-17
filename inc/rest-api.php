@@ -603,3 +603,6 @@ function get_elearn_modules_purchased($modules, $bundles)
 	}
 }
 
+
+
+
