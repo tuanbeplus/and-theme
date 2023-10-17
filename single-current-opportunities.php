@@ -7,9 +7,6 @@ get_header();
 
 $positions = getOpenPositions();
 $program_id = get_field('stepping_into_program_id','options');
-// if($_GET['test'] == '1') {
-//     print_r($program_id);
-// }
 ?>
 
 <div class="col-12 current-opportunities">
@@ -31,7 +28,7 @@ $program_id = get_field('stepping_into_program_id','options');
                         <select name="role">
                             <option value="Administration & Office Support">Administration & Office Support</option>
                             <option value="Agricultural and Veterinary Sciences">Agricultural and Veterinary Sciences</option>
-							              <option value="Art, Design, Architecture and Media">Art, Design, Architecture and Media</option>
+							<option value="Art, Design, Architecture and Media">Art, Design, Architecture and Media</option>
                             <option value="Business, Human Resources and Management">Business, Human Resources and Management</option>
                             <option value="Commerce, Finance, Accounting and Economics">Commerce, Finance, Accounting and Economics</option>
                             <option value="Community Services">Community Services</option>

@@ -602,20 +602,3 @@ function get_elearn_modules_purchased($modules, $bundles)
 		}
 	}
 }
-
-// if ($_GET['test'] = 'test') {
-// echo "<pre>";
-// print_r(getEventRelation());
-// }
-
-// function getEventRelation()
-// {
-//   	$sql = "SELECT FIELDS(ALL) FROM EventRelation LIMIT 10";
-
-// 	$response = sf_query_object_metadata($sql);
-
-// 	return $response;
-// }
-
-
-
