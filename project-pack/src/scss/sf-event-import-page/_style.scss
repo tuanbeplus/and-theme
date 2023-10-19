@@ -143,3 +143,55 @@ a.pp-button {
   opacity: .5;
   pointer-events: none;
 }
+
+.import-all.disable {
+  pointer-events: none;
+  background: lightgray;
+}
+.button-import {
+  &.Done {
+    pointer-events: none;
+    background: gray;
+  }
+}
+.junction-content {
+  position: relative;
+}
+.and-loading-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  background: rgb(0 0 0 / 10%);
+}
+@keyframes sploading {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.and-spinner-loading {
+  margin: 20px auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: conic-gradient(#0000 10%, #ffffff);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 6px), #000 0);
+  animation: sploading 1s infinite linear;
+}
+.import-status {
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  display: block;
+  text-align: center;
+
+  &.Done {
+    color: blue;
+  }
+  &.Failure {
+    color: red;
+  }
+}

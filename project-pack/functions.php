@@ -18,6 +18,7 @@
    */
   require(PP_DIR . '/inc/admin/woo.php');
   require(PP_DIR . '/inc/admin/calendly-poduct-type.php');
+  require(PP_DIR . '/inc/admin/rest-apis.php');
   require(PP_DIR . '/inc/event-tickets/index.php');
   // require(PP_DIR . '/inc/options.php');
   require(PP_DIR . '/inc/admin/sf-event-import/index.php');
