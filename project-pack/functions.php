@@ -22,6 +22,7 @@
   require(PP_DIR . '/inc/event-tickets/index.php');
   // require(PP_DIR . '/inc/options.php');
   require(PP_DIR . '/inc/admin/sf-event-import/index.php');
+  require(PP_DIR . '/inc/admin/sf-event-sync/loader.php');
   require(PP_DIR . '/inc/woo-helpers.php');
 
   require(PP_DIR . '/inc/static.php');
