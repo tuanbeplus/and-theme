@@ -128,9 +128,11 @@ function ppsf_check_product_create_by_junction_exists($junction_id) {
     'post_type' => 'product',  
     'post_status' => 'any',
     'meta_query' => [
-      'key' => '_junction_id', // meta key name here
-      'value' => $junction_id, 
-      'compare' => '=',
+      [
+        'key' => '_junction_id', // meta key name here
+        'value' => $junction_id, 
+        'compare' => '=',
+      ]
     ]
   ]);
 
