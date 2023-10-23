@@ -1,5 +1,6 @@
 <?php
 if(isset($_GET['action']) && $_GET['action'] == 'event-change') {
+  echo "come here"; die;
   $xml = file_get_contents('php://input');
 
   if(empty($xml)) {
@@ -15,32 +16,6 @@ if(isset($_GET['action']) && $_GET['action'] == 'event-change') {
       "Blade__c",
       "Capacity__c",
       "Category__c",
-      "Condition__c",
-      "Description",
-      "Family",
-      "Fuel_Type__c",
-      "HP__c",
-      "HRS_Engine__c",
-      "HRS__c",
-      "Height__c",
-      "Industry__c",
-      "IsActive",
-      "Length__c",
-      "Location__c",
-      "Manufacturer__c",
-      "Marketability__c",
-      "Model__c",
-      "Name",
-      "Price__c",
-      "ROPS__c",
-      "Serial__c",
-      "Track_Type__c",
-      "Track_Width__c",
-      "Unit_Description_Short__c",
-      "Water_Capacity_gal__c",
-      "Weight__c",
-      "Width__c",
-      "Year__c",
   ) as $key) {
       foreach($result->getElementsByTagNameNS("urn:sobject.enterprise.soap.sforce.com", $key) as $element) {
           if($element instanceof DOMElement)
