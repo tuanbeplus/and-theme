@@ -1507,6 +1507,8 @@ function EventListInfo(_ref) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
       children: ["Date: ", (event === null || event === void 0 ? void 0 : event.Workshop_Event_Date__c) || 'null']
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
+      children: ["Date Text: ", (event === null || event === void 0 ? void 0 : event.Workshop_Event_Date_Text__c) || 'null']
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
       children: ["Times: ", (event === null || event === void 0 ? void 0 : event.Workshop_Times__c) || 'null']
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
       children: ["Total Seats: ", (event === null || event === void 0 ? void 0 : event.Total_Number_of_Seats__c) || 'null']

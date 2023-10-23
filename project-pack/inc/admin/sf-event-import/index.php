@@ -150,6 +150,7 @@ function ppsf_add_event($event_data) {
     $custom_fields = apply_filters('PPSF/EVENT_CUSTOM_FIELDS_FILTER', [
       'sf_event_id' => $event_data['Id'],
       'workshop_event_date__c' => $event_data['Workshop_Event_Date__c'],
+      'workshop_event_date_text__c' => $event_data['Workshop_Event_Date_Text__c'],
       'workshop_times__c' => $event_data['Workshop_Times__c'],
       'total_number_of_seats__c' => $event_data['Total_Number_of_Seats__c'],
       'remaining_seats__c' => $event_data['Remaining_Seats__c'],
