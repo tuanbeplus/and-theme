@@ -59,7 +59,7 @@ function pp_get_full_event_import_data() {
 }
 
 add_action('wp_ajax_pp_ajax_get_sf_junctions_object', 'pp_ajax_get_sf_junctions_object');
-add_action('wp_ajax_pp_ajax_get_sf_junctions_object', 'pp_ajax_get_sf_junctions_object');
+add_action('wp_ajax_nopriv_pp_ajax_get_sf_junctions_object', 'pp_ajax_get_sf_junctions_object');
 function pp_ajax_get_sf_junctions_object() {
   wp_send_json(pp_get_full_event_import_data());
 }
@@ -185,13 +185,92 @@ function ppsf_find_event_by_sfevent_id($sf_event_id) {
   return (($_posts && count($_posts)) > 0 ? $_posts[0]->ID : false);
 }
 
+function ppwc_get_all_events() {
+  $events = get_posts([
+    'post_type' => 'sf-event',
+    'status' => 'any',
+    'posts_per_page' => -1,
+  ]);
+  
+  return ($events && count($events) > 0) ? array_map(function($e) {
+    $p = (object) [
+      'ID' => $e->ID,
+      'post_status' => $e->post_status,
+      'post_title' => $e->post_title,
+      'sf_event_id' => get_post_meta($e->ID, 'sf_event_id', true),
+      'workshop_event_date_text__c' => get_post_meta($e->ID, 'workshop_event_date_text__c', true),
+      'workshop_times__c' => get_post_meta($e->ID, 'workshop_times__c', true),
+      'total_number_of_seats__c' => get_post_meta($e->ID, 'total_number_of_seats__c', true),
+      'remaining_seats__c' => get_post_meta($e->ID, 'remaining_seats__c', true),
+    ];
+
+    return $p;
+  }, $events) : false;
+}
+
+function ppwc_get_all_product_events() {
+  $products = get_posts([
+    'post_type' => 'product',  
+    'post_status' => 'any',
+    'meta_query' => [
+      [
+        'key' => '_junction_id', // meta key name here
+        'compare' => 'EXISTS',
+      ]
+    ]
+  ]);
+
+  return ($products && count($products) > 0) ? array_map(function($p) {
+    $_product = wc_get_product( $p->ID );
+    $variable = $_product->is_type('variable') ? true : false;
+    $item = (object) [
+      'ID' => $p->ID,
+      'post_status' => $p->post_status,
+      'post_title' => $p->post_title,
+      '__is_product_variable' => $variable,
+      '__sf_junction_id' => get_post_meta($p->ID, '_junction_id', true),
+    ];
+    
+    if($variable == true) {
+      $_children_ids = $_product->get_children();
+      if($_children_ids && count($_children_ids) > 0) {
+        $item->__product_childrens = $_children_ids;
+        foreach($_children_ids as $variation_id) {
+          $wp_parent_event_id = get_post_meta($variation_id, 'wp_parent_event_id', true);
+          $wp_child_event_id = get_post_meta($variation_id, 'wp_child_event_id', true);
+
+          if(!empty($wp_parent_event_id) || !empty($wp_child_event_id)) {
+            $item->__wp_event_parent_id = $wp_parent_event_id;
+            $item->__wp_event_children_id = $wp_child_event_id;
+            break;
+          }
+        }
+      }
+      
+    }
+
+    return $item;
+  }, $products) : false;
+}
+
+function ppwc_product_sfevent_validate_import() {
+  $events = ppwc_get_all_events();
+  $products = ppwc_get_all_product_events();
+
+  return [
+    'events' => $events,
+    'products' => $products,
+  ];
+}
+
 # For test
 add_action( 'init', function() {
   if(!isset($_GET['test_import'])) return;
 
-  $junction_id = 'a1y9h000000Ar6HAAS';
+  // $junction_id = 'a1y9h000000Ar6HAAS'; 
   // print_r(ppsf_check_product_create_by_junction_exists($junction_id));
   // ppsf_import_by_junction_id($junction_id);
+  echo '<pre>'; print_r(ppwc_product_sfevent_validate_import()); echo '</pre>';
   echo 'TEST import...!'; 
 } );
 # End for test
