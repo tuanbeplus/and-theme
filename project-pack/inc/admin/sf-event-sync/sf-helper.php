@@ -58,7 +58,15 @@ function and_pull_event_data_from_salesforce($event_fields){
   $event_id = ppsf_find_event_by_sfevent_id($event_fields['Id']);
   if($event_id) {
     foreach($event_fields as $name => $value) {
-      update_post_meta($event_id, $name, $value);
+      if ( $name == "Subject" ) {
+        $post_args = array(
+          "ID" => $event_id,
+          "post_title" => $value
+        );
+        wp_update_post(wp_slash($post_args));
+      } else {
+        update_post_meta($event_id, strtolower($name), $value);
+      }
     }
   }
 }
