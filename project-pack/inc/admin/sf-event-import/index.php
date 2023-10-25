@@ -257,11 +257,26 @@ function ppwc_product_sfevent_validate_import() {
   $events = ppwc_get_all_events();
   $products = ppwc_get_all_product_events();
 
-  return [
-    'events' => $events,
-    'products' => $products,
-  ];
+  return $products ? array_map(function($p) use ($events) {
+    
+    if($events) {
+      $_events = (array) $events;
+      $e_parent_found_key = array_search($p->__wp_event_parent_id, array_column($_events, 'ID'));
+      $e_child_found_key = array_search($p->__wp_event_children_id, array_column($_events, 'ID'));
+      $p->__sf_event_parent_id = $events[$e_parent_found_key]->sf_event_id;
+      $p->__sf_event_child_id = $events[$e_child_found_key]->sf_event_id;
+    }
+
+    return $p;
+  }, $products) : false;
 }
+
+function ppwc_ajax_product_sfevent_validate_import() {
+  wp_send_json(ppwc_product_sfevent_validate_import());
+}
+
+add_action('wp_ajax_ppwc_ajax_product_sfevent_validate_import', 'ppwc_ajax_product_sfevent_validate_import');
+add_action('wp_ajax_nopriv_ppwc_ajax_product_sfevent_validate_import', 'ppwc_ajax_product_sfevent_validate_import');
 
 # For test
 add_action( 'init', function() {
