@@ -1,26 +1,39 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getJunctions } from './api';
+import { getJunctions, eventsImported } from './api';
 
 const SFEventContext = createContext();
 
 const SFEventContext_Provider = ({ children }) => {
   const [Junctions, setJunctions] = useState([]);
   const [JunctionsSize, setJunctionsSize] = useState(0);
+  const [dataEventsImported, setDataEventsImported] = useState([]);
 
   useEffect(() => {
-    const _getJunctions = async () => {
-      const { totalSize, records } = await getJunctions();
-      setJunctions(records);
-      setJunctionsSize(totalSize);
+
+    const dataInit = async () => {
+      const _getJunctions = async () => {
+        const { totalSize, records } = await getJunctions();
+        setJunctions(records);
+        setJunctionsSize(totalSize);
+      }
+  
+      const _getEventsImported = async () => {
+        const _eventImported = await eventsImported();
+        setDataEventsImported(_eventImported);
+      }
+  
+      _getEventsImported();
+      _getJunctions();
     }
 
-    _getJunctions();
+    dataInit();
   }, [])
 
   const value = {
     version: '1.0.0',
     Junctions, setJunctions,
-    JunctionsSize, setJunctionsSize
+    JunctionsSize, setJunctionsSize,
+    dataEventsImported, setDataEventsImported
   }
 
   return <SFEventContext.Provider value={ value }>

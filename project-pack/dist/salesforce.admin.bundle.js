@@ -1652,6 +1652,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+var IconTicked = function IconTicked() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+    className: "pp-icon-emoj",
+    children: "\u2705"
+  });
+};
 function JunctionTable() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
@@ -1674,7 +1680,8 @@ function JunctionTable() {
     loading = _useState10[0],
     setLoading = _useState10[1];
   var _useSFEventContext = (0,_libs_context__WEBPACK_IMPORTED_MODULE_0__.useSFEventContext)(),
-    Junctions = _useSFEventContext.Junctions;
+    Junctions = _useSFEventContext.Junctions,
+    dataEventsImported = _useSFEventContext.dataEventsImported;
   var isImportAvailable = function isImportAvailable(juncData) {
     var _juncData$parent_even, _juncData$child_event;
     return juncData !== null && juncData !== void 0 && (_juncData$parent_even = juncData.parent_event_data) !== null && _juncData$parent_even !== void 0 && _juncData$parent_even.Id && juncData !== null && juncData !== void 0 && (_juncData$child_event = juncData.child_event_data) !== null && _juncData$child_event !== void 0 && _juncData$child_event.Id ? true : false;
@@ -1781,6 +1788,18 @@ function JunctionTable() {
       return _ref2.apply(this, arguments);
     };
   }();
+  var isJunctionImported = function isJunctionImported(jID) {
+    var found = dataEventsImported.find(function (item) {
+      return item.__sf_junction_id == jID;
+    });
+    return found ? true : false;
+  };
+  var isEventImported = function isEventImported(eID, name) {
+    var found = dataEventsImported.find(function (item) {
+      return item[name] == eID;
+    });
+    return found ? true : false;
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "junction-table-container",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h4", {
@@ -1826,7 +1845,7 @@ function JunctionTable() {
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tbody", {
           children: Junctions.map(function (item, _name) {
-            var _item$parent_event_da, _item$parent_event_da2, _item$child_event_dat, _item$child_event_dat2;
+            var _item$parent_event_da, _item$parent_event_da2, _item$parent_event_da3, _item$child_event_dat, _item$child_event_dat2, _item$child_event_dat3;
             var status = '';
             if (!loading && eventsImported.length > 0 && eventsImported.includes(item.Id)) {
               status = eventsDone.includes(item.Id) ? 'Done' : 'Failure';
@@ -1841,8 +1860,12 @@ function JunctionTable() {
                   handleClick: handleCheckboxClick,
                   isChecked: isCheck.includes(item.Id)
                 }, item.Id)
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
-                children: item.Id
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("td", {
+                children: [item.Id, " ", isJunctionImported(item.Id) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                  className: "pp-tag pp-tag__dark",
+                  title: "Imported",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(IconTicked, {})
+                }) : '']
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
                 children: item.Name
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
@@ -1855,8 +1878,12 @@ function JunctionTable() {
                     })
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_accessible_popover__WEBPACK_IMPORTED_MODULE_6__.Trigger, {
                     on: "hover",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                      children: item.Parent_Event__c
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                      children: [item.Parent_Event__c, " ", isEventImported(item === null || item === void 0 ? void 0 : (_item$parent_event_da3 = item.parent_event_data) === null || _item$parent_event_da3 === void 0 ? void 0 : _item$parent_event_da3.Id, '__sf_event_parent_id') ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                        className: "pp-tag pp-tag__dark",
+                        title: "Imported",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(IconTicked, {})
+                      }) : '']
                     })
                   })]
                 })
@@ -1870,8 +1897,12 @@ function JunctionTable() {
                     })
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_accessible_popover__WEBPACK_IMPORTED_MODULE_6__.Trigger, {
                     on: "hover",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                      children: item.Child_Event__c
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                      children: [item.Child_Event__c, " ", isEventImported(item === null || item === void 0 ? void 0 : (_item$child_event_dat3 = item.child_event_data) === null || _item$child_event_dat3 === void 0 ? void 0 : _item$child_event_dat3.Id, '__sf_event_child_id') ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                        className: "pp-tag pp-tag__dark",
+                        title: "Imported",
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(IconTicked, {})
+                      }) : '']
                     })
                   })]
                 })
@@ -1993,6 +2024,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   __Request: () => (/* binding */ __Request),
+/* harmony export */   eventsImported: () => (/* binding */ eventsImported),
 /* harmony export */   getEvent: () => (/* binding */ getEvent),
 /* harmony export */   getEvents: () => (/* binding */ getEvents),
 /* harmony export */   getJunctions: () => (/* binding */ getJunctions)
@@ -2083,6 +2115,27 @@ var getEvents = /*#__PURE__*/function () {
     return _ref4.apply(this, arguments);
   };
 }();
+var eventsImported = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.next = 2;
+          return __Request({
+            action: 'ppwc_ajax_product_sfevent_validate_import'
+          });
+        case 2:
+          return _context5.abrupt("return", _context5.sent);
+        case 3:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5);
+  }));
+  return function eventsImported() {
+    return _ref5.apply(this, arguments);
+  };
+}();
 
 /***/ }),
 
@@ -2126,39 +2179,84 @@ var SFEventContext_Provider = function SFEventContext_Provider(_ref) {
     _useState4 = _slicedToArray(_useState3, 2),
     JunctionsSize = _useState4[0],
     setJunctionsSize = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState6 = _slicedToArray(_useState5, 2),
+    dataEventsImported = _useState6[0],
+    setDataEventsImported = _useState6[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    var _getJunctions = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var _yield$getJunctions, totalSize, records;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) switch (_context.prev = _context.next) {
+    var dataInit = /*#__PURE__*/function () {
+      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var _getJunctions, _getEventsImported;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
             case 0:
-              _context.next = 2;
-              return (0,_api__WEBPACK_IMPORTED_MODULE_1__.getJunctions)();
-            case 2:
-              _yield$getJunctions = _context.sent;
-              totalSize = _yield$getJunctions.totalSize;
-              records = _yield$getJunctions.records;
-              setJunctions(records);
-              setJunctionsSize(totalSize);
-            case 7:
+              _getJunctions = /*#__PURE__*/function () {
+                var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+                  var _yield$getJunctions, totalSize, records;
+                  return _regeneratorRuntime().wrap(function _callee$(_context) {
+                    while (1) switch (_context.prev = _context.next) {
+                      case 0:
+                        _context.next = 2;
+                        return (0,_api__WEBPACK_IMPORTED_MODULE_1__.getJunctions)();
+                      case 2:
+                        _yield$getJunctions = _context.sent;
+                        totalSize = _yield$getJunctions.totalSize;
+                        records = _yield$getJunctions.records;
+                        setJunctions(records);
+                        setJunctionsSize(totalSize);
+                      case 7:
+                      case "end":
+                        return _context.stop();
+                    }
+                  }, _callee);
+                }));
+                return function _getJunctions() {
+                  return _ref3.apply(this, arguments);
+                };
+              }();
+              _getEventsImported = /*#__PURE__*/function () {
+                var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+                  var _eventImported;
+                  return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+                    while (1) switch (_context2.prev = _context2.next) {
+                      case 0:
+                        _context2.next = 2;
+                        return (0,_api__WEBPACK_IMPORTED_MODULE_1__.eventsImported)();
+                      case 2:
+                        _eventImported = _context2.sent;
+                        setDataEventsImported(_eventImported);
+                      case 4:
+                      case "end":
+                        return _context2.stop();
+                    }
+                  }, _callee2);
+                }));
+                return function _getEventsImported() {
+                  return _ref4.apply(this, arguments);
+                };
+              }();
+              _getEventsImported();
+              _getJunctions();
+            case 4:
             case "end":
-              return _context.stop();
+              return _context3.stop();
           }
-        }, _callee);
+        }, _callee3);
       }));
-      return function _getJunctions() {
+      return function dataInit() {
         return _ref2.apply(this, arguments);
       };
     }();
-    _getJunctions();
+    dataInit();
   }, []);
   var value = {
     version: '1.0.0',
     Junctions: Junctions,
     setJunctions: setJunctions,
     JunctionsSize: JunctionsSize,
-    setJunctionsSize: setJunctionsSize
+    setJunctionsSize: setJunctionsSize,
+    dataEventsImported: dataEventsImported,
+    setDataEventsImported: setDataEventsImported
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(SFEventContext.Provider, {
     value: value,

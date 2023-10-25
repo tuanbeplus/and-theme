@@ -26,3 +26,9 @@ export const getEvent = async () => {
 export const getEvents = async () => {
 
 }
+
+export const eventsImported = async () => {
+  return await __Request({
+    action: 'ppwc_ajax_product_sfevent_validate_import'
+  })
+}

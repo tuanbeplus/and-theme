@@ -5,13 +5,17 @@ import EventListInfo from "./EventListInfo";
 import { useState } from "react";
 import Checkbox from "./Checkbox";
 
+const IconTicked = () => {
+  return <i className="pp-icon-emoj">✅</i>
+}
+
 export default function JunctionTable() {
   const [eventsDone, setEventsDone] = useState([]);
   const [eventsImported, setEventsImported] = useState([]);
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isCheck, setIsCheck] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { Junctions } = useSFEventContext();
+  const { Junctions, dataEventsImported } = useSFEventContext();
 
   const isImportAvailable = (juncData) => {
     return juncData?.parent_event_data?.Id && juncData?.child_event_data?.Id ? true : false;
@@ -74,14 +78,31 @@ export default function JunctionTable() {
     }
   }
 
+  const isJunctionImported = (jID) => {
+    const found = dataEventsImported.find((item) => {
+      return item.__sf_junction_id == jID;
+    });
+
+    return found ? true : false;
+  }
+
+  const isEventImported = (eID, name) => {
+    const found = dataEventsImported.find((item) => {
+      return item[name] == eID;
+    });
+
+    return found ? true : false;
+  }
+
   return (
     <div className="junction-table-container">
       <h4>Junction Listing</h4>
       <p>This object used in Salesforce to create the link between Workshop Events.</p>
 
-      <button className={`button import-all ${isCheck.length == 0 ? 'disable' : ''}`} 
-              onClick={handleBulkImportEvents}>
-                Import {isCheck.length > 0 ? isCheck.length : ''} events
+      <button 
+        className={`button import-all ${isCheck.length == 0 ? 'disable' : ''}`} 
+        onClick={handleBulkImportEvents}>
+        Import {isCheck.length > 0 ? isCheck.length : ''} events
       </button>
 
       <div className="junction-content">
@@ -129,7 +150,9 @@ export default function JunctionTable() {
                       isChecked={isCheck.includes(item.Id)}
                     />
                   </td>
-                  <td>{item.Id}</td>
+                  <td>
+                    {item.Id} { (isJunctionImported(item.Id) ? <span className="pp-tag pp-tag__dark" title="Imported"><IconTicked /></span> : '') }
+                  </td>
                   <td>{item.Name}</td>
                   <td>
                     <Popover>
@@ -139,9 +162,11 @@ export default function JunctionTable() {
                         </PopoverBox>
                       )}
                       <Trigger on="hover">
-                        <div>{item.Parent_Event__c}</div>
+                        <div>
+                          {item.Parent_Event__c} { (isEventImported(item?.parent_event_data?.Id, '__sf_event_parent_id') ? <span className="pp-tag pp-tag__dark" title="Imported"><IconTicked /></span> : '') }
+                        </div>
                       </Trigger>
-                    </Popover>
+                    </Popover> 
                   </td>
                   <td>
                     <Popover>
@@ -151,9 +176,11 @@ export default function JunctionTable() {
                         </PopoverBox>
                       )}
                       <Trigger on="hover">
-                        <div>{item.Child_Event__c}</div>
+                        <div>
+                          {item.Child_Event__c} { (isEventImported(item?.child_event_data?.Id, '__sf_event_child_id') ? <span className="pp-tag pp-tag__dark" title="Imported"><IconTicked /></span> : '') }
+                        </div>
                       </Trigger>
-                    </Popover>
+                    </Popover> 
                   </td>
                   <td>
                     <button

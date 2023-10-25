@@ -183,6 +183,10 @@ a.pp-button svg {
   color: red;
 }
 
+.pp-icon-emoj {
+  font-style: normal;
+}
+
 .pp-product-variable-custom-field {
   width: 100%;
   border: solid #eee;
