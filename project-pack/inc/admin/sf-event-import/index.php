@@ -229,6 +229,7 @@ function ppwc_get_all_product_events() {
       'post_title' => $p->post_title,
       '__is_product_variable' => $variable,
       '__sf_junction_id' => get_post_meta($p->ID, '_junction_id', true),
+      '__product_edit_url' => get_edit_post_link($p->ID, ''),
     ];
     
     if($variable == true) {
@@ -261,6 +262,10 @@ function ppwc_product_sfevent_validate_import() {
     
     if($events) {
       $_events = (array) $events;
+
+      $p->__wp_event_parent_admin_url = get_edit_post_link($p->__wp_event_parent_id, '');
+      $p->__wp_event_child_admin_url = get_edit_post_link($p->__wp_event_children_id, '');
+
       $e_parent_found_key = array_search($p->__wp_event_parent_id, array_column($_events, 'ID'));
       $e_child_found_key = array_search($p->__wp_event_children_id, array_column($_events, 'ID'));
       $p->__sf_event_parent_id = $events[$e_parent_found_key]->sf_event_id;

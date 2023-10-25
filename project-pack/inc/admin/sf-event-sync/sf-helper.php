@@ -59,11 +59,12 @@ function and_pull_event_data_from_salesforce($event_fields){
   if($event_id) {
     foreach($event_fields as $name => $value) {
       if ( $name == "Subject" ) {
-        $post_args = array(
-          "ID" => $event_id,
+        $post_args = [
+          "ID" => (int) $event_id,
           "post_title" => $value
-        );
-        wp_update_post(wp_slash($post_args));
+        ];
+        sf_log_data(wp_json_encode( $post_args ));
+        // wp_update_post($post_args);
       } else {
         update_post_meta($event_id, strtolower($name), $value);
       }

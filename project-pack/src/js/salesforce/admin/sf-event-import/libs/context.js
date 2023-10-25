@@ -8,19 +8,20 @@ const SFEventContext_Provider = ({ children }) => {
   const [JunctionsSize, setJunctionsSize] = useState(0);
   const [dataEventsImported, setDataEventsImported] = useState([]);
 
+  const _getJunctions = async () => {
+    const { totalSize, records } = await getJunctions();
+    setJunctions(records);
+    setJunctionsSize(totalSize);
+  }
+
+  const _getEventsImported = async () => {
+    const _eventImported = await eventsImported();
+    setDataEventsImported(_eventImported);
+  }
+
   useEffect(() => {
 
     const dataInit = async () => {
-      const _getJunctions = async () => {
-        const { totalSize, records } = await getJunctions();
-        setJunctions(records);
-        setJunctionsSize(totalSize);
-      }
-  
-      const _getEventsImported = async () => {
-        const _eventImported = await eventsImported();
-        setDataEventsImported(_eventImported);
-      }
   
       _getEventsImported();
       _getJunctions();
@@ -33,7 +34,8 @@ const SFEventContext_Provider = ({ children }) => {
     version: '1.0.0',
     Junctions, setJunctions,
     JunctionsSize, setJunctionsSize,
-    dataEventsImported, setDataEventsImported
+    dataEventsImported, setDataEventsImported,
+    _getEventsImported
   }
 
   return <SFEventContext.Provider value={ value }>

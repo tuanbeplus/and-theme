@@ -1658,6 +1658,11 @@ var IconTicked = function IconTicked() {
     children: "\u2705"
   });
 };
+var IconLink = function IconLink() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+    className: "dashicons dashicons-admin-links"
+  });
+};
 function JunctionTable() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
@@ -1681,7 +1686,8 @@ function JunctionTable() {
     setLoading = _useState10[1];
   var _useSFEventContext = (0,_libs_context__WEBPACK_IMPORTED_MODULE_0__.useSFEventContext)(),
     Junctions = _useSFEventContext.Junctions,
-    dataEventsImported = _useSFEventContext.dataEventsImported;
+    dataEventsImported = _useSFEventContext.dataEventsImported,
+    _getEventsImported = _useSFEventContext._getEventsImported;
   var isImportAvailable = function isImportAvailable(juncData) {
     var _juncData$parent_even, _juncData$child_event;
     return juncData !== null && juncData !== void 0 && (_juncData$parent_even = juncData.parent_event_data) !== null && _juncData$parent_even !== void 0 && _juncData$parent_even.Id && juncData !== null && juncData !== void 0 && (_juncData$child_event = juncData.child_event_data) !== null && _juncData$child_event !== void 0 && _juncData$child_event.Id ? true : false;
@@ -1744,21 +1750,22 @@ function JunctionTable() {
             setEventsDone([].concat(_toConsumableArray(eventsDone), importDoneList));
             setIsCheck([]);
             setIsCheckAll(false);
-            _context.next = 23;
+            _getEventsImported();
+            _context.next = 24;
             break;
-          case 20:
-            _context.prev = 20;
+          case 21:
+            _context.prev = 21;
             _context.t0 = _context["catch"](3);
             console.error("Error while fetching PWS API:", _context.t0);
-          case 23:
-            _context.prev = 23;
+          case 24:
+            _context.prev = 24;
             setLoading(false);
-            return _context.finish(23);
-          case 26:
+            return _context.finish(24);
+          case 27:
           case "end":
             return _context.stop();
         }
-      }, _callee, null, [[3, 20, 23, 26]]);
+      }, _callee, null, [[3, 21, 24, 27]]);
     }));
     return function handleImportEvents(_x2) {
       return _ref.apply(this, arguments);
@@ -1800,6 +1807,12 @@ function JunctionTable() {
     });
     return found ? true : false;
   };
+  var eventEditPostUrl = function eventEditPostUrl(eID, sfEventName, wpPostName) {
+    var found = dataEventsImported.find(function (item) {
+      return item[sfEventName] == eID;
+    });
+    return found[wpPostName];
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "junction-table-container",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h4", {
@@ -1807,7 +1820,7 @@ function JunctionTable() {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
       children: "This object used in Salesforce to create the link between Workshop Events."
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
-      className: "button import-all ".concat(isCheck.length == 0 ? 'disable' : ''),
+      className: "pp-button import-all ".concat(isCheck.length == 0 ? 'disable' : ''),
       onClick: handleBulkImportEvents,
       children: ["Import ", isCheck.length > 0 ? isCheck.length : '', " events"]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -1839,13 +1852,11 @@ function JunctionTable() {
               children: "Children Event"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
               children: "Import"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-              children: "Status"
             })]
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tbody", {
           children: Junctions.map(function (item, _name) {
-            var _item$parent_event_da, _item$parent_event_da2, _item$parent_event_da3, _item$child_event_dat, _item$child_event_dat2, _item$child_event_dat3;
+            var _item$parent_event_da, _item$parent_event_da2, _item$parent_event_da3, _item$parent_event_da4, _item$child_event_dat, _item$child_event_dat2, _item$child_event_dat3, _item$child_event_dat4;
             var status = '';
             if (!loading && eventsImported.length > 0 && eventsImported.includes(item.Id)) {
               status = eventsDone.includes(item.Id) ? 'Done' : 'Failure';
@@ -1861,10 +1872,11 @@ function JunctionTable() {
                   isChecked: isCheck.includes(item.Id)
                 }, item.Id)
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("td", {
-                children: [item.Id, " ", isJunctionImported(item.Id) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                  className: "pp-tag pp-tag__dark",
+                children: [item.Id, " ", isJunctionImported(item.Id) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+                  href: eventEditPostUrl(item.Id, '__sf_junction_id', '__product_edit_url'),
+                  target: "_blank",
                   title: "Imported",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(IconTicked, {})
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(IconLink, {})
                 }) : '']
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
                 children: item.Name
@@ -1879,10 +1891,11 @@ function JunctionTable() {
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_accessible_popover__WEBPACK_IMPORTED_MODULE_6__.Trigger, {
                     on: "hover",
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                      children: [item.Parent_Event__c, " ", isEventImported(item === null || item === void 0 ? void 0 : (_item$parent_event_da3 = item.parent_event_data) === null || _item$parent_event_da3 === void 0 ? void 0 : _item$parent_event_da3.Id, '__sf_event_parent_id') ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                        className: "pp-tag pp-tag__dark",
+                      children: [item.Parent_Event__c, " ", isEventImported(item === null || item === void 0 ? void 0 : (_item$parent_event_da3 = item.parent_event_data) === null || _item$parent_event_da3 === void 0 ? void 0 : _item$parent_event_da3.Id, '__sf_event_parent_id') ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+                        href: eventEditPostUrl(item === null || item === void 0 ? void 0 : (_item$parent_event_da4 = item.parent_event_data) === null || _item$parent_event_da4 === void 0 ? void 0 : _item$parent_event_da4.Id, '__sf_event_parent_id', '__wp_event_parent_admin_url'),
+                        target: "_blank",
                         title: "Imported",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(IconTicked, {})
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(IconLink, {})
                       }) : '']
                     })
                   })]
@@ -1898,10 +1911,11 @@ function JunctionTable() {
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_accessible_popover__WEBPACK_IMPORTED_MODULE_6__.Trigger, {
                     on: "hover",
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                      children: [item.Child_Event__c, " ", isEventImported(item === null || item === void 0 ? void 0 : (_item$child_event_dat3 = item.child_event_data) === null || _item$child_event_dat3 === void 0 ? void 0 : _item$child_event_dat3.Id, '__sf_event_child_id') ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                        className: "pp-tag pp-tag__dark",
+                      children: [item.Child_Event__c, " ", isEventImported(item === null || item === void 0 ? void 0 : (_item$child_event_dat3 = item.child_event_data) === null || _item$child_event_dat3 === void 0 ? void 0 : _item$child_event_dat3.Id, '__sf_event_child_id') ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+                        href: eventEditPostUrl(item === null || item === void 0 ? void 0 : (_item$child_event_dat4 = item.child_event_data) === null || _item$child_event_dat4 === void 0 ? void 0 : _item$child_event_dat4.Id, '__sf_event_child_id', '__wp_event_child_admin_url'),
+                        target: "_blank",
                         title: "Imported",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(IconTicked, {})
+                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(IconLink, {})
                       }) : '']
                     })
                   })]
@@ -1920,11 +1934,6 @@ function JunctionTable() {
                       d: "M1574.513 138.515c-30.381-30.268-66.748-51.84-106.278-65.619v434.936h434.937c-13.78-39.529-35.238-75.896-65.62-106.164l-263.04-263.153Zm-219.219 482.19V56h-903.53v903.53H0v112.94h451.765v790.589H1920V620.706h-564.706ZM887.04 1425.3l-79.85-79.85 272.866-272.978h-515.35V959.529h515.35L807.191 686.664l79.849-79.85L1296.226 1016 887.04 1425.299Z"
                     }), " "]
                   })]
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                  className: "import-status ".concat(status),
-                  children: status ? status : '-'
                 })
               })]
             }, item.Id);
@@ -2183,68 +2192,67 @@ var SFEventContext_Provider = function SFEventContext_Provider(_ref) {
     _useState6 = _slicedToArray(_useState5, 2),
     dataEventsImported = _useState6[0],
     setDataEventsImported = _useState6[1];
+  var _getJunctions = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var _yield$getJunctions, totalSize, records;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return (0,_api__WEBPACK_IMPORTED_MODULE_1__.getJunctions)();
+          case 2:
+            _yield$getJunctions = _context.sent;
+            totalSize = _yield$getJunctions.totalSize;
+            records = _yield$getJunctions.records;
+            setJunctions(records);
+            setJunctionsSize(totalSize);
+          case 7:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee);
+    }));
+    return function _getJunctions() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+  var _getEventsImported = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var _eventImported;
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return (0,_api__WEBPACK_IMPORTED_MODULE_1__.eventsImported)();
+          case 2:
+            _eventImported = _context2.sent;
+            setDataEventsImported(_eventImported);
+          case 4:
+          case "end":
+            return _context2.stop();
+        }
+      }, _callee2);
+    }));
+    return function _getEventsImported() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var dataInit = /*#__PURE__*/function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        var _getJunctions, _getEventsImported;
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
-              _getJunctions = /*#__PURE__*/function () {
-                var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-                  var _yield$getJunctions, totalSize, records;
-                  return _regeneratorRuntime().wrap(function _callee$(_context) {
-                    while (1) switch (_context.prev = _context.next) {
-                      case 0:
-                        _context.next = 2;
-                        return (0,_api__WEBPACK_IMPORTED_MODULE_1__.getJunctions)();
-                      case 2:
-                        _yield$getJunctions = _context.sent;
-                        totalSize = _yield$getJunctions.totalSize;
-                        records = _yield$getJunctions.records;
-                        setJunctions(records);
-                        setJunctionsSize(totalSize);
-                      case 7:
-                      case "end":
-                        return _context.stop();
-                    }
-                  }, _callee);
-                }));
-                return function _getJunctions() {
-                  return _ref3.apply(this, arguments);
-                };
-              }();
-              _getEventsImported = /*#__PURE__*/function () {
-                var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-                  var _eventImported;
-                  return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-                    while (1) switch (_context2.prev = _context2.next) {
-                      case 0:
-                        _context2.next = 2;
-                        return (0,_api__WEBPACK_IMPORTED_MODULE_1__.eventsImported)();
-                      case 2:
-                        _eventImported = _context2.sent;
-                        setDataEventsImported(_eventImported);
-                      case 4:
-                      case "end":
-                        return _context2.stop();
-                    }
-                  }, _callee2);
-                }));
-                return function _getEventsImported() {
-                  return _ref4.apply(this, arguments);
-                };
-              }();
               _getEventsImported();
               _getJunctions();
-            case 4:
+            case 2:
             case "end":
               return _context3.stop();
           }
         }, _callee3);
       }));
       return function dataInit() {
-        return _ref2.apply(this, arguments);
+        return _ref4.apply(this, arguments);
       };
     }();
     dataInit();
@@ -2256,7 +2264,8 @@ var SFEventContext_Provider = function SFEventContext_Provider(_ref) {
     JunctionsSize: JunctionsSize,
     setJunctionsSize: setJunctionsSize,
     dataEventsImported: dataEventsImported,
-    setDataEventsImported: setDataEventsImported
+    setDataEventsImported: setDataEventsImported,
+    _getEventsImported: _getEventsImported
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(SFEventContext.Provider, {
     value: value,

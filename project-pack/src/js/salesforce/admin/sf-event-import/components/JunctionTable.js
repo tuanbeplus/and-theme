@@ -9,13 +9,17 @@ const IconTicked = () => {
   return <i className="pp-icon-emoj">✅</i>
 }
 
+const IconLink = () => {
+  return <span className="dashicons dashicons-admin-links"></span>
+}
+
 export default function JunctionTable() {
   const [eventsDone, setEventsDone] = useState([]);
   const [eventsImported, setEventsImported] = useState([]);
   const [isCheckAll, setIsCheckAll] = useState(false);
   const [isCheck, setIsCheck] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { Junctions, dataEventsImported } = useSFEventContext();
+  const { Junctions, dataEventsImported, _getEventsImported } = useSFEventContext();
 
   const isImportAvailable = (juncData) => {
     return juncData?.parent_event_data?.Id && juncData?.child_event_data?.Id ? true : false;
@@ -57,6 +61,8 @@ export default function JunctionTable() {
       setEventsDone([...eventsDone, ...importDoneList]);
       setIsCheck([]); 
       setIsCheckAll(false);
+
+      _getEventsImported()
     } catch (e) {
       console.error("Error while fetching PWS API:", e);
     } finally {
@@ -94,13 +100,21 @@ export default function JunctionTable() {
     return found ? true : false;
   }
 
+  const eventEditPostUrl = (eID, sfEventName, wpPostName) => {
+    const found = dataEventsImported.find((item) => {
+      return item[sfEventName] == eID;
+    });
+
+    return found[wpPostName];
+  }
+
   return (
     <div className="junction-table-container">
       <h4>Junction Listing</h4>
       <p>This object used in Salesforce to create the link between Workshop Events.</p>
 
       <button 
-        className={`button import-all ${isCheck.length == 0 ? 'disable' : ''}`} 
+        className={`pp-button import-all ${isCheck.length == 0 ? 'disable' : ''}`} 
         onClick={handleBulkImportEvents}>
         Import {isCheck.length > 0 ? isCheck.length : ''} events
       </button>
@@ -129,7 +143,7 @@ export default function JunctionTable() {
               <th>Parent Event</th>
               <th>Children Event</th>
               <th>Import</th>
-              <th>Status</th>
+              {/* <th>Status</th> */}
             </tr>
           </thead>
           <tbody>
@@ -151,7 +165,7 @@ export default function JunctionTable() {
                     />
                   </td>
                   <td>
-                    {item.Id} { (isJunctionImported(item.Id) ? <span className="pp-tag pp-tag__dark" title="Imported"><IconTicked /></span> : '') }
+                    {item.Id} { (isJunctionImported(item.Id) ? <a href={ eventEditPostUrl(item.Id, '__sf_junction_id', '__product_edit_url') } target="_blank" title="Imported"><IconLink /></a> : '') }
                   </td>
                   <td>{item.Name}</td>
                   <td>
@@ -163,7 +177,7 @@ export default function JunctionTable() {
                       )}
                       <Trigger on="hover">
                         <div>
-                          {item.Parent_Event__c} { (isEventImported(item?.parent_event_data?.Id, '__sf_event_parent_id') ? <span className="pp-tag pp-tag__dark" title="Imported"><IconTicked /></span> : '') }
+                          {item.Parent_Event__c} { (isEventImported(item?.parent_event_data?.Id, '__sf_event_parent_id') ? <a href={ eventEditPostUrl(item?.parent_event_data?.Id, '__sf_event_parent_id', '__wp_event_parent_admin_url') } target="_blank" title="Imported"><IconLink /></a> : '') }
                         </div>
                       </Trigger>
                     </Popover> 
@@ -177,7 +191,7 @@ export default function JunctionTable() {
                       )}
                       <Trigger on="hover">
                         <div>
-                          {item.Child_Event__c} { (isEventImported(item?.child_event_data?.Id, '__sf_event_child_id') ? <span className="pp-tag pp-tag__dark" title="Imported"><IconTicked /></span> : '') }
+                          {item.Child_Event__c} { (isEventImported(item?.child_event_data?.Id, '__sf_event_child_id') ? <a href={ eventEditPostUrl(item?.child_event_data?.Id, '__sf_event_child_id', '__wp_event_child_admin_url') } target="_blank" title="Imported"><IconLink /></a> : '') }
                         </div>
                       </Trigger>
                     </Popover> 
@@ -193,9 +207,9 @@ export default function JunctionTable() {
                       </svg>
                     </button>                    
                   </td>
-                  <td>
+                  {/* <td>
                     <span className={`import-status ${status}`}>{status ? status : '-'}</span>
-                  </td>
+                  </td> */}
                 </tr>
               );
             })}
