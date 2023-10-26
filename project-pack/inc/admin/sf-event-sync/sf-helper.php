@@ -54,7 +54,7 @@ function and_push_event_data_to_salesforce($post_id, $post, $update){
  * Function to push Event data from WP to Salesforce
  */
 function and_pull_event_data_from_salesforce($event_fields){
-  
+  ob_start();
   $event_id = ppsf_find_event_by_sfevent_id($event_fields['Id']);
   if($event_id) {
     foreach($event_fields as $name => $value) {
@@ -64,10 +64,11 @@ function and_pull_event_data_from_salesforce($event_fields){
           "post_title" => $value
         ];
         sf_log_data(wp_json_encode( $post_args ));
-        // wp_update_post($post_args);
+        wp_update_post($post_args);
       } else {
         update_post_meta($event_id, strtolower($name), $value);
       }
     }
   }
+  ob_get_clean();
 }
