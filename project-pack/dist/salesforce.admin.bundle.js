@@ -1660,7 +1660,7 @@ var IconTicked = function IconTicked() {
 };
 var IconLink = function IconLink() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-    className: "dashicons dashicons-admin-links"
+    className: "dashicons dashicons-admin-links pp-font-icon"
   });
 };
 function JunctionTable() {

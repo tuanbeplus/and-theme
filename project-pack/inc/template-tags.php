@@ -326,6 +326,9 @@ function pp_product_variable_choose_options_tag($product) {
           <?php foreach($variations as $_index => $item) : 
           $_price_html = $item['price_html'];
           $_in_stock = $item['is_in_stock'];
+
+          $eventData = ppwc_get_event_data_by_product_variation_id($item['variation_id']);
+          // echo '<pre>'; print_r($eventData); echo '</pre>';
           ?>
           <div class="option-block product-variable-item <?php echo $_in_stock ? '' : '__disable'; ?>">
             <?php if(!$_in_stock) {
@@ -342,14 +345,16 @@ function pp_product_variable_choose_options_tag($product) {
                     <span class="pp__checkbox-fake-ui-box"></span>
                   </div>
                   <div>
-                    <div class="__date"><?php echo pp_date_format($item['start_date']) ?></div>
-                    <div class="__time"><?php echo $item['start_time'] ?></div>
+                    <!-- <div class="__date"><?php echo pp_date_format($item['start_date']) ?></div>
+                    <div class="__time"><?php echo $item['start_time'] ?></div> -->
+                    <div class="__date"><?php echo $eventData['event_parent']['workshop_event_date_text__c'] ?></div>
+                    <div class="__time"><?php echo $eventData['event_parent']['workshop_times__c'] ?></div>
                   </div>
                 </div>
                 <span class="__splicing">+</span>
                 <div class="time-box schedule-course_end">
-                  <div class="__date"><?php echo pp_date_format($item['end_date']) ?></div>
-                  <div class="__time"><?php echo $item['end_time'] ?></div>
+                  <div class="__date"><?php echo $eventData['event_child']['workshop_event_date_text__c'] ?></div>
+                  <div class="__time"><?php echo $eventData['event_child']['workshop_times__c'] ?></div>
                 </div>
               </div>
             </label>

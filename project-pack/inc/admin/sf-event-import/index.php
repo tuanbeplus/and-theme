@@ -283,6 +283,20 @@ function ppwc_ajax_product_sfevent_validate_import() {
 add_action('wp_ajax_ppwc_ajax_product_sfevent_validate_import', 'ppwc_ajax_product_sfevent_validate_import');
 add_action('wp_ajax_nopriv_ppwc_ajax_product_sfevent_validate_import', 'ppwc_ajax_product_sfevent_validate_import');
 
+function pp_get_event_data_by_id($eID) {
+  $e = get_post($eID);
+  return [
+    'ID' => $e->ID,
+    'post_status' => $e->post_status,
+    'post_title' => $e->post_title,
+    'sf_event_id' => get_post_meta($e->ID, 'sf_event_id', true),
+    'workshop_event_date_text__c' => get_post_meta($e->ID, 'workshop_event_date_text__c', true),
+    'workshop_times__c' => get_post_meta($e->ID, 'workshop_times__c', true),
+    'total_number_of_seats__c' => get_post_meta($e->ID, 'total_number_of_seats__c', true),
+    'remaining_seats__c' => get_post_meta($e->ID, 'remaining_seats__c', true),
+  ];
+}
+
 # For test
 add_action( 'init', function() {
   if(!isset($_GET['test_import'])) return;

@@ -10,7 +10,7 @@ const IconTicked = () => {
 }
 
 const IconLink = () => {
-  return <span className="dashicons dashicons-admin-links"></span>
+  return <span className="dashicons dashicons-admin-links pp-font-icon"></span>
 }
 
 export default function JunctionTable() {

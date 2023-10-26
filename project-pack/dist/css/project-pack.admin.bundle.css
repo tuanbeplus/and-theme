@@ -187,6 +187,10 @@ a.pp-button svg {
   font-style: normal;
 }
 
+.pp-font-icon {
+  font-size: 18px;
+}
+
 .pp-product-variable-custom-field {
   width: 100%;
   border: solid #eee;
