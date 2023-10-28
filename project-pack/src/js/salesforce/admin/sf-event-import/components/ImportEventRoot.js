@@ -1,15 +1,36 @@
+import { useState, useEffect } from "react";
 import { useSFEventContext } from "../libs/context";
 import ImportInfoWidget from "./ImportInfoWidget";
 import JunctionTable from "./JunctionTable";
+import Tabs from "./Tabs";
 
 export default function ImportEventRoot() {
   const { Junctions, JunctionsSize } = useSFEventContext();
+  const [tabActive, setTabActive] = useState('JunctionTable')
 
   return <div>
     <div className="pp-container">
       <div className="pp-panel">
         <div className="pp-panel__content">
-          <JunctionTable />
+          {/* <JunctionTable /> */}
+          <Tabs items={[
+            {
+              label: "Import by Junction", 
+              name: 'JunctionTable', 
+              key: '6561fbc7-4395-4b96-9e71-4c3674292bec',
+              content: <JunctionTable />
+            },
+            {
+              label: "Import by Single Event", 
+              name: 'SingleEvent', 
+              key: 'b02c03f8-8544-4d8b-814f-a00c4a0067b5',
+              content: <div>Single Event</div>
+            }
+          ]} 
+          active={ tabActive }
+          onClick={ (name) => {
+            setTabActive(name)
+          } } />
         </div>
         <div className="pp-panel__sidebar">
           <ImportInfoWidget title="Import Informations" />

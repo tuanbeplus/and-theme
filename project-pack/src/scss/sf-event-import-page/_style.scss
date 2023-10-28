@@ -203,3 +203,45 @@ a.pp-button {
 .pp-font-icon {
   font-size: 18px;
 }
+
+.pp-tabs-container {
+
+  .pp-tabs__heading {
+    display: flex;
+    flex-wrap: wrap;
+
+    .pp-tab__heading-item {
+      border: solid #eee;
+      border-width: 1px 1px 0 0;
+      padding: 1em 2em;
+      cursor: pointer;
+      opacity: .7;
+      background: #eee;
+
+      &.tab-show {
+        box-shadow: 0px 2px 0 -1px #FFF;
+        opacity: 1;
+        background: white;
+        font-weight: bold;
+      }
+
+      &:first-child {
+        border-left-width: 1px;
+      }
+    }
+  }
+
+  .pp-tabs__content {
+    border: solid 1px #eee;
+    padding: 2em;
+    background: white;
+
+    .pp-tab__content-item {
+      display: none;
+
+      &.tab-show {
+        display: block;
+      }
+    }
+  }
+}

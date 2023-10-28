@@ -116,7 +116,7 @@ export default function JunctionTable() {
       <button 
         className={`pp-button import-all ${isCheck.length == 0 ? 'disable' : ''}`} 
         onClick={handleBulkImportEvents}>
-        Import {isCheck.length > 0 ? isCheck.length : ''} events
+        Import {isCheck.length > 0 ? isCheck.length : ''} by Junction
       </button>
 
       <div className="junction-content">
