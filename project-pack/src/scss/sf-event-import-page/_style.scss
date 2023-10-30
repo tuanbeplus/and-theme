@@ -49,6 +49,11 @@
   margin: 1.5em 0;
   background: white;
   font-size: 1em;
+  width: 100%;
+
+  .pp-table {
+    margin: 0;
+  }
 
   th, td {
     padding: .5em;
@@ -244,4 +249,9 @@ a.pp-button {
       }
     }
   }
+}
+
+td.events-in-product {
+  background: #f9f9f9;
+  padding: 1.5em
 }

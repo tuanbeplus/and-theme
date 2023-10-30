@@ -24,11 +24,19 @@ export const getEvent = async () => {
 }
 
 export const getEvents = async () => {
-
+  return await __Request({
+    action: 'pp_ajax_get_events'
+  });
 }
 
 export const eventsImported = async () => {
   return await __Request({
     action: 'ppwc_ajax_product_sfevent_validate_import'
+  })
+}
+
+export const prepareDataImportEvents = async () => {
+  return await __Request({
+    action: 'pp_ajax_prepare_data_import_events',
   })
 }

@@ -142,7 +142,7 @@ export default function JunctionTable() {
               <th>Name</th>
               <th>Parent Event</th>
               <th>Children Event</th>
-              <th>Import</th>
+              <th>Action</th>
               {/* <th>Status</th> */}
             </tr>
           </thead>

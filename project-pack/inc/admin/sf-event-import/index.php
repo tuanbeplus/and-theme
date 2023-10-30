@@ -4,6 +4,7 @@
  * 
  * @author Mike
  */
+require( __DIR__ . '/import-handle.php' );
 
 add_action('init', 'pp_register_sfevent_cpt');
 function pp_register_sfevent_cpt() {
@@ -208,6 +209,13 @@ function ppwc_get_all_events() {
   }, $events) : false;
 }
 
+add_action('wp_ajax_pp_ajax_get_all_events_imported', 'pp_ajax_get_all_events_imported');
+add_action('wp_ajax_nopriv_pp_ajax_get_all_events_imported', 'pp_ajax_get_all_events_imported');
+
+function pp_ajax_get_all_events_imported() {
+  wp_send_json(ppwc_get_all_events());
+}
+
 function ppwc_get_all_product_events() {
   $products = get_posts([
     'post_type' => 'product',  
@@ -295,6 +303,59 @@ function pp_get_event_data_by_id($eID) {
     'total_number_of_seats__c' => get_post_meta($e->ID, 'total_number_of_seats__c', true),
     'remaining_seats__c' => get_post_meta($e->ID, 'remaining_seats__c', true),
   ];
+}
+
+add_action('wp_ajax_pp_ajax_get_events', 'pp_ajax_get_events');
+add_action('wp_ajax_nopriv_pp_ajax_get_events', 'pp_ajax_get_events');
+
+function pp_ajax_get_events() {
+  wp_send_json(ppsf_get_events());
+}
+
+add_action('wp_ajax_pp_ajax_get_all_products', 'pp_ajax_get_all_products');
+add_action('wp_ajax_nopriv_pp_ajax_get_all_products', 'pp_ajax_get_all_products');
+
+function pp_ajax_get_all_products() {
+  wp_send_json(ppsf_get_all_products());
+}
+
+function pp_prepare_data_import_events() {
+  $all_events = ppsf_get_events();
+  $all_products = ppsf_get_all_products();
+  // wp_send_json( [$all_events['records'], $all_products['records']] );
+  $product_need_import = [];
+
+  foreach($all_products['records'] as $p) {
+    $pid = $p['Id'];
+    // $found = array_search($pid, array_column($all_events['records'], 'WhatId'));
+    $eIDs = array_filter($all_events['records'], function($eItem) use ($pid) {
+      return $eItem['WhatId'] == $pid;
+    });
+
+    if($eIDs && count($eIDs) > 0) {
+      $p['__events'] = $eIDs;
+      $product_need_import[$pid] = $p;
+    }
+
+    // if($found !== false) {
+
+    //   if(isset($product_need_import[$pid])) { 
+    //     array_push($product_need_import[$pid]['__events'], $all_events['records'][$found]);
+    //   } else {
+    //     $p['__events'] = [$all_events['records'][$found]];
+    //     $product_need_import[$pid] = $p; 
+    //   }
+    // }
+  }
+
+  return $product_need_import;
+}
+
+add_action('wp_ajax_pp_ajax_prepare_data_import_events', 'pp_ajax_prepare_data_import_events');
+add_action('wp_ajax_nopriv_pp_ajax_prepare_data_import_events', 'pp_ajax_prepare_data_import_events');
+
+function pp_ajax_prepare_data_import_events() {
+  return wp_send_json(pp_prepare_data_import_events());
 }
 
 # For test

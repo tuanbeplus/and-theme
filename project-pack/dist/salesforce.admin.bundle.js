@@ -1,1522 +1,6 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
-
-/***/ "./node_modules/@accessible/button/dist/module/index.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/@accessible/button/dist/module/index.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Button: () => (/* binding */ Button),
-/* harmony export */   useA11yButton: () => (/* binding */ useA11yButton)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _accessible_use_key__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @accessible/use-key */ "./node_modules/@accessible/use-key/dist/module/index.js");
-/* harmony import */ var _react_hook_event__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-hook/event */ "./node_modules/@react-hook/event/dist/module/index.js");
-/* harmony import */ var _react_hook_merged_ref__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-hook/merged-ref */ "./node_modules/@react-hook/merged-ref/dist/module/index.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
-
-
-
-
-function useA11yButton(target, onClick) {
-  const clickedMouse = react__WEBPACK_IMPORTED_MODULE_0__.useRef(false);
-
-  const setClickedMouse = () => clickedMouse.current = true;
-
-  (0,_react_hook_event__WEBPACK_IMPORTED_MODULE_1__["default"])(target, 'touchstart', setClickedMouse);
-  (0,_react_hook_event__WEBPACK_IMPORTED_MODULE_1__["default"])(target, 'mousedown', setClickedMouse);
-  (0,_react_hook_event__WEBPACK_IMPORTED_MODULE_1__["default"])(target, 'click', event => {
-    // Only fire onClick if the keyboard was not used to initiate the click
-    clickedMouse.current && onClick(event);
-    clickedMouse.current = false;
-  }); // @ts-expect-error
-
-  (0,_accessible_use_key__WEBPACK_IMPORTED_MODULE_2__["default"])(target, {
-    Enter: onClick,
-    ' ': onClick
-  });
-  return {
-    role: 'button',
-    tabIndex: 0
-  };
-}
-const Button = ({
-  children
-}) => {
-  const ref = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null);
-  const {
-    props
-  } = children;
-  const {
-    role,
-    tabIndex
-  } = useA11yButton(ref, props.onClick);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(children, {
-    onClick: undefined,
-    role: props.hasOwnProperty('role') ? props.role : role,
-    tabIndex: props.hasOwnProperty('tabIndex') ? props.tabIndex : tabIndex,
-    // @ts-expect-error
-    ref: (0,_react_hook_merged_ref__WEBPACK_IMPORTED_MODULE_3__["default"])(ref, children.ref)
-  });
-};
-
-/* istanbul ignore next */
-if (typeof process !== 'undefined' && "development" !== 'production') {
-  Button.displayName = 'AccessibleButton';
-}
-
-/***/ }),
-
-/***/ "./node_modules/@accessible/popover/dist/module/index.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/@accessible/popover/dist/module/index.js ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Close: () => (/* binding */ Close),
-/* harmony export */   Popover: () => (/* binding */ Popover),
-/* harmony export */   PopoverConsumer: () => (/* binding */ PopoverConsumer),
-/* harmony export */   PopoverContext: () => (/* binding */ PopoverContext),
-/* harmony export */   Target: () => (/* binding */ Target),
-/* harmony export */   Trigger: () => (/* binding */ Trigger),
-/* harmony export */   useControls: () => (/* binding */ useControls),
-/* harmony export */   useIsOpen: () => (/* binding */ useIsOpen),
-/* harmony export */   usePlacement: () => (/* binding */ usePlacement),
-/* harmony export */   usePopover: () => (/* binding */ usePopover)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_hook_window_size_throttled__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @react-hook/window-size/throttled */ "./node_modules/@react-hook/window-size/throttled/dist/module/index.js");
-/* harmony import */ var _react_hook_passive_layout_effect__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @react-hook/passive-layout-effect */ "./node_modules/@react-hook/passive-layout-effect/dist/module/index.js");
-/* harmony import */ var _react_hook_switch__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @react-hook/switch */ "./node_modules/@react-hook/switch/dist/module/index.js");
-/* harmony import */ var _react_hook_merged_ref__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-hook/merged-ref */ "./node_modules/@react-hook/merged-ref/dist/module/index.js");
-/* harmony import */ var _react_hook_window_scroll__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @react-hook/window-scroll */ "./node_modules/@react-hook/window-scroll/dist/module/index.js");
-/* harmony import */ var _accessible_use_id__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @accessible/use-id */ "./node_modules/@accessible/use-id/dist/module/index.js");
-/* harmony import */ var _accessible_use_key__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @accessible/use-key */ "./node_modules/@accessible/use-key/dist/module/index.js");
-/* harmony import */ var _accessible_use_conditional_focus__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @accessible/use-conditional-focus */ "./node_modules/@accessible/use-conditional-focus/dist/module/index.js");
-/* harmony import */ var _accessible_button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @accessible/button */ "./node_modules/@accessible/button/dist/module/index.js");
-/* harmony import */ var react_portalize__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-portalize */ "./node_modules/react-portalize/dist/module/index.js");
-/* harmony import */ var clsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! clsx */ "./node_modules/clsx/dist/clsx.m.js");
-/* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
-
-const __reactCreateElement__ = react__WEBPACK_IMPORTED_MODULE_0__.createElement
-;
-
-
-
-
-
-
-
-
-
-
-
-const __DEV__ =
-  typeof process !== 'undefined' && "development" !== 'production'
-
-const windowWidth = () =>
-  window.innerWidth || document.documentElement.clientWidth
-
-const windowHeight = () =>
-  window.innerHeight || document.documentElement.clientHeight
-
-const auto = 'auto'
-
-const centerXPos = (triggerRect, popoverRect) => ({
-  right:
-    windowWidth() -
-    triggerRect.right -
-    (popoverRect.width - triggerRect.width) / 2,
-  left: auto,
-})
-
-const centerYPos = (triggerRect, popoverRect) => ({
-  top: auto,
-  bottom:
-    windowHeight() -
-    triggerRect.bottom -
-    (popoverRect.height - triggerRect.height) / 2,
-})
-
-const startXInnerPos = (triggerRect) => ({
-  right: auto,
-  left: triggerRect.left,
-})
-
-const startXOuterPos = (triggerRect) => ({
-  right: windowWidth() - triggerRect.left,
-  left: auto,
-})
-
-const endXOuterPos = (triggerRect) => ({
-  right: auto,
-  left: triggerRect.right,
-})
-
-const endXInnerPos = (triggerRect) => ({
-  right: windowWidth() - triggerRect.right,
-  left: auto,
-})
-
-const startYInnerPos = (triggerRect) => ({
-  top: triggerRect.top,
-  bottom: auto,
-})
-
-const startYOuterPos = (triggerRect) => ({
-  top: auto,
-  bottom: windowHeight() - triggerRect.top,
-})
-
-const endYInnerPos = (triggerRect) => ({
-  top: auto,
-  bottom: windowHeight() - triggerRect.bottom,
-})
-
-const endYOuterPos = (triggerRect) => ({
-  top: triggerRect.bottom,
-  bottom: auto,
-})
-
-const centerXRect = (triggerRect, popoverRect) => {
-  const right =
-    popoverRect.width / 2 - triggerRect.width / 2 + triggerRect.right
-  return {
-    right,
-    left: right - popoverRect.width,
-  }
-}
-
-const startXOuterRect = (triggerRect, popoverRect) => ({
-  right: triggerRect.left,
-  left: triggerRect.left - popoverRect.width,
-})
-
-const endXOuterRect = (triggerRect, popoverRect) => ({
-  right: triggerRect.right + popoverRect.width,
-  left: triggerRect.right,
-})
-
-const centerYRect = (triggerRect, popoverRect) => {
-  const bottom =
-    popoverRect.height / 2 - triggerRect.height / 2 + triggerRect.bottom
-  return {
-    top: bottom - popoverRect.height,
-    bottom,
-  }
-}
-
-const startYOuterRect = (triggerRect, popoverRect) => ({
-  top: triggerRect.top - popoverRect.height,
-  bottom: triggerRect.top,
-})
-
-const endYOuterRect = (triggerRect, popoverRect) => ({
-  top: triggerRect.bottom,
-  bottom: triggerRect.bottom + popoverRect.height,
-})
-
-const startXInnerRect = (triggerRect, popoverRect) => ({
-  right: triggerRect.left + popoverRect.width,
-  left: triggerRect.left,
-})
-
-const endXInnerRect = (triggerRect, popoverRect) => ({
-  right: triggerRect.right,
-  left: triggerRect.right - popoverRect.width,
-})
-
-const startYInnerRect = (triggerRect, popoverRect) => ({
-  top: triggerRect.top,
-  bottom: triggerRect.top + popoverRect.height,
-})
-
-const endYInnerRect = (triggerRect, popoverRect) => ({
-  top: triggerRect.bottom - popoverRect.height,
-  bottom: triggerRect.bottom,
-})
-
-const assignY = (x, y) => Object.assign(x, y)
-
-const idealFn = (placement, xFn, yFn) => {
-  idealRects[placement.toLowerCase()] = (triggerRect, popoverRect) =>
-    assignY(xFn(triggerRect, popoverRect), yFn(triggerRect, popoverRect))
-}
-
-const idealRects = {}
-const inner = 'inner'
-const top = 'top'
-const right = 'right'
-const bottom = 'bottom'
-const left = 'left'
-const Top = 'Top'
-const Right = 'Right'
-const Bottom = 'Bottom'
-const Left = 'Left'
-idealFn(top, centerXRect, startYOuterRect)
-idealFn(top + Left, startXInnerRect, startYOuterRect)
-idealFn(top + Right, endXInnerRect, startYOuterRect)
-idealFn(right, endXOuterRect, centerYRect)
-idealFn(right + Top, endXOuterRect, startYInnerRect)
-idealFn(right + Bottom, endXOuterRect, endYInnerRect)
-idealFn(bottom, centerXRect, endYOuterRect)
-idealFn(bottom + Left, startXInnerRect, endYOuterRect)
-idealFn(bottom + Right, endXInnerRect, endYOuterRect)
-idealFn(left, startXOuterRect, centerYRect)
-idealFn(left + Top, startXOuterRect, startYInnerRect)
-idealFn(left + Bottom, startXOuterRect, endYInnerRect)
-idealFn(inner + Left, startXInnerRect, centerYRect)
-idealFn(inner + Right, endXInnerRect, centerYRect)
-idealFn(inner + Top, centerXRect, startYInnerRect)
-idealFn(inner + Top + Left, startXInnerRect, startYInnerRect)
-idealFn(inner + Top + Right, endXInnerRect, startYInnerRect)
-idealFn(inner + Bottom, centerXRect, endYInnerRect)
-idealFn(inner + Bottom + Left, startXInnerRect, endYInnerRect)
-idealFn(inner + Bottom + Right, endXInnerRect, endYInnerRect)
-idealFn('center', centerXRect, centerYRect)
-
-const contain = (placement) => (triggerRect, popoverRect, containPolicy) => {
-  let nextPlacement = placement
-  const flip = containPolicy === 'flip',
-    flipX = containPolicy === 'flipX',
-    flipY = containPolicy === 'flipY'
-
-  if (flip || flipX || flipY) {
-    const idealRect = (idealRects[placement] || idealRects.center)(
-      triggerRect,
-      popoverRect
-    ) // center checks
-
-    if (!nextPlacement) {
-      if (flip || flipY) {
-        if (idealRect.bottom > windowHeight()) {
-          nextPlacement = 'top'
-        } else if (idealRect.top < 0) {
-          nextPlacement = 'bottom'
-        }
-      }
-
-      if (!nextPlacement && (flip || flipX)) {
-        if (idealRect.left < 0) {
-          nextPlacement = 'right'
-        } else if (idealRect.right > windowWidth()) {
-          nextPlacement = 'left'
-        }
-      }
-    } // order of these indexes matters... must be before placement === top check
-
-    const leftIdx = nextPlacement.indexOf('left'),
-      topIdx = nextPlacement.indexOf('top')
-
-    if (nextPlacement === 'top' || nextPlacement === 'bottom') {
-      if (flip || flipX) {
-        // handles center X-axis case
-        if (idealRect.left < 0) {
-          nextPlacement += 'left'
-        } else if (idealRect.right > windowWidth()) {
-          nextPlacement += 'right'
-        }
-      }
-    }
-
-    if (flip || flipX) {
-      // left checks
-      if (
-        (leftIdx === 0 && idealRect.left < 0) ||
-        (leftIdx > 0 && idealRect.right > windowWidth())
-      ) {
-        nextPlacement = nextPlacement.replace('left', 'right')
-      } else {
-        const rightIdx = nextPlacement.indexOf('right') // right checks
-
-        if (
-          (rightIdx === 0 && idealRect.right > windowWidth()) ||
-          (rightIdx > 0 && idealRect.left < 0)
-        ) {
-          nextPlacement = nextPlacement.replace('right', 'left')
-        }
-      }
-    } // handles center Y-axis case
-
-    if (flip || flipY) {
-      if (nextPlacement === 'left' || nextPlacement === 'right') {
-        if (idealRect.top < 0) {
-          nextPlacement += 'top'
-        } else if (idealRect.bottom > windowHeight()) {
-          nextPlacement += 'bottom'
-        }
-      } else if (
-        nextPlacement === 'innerleft' ||
-        nextPlacement === 'innerright'
-      ) {
-        if (idealRect.top < 0) {
-          nextPlacement = nextPlacement.replace('inner', 'innertop')
-        } else if (idealRect.bottom > windowHeight()) {
-          nextPlacement = nextPlacement.replace('inner', 'innerbottom')
-        }
-      }
-    }
-
-    if (flip || flipY) {
-      // top checks
-      if (
-        (topIdx === 0 && idealRect.top < 0) ||
-        (topIdx > 0 && idealRect.bottom > windowHeight())
-      ) {
-        nextPlacement = nextPlacement.replace('top', 'bottom')
-      } else {
-        const bottomIdx = nextPlacement.indexOf('bottom') // bottom checks
-
-        if (
-          (bottomIdx === 0 && idealRect.bottom > windowHeight()) ||
-          (bottomIdx > 0 && idealRect.top < 0)
-        ) {
-          nextPlacement = nextPlacement.replace('bottom', 'top')
-        }
-      }
-    }
-  } else if (typeof containPolicy === 'function') {
-    nextPlacement = containPolicy(nextPlacement, triggerRect, popoverRect)
-    if (typeof nextPlacement !== 'string') return nextPlacement
-  }
-
-  return (placements[nextPlacement] || placements.center)(
-    triggerRect,
-    popoverRect
-  )
-}
-
-const placements = {}
-
-const placementFn = (placement, xFn, yFn) => {
-  placements[placement.toLowerCase()] = (triggerRect, popoverRect) => ({
-    placement: placement,
-    style: assignY(
-      xFn(triggerRect, popoverRect),
-      yFn(triggerRect, popoverRect)
-    ),
-  })
-}
-
-placementFn(top, centerXPos, startYOuterPos)
-placementFn(top + Left, startXInnerPos, startYOuterPos)
-placementFn(top + Right, endXInnerPos, startYOuterPos)
-placementFn(right, endXOuterPos, centerYPos)
-placementFn(right + Top, endXOuterPos, startYInnerPos)
-placementFn(right + Bottom, endXOuterPos, endYInnerPos)
-placementFn(bottom, centerXPos, endYOuterPos)
-placementFn(bottom + Left, startXInnerPos, endYOuterPos)
-placementFn(bottom + Right, endXInnerPos, endYOuterPos)
-placementFn(left, startXOuterPos, centerYPos)
-placementFn(left + Top, startXOuterPos, startYInnerPos)
-placementFn(left + Bottom, startXOuterPos, endYInnerPos)
-placementFn(inner + Top, centerXPos, startYInnerPos)
-placementFn(inner + Top + Left, startXInnerPos, startYInnerPos)
-placementFn(inner + Top + Right, endXInnerPos, startYInnerPos)
-placementFn(inner + Right, endXInnerPos, centerYPos)
-placementFn(inner + Bottom, centerXPos, endYInnerPos)
-placementFn(inner + Bottom + Right, endXInnerPos, endYInnerPos)
-placementFn(inner + Bottom + Left, startXInnerPos, endYInnerPos)
-placementFn(inner + Left, startXInnerPos, centerYPos)
-placementFn('center', centerXPos, centerYPos)
-
-function _ref(prev) {
-  return prev
-}
-
-const setPlacementStyle = (
-  requestedPlacement,
-  trigger,
-  popover,
-  containPolicy
-) => {
-  if (!trigger || !popover) return _ref
-  let result = {},
-    placement = requestedPlacement
-  const triggerRect = trigger.getBoundingClientRect(),
-    popoverRect = popover.getBoundingClientRect()
-  popoverRect.width = popover.offsetWidth
-  popoverRect.height = popover.offsetHeight
-
-  if (typeof requestedPlacement === 'function') {
-    result = requestedPlacement(triggerRect, popoverRect, containPolicy)
-
-    if (typeof result === 'string') {
-      placement = result
-    } else {
-      if (__DEV__) {
-        if (
-          // @ts-ignore
-          typeof result.placement !== 'string' || // @ts-ignore
-          typeof result.style !== 'object'
-        ) {
-          throw new Error(
-            `[Popover] Placement functions must return an object of type:\n` +
-              `\n{\n  placement: string,\n  style: {}\n}\n`
-          )
-        }
-      }
-    }
-  }
-
-  if (typeof placement === 'string') {
-    const fn = contain(placement.toLowerCase())
-    result = fn(triggerRect, popoverRect, containPolicy)
-  } // @ts-ignore
-
-  result.requestedPlacement = requestedPlacement
-  return result
-}
-
-// @ts-ignore
-const PopoverContext = /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createContext({}),
-  {Consumer: PopoverConsumer} = PopoverContext,
-  usePopover = () => react__WEBPACK_IMPORTED_MODULE_0__.useContext(PopoverContext),
-  usePlacement = () => usePopover().placement,
-  useControls = () => {
-    const {open, close, toggle, reposition} = usePopover()
-    return {
-      open,
-      close,
-      toggle,
-      reposition,
-    }
-  },
-  useIsOpen = () => usePopover().isOpen
-const isClosedStyles = {
-  position: 'fixed',
-  visibility: 'hidden',
-}
-const isOpenStyles = /*#__PURE__*/ Object.assign({}, isClosedStyles, {
-  visibility: 'visible',
-})
-
-const portalize = (Component, portal) => {
-  if (portal === false || portal === void 0 || portal === null) return Component
-  const props = {
-    children: Component,
-  }
-  if (typeof portal === 'string') props.container = portal
-  else Object.assign(props, portal)
-  return __reactCreateElement__(react_portalize__WEBPACK_IMPORTED_MODULE_2__["default"], props)
-}
-
-let isServer
-const Target = ({
-  placement = 'bottom',
-  portal,
-  openStyle,
-  closedStyle,
-  closedClass,
-  closeOnEscape = true,
-  openClass = 'popover--open',
-  children,
-}) => {
-  let {
-    id,
-    style,
-    isOpen,
-    close,
-    reposition,
-    triggeredBy,
-    targetRef,
-  } = usePopover()
-  const ref = (0,_react_hook_merged_ref__WEBPACK_IMPORTED_MODULE_3__["default"])(
-    // @ts-ignore
-    children.ref,
-    targetRef
-  ) // Closes the modal when escape is pressed
-
-  ;(0,_accessible_use_key__WEBPACK_IMPORTED_MODULE_4__.useKey)(targetRef, {
-    Escape: () => closeOnEscape && close(),
-  })
-  ;(0,_accessible_use_conditional_focus__WEBPACK_IMPORTED_MODULE_5__["default"])(targetRef, isOpen, {
-    includeRoot: true,
-  }) // handles repositioning the popover
-  // Yes this is correct, it's React.useEffect, not useLayoutEffect
-  // Just move on .
-
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    reposition(placement)
-    isServer = false
-  }, [placement, reposition])
-  const defaultStyles = isOpen ? isOpenStyles : isClosedStyles
-  triggeredBy = triggeredBy || 'click'
-  const isClickTrigger = triggeredBy.indexOf('click') > -1
-  return portalize(
-    /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(children, {
-      'aria-modal': isClickTrigger ? 'false' : void 0,
-      'aria-hidden': String(!isOpen),
-      key: String(isServer),
-      id,
-      role: isClickTrigger ? 'dialog' : 'tooltip',
-      className:
-        (0,clsx__WEBPACK_IMPORTED_MODULE_1__["default"])(children.props.className, isOpen ? openClass : closedClass) ||
-        void 0,
-      style: Object.assign(
-        {},
-        defaultStyles,
-        children.props.style,
-        style,
-        isOpen ? openStyle : closedStyle
-      ),
-      ref,
-    }),
-    portal
-  )
-}
-const PopoverContainer = /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.memo(
-  ({
-    id,
-    open,
-    close,
-    toggle,
-    isOpen,
-    containPolicy,
-    windowSize,
-    scrollY,
-    children,
-  }) => {
-    const triggerRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null),
-      targetRef = react__WEBPACK_IMPORTED_MODULE_0__.useRef(null),
-      [{style, requestedPlacement, placement}, setState] = react__WEBPACK_IMPORTED_MODULE_0__.useState({
-        style: {
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0,
-        },
-        placement: 'bottom',
-        requestedPlacement: 'bottom',
-      }),
-      reposition = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(
-        (nextPlacement) => {
-          if (!triggerRef.current || !targetRef.current) return
-          setState(
-            setPlacementStyle(
-              nextPlacement,
-              triggerRef.current,
-              targetRef.current,
-              containPolicy
-            )
-          )
-        },
-        [containPolicy]
-      ),
-      [triggeredBy, setTriggeredBy] = react__WEBPACK_IMPORTED_MODULE_0__.useState(null)
-    ;(0,_react_hook_passive_layout_effect__WEBPACK_IMPORTED_MODULE_6__["default"])(() => {
-      isOpen && reposition(requestedPlacement) // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isOpen, reposition, scrollY, windowSize[0], windowSize[1]])
-    const childContext = react__WEBPACK_IMPORTED_MODULE_0__.useMemo(
-      () => ({
-        isOpen,
-        open,
-        close,
-        toggle,
-        id,
-        style,
-        placement,
-        reposition,
-        targetRef,
-        triggerRef,
-        triggeredBy,
-        setTriggeredBy,
-      }),
-      [
-        id,
-        isOpen,
-        open,
-        close,
-        toggle,
-        placement,
-        reposition,
-        triggeredBy,
-        style,
-      ]
-    )
-    return /*#__PURE__*/ __reactCreateElement__(PopoverContext.Provider, {
-      value: childContext,
-      // @ts-ignore
-      children:
-        typeof children === 'function' ? children(childContext) : children,
-    })
-  },
-  (
-    prev,
-    next // bails out if the popover is closed and was closed
-  ) =>
-    // and the children didn't change
-    (next.isOpen === false &&
-      prev.isOpen === false &&
-      prev.children === next.children) || // bails out if all else is equal
-    (prev.children === next.children &&
-      prev.isOpen === next.isOpen &&
-      prev.windowSize[0] === next.windowSize[0] &&
-      prev.windowSize[1] === next.windowSize[1] &&
-      prev.scrollY === next.scrollY &&
-      prev.containPolicy === next.containPolicy)
-)
-const Close = ({children}) => {
-  const {close, isOpen, id} = usePopover()
-  return /*#__PURE__*/ __reactCreateElement__(
-    _accessible_button__WEBPACK_IMPORTED_MODULE_7__.Button,
-    null,
-    /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(children, {
-      'aria-controls': id,
-      'aria-haspopup': 'dialog',
-      'aria-expanded': String(isOpen),
-      'aria-label': children.props['aria-label'] || 'Close',
-      onClick: react__WEBPACK_IMPORTED_MODULE_0__.useCallback(
-        (e) => {
-          var _children$props$onCli, _children$props
-
-          e.stopPropagation()
-          close()
-          ;(_children$props$onCli = (_children$props = children.props)
-            .onClick) === null || _children$props$onCli === void 0
-            ? void 0
-            : _children$props$onCli.call(_children$props, e)
-        },
-        [close, children.props.onClick]
-      ),
-    })
-  )
-}
-const Trigger = ({
-  children,
-  on,
-  openClass,
-  closedClass,
-  openStyle,
-  closedStyle,
-}) => {
-  const {
-      isOpen,
-      open,
-      close,
-      toggle,
-      id,
-      triggerRef,
-      setTriggeredBy,
-    } = usePopover(),
-    prevOpen = react__WEBPACK_IMPORTED_MODULE_0__.useRef(isOpen),
-    ref = (0,_react_hook_merged_ref__WEBPACK_IMPORTED_MODULE_3__["default"])(
-      // @ts-ignore
-      children.ref,
-      triggerRef
-    )
-  ;(0,_accessible_use_conditional_focus__WEBPACK_IMPORTED_MODULE_5__["default"])(
-    triggerRef,
-    prevOpen.current && !isOpen && on.indexOf('click') > -1,
-    {
-      includeRoot: true,
-    }
-  )
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    setTriggeredBy(on) // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [on]) // returns the focus to the trigger when the popover box closes if focus is
-  // not an event that triggers opening the popover and prevents the trigger
-  // from capturing the window focus right away
-
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    prevOpen.current = isOpen
-  }, [isOpen])
-  const isClickable = on.indexOf('click') > -1
-  const isFocusable = on.indexOf('focus') > -1
-  const isHoverable = on.indexOf('hover') > -1
-  const props = children.props
-  const child = /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.cloneElement(children, {
-    'aria-controls': id,
-    'aria-haspopup': props.hasOwnProperty('aria-haspopup')
-      ? props['aria-haspopup']
-      : 'dialog',
-    'aria-expanded': String(isOpen),
-    className:
-      (0,clsx__WEBPACK_IMPORTED_MODULE_1__["default"])(props.className, isOpen ? openClass : closedClass) || void 0,
-    onClick: !isClickable
-      ? props.onClick
-      : (e) => {
-          var _props$onClick
-
-          e.stopPropagation()
-          toggle()
-          ;(_props$onClick = props.onClick) === null ||
-          _props$onClick === void 0
-            ? void 0
-            : _props$onClick.call(props, e)
-        },
-    onFocus: !isFocusable
-      ? props.onFocus
-      : (e) => {
-          var _props$onFocus
-
-          open()
-          ;(_props$onFocus = props.onFocus) === null ||
-          _props$onFocus === void 0
-            ? void 0
-            : _props$onFocus.call(props, e)
-        },
-    onMouseEnter: !isHoverable
-      ? props.onMouseEnter
-      : (e) => {
-          var _props$onMouseEnter
-
-          open()
-          ;(_props$onMouseEnter = props.onMouseEnter) === null ||
-          _props$onMouseEnter === void 0
-            ? void 0
-            : _props$onMouseEnter.call(props, e)
-        },
-    onMouseLeave: !isHoverable
-      ? props.onMouseLeave
-      : (e) => {
-          var _props$onMouseLeave
-
-          close()
-          ;(_props$onMouseLeave = props.onMouseLeave) === null ||
-          _props$onMouseLeave === void 0
-            ? void 0
-            : _props$onMouseLeave.call(props, e)
-        },
-    style: Object.assign({}, props.style, isOpen ? openStyle : closedStyle),
-    ref,
-  })
-  return isClickable
-    ? /*#__PURE__*/ __reactCreateElement__(_accessible_button__WEBPACK_IMPORTED_MODULE_7__.Button, null, child)
-    : child
-}
-
-const ScrollPositioner = (props) =>
-  __reactCreateElement__(
-    PopoverContainer,
-    Object.assign(
-      {
-        scrollY: (0,_react_hook_window_scroll__WEBPACK_IMPORTED_MODULE_8__["default"])(
-          props.repositionOnScroll === true
-            ? Infinity
-            : props.repositionOnScroll
-        ),
-      },
-      props
-    )
-  )
-
-const ResizePositioner = (prevProps) => {
-  const props = Object.assign(
-    {
-      windowSize: (0,_react_hook_window_size_throttled__WEBPACK_IMPORTED_MODULE_9__.useWindowSize)({
-        initialWidth: 1280,
-        initialHeight: 720,
-        fps:
-          prevProps.repositionOnResize === true
-            ? Infinity
-            : prevProps.repositionOnResize,
-      }),
-    },
-    prevProps
-  )
-  return __reactCreateElement__(
-    props.repositionOnScroll ? ScrollPositioner : PopoverContainer,
-    props
-  )
-}
-
-const defaultWindowSize = [0, 0]
-const Popover = ({
-  id,
-  open,
-  defaultOpen,
-  repositionOnResize = false,
-  repositionOnScroll = false,
-  containPolicy = 'flip',
-  onChange,
-  children,
-}) => {
-  const [isOpen_, toggle] = (0,_react_hook_switch__WEBPACK_IMPORTED_MODULE_10__["default"])(defaultOpen)
-  const didMount = react__WEBPACK_IMPORTED_MODULE_0__.useRef()
-  const storedOnChange = react__WEBPACK_IMPORTED_MODULE_0__.useRef(onChange)
-  storedOnChange.current = onChange
-  id = (0,_accessible_use_id__WEBPACK_IMPORTED_MODULE_11__["default"])(id)
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    var _storedOnChange$curre
-
-    didMount.current &&
-      ((_storedOnChange$curre = storedOnChange.current) === null ||
-      _storedOnChange$curre === void 0
-        ? void 0
-        : _storedOnChange$curre.call(storedOnChange, isOpen_))
-    didMount.current = true
-  }, [isOpen_])
-  return __reactCreateElement__(
-    repositionOnResize
-      ? ResizePositioner
-      : repositionOnScroll
-      ? ScrollPositioner
-      : PopoverContainer,
-    {
-      id,
-      open: toggle.on,
-      close: toggle.off,
-      toggle,
-      isOpen: open === void 0 || open === null ? isOpen_ : open,
-      containPolicy: containPolicy,
-      windowSize: defaultWindowSize,
-      repositionOnResize,
-      repositionOnScroll,
-      children,
-    }
-  )
-}
-/* istanbul ignore next */
-
-if (__DEV__) {
-  Popover.displayName = 'Popover'
-  Target.displayName = 'Target'
-  Trigger.displayName = 'Trigger'
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/@accessible/tabbable/dist/module/index.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/@accessible/tabbable/dist/module/index.js ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-// Credit:
-// https://github.com/davidtheclark/tabbable
-const candidateSelector = 'input,select,textarea,a[href],button,[tabindex],' + 'audio[controls],video[controls],' + '[contenteditable]:not([contenteditable="false"])';
-const matches = typeof Element === 'undefined' ? () => false : Element.prototype.matches || // @ts-ignore
-Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
-
-function _ref(a) {
-  return a.node;
-}
-
-const tabbable = (el, includeRootNode = false) => {
-  const regularTabbables = [];
-  const orderedTabbables = [];
-  let candidates = el.querySelectorAll(candidateSelector);
-
-  if (includeRootNode && matches.call(el, candidateSelector)) {
-    candidates = Array.prototype.slice.apply(candidates);
-    candidates.unshift(el);
-  }
-
-  let i, candidate, candidateTabindex;
-
-  for (i = 0; i < candidates.length; i++) {
-    candidate = candidates[i];
-    if (!isNodeMatchingSelectorTabbable(candidate)) continue;
-    candidateTabindex = getTabindex(candidate);
-
-    if (candidateTabindex === 0) {
-      regularTabbables.push(candidate);
-    } else {
-      orderedTabbables.push({
-        documentOrder: i,
-        tabIndex: candidateTabindex,
-        node: candidate
-      });
-    }
-  }
-
-  return orderedTabbables.sort(sortOrderedTabbables).map(_ref).concat(regularTabbables);
-};
-
-const isNodeMatchingSelectorTabbable = node => !(!isNodeMatchingSelectorFocusable(node) || node.tagName === 'INPUT' && node.type === 'radio' && !isTabbableRadio(node) || getTabindex(node) < 0);
-
-const isNodeMatchingSelectorFocusable = node => !(node.disabled || isInput(node) && node.type === 'hidden' || // offsetParent being null will allow detecting cases where an element
-// is invisible or inside an invisible element,  as long as the element
-// does not use position: fixed. For them, their visibility has to be
-// checked directly as well.
-node.offsetParent === null || getComputedStyle(node).visibility === 'hidden');
-
-const getTabindex = node => {
-  const tabindexAttr = parseInt(node.getAttribute('tabindex') || '', 10);
-  if (!isNaN(tabindexAttr)) return tabindexAttr; // Browsers do not return `tabIndex` correctly for contentEditable nodes;
-  // so if they don't have a tabindex attribute specifically set, assume it's 0.
-
-  if (node.contentEditable === 'true') return 0;
-  return node.tabIndex;
-}; // @ts-ignore
-
-
-const sortOrderedTabbables = (a, b) => a.tabIndex === b.tabIndex ? a.documentOrder - b.documentOrder : a.tabIndex - b.tabIndex;
-
-const isInput = node => node.tagName === 'INPUT';
-
-const isTabbableRadio = node => {
-  if (!node.name) return true; // This won't account for the edge case where you have radio groups with the
-  // same in separate forms on the same page.
-
-  if (node.ownerDocument) {
-    const radioSet = node.ownerDocument.querySelectorAll('input[type="radio"][name="' + node.name + '"]');
-
-    for (let i = 0; i < radioSet.length; i++) if (radioSet[i].checked) return radioSet[i] === node;
-
-    return true;
-  }
-
-  return false;
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (tabbable);
-
-/***/ }),
-
-/***/ "./node_modules/@accessible/use-conditional-focus/dist/module/index.js":
-/*!*****************************************************************************!*\
-  !*** ./node_modules/@accessible/use-conditional-focus/dist/module/index.js ***!
-  \*****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _accessible_tabbable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @accessible/tabbable */ "./node_modules/@accessible/tabbable/dist/module/index.js");
-/* harmony import */ var _react_hook_event__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @react-hook/event */ "./node_modules/@react-hook/event/dist/module/index.js");
-
-
-
-
-function useConditionalFocus(target, shouldFocus = false, {
-  includeRoot,
-  preventScroll
-} = defaultOptions) {
-  const didFocus = react__WEBPACK_IMPORTED_MODULE_0__.useRef(false);
-  const didFocusAfterEvent = react__WEBPACK_IMPORTED_MODULE_0__.useRef(false);
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    const element = target && 'current' in target ? target.current : target;
-    if (!element || !shouldFocus || didFocus.current) return;
-    const tabbableEls = (0,_accessible_tabbable__WEBPACK_IMPORTED_MODULE_1__["default"])(element, includeRoot);
-    if (tabbableEls.length > 0) tabbableEls[0].focus({
-      preventScroll
-    });
-    didFocus.current = true;
-  }, [target, includeRoot, preventScroll, shouldFocus]);
-
-  function _ref() {
-    didFocus.current = false;
-    didFocusAfterEvent.current = false;
-  }
-
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    return _ref;
-  }, [shouldFocus]);
-  (0,_react_hook_event__WEBPACK_IMPORTED_MODULE_2__["default"])(target, 'transitionend', () => {
-    const element = target && 'current' in target ? target.current : target;
-    if (!element || !shouldFocus || didFocusAfterEvent.current) return;
-    const tabbableEls = (0,_accessible_tabbable__WEBPACK_IMPORTED_MODULE_1__["default"])(element, includeRoot);
-    if (tabbableEls.length > 0) tabbableEls[0].focus({
-      preventScroll
-    });
-    didFocusAfterEvent.current = true;
-  });
-}
-
-const defaultOptions = {
-  includeRoot: false,
-  preventScroll: false
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useConditionalFocus);
-
-/***/ }),
-
-/***/ "./node_modules/@accessible/use-id/dist/module/index.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/@accessible/use-id/dist/module/index.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_hook_passive_layout_effect__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-hook/passive-layout-effect */ "./node_modules/@react-hook/passive-layout-effect/dist/module/index.js");
-
-
-let ID = 0;
-
-const genId = () => ID++;
-
-let serverHandoffComplete = false;
-
-const useId = (fallbackId, prefix = '🅰') => {
-  const [id, setId] = react__WEBPACK_IMPORTED_MODULE_0__.useState(serverHandoffComplete ? genId : void 0);
-  (0,_react_hook_passive_layout_effect__WEBPACK_IMPORTED_MODULE_1__["default"])(() => {
-    if (id === void 0) {
-      setId(ID++);
-    }
-
-    serverHandoffComplete = true;
-  }, []);
-  return fallbackId ? fallbackId : id === void 0 ? id : prefix + id;
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useId);
-
-/***/ }),
-
-/***/ "./node_modules/@accessible/use-key/dist/module/index.js":
-/*!***************************************************************!*\
-  !*** ./node_modules/@accessible/use-key/dist/module/index.js ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   useKey: () => (/* binding */ useKey)
-/* harmony export */ });
-/* harmony import */ var _react_hook_event__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @react-hook/event */ "./node_modules/@react-hook/event/dist/module/index.js");
-
-function useKey(target, listeners) {
-  (0,_react_hook_event__WEBPACK_IMPORTED_MODULE_0__["default"])(target, 'keydown', event => {
-    const listener = listeners[LEGACY_COMPAT[event.key] || event.key];
-    if (listener) listener(event);
-  });
-} // IE 11 and some versions of Edge have non-standard value
-
-const LEGACY_COMPAT = {
-  Up: 'ArrowUp',
-  Right: 'ArrowRight',
-  Down: 'ArrowDown',
-  Left: 'ArrowLeft',
-  Esc: 'Escape',
-  Spacebar: ' ',
-  Del: 'Delete',
-  Crsel: 'CrSel',
-  Exsel: 'ExSel',
-  Add: '+',
-  Subtract: '-',
-  Multiply: '*',
-  Divide: '/',
-  Decimal: '.',
-  Scroll: 'ScrollLock'
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useKey);
-
-/***/ }),
-
-/***/ "./node_modules/@react-hook/event/dist/module/index.js":
-/*!*************************************************************!*\
-  !*** ./node_modules/@react-hook/event/dist/module/index.js ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function useEvent(target, type, listener, cleanup) {
-  const storedListener = react__WEBPACK_IMPORTED_MODULE_0__.useRef(listener);
-  const storedCleanup = react__WEBPACK_IMPORTED_MODULE_0__.useRef(cleanup);
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    storedListener.current = listener;
-    storedCleanup.current = cleanup;
-  });
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    const targetEl = target && 'current' in target ? target.current : target;
-    if (!targetEl) return;
-    let didUnsubscribe = 0;
-
-    function listener(...args) {
-      if (didUnsubscribe) return;
-      storedListener.current.apply(this, args);
-    }
-
-    targetEl.addEventListener(type, listener);
-    const cleanup = storedCleanup.current;
-    return () => {
-      didUnsubscribe = 1;
-      targetEl.removeEventListener(type, listener);
-      cleanup && cleanup();
-    }; // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [target, type]);
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useEvent);
-
-/***/ }),
-
-/***/ "./node_modules/@react-hook/latest/dist/module/index.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/@react-hook/latest/dist/module/index.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-const useLatest = current => {
-  const storedValue = react__WEBPACK_IMPORTED_MODULE_0__.useRef(current);
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    storedValue.current = current;
-  });
-  return storedValue;
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useLatest);
-
-/***/ }),
-
-/***/ "./node_modules/@react-hook/merged-ref/dist/module/index.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@react-hook/merged-ref/dist/module/index.js ***!
-  \******************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function useMergedRef(...refs) {
-  return react__WEBPACK_IMPORTED_MODULE_0__.useCallback(element => {
-    for (let i = 0; i < refs.length; i++) {
-      const ref = refs[i];
-      if (typeof ref === 'function') ref(element);else if (ref && typeof ref === 'object') ref.current = element;
-    }
-  }, // eslint-disable-next-line react-hooks/exhaustive-deps
-  refs);
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useMergedRef);
-
-/***/ }),
-
-/***/ "./node_modules/@react-hook/passive-layout-effect/dist/module/index.js":
-/*!*****************************************************************************!*\
-  !*** ./node_modules/@react-hook/passive-layout-effect/dist/module/index.js ***!
-  \*****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-const usePassiveLayoutEffect = (react__WEBPACK_IMPORTED_MODULE_0___default())[typeof document !== 'undefined' && document.createElement !== void 0 ? 'useLayoutEffect' : 'useEffect'];
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (usePassiveLayoutEffect);
-
-/***/ }),
-
-/***/ "./node_modules/@react-hook/switch/dist/module/index.js":
-/*!**************************************************************!*\
-  !*** ./node_modules/@react-hook/switch/dist/module/index.js ***!
-  \**************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_hook_latest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-hook/latest */ "./node_modules/@react-hook/latest/dist/module/index.js");
-
-
-/**
- * A hook for creating controlled toggles with on, off, and toggle callbacks.
- * This is extremely useful for creating controlled inputs for components like Checkbox.
- *
- * @param defaultValue Sets the default value of the switch
- * @param controlledValue Sets the controlled value of the switch, which will override
- *  the defaultValue
- * @param onChange A callback invoked whenever toggle callbacks that change state are invoked
- */
-
-function useSwitch(defaultValue = false, controlledValue, onChange = noop) {
-  const [current, setCurrent] = react__WEBPACK_IMPORTED_MODULE_0__.useState(controlledValue !== null && controlledValue !== void 0 ? controlledValue : defaultValue);
-  const storedOnChange = (0,_react_hook_latest__WEBPACK_IMPORTED_MODULE_1__["default"])(onChange);
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    if (typeof controlledValue === 'boolean') {
-      setCurrent(controlledValue);
-    }
-  }, [controlledValue]);
-  const toggle = react__WEBPACK_IMPORTED_MODULE_0__.useCallback(() => {
-    setCurrent(!current);
-    storedOnChange.current(!current);
-  }, [storedOnChange, current]);
-  return [controlledValue !== null && controlledValue !== void 0 ? controlledValue : current, Object.assign(toggle, {
-    on: react__WEBPACK_IMPORTED_MODULE_0__.useCallback(() => {
-      setCurrent(true);
-      if (!current) storedOnChange.current(true);
-    }, [storedOnChange, current]),
-    off: react__WEBPACK_IMPORTED_MODULE_0__.useCallback(() => {
-      setCurrent(false);
-      if (current) storedOnChange.current(false);
-    }, [storedOnChange, current])
-  })];
-}
-
-function noop() {}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useSwitch);
-
-/***/ }),
-
-/***/ "./node_modules/@react-hook/throttle/dist/module/index.js":
-/*!****************************************************************!*\
-  !*** ./node_modules/@react-hook/throttle/dist/module/index.js ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   useThrottle: () => (/* binding */ useThrottle),
-/* harmony export */   useThrottleCallback: () => (/* binding */ useThrottleCallback)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_hook_latest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-hook/latest */ "./node_modules/@react-hook/latest/dist/module/index.js");
-
-
-const perf = typeof performance !== 'undefined' ? performance : Date;
-
-const now = () => perf.now();
-
-function useThrottleCallback(callback, fps = 30, leading = false) {
-  const storedCallback = (0,_react_hook_latest__WEBPACK_IMPORTED_MODULE_1__["default"])(callback);
-  const ms = 1000 / fps;
-  const prev = react__WEBPACK_IMPORTED_MODULE_0__.useRef(0);
-  const trailingTimeout = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
-
-  const clearTrailing = () => trailingTimeout.current && clearTimeout(trailingTimeout.current);
-
-  const deps = [fps, leading, storedCallback]; // Reset any time the deps change
-
-  function _ref() {
-    prev.current = 0;
-    clearTrailing();
-  }
-
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => _ref, deps);
-  return react__WEBPACK_IMPORTED_MODULE_0__.useCallback(function () {
-    // eslint-disable-next-line prefer-rest-params
-    const args = arguments;
-    const rightNow = now();
-
-    const call = () => {
-      prev.current = rightNow;
-      clearTrailing();
-      storedCallback.current.apply(null, args);
-    };
-
-    const current = prev.current; // leading
-
-    if (leading && current === 0) return call(); // body
-
-    if (rightNow - current > ms) {
-      if (current > 0) return call();
-      prev.current = rightNow;
-    } // trailing
-
-
-    clearTrailing();
-    trailingTimeout.current = setTimeout(() => {
-      call();
-      prev.current = 0;
-    }, ms);
-  }, deps);
-}
-function useThrottle(initialState, fps, leading) {
-  const state = react__WEBPACK_IMPORTED_MODULE_0__.useState(initialState);
-  return [state[0], useThrottleCallback(state[1], fps, leading)];
-}
-
-/***/ }),
-
-/***/ "./node_modules/@react-hook/window-scroll/dist/module/index.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/@react-hook/window-scroll/dist/module/index.js ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   useWindowScroll: () => (/* binding */ useWindowScroll)
-/* harmony export */ });
-/* harmony import */ var _react_hook_throttle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @react-hook/throttle */ "./node_modules/@react-hook/throttle/dist/module/index.js");
-/* harmony import */ var _react_hook_event__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-hook/event */ "./node_modules/@react-hook/event/dist/module/index.js");
-
-
-const win = typeof window === 'undefined' ? null : window;
-
-const getScrollY = () => win.scrollY !== void 0 ? win.scrollY : win.pageYOffset === void 0 ? 0 : win.pageYOffset;
-
-const useWindowScroll = (fps = 30) => {
-  const state = (0,_react_hook_throttle__WEBPACK_IMPORTED_MODULE_0__.useThrottle)(typeof window === 'undefined' ? 0 : getScrollY, fps, true);
-  (0,_react_hook_event__WEBPACK_IMPORTED_MODULE_1__["default"])(win, 'scroll', () => state[1](getScrollY()));
-  return state[0];
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (useWindowScroll);
-
-/***/ }),
-
-/***/ "./node_modules/@react-hook/window-size/throttled/dist/module/index.js":
-/*!*****************************************************************************!*\
-  !*** ./node_modules/@react-hook/window-size/throttled/dist/module/index.js ***!
-  \*****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   useWindowHeight: () => (/* binding */ useWindowHeight),
-/* harmony export */   useWindowSize: () => (/* binding */ useWindowSize),
-/* harmony export */   useWindowWidth: () => (/* binding */ useWindowWidth)
-/* harmony export */ });
-/* harmony import */ var _react_hook_throttle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @react-hook/throttle */ "./node_modules/@react-hook/throttle/dist/module/index.js");
-/* harmony import */ var _react_hook_event__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-hook/event */ "./node_modules/@react-hook/event/dist/module/index.js");
-/* eslint-disable import/no-extraneous-dependencies */
-
-
-const emptyObj = {};
-const win = typeof window === 'undefined' ? null : window;
-const wv = win && typeof win.visualViewport !== 'undefined' ? win.visualViewport : null;
-
-const getSize = () => [document.documentElement.clientWidth, document.documentElement.clientHeight];
-
-const useWindowSize = function (options) {
-  if (options === void 0) {
-    options = emptyObj;
-  }
-
-  const {
-    fps,
-    leading,
-    initialWidth = 0,
-    initialHeight = 0
-  } = options;
-  const [size, setThrottledSize] = (0,_react_hook_throttle__WEBPACK_IMPORTED_MODULE_0__.useThrottle)(
-  /* istanbul ignore next */
-  typeof document === 'undefined' ? [initialWidth, initialHeight] : getSize, fps, leading);
-
-  const setSize = () => setThrottledSize(getSize);
-
-  (0,_react_hook_event__WEBPACK_IMPORTED_MODULE_1__["default"])(win, 'resize', setSize); // @ts-expect-error
-
-  (0,_react_hook_event__WEBPACK_IMPORTED_MODULE_1__["default"])(wv, 'resize', setSize);
-  (0,_react_hook_event__WEBPACK_IMPORTED_MODULE_1__["default"])(win, 'orientationchange', setSize);
-  return size;
-};
-const useWindowHeight = options => useWindowSize(options)[1];
-const useWindowWidth = options => useWindowSize(options)[0];
-
-/***/ }),
-
-/***/ "./src/js/salesforce/admin/sf-event-import/components/Checkbox.js":
-/*!************************************************************************!*\
-  !*** ./src/js/salesforce/admin/sf-event-import/components/Checkbox.js ***!
-  \************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-var Checkbox = function Checkbox(_ref) {
-  var id = _ref.id,
-    type = _ref.type,
-    name = _ref.name,
-    handleClick = _ref.handleClick,
-    isChecked = _ref.isChecked;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-    id: id,
-    name: name,
-    type: type,
-    onChange: handleClick,
-    checked: isChecked
-  });
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Checkbox);
-
-/***/ }),
-
-/***/ "./src/js/salesforce/admin/sf-event-import/components/EventListInfo.js":
-/*!*****************************************************************************!*\
-  !*** ./src/js/salesforce/admin/sf-event-import/components/EventListInfo.js ***!
-  \*****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ EventListInfo)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-function EventListInfo(_ref) {
-  var event = _ref.event;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
-      children: ["ID: ", event === null || event === void 0 ? void 0 : event.Id]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
-      children: ["Date Text: ", (event === null || event === void 0 ? void 0 : event.Workshop_Event_Date_Text__c) || 'null']
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
-      children: ["Times: ", (event === null || event === void 0 ? void 0 : event.Workshop_Times__c) || 'null']
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
-      children: ["Total Seats: ", (event === null || event === void 0 ? void 0 : event.Total_Number_of_Seats__c) || 'null']
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
-      children: ["Remaining Seats: ", (event === null || event === void 0 ? void 0 : event.Remaining_Seats__c) || 'null']
-    })]
-  });
-}
-
-/***/ }),
 
 /***/ "./src/js/salesforce/admin/sf-event-import/components/ImportEventRoot.js":
 /*!*******************************************************************************!*\
@@ -1524,7 +8,6 @@ function EventListInfo(_ref) {
   \*******************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ ImportEventRoot)
@@ -1533,8 +16,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _libs_context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../libs/context */ "./src/js/salesforce/admin/sf-event-import/libs/context.js");
 /* harmony import */ var _ImportInfoWidget__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ImportInfoWidget */ "./src/js/salesforce/admin/sf-event-import/components/ImportInfoWidget.js");
-/* harmony import */ var _JunctionTable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./JunctionTable */ "./src/js/salesforce/admin/sf-event-import/components/JunctionTable.js");
-/* harmony import */ var _Tabs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Tabs */ "./src/js/salesforce/admin/sf-event-import/components/Tabs.js");
+/* harmony import */ var _Tabs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Tabs */ "./src/js/salesforce/admin/sf-event-import/components/Tabs.js");
+/* harmony import */ var _ProductImportTable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ProductImportTable */ "./src/js/salesforce/admin/sf-event-import/components/ProductImportTable.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -1545,7 +28,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+// import JunctionTable from "./JunctionTable";
 
+// import EventsTable from "./EventsTable";
 
 
 
@@ -1553,7 +38,7 @@ function ImportEventRoot() {
   var _useSFEventContext = (0,_libs_context__WEBPACK_IMPORTED_MODULE_1__.useSFEventContext)(),
     Junctions = _useSFEventContext.Junctions,
     JunctionsSize = _useSFEventContext.JunctionsSize;
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('JunctionTable'),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('ProductImportTable'),
     _useState2 = _slicedToArray(_useState, 2),
     tabActive = _useState2[0],
     setTabActive = _useState2[1];
@@ -1564,20 +49,27 @@ function ImportEventRoot() {
         className: "pp-panel",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "pp-panel__content",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Tabs__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Tabs__WEBPACK_IMPORTED_MODULE_3__["default"], {
             items: [{
-              label: "Import by Junction",
-              name: 'JunctionTable',
-              key: '6561fbc7-4395-4b96-9e71-4c3674292bec',
-              content: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_JunctionTable__WEBPACK_IMPORTED_MODULE_3__["default"], {})
-            }, {
-              label: "Import by Single Event",
-              name: 'SingleEvent',
-              key: 'b02c03f8-8544-4d8b-814f-a00c4a0067b5',
-              content: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-                children: "Single Event"
-              })
-            }],
+              label: "Import",
+              name: 'ProductImportTable',
+              key: 'f412b1d8-6e17-4f08-a157-168b07b1d6c5',
+              content: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_ProductImportTable__WEBPACK_IMPORTED_MODULE_4__["default"], {})
+            }
+            // {
+            //   label: "Import by Junction", 
+            //   name: 'JunctionTable', 
+            //   key: '6561fbc7-4395-4b96-9e71-4c3674292bec',
+            //   content: <JunctionTable />
+            // },
+            // {
+            //   label: "Import by Single Event", 
+            //   name: 'SingleEvent', 
+            //   key: 'b02c03f8-8544-4d8b-814f-a00c4a0067b5',
+            //   content: <EventsTable />
+            // }
+            ],
+
             active: tabActive,
             onClick: function onClick(name) {
               setTabActive(name);
@@ -1602,7 +94,6 @@ function ImportEventRoot() {
   \********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ ImportInfoWidget)
@@ -1644,375 +135,234 @@ function ImportInfoWidget(_ref) {
 
 /***/ }),
 
-/***/ "./src/js/salesforce/admin/sf-event-import/components/JunctionTable.js":
-/*!*****************************************************************************!*\
-  !*** ./src/js/salesforce/admin/sf-event-import/components/JunctionTable.js ***!
-  \*****************************************************************************/
+/***/ "./src/js/salesforce/admin/sf-event-import/components/ProductImportTable.js":
+/*!**********************************************************************************!*\
+  !*** ./src/js/salesforce/admin/sf-event-import/components/ProductImportTable.js ***!
+  \**********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ JunctionTable)
+/* harmony export */   "default": () => (/* binding */ ProductImportTable)
 /* harmony export */ });
-/* harmony import */ var _libs_context__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../libs/context */ "./src/js/salesforce/admin/sf-event-import/libs/context.js");
-/* harmony import */ var _PopoverBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PopoverBox */ "./src/js/salesforce/admin/sf-event-import/components/PopoverBox.js");
-/* harmony import */ var _accessible_popover__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @accessible/popover */ "./node_modules/@accessible/popover/dist/module/index.js");
-/* harmony import */ var _EventListInfo__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EventListInfo */ "./src/js/salesforce/admin/sf-event-import/components/EventListInfo.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _Checkbox__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Checkbox */ "./src/js/salesforce/admin/sf-event-import/components/Checkbox.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _libs_context__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../libs/context */ "./src/js/salesforce/admin/sf-event-import/libs/context.js");
+/* harmony import */ var _libs_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../libs/actions */ "./src/js/salesforce/admin/sf-event-import/libs/actions.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
-function _iterableToArrayLimit(arr, i) { var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"]; if (null != _i) { var _s, _e, _x, _r, _arr = [], _n = !0, _d = !1; try { if (_x = (_i = _i.call(arr)).next, 0 === i) { if (Object(_i) !== _i) return; _n = !1; } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0); } catch (err) { _d = !0, _e = err; } finally { try { if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return; } finally { if (_d) throw _e; } } return _arr; } }
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
 
 
-
-
-var IconTicked = function IconTicked() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-    className: "pp-icon-emoj",
-    children: "\u2705"
-  });
-};
-var IconLink = function IconLink() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-    className: "dashicons dashicons-admin-links pp-font-icon"
-  });
-};
-function JunctionTable() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
-    _useState2 = _slicedToArray(_useState, 2),
-    eventsDone = _useState2[0],
-    setEventsDone = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
-    _useState4 = _slicedToArray(_useState3, 2),
-    eventsImported = _useState4[0],
-    setEventsImported = _useState4[1];
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
-    _useState6 = _slicedToArray(_useState5, 2),
-    isCheckAll = _useState6[0],
-    setIsCheckAll = _useState6[1];
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)([]),
-    _useState8 = _slicedToArray(_useState7, 2),
-    isCheck = _useState8[0],
-    setIsCheck = _useState8[1];
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_3__.useState)(false),
-    _useState10 = _slicedToArray(_useState9, 2),
-    loading = _useState10[0],
-    setLoading = _useState10[1];
-  var _useSFEventContext = (0,_libs_context__WEBPACK_IMPORTED_MODULE_0__.useSFEventContext)(),
-    Junctions = _useSFEventContext.Junctions,
-    dataEventsImported = _useSFEventContext.dataEventsImported,
-    _getEventsImported = _useSFEventContext._getEventsImported;
-  var isImportAvailable = function isImportAvailable(juncData) {
-    var _juncData$parent_even, _juncData$child_event;
-    return juncData !== null && juncData !== void 0 && (_juncData$parent_even = juncData.parent_event_data) !== null && _juncData$parent_even !== void 0 && _juncData$parent_even.Id && juncData !== null && juncData !== void 0 && (_juncData$child_event = juncData.child_event_data) !== null && _juncData$child_event !== void 0 && _juncData$child_event.Id ? true : false;
-  };
-  var handleSelectAll = function handleSelectAll(e) {
-    setIsCheckAll(!isCheckAll);
-    setIsCheck(Junctions.map(function (item) {
-      return item.Id;
-    }));
-    if (isCheckAll) {
-      setIsCheck([]);
+var EventTableChild = function EventTableChild(_ref) {
+  var events = _ref.events,
+    product = _ref.product;
+  var tableData = [{
+    key: '108ba70f-20b3-48ab-9bf9-55fe470cb98b',
+    label: 'Subject',
+    field: function field(item) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+        children: ["\u21B3 ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+          children: item.Subject
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), "#ID: ", item.Id]
+      });
     }
-  };
-  var handleCheckboxClick = function handleCheckboxClick(e) {
-    var _e$target = e.target,
-      id = _e$target.id,
-      checked = _e$target.checked;
-    setIsCheck([].concat(_toConsumableArray(isCheck), [id]));
-    if (!checked) {
-      setIsCheck(isCheck.filter(function (item) {
-        return item !== id;
-      }));
+  }, {
+    key: '2de8e129-8f1d-4e75-8c4f-92d9e8130b87',
+    label: 'Total Seats / Remaining Seats',
+    field: function field(item) {
+      return "".concat(item.Total_Number_of_Seats__c, " / ").concat(item.Remaining_Seats__c);
     }
-  };
-  var handleImportEvents = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(eventIds) {
-      var eventIdsArr, response, _yield$response$json, importResult, result, failureCount, importDoneList;
-      return _regeneratorRuntime().wrap(function _callee$(_context) {
-        while (1) switch (_context.prev = _context.next) {
-          case 0:
-            eventIdsArr = eventIds.split(",");
-            setEventsImported([].concat(_toConsumableArray(eventsImported), _toConsumableArray(eventIdsArr)));
-            setLoading(true);
-            _context.prev = 3;
-            _context.next = 6;
-            return fetch("".concat(window.location.origin, "/wp-json/wp/v2/salesforce-import-events/"), {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                eventIds: eventIds
-              })
-            });
-          case 6:
-            response = _context.sent;
-            _context.next = 9;
-            return response.json();
-          case 9:
-            _yield$response$json = _context.sent;
-            importResult = _yield$response$json.importResult;
-            result = _yield$response$json.result;
-            failureCount = _yield$response$json.failureCount;
-            importDoneList = [];
-            importResult.map(function (event) {
-              if (event.status == 'success') {
-                importDoneList.push(event.id);
-              }
-            });
-            setEventsDone([].concat(_toConsumableArray(eventsDone), importDoneList));
-            setIsCheck([]);
-            setIsCheckAll(false);
-            _getEventsImported();
-            _context.next = 24;
-            break;
-          case 21:
-            _context.prev = 21;
-            _context.t0 = _context["catch"](3);
-            console.error("Error while fetching PWS API:", _context.t0);
-          case 24:
-            _context.prev = 24;
-            setLoading(false);
-            return _context.finish(24);
-          case 27:
-          case "end":
-            return _context.stop();
-        }
-      }, _callee, null, [[3, 21, 24, 27]]);
-    }));
-    return function handleImportEvents(_x2) {
-      return _ref.apply(this, arguments);
-    };
-  }();
-  var handleBulkImportEvents = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-      var checkedItems;
-      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-        while (1) switch (_context2.prev = _context2.next) {
-          case 0:
-            // Generate string of checked items
-            checkedItems = isCheck.length ? isCheck.reduce(function (total, item) {
-              return total + "," + item;
-            }) : "";
-            if (checkedItems) {
-              console.log(checkedItems);
-              handleImportEvents(checkedItems);
-            }
-          case 2:
-          case "end":
-            return _context2.stop();
-        }
-      }, _callee2);
-    }));
-    return function handleBulkImportEvents() {
-      return _ref2.apply(this, arguments);
-    };
-  }();
-  var isJunctionImported = function isJunctionImported(jID) {
-    var found = dataEventsImported.find(function (item) {
-      return item.__sf_junction_id == jID;
-    });
-    return found ? true : false;
-  };
-  var isEventImported = function isEventImported(eID, name) {
-    var found = dataEventsImported.find(function (item) {
-      return item[name] == eID;
-    });
-    return found ? true : false;
-  };
-  var eventEditPostUrl = function eventEditPostUrl(eID, sfEventName, wpPostName) {
-    var found = dataEventsImported.find(function (item) {
-      return item[sfEventName] == eID;
-    });
-    return found[wpPostName];
-  };
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-    className: "junction-table-container",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h4", {
-      children: "Junction Listing"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
-      children: "This object used in Salesforce to create the link between Workshop Events."
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
-      className: "pp-button import-all ".concat(isCheck.length == 0 ? 'disable' : ''),
-      onClick: handleBulkImportEvents,
-      children: ["Import ", isCheck.length > 0 ? isCheck.length : '', " by Junction"]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-      className: "junction-content",
-      children: [loading && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-        className: "and-loading-wrapper",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-          className: "and-spinner-loading"
+  }, {
+    key: '5927c47c-67bb-4140-9004-ccac9b6aec3c',
+    label: 'Workshop Date / Time',
+    field: function field(item) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+        children: [item.Workshop_Event_Date_Text__c, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), " ", item.Workshop_Times__c]
+      });
+    }
+  }
+  // {
+  //   key: '39c9f999-5510-41a3-aa42-a0c7dfbb19a2',
+  //   label: 'Action',
+  //   field: (item) => {
+  //     return <button className="pp-button button-import" onClick={ async (e) => { 
+  //       e.preventDefault(); } 
+  //       }>
+  //       Import 
+  //       <svg fill="#FFFFFF" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+  //         <path d="M1574.513 138.515c-30.381-30.268-66.748-51.84-106.278-65.619v434.936h434.937c-13.78-39.529-35.238-75.896-65.62-106.164l-263.04-263.153Zm-219.219 482.19V56h-903.53v903.53H0v112.94h451.765v790.589H1920V620.706h-564.706ZM887.04 1425.3l-79.85-79.85 272.866-272.978h-515.35V959.529h515.35L807.191 686.664l79.849-79.85L1296.226 1016 887.04 1425.299Z" />{" "}
+  //       </svg>
+  //     </button>
+  //   },
+  // },
+  ];
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("table", {
+    className: "pp-table events-table",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("thead", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tr", {
+        children: tableData.map(function (_ref2) {
+          var label = _ref2.label,
+            key = _ref2.key;
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+            children: typeof label === 'function' ? label() : label
+          }, "__name-item-".concat(key));
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("table", {
-        className: "pp-table junction-table",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("thead", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                type: "checkbox",
-                name: "selectAll",
-                id: "selectAll",
-                handleClick: handleSelectAll,
-                isChecked: isCheckAll
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-              children: "ID"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-              children: "Name"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-              children: "Parent Event"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-              children: "Children Event"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-              children: "Import"
-            })]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {
+      children: events.map(function (item) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tr", {
+          children: tableData.map(function (_ref3) {
+            var field = _ref3.field,
+              key = _ref3.key;
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+              children: typeof field === 'function' ? field(item) : item[field]
+            }, "__name-item-".concat(key));
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tbody", {
-          children: Junctions.map(function (item, _name) {
-            var _item$parent_event_da, _item$parent_event_da2, _item$parent_event_da3, _item$parent_event_da4, _item$child_event_dat, _item$child_event_dat2, _item$child_event_dat3, _item$child_event_dat4;
-            var status = '';
-            if (!loading && eventsImported.length > 0 && eventsImported.includes(item.Id)) {
-              status = eventsDone.includes(item.Id) ? 'Done' : 'Failure';
-            }
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tr", {
-              className: "__item-".concat(_name),
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_Checkbox__WEBPACK_IMPORTED_MODULE_4__["default"], {
-                  type: "checkbox",
-                  name: item.Id,
-                  id: item.Id,
-                  handleClick: handleCheckboxClick,
-                  isChecked: isCheck.includes(item.Id)
-                }, item.Id)
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("td", {
-                children: [item.Id, " ", isJunctionImported(item.Id) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
-                  href: eventEditPostUrl(item.Id, '__sf_junction_id', '__product_edit_url'),
-                  target: "_blank",
-                  title: "Imported",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(IconLink, {})
-                }) : '']
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
-                children: item.Name
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_accessible_popover__WEBPACK_IMPORTED_MODULE_6__.Popover, {
-                  children: [(item === null || item === void 0 ? void 0 : (_item$parent_event_da = item.parent_event_data) === null || _item$parent_event_da === void 0 ? void 0 : _item$parent_event_da.Id) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_PopoverBox__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                    placement: "bottomLeft",
-                    label: "Subject: ".concat(item === null || item === void 0 ? void 0 : (_item$parent_event_da2 = item.parent_event_data) === null || _item$parent_event_da2 === void 0 ? void 0 : _item$parent_event_da2.Subject),
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_EventListInfo__WEBPACK_IMPORTED_MODULE_2__["default"], {
-                      event: item === null || item === void 0 ? void 0 : item.parent_event_data
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_accessible_popover__WEBPACK_IMPORTED_MODULE_6__.Trigger, {
-                    on: "hover",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                      children: [item.Parent_Event__c, " ", isEventImported(item === null || item === void 0 ? void 0 : (_item$parent_event_da3 = item.parent_event_data) === null || _item$parent_event_da3 === void 0 ? void 0 : _item$parent_event_da3.Id, '__sf_event_parent_id') ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
-                        href: eventEditPostUrl(item === null || item === void 0 ? void 0 : (_item$parent_event_da4 = item.parent_event_data) === null || _item$parent_event_da4 === void 0 ? void 0 : _item$parent_event_da4.Id, '__sf_event_parent_id', '__wp_event_parent_admin_url'),
-                        target: "_blank",
-                        title: "Imported",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(IconLink, {})
-                      }) : '']
-                    })
-                  })]
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(_accessible_popover__WEBPACK_IMPORTED_MODULE_6__.Popover, {
-                  children: [(item === null || item === void 0 ? void 0 : (_item$child_event_dat = item.child_event_data) === null || _item$child_event_dat === void 0 ? void 0 : _item$child_event_dat.Id) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_PopoverBox__WEBPACK_IMPORTED_MODULE_1__["default"], {
-                    placement: "bottomLeft",
-                    label: "Subject: ".concat(item === null || item === void 0 ? void 0 : (_item$child_event_dat2 = item.child_event_data) === null || _item$child_event_dat2 === void 0 ? void 0 : _item$child_event_dat2.Subject),
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_EventListInfo__WEBPACK_IMPORTED_MODULE_2__["default"], {
-                      event: item === null || item === void 0 ? void 0 : item.child_event_data
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_accessible_popover__WEBPACK_IMPORTED_MODULE_6__.Trigger, {
-                    on: "hover",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                      children: [item.Child_Event__c, " ", isEventImported(item === null || item === void 0 ? void 0 : (_item$child_event_dat3 = item.child_event_data) === null || _item$child_event_dat3 === void 0 ? void 0 : _item$child_event_dat3.Id, '__sf_event_child_id') ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
-                        href: eventEditPostUrl(item === null || item === void 0 ? void 0 : (_item$child_event_dat4 = item.child_event_data) === null || _item$child_event_dat4 === void 0 ? void 0 : _item$child_event_dat4.Id, '__sf_event_child_id', '__wp_event_child_admin_url'),
-                        target: "_blank",
-                        title: "Imported",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(IconLink, {})
-                      }) : '']
-                    })
-                  })]
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
-                  className: ["pp-button button-import", status, isImportAvailable(item) ? "" : "btn-disable"].join(" "),
-                  onClick: function onClick() {
-                    return handleImportEvents(item.Id);
-                  },
-                  children: ["Import", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("svg", {
-                    fill: "#FFFFFF",
-                    viewBox: "0 0 1920 1920",
-                    xmlns: "http://www.w3.org/2000/svg",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("path", {
-                      d: "M1574.513 138.515c-30.381-30.268-66.748-51.84-106.278-65.619v434.936h434.937c-13.78-39.529-35.238-75.896-65.62-106.164l-263.04-263.153Zm-219.219 482.19V56h-903.53v903.53H0v112.94h451.765v790.589H1920V620.706h-564.706ZM887.04 1425.3l-79.85-79.85 272.866-272.978h-515.35V959.529h515.35L807.191 686.664l79.849-79.85L1296.226 1016 887.04 1425.299Z"
-                    }), " "]
-                  })]
-                })
-              })]
-            }, item.Id);
-          })
-        })]
-      })]
+        }, item.Id);
+      })
     })]
   });
-}
-
-/***/ }),
-
-/***/ "./src/js/salesforce/admin/sf-event-import/components/PopoverBox.js":
-/*!**************************************************************************!*\
-  !*** ./src/js/salesforce/admin/sf-event-import/components/PopoverBox.js ***!
-  \**************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ PopoverBox)
-/* harmony export */ });
-/* harmony import */ var _accessible_popover__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @accessible/popover */ "./node_modules/@accessible/popover/dist/module/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-function PopoverBox(_ref) {
-  var _ref$placement = _ref.placement,
-    placement = _ref$placement === void 0 ? "right" : _ref$placement,
-    label = _ref.label,
-    children = _ref.children;
-  var isOpen = (0,_accessible_popover__WEBPACK_IMPORTED_MODULE_1__.useIsOpen)();
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_accessible_popover__WEBPACK_IMPORTED_MODULE_1__.Target, {
-    placement: placement,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-      className: ['popover-box', isOpen ? '__open' : ''].join(' '),
-      children: [label ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
-        className: "__label",
-        children: label
-      }) : '', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-        className: "__entry",
-        children: children
+};
+function ProductImportTable() {
+  var _useSFEventContext = (0,_libs_context__WEBPACK_IMPORTED_MODULE_1__.useSFEventContext)(),
+    ImportProducts = _useSFEventContext.ImportProducts;
+  var tableData = [{
+    key: '93a07b94-37b5-4556-9622-15c389eb46ae',
+    label: function label() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+        className: "pp-input pp-input__checkbox",
+        type: "checkbox",
+        name: "select-products-all",
+        id: "select-products-all"
+      });
+    },
+    field: function field(item) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+        className: "pp-input pp-input__checkbox",
+        type: "checkbox",
+        name: "product_ids_selected",
+        value: item.Id
+      });
+    }
+  }, {
+    key: '4b30bef2-f5a9-482c-9548-f4c025ecb520',
+    label: 'Product Name',
+    field: function field(item) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("strong", {
+          children: item.Name
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), "#ID: ", item.Id, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), Object.keys(item.__events).length, " Event(s)"]
+      });
+    }
+  }, {
+    key: '1d070b76-386d-4c0d-ac8e-eb428d16d4eb',
+    label: 'Family',
+    field: 'Family'
+  }, {
+    key: '58f7de72-b343-48c1-ba73-8c07de075191',
+    label: 'ProductCode',
+    field: 'ProductCode'
+  }, {
+    key: '3ae39b77-bd12-4f42-90fa-1ac78866d9b7',
+    label: 'Description',
+    field: function field(item) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        dangerouslySetInnerHTML: {
+          __html: item.Description
+        }
+      });
+    }
+  }, {
+    key: '39c9f999-5510-41a3-aa42-a0c7dfbb19a2',
+    label: 'Action',
+    field: function field(item) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+        className: "pp-button button-import",
+        onClick: /*#__PURE__*/function () {
+          var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
+            return _regeneratorRuntime().wrap(function _callee$(_context) {
+              while (1) switch (_context.prev = _context.next) {
+                case 0:
+                  e.preventDefault();
+                  (0,_libs_actions__WEBPACK_IMPORTED_MODULE_2__.importProduct)(item);
+                case 2:
+                case "end":
+                  return _context.stop();
+              }
+            }, _callee);
+          }));
+          return function (_x) {
+            return _ref4.apply(this, arguments);
+          };
+        }(),
+        children: ["Import", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("svg", {
+          fill: "#FFFFFF",
+          viewBox: "0 0 1920 1920",
+          xmlns: "http://www.w3.org/2000/svg",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("path", {
+            d: "M1574.513 138.515c-30.381-30.268-66.748-51.84-106.278-65.619v434.936h434.937c-13.78-39.529-35.238-75.896-65.62-106.164l-263.04-263.153Zm-219.219 482.19V56h-903.53v903.53H0v112.94h451.765v790.589H1920V620.706h-564.706ZM887.04 1425.3l-79.85-79.85 272.866-272.978h-515.35V959.529h515.35L807.191 686.664l79.849-79.85L1296.226 1016 887.04 1425.299Z"
+          }), " "]
+        })]
+      });
+    }
+  }];
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "product-import-table-container",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
+      children: "Products Import Listing"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+      children: "Summary of object (Product2, Event, Junction_Workshop_Event__c) used in Salesforce to create the link between Workshop Events."
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("table", {
+      className: "pp-table products-table",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("thead", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tr", {
+          children: tableData.map(function (_ref5) {
+            var label = _ref5.label,
+              key = _ref5.key;
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+              children: typeof label === 'function' ? label() : label
+            }, "__name-item-".concat(key));
+          })
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {
+        children: ImportProducts.map(function (item) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tr", {
+              children: tableData.map(function (_ref6) {
+                var field = _ref6.field,
+                  key = _ref6.key;
+                var rowSpan2 = ['93a07b94-37b5-4556-9622-15c389eb46ae', '39c9f999-5510-41a3-aa42-a0c7dfbb19a2'];
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                  rowSpan: rowSpan2.includes(key) ? 2 : 1,
+                  children: typeof field === 'function' ? field(item) : item[field]
+                }, "__name-item-".concat(key));
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tr", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
+                colSpan: tableData.length - 2,
+                className: "events-in-product",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h4", {
+                  children: ["\u21B3 ", Object.keys(item.__events).length, " Event(s) of ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("u", {
+                    children: item.Name
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(EventTableChild, {
+                  events: Object.values(item.__events),
+                  product: item
+                })]
+              })
+            })]
+          }, item.Id);
+        })
       })]
-    })
+    })]
   });
 }
 
@@ -2024,7 +374,6 @@ function PopoverBox(_ref) {
   \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Tabs)
@@ -2077,7 +426,6 @@ function Tabs(_ref) {
   \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -2109,20 +457,53 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/js/salesforce/admin/sf-event-import/libs/actions.js":
+/*!*****************************************************************!*\
+  !*** ./src/js/salesforce/admin/sf-event-import/libs/actions.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   importProduct: () => (/* binding */ importProduct)
+/* harmony export */ });
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+var importProduct = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(productData) {
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          console.log(productData);
+        case 1:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee);
+  }));
+  return function importProduct(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+/***/ }),
+
 /***/ "./src/js/salesforce/admin/sf-event-import/libs/api.js":
 /*!*************************************************************!*\
   !*** ./src/js/salesforce/admin/sf-event-import/libs/api.js ***!
   \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   __Request: () => (/* binding */ __Request),
 /* harmony export */   eventsImported: () => (/* binding */ eventsImported),
 /* harmony export */   getEvent: () => (/* binding */ getEvent),
 /* harmony export */   getEvents: () => (/* binding */ getEvents),
-/* harmony export */   getJunctions: () => (/* binding */ getJunctions)
+/* harmony export */   getJunctions: () => (/* binding */ getJunctions),
+/* harmony export */   prepareDataImportEvents: () => (/* binding */ prepareDataImportEvents)
 /* harmony export */ });
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, defineProperty = Object.defineProperty || function (obj, key, desc) { obj[key] = desc.value; }, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return defineProperty(generator, "_invoke", { value: makeInvokeMethod(innerFn, self, context) }), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; defineProperty(this, "_invoke", { value: function value(method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; } function maybeInvokeDelegate(delegate, context) { var methodName = context.method, method = delegate.iterator[methodName]; if (undefined === method) return context.delegate = null, "throw" === methodName && delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method) || "return" !== methodName && (context.method = "throw", context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")), ContinueSentinel; var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, defineProperty(Gp, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), defineProperty(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (val) { var object = Object(val), keys = []; for (var key in object) keys.push(key); return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
@@ -2201,6 +582,13 @@ var getEvents = /*#__PURE__*/function () {
     return _regeneratorRuntime().wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
+          _context4.next = 2;
+          return __Request({
+            action: 'pp_ajax_get_events'
+          });
+        case 2:
+          return _context4.abrupt("return", _context4.sent);
+        case 3:
         case "end":
           return _context4.stop();
       }
@@ -2231,6 +619,27 @@ var eventsImported = /*#__PURE__*/function () {
     return _ref5.apply(this, arguments);
   };
 }();
+var prepareDataImportEvents = /*#__PURE__*/function () {
+  var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+    return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+      while (1) switch (_context6.prev = _context6.next) {
+        case 0:
+          _context6.next = 2;
+          return __Request({
+            action: 'pp_ajax_prepare_data_import_events'
+          });
+        case 2:
+          return _context6.abrupt("return", _context6.sent);
+        case 3:
+        case "end":
+          return _context6.stop();
+      }
+    }, _callee6);
+  }));
+  return function prepareDataImportEvents() {
+    return _ref6.apply(this, arguments);
+  };
+}();
 
 /***/ }),
 
@@ -2240,7 +649,6 @@ var eventsImported = /*#__PURE__*/function () {
   \*****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   SFEventContext_Provider: () => (/* binding */ SFEventContext_Provider),
@@ -2278,6 +686,18 @@ var SFEventContext_Provider = function SFEventContext_Provider(_ref) {
     _useState6 = _slicedToArray(_useState5, 2),
     dataEventsImported = _useState6[0],
     setDataEventsImported = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState8 = _slicedToArray(_useState7, 2),
+    Events = _useState8[0],
+    setEvents = _useState8[1];
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    _useState10 = _slicedToArray(_useState9, 2),
+    EventsSize = _useState10[0],
+    setEventsSize = _useState10[1];
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState12 = _slicedToArray(_useState11, 2),
+    ImportProducts = _useState12[0],
+    setImportProducts = _useState12[1];
   var _getJunctions = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _yield$getJunctions, totalSize, records;
@@ -2323,22 +743,69 @@ var SFEventContext_Provider = function SFEventContext_Provider(_ref) {
       return _ref3.apply(this, arguments);
     };
   }();
+  var _getEvents = /*#__PURE__*/function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var _yield$getEvents, totalSize, records;
+      return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            _context3.next = 2;
+            return (0,_api__WEBPACK_IMPORTED_MODULE_1__.getEvents)();
+          case 2:
+            _yield$getEvents = _context3.sent;
+            totalSize = _yield$getEvents.totalSize;
+            records = _yield$getEvents.records;
+            setEvents(records);
+            setEventsSize(totalSize);
+          case 7:
+          case "end":
+            return _context3.stop();
+        }
+      }, _callee3);
+    }));
+    return function _getEvents() {
+      return _ref4.apply(this, arguments);
+    };
+  }();
+  var _prepareDataImportEvents = /*#__PURE__*/function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      var res;
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
+          case 0:
+            _context4.next = 2;
+            return (0,_api__WEBPACK_IMPORTED_MODULE_1__.prepareDataImportEvents)();
+          case 2:
+            res = _context4.sent;
+            setImportProducts(Object.values(res));
+          case 4:
+          case "end":
+            return _context4.stop();
+        }
+      }, _callee4);
+    }));
+    return function _prepareDataImportEvents() {
+      return _ref5.apply(this, arguments);
+    };
+  }();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var dataInit = /*#__PURE__*/function () {
-      var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-          while (1) switch (_context3.prev = _context3.next) {
+      var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+          while (1) switch (_context5.prev = _context5.next) {
             case 0:
-              _getEventsImported();
-              _getJunctions();
-            case 2:
+              // _getEventsImported();
+              // _getJunctions();
+              // _getEvents();
+              _prepareDataImportEvents();
+            case 1:
             case "end":
-              return _context3.stop();
+              return _context5.stop();
           }
-        }, _callee3);
+        }, _callee5);
       }));
       return function dataInit() {
-        return _ref4.apply(this, arguments);
+        return _ref6.apply(this, arguments);
       };
     }();
     dataInit();
@@ -2351,7 +818,13 @@ var SFEventContext_Provider = function SFEventContext_Provider(_ref) {
     setJunctionsSize: setJunctionsSize,
     dataEventsImported: dataEventsImported,
     setDataEventsImported: setDataEventsImported,
-    _getEventsImported: _getEventsImported
+    _getEventsImported: _getEventsImported,
+    Events: Events,
+    setEvents: setEvents,
+    EventsSize: EventsSize,
+    setEventsSize: setEventsSize,
+    ImportProducts: ImportProducts,
+    setImportProducts: setImportProducts
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(SFEventContext.Provider, {
     value: value,
@@ -2365,223 +838,12 @@ var useSFEventContext = function useSFEventContext() {
 
 /***/ }),
 
-/***/ "./node_modules/clsx/dist/clsx.m.js":
-/*!******************************************!*\
-  !*** ./node_modules/clsx/dist/clsx.m.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   clsx: () => (/* binding */ clsx),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-function r(e){var t,f,n="";if("string"==typeof e||"number"==typeof e)n+=e;else if("object"==typeof e)if(Array.isArray(e))for(t=0;t<e.length;t++)e[t]&&(f=r(e[t]))&&(n&&(n+=" "),n+=f);else for(t in e)e[t]&&(n&&(n+=" "),n+=t);return n}function clsx(){for(var e,t,f=0,n="";f<arguments.length;)(e=arguments[f++])&&(t=r(e))&&(n&&(n+=" "),n+=t);return n}/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (clsx);
-
-/***/ }),
-
-/***/ "./node_modules/process/browser.js":
-/*!*****************************************!*\
-  !*** ./node_modules/process/browser.js ***!
-  \*****************************************/
-/***/ ((module) => {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-
 /***/ "./node_modules/react-dom/cjs/react-dom.development.js":
 /*!*************************************************************!*\
   !*** ./node_modules/react-dom/cjs/react-dom.development.js ***!
   \*************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-"use strict";
 /**
  * @license React
  * react-dom.development.js
@@ -32455,7 +30717,6 @@ if (
   \******************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-"use strict";
 
 
 var m = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
@@ -32488,7 +30749,6 @@ if (false) {} else {
   \*****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 
 
 function checkDCE() {
@@ -32526,83 +30786,12 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./node_modules/react-portalize/dist/module/index.js":
-/*!***********************************************************!*\
-  !*** ./node_modules/react-portalize/dist/module/index.js ***!
-  \***********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   PORTALS: () => (/* binding */ PORTALS),
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-
-const __reactCreateElement__ = react__WEBPACK_IMPORTED_MODULE_0__.createElement
-;
-const PORTALS = {}
-
-const getContainer = (container) =>
-  typeof document !== 'undefined' && document.querySelectorAll(container)
-
-function _ref(children, {provider, value}) {
-  return __reactCreateElement__(
-    provider,
-    {
-      value,
-    },
-    children
-  )
-}
-
-const Portalize = ({
-  container = '#portals',
-  server = true,
-  providers,
-  children,
-}) => {
-  const [nodes, setNodes] = react__WEBPACK_IMPORTED_MODULE_0__.useState(getContainer(container))
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(() => {
-    setNodes(getContainer(container))
-  }, [container])
-
-  if (nodes === false) {
-    // this branch only renders on the server
-    if (server) {
-      if (providers !== void 0 && providers.length > 0) {
-        children = providers.reduceRight(_ref, children)
-      }
-
-      if (children) PORTALS[container] = children
-    }
-  } else if (nodes.length > 0) {
-    const portals = []
-
-    for (let i = 0; i < nodes.length; i++)
-      portals.push(/*#__PURE__*/ react_dom__WEBPACK_IMPORTED_MODULE_1__.createPortal(children, nodes[i]))
-
-    return /*#__PURE__*/ __reactCreateElement__(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, portals)
-  }
-
-  return null
-}
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Portalize);
-
-
-/***/ }),
-
 /***/ "./node_modules/react/cjs/react-jsx-runtime.development.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/react/cjs/react-jsx-runtime.development.js ***!
   \*****************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-"use strict";
 /**
  * @license React
  * react-jsx-runtime.development.js
@@ -33927,7 +32116,6 @@ exports.jsxs = jsxs;
   \*****************************************************/
 /***/ ((module, exports, __webpack_require__) => {
 
-"use strict";
 /* module decorator */ module = __webpack_require__.nmd(module);
 /**
  * @license React
@@ -36678,7 +34866,6 @@ if (
   \*************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 
 
 if (false) {} else {
@@ -36694,7 +34881,6 @@ if (false) {} else {
   \*******************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 
 
 if (false) {} else {
@@ -36710,7 +34896,6 @@ if (false) {} else {
   \*************************************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 /**
  * @license React
  * scheduler.development.js
@@ -37355,7 +35540,6 @@ if (
   \*****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 
 
 if (false) {} else {
@@ -37446,9 +35630,8 @@ if (false) {} else {
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-"use strict";
 /*!******************************************!*\
   !*** ./src/js/salesforce/admin/index.js ***!
   \******************************************/

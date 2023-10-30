@@ -44,6 +44,10 @@
   margin: 1.5em 0;
   background: white;
   font-size: 1em;
+  width: 100%;
+}
+.pp-table .pp-table {
+  margin: 0;
 }
 .pp-table th, .pp-table td {
   padding: 0.5em;
@@ -222,6 +226,11 @@ a.pp-button svg {
 }
 .pp-tabs-container .pp-tabs__content .pp-tab__content-item.tab-show {
   display: block;
+}
+
+td.events-in-product {
+  background: #f9f9f9;
+  padding: 1.5em;
 }
 
 .pp-product-variable-custom-field {

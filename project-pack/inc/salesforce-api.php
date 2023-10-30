@@ -137,3 +137,32 @@ function ppsf_get_event($eventID) {
   $response = ppsf_remote_post($url);
   return json_decode( wp_remote_retrieve_body( $response ), true );
 }
+
+function ppsf_get_events() {
+  list(
+    'endpoint' => $endpoint,
+    'version' => $version,
+  ) = ppsf_api_info();
+
+  $sql = "SELECT Id, Subject, Total_Number_of_Seats__c, Remaining_Seats__c, Workshop_Event_Date_Text__c,    Workshop_Times__c, WhoId, WhatId, DurationInMinutes
+          FROM Event 
+          WHERE Workshops_Event__c=true";
+
+  $url = $endpoint . '/services/data/'. $version .'/query/?q=' . urlencode($sql);
+  $response = ppsf_remote_post($url);
+  return json_decode( wp_remote_retrieve_body( $response ), true );
+}
+
+function ppsf_get_all_products() {
+  list(
+    'endpoint' => $endpoint,
+    'version' => $version,
+  ) = ppsf_api_info();
+
+  $sql = "SELECT Id, Name, ProductCode, Description, Family  
+          FROM Product2";
+
+  $url = $endpoint . '/services/data/'. $version .'/query/?q=' . urlencode($sql);
+  $response = ppsf_remote_post($url);
+  return json_decode( wp_remote_retrieve_body( $response ), true );
+}
