@@ -16,16 +16,16 @@ get_header(); ?>
 
 
 <?php
+
 // check if the flexible content field has rows of data
 if( have_rows('page_builder') ):
 
    $counter = 0;
 
     // loop through the rows of data
-   while ( have_rows('page_builder') ) : the_row();
+    while ( have_rows('page_builder') ) : the_row();
 
-   $counter++;
-
+    $counter++;
 
     if( get_row_layout() == 'hero_with_breadcrumb' ):
         $title = get_sub_field('title');

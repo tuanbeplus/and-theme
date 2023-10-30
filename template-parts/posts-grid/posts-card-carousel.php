@@ -9,9 +9,9 @@
 $cards_id = rand(1, 999);
 ?>
 <!-- Cards carousel for Mobile -->
-<ul id="cards-<?php echo $cards_id; ?>" class="cards owl-carousel">
+<div id="cards-<?php echo $cards_id; ?>" class="cards owl-carousel">
 <?php foreach ($posts as $post_id): ?>
-    <li class="post-card item">
+    <div class="post-card item">
         <div>
             <?php 
                 $product = wc_get_product($post_id);
@@ -20,7 +20,7 @@ $cards_id = rand(1, 999);
                     $img_url = AND_IMG_URI .'footer-bg.jpg';
                 }
             ?>
-            <img class="card__thumb" src="<?php echo $img_url; ?>" alt="Post feature image" loading="lazy">
+            <img class="card__thumb" src="<?php echo $img_url; ?>" alt="<?php echo get_the_title($post_id); ?>" loading="lazy">
             <div class="card__body">
                 <?php if ($post_type == 'product'): ?>
                     <?php pp_product_list_item_info_tag($product); ?>
@@ -62,9 +62,9 @@ $cards_id = rand(1, 999);
                 }
             ?>
         </div>
-    </li>
+    </div>
 <?php endforeach; ?>
-</ul>
+</div>
 <!-- /Cards carousel for Mobile -->
 <script>
     jQuery(document).ready(function(){
