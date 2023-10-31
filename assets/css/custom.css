@@ -1,10 +1,10 @@
-/* button:focus,
+button:focus,
 :focus {
-  box-shadow: 0px 0px 0px 2px #444!important;
+  box-shadow: 0px 0px 0px 2px #3788ff!important;
   border-radius: 2px;
   border: 2px solid #fff!important;
-  outline: none;
-} */
+  outline: none!important;
+}
 
 .container{
   max-width: 1392px;
@@ -528,9 +528,6 @@ header.version-2 .hamburger .text {
 
 body a{
   outline: none;
-}
-body a:focus{
-  border: 0;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -1730,6 +1727,10 @@ section.posts-grid {
   letter-spacing: 0.24px;
 }
 
+.post-card .card__title a:focus {
+  border: 1px solid #3788ff!important;
+}
+
 .post-card .card__footer {
   padding: 0 32px 30px;
 }
@@ -1754,8 +1755,6 @@ section.posts-grid {
 
 .post-card .card__btn {
   text-decoration: none;
-  position: relative;
-  z-index: 9;
   display: inline-block;
   padding: 8px 20px;
   border: 2px solid #6e297b;
@@ -1887,6 +1886,9 @@ section.posts-grid {
   .cards .post-card {
     height: 500px;
   }
+  .posts-grid .owl-carousel .owl-dots {
+    height: 20px;
+  }
 }
 
 @media only screen and (max-width: 400px) {
@@ -1910,6 +1912,10 @@ section.icons-list {
   justify-content: center;
   flex-wrap: wrap;
   gap: 63px;
+}
+
+.icons .icon-item {
+  position: relative;
 }
 
 .icons .icon-item ._icon {
@@ -1942,12 +1948,24 @@ section.icons-list {
   font-size: 1.25rem;
   line-height: 27px;
   color: #000;
+  border-radius: 0;
   text-decoration: underline;
   text-underline-position: from-font;
   font-family: "Avenir-black";
 }
-.icons .icon-item ._cta a:hover{
+
+.icons .icon-item ._cta a:hover {
   color: #faa919;
+}
+
+.icons .icon-item ._cta a::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid transparent;
 }
 
 @media only screen and (max-width: 1024px) {

@@ -19,7 +19,7 @@
                     $img_url = AND_IMG_URI .'footer-bg.jpg';
                 }
             ?>
-            <img class="card__thumb" src="<?php echo $img_url; ?>" alt="Post feature image" loading="lazy">
+            <img class="card__thumb" src="<?php echo $img_url; ?>" alt="<?php echo get_the_title($post_id); ?>" loading="lazy">
             <div class="card__body">
                 <?php if ($post_type == 'product'): ?>
                     <?php pp_product_list_item_info_tag($product); ?>
@@ -57,7 +57,7 @@
                     echo do_shortcode('[add_to_cart id="'.$post_id.'"]'); 
                 }
                 else {
-                    echo '<a href="'.get_permalink( $post_id ).'" class="card__btn">Read more</a>';
+                    echo '<span class="card__btn">Read more</span>';
                 }
             ?>
         </div>
