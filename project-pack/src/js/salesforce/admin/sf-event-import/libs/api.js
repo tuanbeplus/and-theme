@@ -40,3 +40,9 @@ export const prepareDataImportEvents = async () => {
     action: 'pp_ajax_prepare_data_import_events',
   })
 }
+
+export const getAllProductsEventsImportedValidate = async () => {
+  return await __Request({
+    action: 'pp_ajax_ppsf_event_validate_products_import_exists',
+  });
+}

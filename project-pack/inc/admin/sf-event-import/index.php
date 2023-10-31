@@ -322,6 +322,8 @@ function pp_ajax_get_all_products() {
 function pp_prepare_data_import_events() {
   $all_events = ppsf_get_events();
   $all_products = ppsf_get_all_products();
+  $all_junctions = ppsf_get_junctions();
+  // wp_send_json($all_junctions);
   // wp_send_json( [$all_events['records'], $all_products['records']] );
   $product_need_import = [];
 
@@ -333,19 +335,19 @@ function pp_prepare_data_import_events() {
     });
 
     if($eIDs && count($eIDs) > 0) {
+
+      array_map(function($eItem) use ($all_junctions) {
+
+        if(count($all_junctions['records'])) {
+          // check event parent or child here.
+        }
+
+        return $eItem;
+      }, $eIDs);
+
       $p['__events'] = $eIDs;
       $product_need_import[$pid] = $p;
     }
-
-    // if($found !== false) {
-
-    //   if(isset($product_need_import[$pid])) { 
-    //     array_push($product_need_import[$pid]['__events'], $all_events['records'][$found]);
-    //   } else {
-    //     $p['__events'] = [$all_events['records'][$found]];
-    //     $product_need_import[$pid] = $p; 
-    //   }
-    // }
   }
 
   return $product_need_import;

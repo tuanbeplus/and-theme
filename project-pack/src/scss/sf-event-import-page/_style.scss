@@ -255,3 +255,65 @@ td.events-in-product {
   background: #f9f9f9;
   padding: 1.5em
 }
+
+.pp-button.__imported {
+  opacity: .7;
+}
+
+a.open-url {
+  vertical-align: middle;
+  display: inline-block;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+table.products-table {
+
+  tr.__imported {
+    background: #eee;
+
+    > td:first-child {
+      border-left: solid 2px #2571b1;
+    }
+  }
+}
+
+@keyframes loadingRotateRounded {
+  from { transform: rotate(0); -webkit-transform: rotate(0) }
+  to { transform: rotate(360deg); -webkit-transform: rotate(360deg) }
+}
+
+.__is-loading {
+  opacity: .5 !important;
+  position: relative;
+  pointer-events: none;
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: calc(50% - (18px / 2));
+    top: calc(50% - (18px / 2));
+    // transform: translate(-50%, -50%);
+    // -webkit-transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    border-radius: 24px;
+    border: solid #eee;
+    border-width: 3px;
+    border-left-color: transparent;
+    animation: loadingRotateRounded 3s infinite linear;
+    -webkit-animation: loadingRotateRounded 3s infinite linear;
+    box-sizing: border-box;
+  }
+}
+
+.pp-button {
+
+  &.__is-loading {
+    color: transparent;
+    
+    svg {
+      opacity: 0;
+    }
+  }
+}
