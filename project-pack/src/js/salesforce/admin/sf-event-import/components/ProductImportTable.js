@@ -2,6 +2,12 @@ import { Fragment } from 'react';
 import { useSFEventContext } from "../libs/context";
 import { importProduct } from "../libs/actions";
 
+const IconImport = () => {
+  return <svg fill="#FFFFFF" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1574.513 138.515c-30.381-30.268-66.748-51.84-106.278-65.619v434.936h434.937c-13.78-39.529-35.238-75.896-65.62-106.164l-263.04-263.153Zm-219.219 482.19V56h-903.53v903.53H0v112.94h451.765v790.589H1920V620.706h-564.706ZM887.04 1425.3l-79.85-79.85 272.866-272.978h-515.35V959.529h515.35L807.191 686.664l79.849-79.85L1296.226 1016 887.04 1425.299Z" />{" "}
+  </svg>
+}
+
 const EventTableChild = ({ events, product }) => {
 
   const tableData = [
@@ -10,7 +16,14 @@ const EventTableChild = ({ events, product }) => {
       label: 'Subject',
       field: (item) => {
         return <>
-          ↳ <strong>{ item.Subject }</strong><br />
+          ↳ <strong>{ item.Subject }</strong> 
+          { 
+            (item.__imported == true 
+            ? <a className="open-url" target="_blank" href={ item.__event_edit_url }>
+                <span className="dashicons dashicons-admin-links"></span>
+              </a> 
+            : '') 
+          }<br />
           #ID: { item.Id }
         </>
       },
@@ -29,20 +42,6 @@ const EventTableChild = ({ events, product }) => {
         return <>{ item.Workshop_Event_Date_Text__c }<br /> { item.Workshop_Times__c }</>
       },
     },
-    // {
-    //   key: '39c9f999-5510-41a3-aa42-a0c7dfbb19a2',
-    //   label: 'Action',
-    //   field: (item) => {
-    //     return <button className="pp-button button-import" onClick={ async (e) => { 
-    //       e.preventDefault(); } 
-    //       }>
-    //       Import 
-    //       <svg fill="#FFFFFF" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-    //         <path d="M1574.513 138.515c-30.381-30.268-66.748-51.84-106.278-65.619v434.936h434.937c-13.78-39.529-35.238-75.896-65.62-106.164l-263.04-263.153Zm-219.219 482.19V56h-903.53v903.53H0v112.94h451.765v790.589H1920V620.706h-564.706ZM887.04 1425.3l-79.85-79.85 272.866-272.978h-515.35V959.529h515.35L807.191 686.664l79.849-79.85L1296.226 1016 887.04 1425.299Z" />{" "}
-    //       </svg>
-    //     </button>
-    //   },
-    // },
   ]
 
   return <table className="pp-table events-table">
@@ -76,7 +75,11 @@ const EventTableChild = ({ events, product }) => {
 }
 
 export default function ProductImportTable() {
-  const { ImportProducts } = useSFEventContext();
+  const { 
+    ImportProducts, 
+    _getAllProductsEventsImportedValidate, 
+    loadingItems, 
+    setLoadingItems } = useSFEventContext();
 
   const tableData = [
     {
@@ -93,7 +96,14 @@ export default function ProductImportTable() {
       label: 'Product Name',
       field: (item) => {
         return <>
-          <strong>{ item.Name }</strong><br/>
+          <strong>{ item.Name }</strong> 
+          { 
+            (item.__imported == true 
+            ? <a className="open-url" target="_blank" href={ item.__product_edit_url }>
+                <span className="dashicons dashicons-admin-links"></span>
+              </a> 
+            : '') 
+          }<br/>
           #ID: { item.Id }<br />
           { Object.keys(item.__events).length } Event(s)
         </>
@@ -120,14 +130,17 @@ export default function ProductImportTable() {
       key: '39c9f999-5510-41a3-aa42-a0c7dfbb19a2',
       label: 'Action',
       field: (item) => {
-        return <button className="pp-button button-import" onClick={ async (e) => { 
+        const isLoading = loadingItems.includes(item.Id);
+        return <button className={ ["pp-button button-import", (item.__imported == true ? '__imported' : ''), isLoading ? '__is-loading' : ''].join(' ') } onClick={ async (e) => { 
           e.preventDefault();
-          importProduct(item) } 
-          }>
-          Import 
-          <svg fill="#FFFFFF" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1574.513 138.515c-30.381-30.268-66.748-51.84-106.278-65.619v434.936h434.937c-13.78-39.529-35.238-75.896-65.62-106.164l-263.04-263.153Zm-219.219 482.19V56h-903.53v903.53H0v112.94h451.765v790.589H1920V620.706h-564.706ZM887.04 1425.3l-79.85-79.85 272.866-272.978h-515.35V959.529h515.35L807.191 686.664l79.849-79.85L1296.226 1016 887.04 1425.299Z" />{" "}
-          </svg>
+          const r = confirm('Are you sure you want to import?');
+          if(!r) return;
+
+          setLoadingItems([item.Id]);
+          await importProduct(item); 
+          await _getAllProductsEventsImportedValidate();
+          setLoadingItems([]); }}>
+          { item.__imported == true ? 'Imported' : 'Import' } <IconImport />
         </button>
       },
     },
@@ -136,6 +149,7 @@ export default function ProductImportTable() {
   return <div className="product-import-table-container">
     <h4>Products Import Listing</h4>
     <p>Summary of object (Product2, Event, Junction_Workshop_Event__c) used in Salesforce to create the link between Workshop Events.</p>
+    { console.log(ImportProducts) }
     <table className="pp-table products-table">
       <thead>
         <tr>
@@ -152,7 +166,7 @@ export default function ProductImportTable() {
         {
           ImportProducts.map((item) => {
             return <Fragment key={ item.Id } >
-              <tr>
+              <tr className={ item.__imported ? '__imported' : '' }>
                 {
                   tableData.map(({ field, key }) => {
                     const rowSpan2 = ['93a07b94-37b5-4556-9622-15c389eb46ae', '39c9f999-5510-41a3-aa42-a0c7dfbb19a2'];
@@ -164,7 +178,7 @@ export default function ProductImportTable() {
               </tr>
               <tr>
                 <td colSpan={ tableData.length - 2 } className="events-in-product">
-                  <h4>↳ { Object.keys(item.__events).length } Event(s) of <u>{ item.Name }</u></h4>
+                  <h4>↳ { Object.keys(item.__events).length } Event(s) in <u>{ item.Name }</u></h4>
                   <EventTableChild events={ Object.values(item.__events) } product={ item } />
                 </td>
               </tr>
