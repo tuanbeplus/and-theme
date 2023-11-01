@@ -65,6 +65,25 @@ function ppsf_event_check_product_child_exists_by_wpeventid($WpEventId, $product
   return ($res && count($res) > 0) ? $res[0]->ID : false; 
 }
 
+function ppsf_event_check_product_child_exists_by_junctionid($productParentId, $junction_id) {
+  $args = [
+    'post_type'      => 'product_variation',
+    'post_status'    => 'any',
+    'posts_per_page' => 1,
+    'post_parent__in'=> [$productParentId],
+    'meta_query'     => [
+      [
+        'key'         => '__junctions_id',
+        'value'       => $junction_id,
+        'compare'     => '='
+      ]
+    ]
+  ];
+
+  $res = get_posts($args);
+  return ($res && count($res) > 0) ? $res[0]->ID : false; 
+}
+
 function ppsf_event_add_product_child($data, $productParentId) {
   $default = [
     // 'DurationInMinutes' => '',
@@ -76,23 +95,53 @@ function ppsf_event_add_product_child($data, $productParentId) {
     // 'WhoId' => '',
     // 'Workshop_Event_Date_Text__c' => '',
     // 'Workshop_Times__c' => '',
+    '__event_type' => '',
+    '__junctions_id' => '',
     'WpEventId' => '',
   ];
   $_args = wp_parse_args($data, $default);
 
   $WpEventId = $_args['WpEventId'];
   $opt_name = $_args['Subject'];
+  $__junctions_id = $_args['__junctions_id'];
+  $__event_type = $_args['__event_type'];
   $Total_Number_of_Seats__c = (int) $_args['Total_Number_of_Seats__c'];
   $Remaining_Seats__c = (int) $_args['Remaining_Seats__c'];
   $stock_quantity = ($Total_Number_of_Seats__c - $Remaining_Seats__c);
 
-  $WpProductChildId = ppsf_event_check_product_child_exists_by_wpeventid($WpEventId, $productParentId);
+  $mapFields = [
+    '__PARENT__' => 'wp_parent_event_id',
+    '__CHILDREN__' => 'wp_child_event_id',
+    '' => 'wp_parent_event_id',
+  ];
+
+  $update_field = $mapFields[$__event_type];
+
+  if(!$update_field) {
+    return [
+      'error' => true,
+      'message' => __('Update field wrong!')
+    ];
+  }
+
+  $WpProductChildId = ppsf_event_check_product_child_exists_by_wpeventid($WpEventId, $productParentId, $update_field);
   
   // Product child exists
   if($WpProductChildId !== false) {
     return $WpProductChildId;
   }
-  
+
+  // Check if Junction_Workshop_Event__c type
+  if(in_array($__event_type, ['__PARENT__', '__CHILDREN__'])) {
+    $WpProductChildId = ppsf_event_check_product_child_exists_by_junctionid($productParentId, $__junctions_id);
+    
+    if($WpProductChildId !== false) {
+      update_post_meta($WpProductChildId, $update_field, $WpEventId);
+      return $WpProductChildId;
+    }
+  }
+  // End check if Junction_Workshop_Event__c type
+
   ppwc_event_add_product_attr_opts($productParentId, $opt_name);
 
   $variation = new WC_Product_Variation();
@@ -109,7 +158,8 @@ function ppsf_event_add_product_child($data, $productParentId) {
 
   // Update meta fields
   $meta_fields = apply_filters( 'PPSF/event_import_meta_fields_filter', [
-    'wp_parent_event_id' => $WpEventId,
+    $update_field => $WpEventId,
+    '__junctions_id' => $__junctions_id,
     // 'wp_child_event_id' => $_args['wp_child_event_id'], 
   ], $_args); 
 
@@ -208,6 +258,8 @@ function ppsf_event_product_import($data) {
 
   if(isset($data['__events']) && count($data['__events']) > 0) {
     foreach($data['__events'] as $eItem) {
+      if($eItem['__ready_import'] != true) continue; 
+
       $WpEventId = ppsf_event_import_sfevent_to_wpevent_cpt($eItem);
       $eItem['WpEventId'] = $WpEventId;
       $WpProductChildId = ppsf_event_add_product_child($eItem, $WooProductParentId);

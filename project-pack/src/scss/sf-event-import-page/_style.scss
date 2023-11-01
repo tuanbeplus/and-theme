@@ -18,7 +18,7 @@
 }
 
 .pp-container {
-  width: 1220px;
+  width: 100%;
   max-width: calc(100% - 40px);
   margin: 5vw auto;
 }
@@ -316,4 +316,29 @@ table.products-table {
       opacity: 0;
     }
   }
+}
+
+.pp-message {
+  border: solid 2px black;
+  display: inline-block;
+  padding: 0.5em;
+  line-height: normal;
+  margin: 0.5em 0;
+  font-size: .9em;
+  font-weight: bold;
+
+  &.__error {
+    border-color: #c65e3d;
+    color: white;
+    background: #c65e3d;
+  }
+}
+
+.junction-tag {
+  color: white;
+  padding: 2px 4px;
+  display: inline-block;
+  border-radius: 2px;
+  font-size: .9em;
+  line-height: normal;
 }
