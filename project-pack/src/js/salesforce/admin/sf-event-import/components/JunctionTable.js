@@ -112,7 +112,7 @@ export default function JunctionTable() {
     <div className="junction-table-container">
       <h4>Junction Listing</h4>
       <p>This object used in Salesforce to create the link between Workshop Events.</p>
-
+      
       <button 
         className={`pp-button import-all ${isCheck.length == 0 ? 'disable' : ''}`} 
         onClick={handleBulkImportEvents}>

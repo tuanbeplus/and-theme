@@ -24,7 +24,13 @@ const EventTableChild = ({ events, product }) => {
               </a> 
             : '') 
           }<br />
-          #ID: { item.Id }
+          #ID: { item.Id } <br />
+          { item.__junctions_id ? <div>Junctions ID: <span className='junction-tag' style={{ background: item.__jcolor }}> { item.__junctions_id }</span><br /></div> : '' }
+          { item.__event_type ? <>Type: { item.__event_type }<br /></> : '' }
+          {
+            item.__error_message ? <div className='pp-message __error'>Error: { item.__error_message }</div> : ''
+          }
+          {/* <pre>{ JSON.stringify(item) }</pre> */}
         </>
       },
     },
@@ -59,7 +65,9 @@ const EventTableChild = ({ events, product }) => {
     <tbody>
       {
         events.map((item) => {
-          return <tr key={ item.Id }>
+          let __style = {};
+          __style = (item?.__jcolor ? { ...__style, borderLeftColor: item.__jcolor, borderStyle: 'solid', borderWidth: '0 0 0 2px' } : __style);
+          return <tr key={ item.Id } style={ __style }>
             {
               tableData.map(({ field, key }) => {
                 return <td key={ `__name-item-${ key }` }>
@@ -149,7 +157,7 @@ export default function ProductImportTable() {
   return <div className="product-import-table-container">
     <h4>Products Import Listing</h4>
     <p>Summary of object (Product2, Event, Junction_Workshop_Event__c) used in Salesforce to create the link between Workshop Events.</p>
-    { console.log(ImportProducts) }
+    {/* <pre>{ JSON.stringify(ImportProducts) }</pre> */}
     <table className="pp-table products-table">
       <thead>
         <tr>
