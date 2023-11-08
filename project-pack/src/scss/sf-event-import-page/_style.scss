@@ -342,3 +342,47 @@ table.products-table {
   font-size: .9em;
   line-height: normal;
 }
+
+.display-tools {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1em;
+
+  &__item {
+    margin-right: 2em;
+    padding: 4px;
+    border: solid 1px #999;
+    border-radius: 3px;
+    line-height: normal;
+    background: white;
+    display: flex;
+    align-items: center;
+
+    input[type="checkbox"] {
+      margin: 0 4px 0 0;
+    }
+  }
+}
+
+.event-relation-list {
+
+  .__item {
+
+    span {
+      display: inline;
+    }
+
+    &:not(:last-child) {
+      &:after {
+        content: ", ";
+      }
+    }
+
+    .__error {
+      background: #c65e3c;
+      color: white;
+      padding: 0.5em;
+      
+    }
+  }
+}

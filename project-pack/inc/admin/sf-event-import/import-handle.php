@@ -370,3 +370,38 @@ add_action( 'init', function() {
   // $WpEventId, $productParentId
   var_dump(ppsf_event_validate_products_import_exists());
 } );
+
+/**
+ * Add Category (Proccess import) 
+ */
+function pp_find_cat_by_name($name, $cat = '') {
+  $cat = get_term_by('name', $name, $cat);
+
+	if($cat) {
+		return $cat->term_id;
+	}
+
+	return 0;
+}
+
+add_action('PPSF/after_add_product_parent_hook', 'ppsf_set_product_category', 20, 3);
+
+function ppsf_set_product_category($product, $product_id, $args) {
+  $catName = $args['Family'];
+  if(empty($catName)) return;
+
+  $catID = pp_find_cat_by_name($catName, 'product_cat');
+  if(!$catID) {
+    $term = wp_insert_term(
+      $catName, // the term 
+      'product_cat' // the taxonomy
+    );
+    $catID = $term['term_id'];
+  }
+
+  wp_set_object_terms($product_id, $catID, 'product_cat');
+  pp_log('Message: Added product '. $product_id .' to category ' . $catName . '('. $catID .')');
+}
+/**
+ * End add Category (Proccess import) 
+ */

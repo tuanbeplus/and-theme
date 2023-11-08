@@ -1,85 +1,12 @@
 import { Fragment } from 'react';
 import { useSFEventContext } from "../libs/context";
 import { importProduct } from "../libs/actions";
+import EventTableChild from "./EventTableChild";
 
 const IconImport = () => {
   return <svg fill="#FFFFFF" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
     <path d="M1574.513 138.515c-30.381-30.268-66.748-51.84-106.278-65.619v434.936h434.937c-13.78-39.529-35.238-75.896-65.62-106.164l-263.04-263.153Zm-219.219 482.19V56h-903.53v903.53H0v112.94h451.765v790.589H1920V620.706h-564.706ZM887.04 1425.3l-79.85-79.85 272.866-272.978h-515.35V959.529h515.35L807.191 686.664l79.849-79.85L1296.226 1016 887.04 1425.299Z" />{" "}
   </svg>
-}
-
-const EventTableChild = ({ events, product }) => {
-
-  const tableData = [
-    {
-      key: '108ba70f-20b3-48ab-9bf9-55fe470cb98b',
-      label: 'Subject',
-      field: (item) => {
-        return <>
-          ↳ <strong>{ item.Subject }</strong> 
-          { 
-            (item.__imported == true 
-            ? <a className="open-url" target="_blank" href={ item.__event_edit_url }>
-                <span className="dashicons dashicons-admin-links"></span>
-              </a> 
-            : '') 
-          }<br />
-          #ID: { item.Id } <br />
-          { item.__junctions_id ? <div>Junctions ID: <span className='junction-tag' style={{ background: item.__jcolor }}> { item.__junctions_id }</span><br /></div> : '' }
-          { item.__event_type ? <>Type: { item.__event_type }<br /></> : '' }
-          {
-            item.__error_message ? <div className='pp-message __error'>Error: { item.__error_message }</div> : ''
-          }
-          {/* <pre>{ JSON.stringify(item) }</pre> */}
-        </>
-      },
-    },
-    {
-      key: '2de8e129-8f1d-4e75-8c4f-92d9e8130b87',
-      label: 'Total Seats / Remaining Seats',
-      field: (item) => {
-        return `${ item.Total_Number_of_Seats__c } / ${ item.Remaining_Seats__c }`
-      },
-    },
-    {
-      key: '5927c47c-67bb-4140-9004-ccac9b6aec3c',
-      label: 'Workshop Date / Time',
-      field: (item) => {
-        return <>{ item.Workshop_Event_Date_Text__c }<br /> { item.Workshop_Times__c }</>
-      },
-    },
-  ]
-
-  return <table className="pp-table events-table">
-    <thead>
-      <tr>
-        {
-          tableData.map(({ label, key }) => {
-            return <th key={ `__name-item-${ key }` }>
-              { (typeof label === 'function') ? label() : label }
-            </th>
-          })
-        }
-      </tr>
-    </thead>
-    <tbody>
-      {
-        events.map((item) => {
-          let __style = {};
-          __style = (item?.__jcolor ? { ...__style, borderLeftColor: item.__jcolor, borderStyle: 'solid', borderWidth: '0 0 0 2px' } : __style);
-          return <tr key={ item.Id } style={ __style }>
-            {
-              tableData.map(({ field, key }) => {
-                return <td key={ `__name-item-${ key }` }>
-                  { (typeof field === 'function') ? field(item) : item[field] }
-                </td>
-              })
-            }
-          </tr>
-        })
-      }
-    </tbody>
-  </table>
 }
 
 export default function ProductImportTable() {
@@ -119,7 +46,7 @@ export default function ProductImportTable() {
     },
     {
       key: '1d070b76-386d-4c0d-ac8e-eb428d16d4eb',
-      label: 'Family',
+      label: 'Family (Category)',
       field: 'Family',
     },
     {

@@ -46,3 +46,10 @@ export const getAllProductsEventsImportedValidate = async () => {
     action: 'pp_ajax_ppsf_event_validate_products_import_exists',
   });
 }
+
+export const get_EventRelationByEventId = async (event_id) => {
+  return await __Request({
+    action: 'pp_ajax_get_EventRelation_by_event_Id',
+    event_id,
+  })
+}
