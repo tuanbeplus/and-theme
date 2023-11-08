@@ -1631,6 +1631,41 @@ button#place_order:hover {
   border-color: #a00 !important;
 }
 
+.step-checkout-bar .step-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.step-checkout-bar .step-list .__line {
+  border-bottom: solid 1px #999;
+}
+.step-checkout-bar .step-list li {
+  width: 100%;
+}
+.step-checkout-bar .step-list .step-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1em 2em;
+  opacity: 0.4;
+}
+.step-checkout-bar .step-list .step-item.__active {
+  opacity: 1;
+  font-weight: bold;
+}
+.step-checkout-bar .step-list .step-item .__icon {
+  display: inline-flex;
+  width: 36px;
+  line-height: 0;
+  margin-right: 8px;
+}
+.step-checkout-bar .step-list .step-item .__icon svg {
+  width: 100%;
+}
+.step-checkout-bar .step-list .step-item .__label {
+  line-height: 1.3em;
+}
+
 .woocommerce-order-received .woocommerce-thankyou-order-received {
   margin-bottom: 1rem;
 }

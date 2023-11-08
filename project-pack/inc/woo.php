@@ -121,3 +121,21 @@ add_action( 'woocommerce_after_order_itemmeta', function($item_id, $item, $produ
 //   $items = $woocommerce->cart->get_cart();
 //   echo '<pre>'; print_r($items); echo '</pre>'; 
 // });
+
+/**
+ * Checkout custom
+ */
+add_action('woocommerce_before_checkout_form', 'ppwc_step_checkout_bar');
+
+function ppwc_step_checkout_bar() {
+  pp_load_template('step-checkout-bar');
+}
+
+add_action('woocommerce_before_checkout_form', 'ppwc_step_add_seats_contact_form');
+
+function ppwc_step_add_seats_contact_form() {
+  pp_load_template('add-seats-contact-form');
+}
+/**
+ * End checkout custom
+ */

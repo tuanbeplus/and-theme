@@ -250,3 +250,48 @@ button#place_order {
 .woocommerce form .form-row.woocommerce-invalid select {
   border-color: #a00 !important;
 }
+
+.step-checkout-bar {
+
+  .step-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .__line {
+      border-bottom: solid 1px #999;
+    }
+
+    li {
+      width: 100%;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1em 2em;
+      opacity: .4;
+
+      &.__active {
+        opacity: 1;
+        font-weight: bold;
+      }
+      
+      .__icon {
+        display: inline-flex;
+        width: 36px;
+        line-height: 0;
+        margin-right: 8px;
+
+        svg {
+          width: 100%;
+        }
+      }
+
+      .__label {
+        line-height: 1.3em;
+      }
+    }
+  }
+}
