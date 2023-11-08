@@ -1195,6 +1195,7 @@ var SFEventContext_Provider = function SFEventContext_Provider(_ref) {
 
         // Valiadate of Junctions
         __events.map(function (eItem) {
+          eItem.__ready_import = true;
           if (eItem.__event_type == '__PARENT__') {
             var found = __events.find(function (e) {
               return eItem.__junctions_id == e.__junctions_id && e.__event_type == '__CHILDREN__';
@@ -1213,7 +1214,6 @@ var SFEventContext_Provider = function SFEventContext_Provider(_ref) {
               eItem.__error_message = 'Could not find event __PARENT__!!! (Not ready to import)';
             }
           }
-          eItem.__ready_import = true;
           return eItem;
         });
         pItem.__events = __events;

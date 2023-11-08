@@ -17,12 +17,13 @@ function ppsf_event_create_product_parent($data) {
     'Id' => '',
     'Name' => '',
     'ProductCode' => '',
+    'Woocommerce_Description__c' => '',
   ];
-  $_args = wp_parse_args($data, $default);
+  $_args = wp_parse_args($data, $default); 
   $product = new WC_Product_Variable();
   // Name and Description
   $product->set_name($_args['Name']);
-  $product->set_name($_args['Description']);
+  $product->set_description($_args['Woocommerce_Description__c']);
 
   // Event attribute
   $attribute = new WC_Product_Attribute();
@@ -225,6 +226,7 @@ function ppsf_event_import_sfevent_to_wpevent_cpt($eventData = []) {
     'post_type' => 'sf-event',
     'post_title' => wp_strip_all_tags($eventData['Subject']),
     'post_status' => 'publish',
+    'post_content' => isset($eventData['Description']) ? $eventData['Description'] : ''
   ]);
 
   $custom_fields = apply_filters('PPSF/EVENT_CUSTOM_FIELDS_FILTER', [
@@ -258,7 +260,9 @@ function ppsf_event_product_import($data) {
 
   if(isset($data['__events']) && count($data['__events']) > 0) {
     foreach($data['__events'] as $eItem) {
-      if($eItem['__ready_import'] != true) continue; 
+      if($eItem['__ready_import'] == 'false') {
+        continue;
+      }
 
       $WpEventId = ppsf_event_import_sfevent_to_wpevent_cpt($eItem);
       $eItem['WpEventId'] = $WpEventId;

@@ -3185,7 +3185,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
  */
 
 ;
-(function () {
+(function (w, $) {
   'use strict';
 
   var FAQsContentOfTableFn = /*#__PURE__*/function () {

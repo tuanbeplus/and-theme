@@ -12,6 +12,7 @@ function pp_register_sfevent_cpt() {
     'public'    => true,
     'label'     => __( 'SF Events', 'pp' ),
     'menu_icon' => 'dashicons-block-default',
+    'supports'  => ['title', 'editor']
   ];
   register_post_type( 'sf-event', $args );
 }

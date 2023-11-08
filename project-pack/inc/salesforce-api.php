@@ -144,7 +144,7 @@ function ppsf_get_events() {
     'version' => $version,
   ) = ppsf_api_info();
 
-  $sql = "SELECT Id, Subject, Total_Number_of_Seats__c, Remaining_Seats__c, Workshop_Event_Date_Text__c,    Workshop_Times__c, WhoId, WhatId, DurationInMinutes
+  $sql = "SELECT Id, Subject, Total_Number_of_Seats__c, Remaining_Seats__c, Workshop_Event_Date_Text__c, Workshop_Times__c, WhoId, WhatId, DurationInMinutes, Description
           FROM Event 
           WHERE Workshops_Event__c=true";
 
@@ -156,10 +156,10 @@ function ppsf_get_events() {
 function ppsf_get_all_products() {
   list(
     'endpoint' => $endpoint,
-    'version' => $version,
+    'version' => $version, 
   ) = ppsf_api_info();
 
-  $sql = "SELECT Id, Name, ProductCode, Description, Family  
+  $sql = "SELECT Id, Name, ProductCode, Description, Family, Woocommerce_Description__c 
           FROM Product2";
 
   $url = $endpoint . '/services/data/'. $version .'/query/?q=' . urlencode($sql);
@@ -175,7 +175,7 @@ function ppsf_get_EventRelation_by_event_Id($eventId) {
 
   $sql = "SELECT Id, RelationId, EventId, AccountId, Status, CreatedDate, IsDeleted 
         FROM EventRelation 
-        WHERE EventId='". $eventId ."' AND IsWhat=false";
+        WHERE EventId='". $eventId ."'"; //  AND IsWhat=false
   
   $url = $endpoint . '/services/data/'. $version .'/query/?q=' . urlencode($sql);
   $response = ppsf_remote_post($url);

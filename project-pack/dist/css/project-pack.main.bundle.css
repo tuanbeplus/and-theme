@@ -1225,6 +1225,9 @@ body.__pp-offcanvas-active .pp-offcanvas__container {
   transition: 0.3s ease;
   -webkit-transition: 0.3s ease;
 }
+.product-variable-options .product-variable-item .schedule-course .time-box.__full {
+  width: 100%;
+}
 @media (max-width: 697px) {
   .product-variable-options .product-variable-item .schedule-course .time-box {
     width: 100%;

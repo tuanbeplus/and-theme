@@ -140,7 +140,9 @@ const SFEventContext_Provider = ({ children }) => {
 
         // Valiadate of Junctions
         __events.map((eItem) => {
-          if(eItem.__event_type == '__PARENT__') {
+          eItem.__ready_import = true;
+
+          if(eItem.__event_type == '__PARENT__') { 
             const found = __events.find(e => {
               return (eItem.__junctions_id == e.__junctions_id && e.__event_type == '__CHILDREN__');
             })
@@ -162,7 +164,6 @@ const SFEventContext_Provider = ({ children }) => {
             }
           }
 
-          eItem.__ready_import = true;
           return eItem;
         })
 

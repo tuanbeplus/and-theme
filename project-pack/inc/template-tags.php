@@ -340,7 +340,7 @@ function pp_product_variable_choose_options_tag($product) {
                 <?php echo implode(' — ', $item['attributes']); ?> <?php echo ! empty($_price_html) ? "<span class=\"pp-amount\">$_price_html</span>" : '' ?>
               </h4>
               <div class="schedule-course">
-                <div class="time-box schedule-course_start">
+                <div class="time-box schedule-course_start <?php echo (empty($eventData['event_child']) ? '__full' : '') ?>">
                   <div class="pp__checkbox-fake-ui">
                     <span class="pp__checkbox-fake-ui-box"></span>
                   </div>
@@ -351,11 +351,13 @@ function pp_product_variable_choose_options_tag($product) {
                     <div class="__time"><?php echo $eventData['event_parent']['workshop_times__c'] ?></div>
                   </div>
                 </div>
+                <?php if(!empty($eventData['event_child'])) : ?>
                 <span class="__splicing">+</span>
                 <div class="time-box schedule-course_end">
                   <div class="__date"><?php echo $eventData['event_child']['workshop_event_date_text__c'] ?></div>
                   <div class="__time"><?php echo $eventData['event_child']['workshop_times__c'] ?></div>
                 </div>
+                <?php endif; ?>
               </div>
             </label>
           </div>

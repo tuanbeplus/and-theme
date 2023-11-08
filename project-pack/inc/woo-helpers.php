@@ -83,10 +83,10 @@ function ppwc_get_event_data_by_product_variation_id($variation_id) {
   $wp_event_parent_id = get_post_meta($variation_id, 'wp_parent_event_id', true);
   $wp_event_child_id = get_post_meta($variation_id, 'wp_child_event_id', true);
 
-  if(!$wp_event_parent_id || !$wp_event_child_id) return;
+  // if(!$wp_event_parent_id && !$wp_event_child_id) return;
 
   return [
-    'event_parent' => pp_get_event_data_by_id((int) $wp_event_parent_id),
-    'event_child' => pp_get_event_data_by_id((int) $wp_event_child_id),
+    'event_parent' => $wp_event_parent_id ? pp_get_event_data_by_id((int) $wp_event_parent_id) : '',
+    'event_child' => $wp_event_child_id ? pp_get_event_data_by_id((int) $wp_event_child_id) : '',
   ];
 }

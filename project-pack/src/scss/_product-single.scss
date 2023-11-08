@@ -173,7 +173,7 @@
       > input[type=checkbox]:checked ~ .schedule-course {
 
         .time-box {
-          background: var(--accent-color);
+          background: var(--accent-color); 
           border-color: var(--accent-color);
           color: white;
         }
@@ -248,6 +248,10 @@
         // @media(max-width: 768px) {
         //   font-size: .8rem;
         // }
+
+        &.__full {
+          width: 100%;
+        }
 
         @media(max-width: 697px) {
           width: 100%;
