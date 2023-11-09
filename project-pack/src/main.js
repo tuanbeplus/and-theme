@@ -12,3 +12,4 @@ import './js/product-variations-form';
 import './js/product';
 import './js/outlook-calendar';
 import './js/product-type-calendly';
+import './js/checkout-add-attendees-form';

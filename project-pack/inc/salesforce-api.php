@@ -181,3 +181,15 @@ function ppsf_get_EventRelation_by_event_Id($eventId) {
   $response = ppsf_remote_post($url);
   return json_decode( wp_remote_retrieve_body( $response ), true );
 }
+
+function ppsf_find_contact_by_email($email) {
+  list(
+    'endpoint' => $endpoint,
+    'version' => $version,
+  ) = ppsf_api_info();
+
+  $sql = "SELECT FIELDS(ALL) FROM Contact WHERE Email='". $email ."'  LIMIT 1";
+  $url = $endpoint . '/services/data/'. $version .'/query/?q=' . urlencode($sql);
+  $response = ppsf_remote_post($url);
+  return json_decode( wp_remote_retrieve_body( $response ), true );
+}
