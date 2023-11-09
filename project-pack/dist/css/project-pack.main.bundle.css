@@ -1225,6 +1225,9 @@ body.__pp-offcanvas-active .pp-offcanvas__container {
   transition: 0.3s ease;
   -webkit-transition: 0.3s ease;
 }
+.product-variable-options .product-variable-item .schedule-course .time-box.__full {
+  width: 100%;
+}
 @media (max-width: 697px) {
   .product-variable-options .product-variable-item .schedule-course .time-box {
     width: 100%;
@@ -1626,6 +1629,110 @@ button#place_order:hover {
 .woocommerce form .form-row.woocommerce-invalid input.input-text,
 .woocommerce form .form-row.woocommerce-invalid select {
   border-color: #a00 !important;
+}
+
+.step-checkout-bar .step-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.step-checkout-bar .step-list .__line {
+  border-bottom: solid 1px #999;
+}
+.step-checkout-bar .step-list li {
+  width: 100%;
+}
+.step-checkout-bar .step-list .step-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1em 2em;
+  opacity: 0.4;
+}
+.step-checkout-bar .step-list .step-item.__active {
+  opacity: 1;
+  font-weight: bold;
+}
+.step-checkout-bar .step-list .step-item .__icon {
+  display: inline-flex;
+  width: 36px;
+  line-height: 0;
+  margin-right: 8px;
+}
+.step-checkout-bar .step-list .step-item .__icon svg {
+  width: 100%;
+}
+.step-checkout-bar .step-list .step-item .__label {
+  line-height: 1.3em;
+}
+
+.add-attendees-container {
+  padding: 2em;
+  background: white;
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+.add-attendees-container .__item {
+  border-bottom: solid 1px #ddd;
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+}
+.add-attendees-container .__item .product-name {
+  margin-bottom: 0.6em;
+  font-size: 1.3em;
+}
+.add-attendees-container .__status-icon {
+  width: 30px;
+  display: inline-block;
+}
+.add-attendees-container input[type=text],
+.add-attendees-container input[type=email] {
+  padding: 0.6em 1em;
+  color: #2a2a2a;
+  border-radius: 1px;
+  border: solid 1px #c5c5c5;
+  width: 100%;
+}
+.add-attendees-container input[type=text]::-moz-placeholder, .add-attendees-container input[type=email]::-moz-placeholder {
+  color: #717171;
+}
+.add-attendees-container input[type=text]::placeholder,
+.add-attendees-container input[type=email]::placeholder {
+  color: #717171;
+}
+.add-attendees-container input[type=text]:-moz-read-only, .add-attendees-container input[type=email]:-moz-read-only {
+  opacity: 0.6;
+  background: #f4f4f4;
+}
+.add-attendees-container input[type=text]:read-only,
+.add-attendees-container input[type=email]:read-only {
+  opacity: 0.6;
+  background: #f4f4f4;
+}
+
+.pp-table {
+  border-collapse: collapse;
+  border: solid #e0e0e0;
+  border-width: 1px 1px 0 1px;
+  max-width: 100%;
+  margin: 1.5em 0;
+  background: white;
+  font-size: 1em;
+  width: 100%;
+}
+.pp-table .pp-table {
+  margin: 0;
+}
+.pp-table th, .pp-table td {
+  padding: 0.5em;
+  border: solid #e0e0e0;
+  border-width: 0 1px 1px 0;
+  box-sizing: border-box;
+  font-size: 0.8em;
+}
+.pp-table thead th {
+  text-align: left;
+  background-color: #f9f9f9;
 }
 
 .woocommerce-order-received .woocommerce-thankyou-order-received {

@@ -12,6 +12,7 @@ function pp_register_sfevent_cpt() {
     'public'    => true,
     'label'     => __( 'SF Events', 'pp' ),
     'menu_icon' => 'dashicons-block-default',
+    'supports'  => ['title', 'editor']
   ];
   register_post_type( 'sf-event', $args );
 }
@@ -357,7 +358,22 @@ add_action('wp_ajax_pp_ajax_prepare_data_import_events', 'pp_ajax_prepare_data_i
 add_action('wp_ajax_nopriv_pp_ajax_prepare_data_import_events', 'pp_ajax_prepare_data_import_events');
 
 function pp_ajax_prepare_data_import_events() {
-  return wp_send_json(pp_prepare_data_import_events());
+  wp_send_json(pp_prepare_data_import_events());
+}
+
+add_action('wp_ajax_pp_ajax_get_EventRelation_by_event_Id', 'pp_ajax_get_EventRelation_by_event_Id');
+add_action('wp_ajax_nopriv_pp_ajax_get_EventRelation_by_event_Id', 'pp_ajax_get_EventRelation_by_event_Id');
+
+function pp_ajax_get_EventRelation_by_event_Id() {
+  $eventId = $_POST['event_id'];
+  $EventRelation = ppsf_get_EventRelation_by_event_Id($eventId);
+  
+  $records = array_map(function($item) {
+    $item['account_info'] = ppsf_get_contact($item['RelationId']);
+    return $item;
+  }, $EventRelation['records']);
+
+  wp_send_json($records); 
 }
 
 # For test

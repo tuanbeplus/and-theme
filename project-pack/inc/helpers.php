@@ -186,6 +186,7 @@ function pp_saleforce_current_user_metadata() {
   $user = wp_get_current_user();
   if(!$user) return;
 
+  $__salesforce_account_json = get_user_meta($user->ID, '__salesforce_account_json', true);
   return [
     'wp_user_id' => $user->ID,
     'sf_user_id' => get_user_meta($user->ID, '__salesforce_user_id', true),
@@ -193,6 +194,8 @@ function pp_saleforce_current_user_metadata() {
     'sf_profile_id' => get_user_meta($user->ID, '__salesforce_profile_id', true),
     'sf_account_id' => get_user_meta($user->ID, '__salesforce_account_id', true),
     'email' => $user->user_email,
+    'account_id' => get_user_meta($user->ID, '__salesforce_account_id', true),
+    'salesforce_account' => $__salesforce_account_json ? json_decode($__salesforce_account_json, true) : '',
   ];
 }
 

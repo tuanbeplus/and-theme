@@ -2,7 +2,7 @@
  * FAQs Content of table 
  */
 
-;(() => {
+;((w, $) => {
   'use strict';
 
   const FAQsContentOfTableFn = class {

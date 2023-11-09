@@ -156,3 +156,23 @@ function pp_ajax_product_filter_v2() {
 
 add_action( 'wp_ajax_pp_ajax_product_filter_v2', 'pp_ajax_product_filter_v2' );
 add_action( 'wp_ajax_nopriv_pp_ajax_product_filter_v2', 'pp_ajax_product_filter_v2' );
+
+function pp_ajax_find_contact_sf_by_email() {
+  $email = $_POST['email'];
+  $res = ppsf_find_contact_by_email($email);
+  if(count($res['records']) > 0) {
+    $firstContact = $res['records'][0];
+    $AccountId = $firstContact['AccountId'];
+    $firstContact['__Account_Data'] = !empty($AccountId) ? ppsf_get_account($AccountId) : '';
+    wp_send_json( [
+      'contact' => $firstContact,
+    ] );
+  } else {
+    wp_send_json( [
+      'contact' => ''
+    ] );
+  }
+}
+
+add_action('wp_ajax_pp_ajax_find_contact_sf_by_email', 'pp_ajax_find_contact_sf_by_email');
+add_action('wp_ajax_nopriv_pp_ajax_find_contact_sf_by_email', 'pp_ajax_find_contact_sf_by_email');
