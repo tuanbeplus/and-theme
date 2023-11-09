@@ -16,9 +16,9 @@ function ppsf_token() {
   return get_field('salesforce_api_access_token', 'option');
 }
 
-function ppsf_remote_post($url, $args = []) {
+function ppsf_remote_post($url, $args = [], $method = 'GET') {
   $_default = [
-    'method' => 'GET',
+    'method' => $method,
     'headers' => [
       'Authorization' => 'Bearer ' . ppsf_token(),
     ]];
