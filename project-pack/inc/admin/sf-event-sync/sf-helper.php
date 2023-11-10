@@ -10,6 +10,17 @@ function sf_log_data( $data ) {
   file_put_contents($file, $current);
 }
 
+/**
+ * Function to get Salesforce API Info
+ */
+function and_get_sf_api_info() {
+  return [
+    'endpoint' => get_field('salesforce_endpoint_url', 'option'),
+    'version' => get_field('salesforce_api_version', 'option'),
+    'access_token' => get_field('salesforce_api_access_token', 'option')
+  ];
+}
+
 /** 
  * Function to push Event data from WP to Salesforce
  */
@@ -18,22 +29,23 @@ function and_push_event_data_to_salesforce($post_id, $post, $update){
 
   if( $post->post_type == 'sf-event' && $post->post_status == "publish" ){
       $sf_event_id = get_field('sf_event_id', $post_id );
+
       if ( ! $sf_event_id ) return;
 
+      // Get remaining seats to update
       $remaining_seats__c = get_field('remaining_seats__c', $post_id );
-      $sf_endpoint_url = get_field('salesforce_endpoint_url', 'options');
-      $sf_api_version = get_field('salesforce_api_version', 'options');
-      $sf_api_access_token = get_field('salesforce_api_access_token', 'options');
+
+      // Get API info
+      list(
+        'endpoint' => $sf_endpoint_url,
+        'version' => $sf_api_version,
+        'access_token' => $sf_api_access_token
+      ) = and_get_sf_api_info();
       
       $curl = curl_init();
       curl_setopt_array($curl, array(
         CURLOPT_URL => $sf_endpoint_url.'/services/data/'.$sf_api_version.'/sobjects/Event/'.$sf_event_id,
         CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_ENCODING => '',
-        CURLOPT_MAXREDIRS => 10,
-        CURLOPT_TIMEOUT => 0,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'PATCH',
         CURLOPT_POSTFIELDS =>'{
           "remaining_seats__c": "'.$remaining_seats__c.'"
@@ -72,3 +84,51 @@ function and_pull_event_data_from_salesforce($event_fields){
   }
   ob_get_clean();
 }
+
+/**
+ * Function to create an Event Relation on Salesforce
+ */
+function and_create_an_event_relation_on_salesforce($event_id, $relation_id) {
+
+  if( $event_id && $relation_id ){
+    // Get API info
+    list(
+      'endpoint' => $sf_endpoint_url,
+      'version' => $sf_api_version,
+      'access_token' => $sf_api_access_token
+    ) = and_get_sf_api_info();
+    
+    $curl = curl_init();
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => $sf_endpoint_url.'/services/data/'.$sf_api_version.'/sobjects/EventRelation',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS =>'{
+        "EventId": "'.$event_id.'",
+        "RelationId": "'.$relation_id.'",
+        "IsInvitee": true
+      }',
+      CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json',
+        'Authorization: Bearer '.$sf_api_access_token,
+      ),
+    ));
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+    
+    $data = json_decode($response, true);
+    if ( $data['success'] ) {
+      return array(
+        'success' => 'true',
+        'relation_id' => $data['id']
+      );
+    } else {
+      return array(
+        'success' => 'false',
+        'message' => $data
+      ); 
+    }
+  }
+}
+
