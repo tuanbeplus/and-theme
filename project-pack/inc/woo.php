@@ -93,6 +93,23 @@ function pp_and_woo_auto_complete_order( $order_id ) {
   }
 
   $order = wc_get_order( $order_id );
+  foreach ($order->get_items() as $item_id => $item_obj) {
+    $__SF_CONTACT_FULL = wc_get_order_item_meta( $item_id, '__SF_CONTACT_FULL', true );
+    $course_information = wc_get_order_item_meta( $item_id, 'course_information', true );
+    pp_log(wp_json_encode($__SF_CONTACT_FULL));
+    pp_log(wp_json_encode($course_information));
+
+    if(!$__SF_CONTACT_FULL || !isset($course_information['event_parent']['sf_event_id'])) continue;
+
+    $eventID = $course_information['event_parent']['sf_event_id'];
+    foreach($__SF_CONTACT_FULL as $cItem) {
+      $res = and_create_an_event_relation_on_salesforce($eventID, $cItem['contact_id']);
+      pp_log(wp_json_encode($res)); 
+    }
+    // $eventID = $course_information['event_parent']['sf_event_id'];
+    // pp_log(wp_json_encode($__SF_CONTACT_FULL));
+    // pp_log('Event ID: ' . $eventID);
+  }
 
   if( $order->has_status( 'processing' ) && $order->is_paid() ) {
     $order->update_status( 'completed' );
@@ -102,6 +119,7 @@ function pp_and_woo_auto_complete_order( $order_id ) {
 add_action( 'woocommerce_after_order_itemmeta', function($item_id, $item, $product) {
   # echo '<pre>'; print_r($item['course_information']); echo '</pre>'; 
   if(!isset($item['course_information'])) return;
+  // var_dump($item['__SF_CONTACT_FULL']);
   ?>
   <table cellspacing="0" class="display_meta">
     <tr>
@@ -139,3 +157,4 @@ function ppwc_step_add_seats_contact_form() {
 /**
  * End checkout custom
  */
+

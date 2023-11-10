@@ -233,9 +233,10 @@ function pp_ajax_save_attendees_in_cart() {
     }
 
     $woocommerce->cart->cart_contents[$cart_item_key]['__SF_CONTACT_FULL'] = $__SF_CONTACT_FULL;
+    // wc_update_order_item_meta($cart_item_key, '__SF_CONTACT_FULL', $__SF_CONTACT_FULL);
   }
   $woocommerce->cart->set_session();
-  
+
   wp_send_json([
     'success' => true,
   ]);

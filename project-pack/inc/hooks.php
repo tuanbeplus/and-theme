@@ -45,4 +45,14 @@ add_action( 'wp_head', function() {
   endif;
 } );
 
+add_action('woocommerce_add_order_item_meta','pp_add_sf_contact_data_to_order_item_meta', 20, 3 );
 
+function pp_add_sf_contact_data_to_order_item_meta($item_id, $item_values, $item_key) {
+  $custom_meta_field = '__SF_CONTACT_FULL';
+
+  if( isset($item_values[$custom_meta_field]) )
+    wc_update_order_item_meta( 
+      $item_id, 
+      $custom_meta_field,  
+      $item_values[$custom_meta_field] ); 
+}
