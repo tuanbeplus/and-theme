@@ -3,27 +3,14 @@
 $user_id = $_COOKIE['userId'];
 $arr_terms = array('self-assessed','index');
 $organisation_id = get_user_meta( get_current_user_id(), '__salesforce_account_id', true);
-$assessments_accessible_all_users = get_assessments_accessible_all_users($arr_terms);
-$sf_product_id_opp = getProductIdByOpportunity();
-$index_product_id = isset($sf_product_id_opp['index_product_id']) ? $sf_product_id_opp['index_product_id'] : null;
-$index_assessments_list = get_assessments_related_sf_products($index_product_id, 'index') ?? null;
-$accessible_list = array();
-$index_list = array();
+$index_accessible_list = get_assessments_accessible_members($user_id, $organisation_id, $arr_terms);
+// $sf_product_id_opp = getProductIdByOpportunity();
+// $index_product_id = isset($sf_product_id_opp['index_product_id']) ? $sf_product_id_opp['index_product_id'] : null;
+// $index_assessments_list = get_assessments_related_sf_products($index_product_id, 'index') ?? null;
+// $accessible_list = array();
+// $index_list = array();
 
-foreach ($index_assessments_list as $index_id) {
-    $submission_completed = get_submissions_completed($organisation_id, $index_id);
-    if (empty($submission_completed)){
-        $index_list[] = $index_id;
-    }
-}
-foreach ($assessments_accessible_all_users as $assessment_id) {
-    $submission_completed = get_submissions_completed($organisation_id, $assessment_id);
-    if (empty($submission_completed)){
-        $accessible_list[] = $assessment_id;
-    }
-}
-
-if ($accessible_list || $index_list) {
+if ($index_accessible_list) {
     if( get_row_layout() == 'dashboard_index' ) {
         $index_heading = get_sub_field('index_heading');
         $index_helper_text = get_sub_field('helper_text');
@@ -47,15 +34,7 @@ if ($accessible_list || $index_list) {
                             <p><?php echo $index_helper_text; ?></p>
                             <div class="index-purchase">
                                 <ul class="assessments-list">
-                                    <?php foreach ($accessible_list as $assessment_id): ?>
-                                        <li>
-                                            <a href="<?php echo get_the_permalink($assessment_id); ?>" target="_blank">
-                                                <?php echo get_the_title($assessment_id); ?>
-                                            </a>
-                                        </li>
-                                    <?php endforeach; ?>
-
-                                    <?php foreach ($index_list as $index_id): ?>
+                                    <?php foreach ($index_accessible_list as $index_id): ?>
                                         <li>
                                             <a href="<?php echo get_the_permalink($index_id); ?>" target="_blank">
                                                 <?php echo get_the_title($index_id); ?>

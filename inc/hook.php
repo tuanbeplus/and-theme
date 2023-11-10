@@ -327,10 +327,25 @@ function get_old_attachments_exist()
     }
     // return $attachments;
 }
+
+// function getSalesforceObject()
+// {
+// 	$sql = "SELECT Id, Name
+// 			FROM User LIMIT 10";
+
+// 	$response = sf_query_object_metadata($sql);
+
+// 	if (isset($response->records)) {
+// 		return $response;
+// 	}
+// 	else {
+// 		return null;
+// 	}
+// }
  
 // if (($_GET['test'] == 'test')) {
 //     echo "<pre>";
-//     print_r();
+//     print_r(getSalesforceObject());
 //     echo "</pre>";
 // }
 

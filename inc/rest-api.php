@@ -486,7 +486,7 @@ function getOpportunityContact($contact_id='')
 	return $response;
 }
 
-function getAccountMember()
+function getAccountMember($account_id = null)
 {
   	$account_id = getUser($_COOKIE['userId'])->records[0]->AccountId;
 
