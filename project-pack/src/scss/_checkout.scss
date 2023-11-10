@@ -367,3 +367,202 @@ button#place_order {
     }
   }
 }
+
+.add-attendees-table {
+
+  td, th {
+    position: relative;
+
+    &.show-error-message {
+      background: #FF5722;
+
+      .error-message {
+        visibility: visible;
+        opacity: 1;   
+      }
+    }
+  }
+
+  tr.__loading {
+    pointer-events: none;
+
+    td > * {
+      opacity: .4;
+    }
+
+    td:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: url(../../images/loading.svg) no-repeat center center;
+      background-size: 30px;
+      z-index: 3;
+    }
+  }
+
+  tr.__invalid__ {
+    border-left: solid 2px #f55724;
+    background: #f5572412;
+  }
+
+  .error-message {
+    position: absolute;
+    width: 100%;
+    background: #FF5722;
+    color: white;
+    padding: 0.5em;
+    left: 0;
+    top: 100%;
+    z-index: 9;
+    visibility: hidden;
+    opacity: 0;
+    font-weight: bold;
+    transition: .3s ease;
+    -webkit-transition: .3s ease;
+  }
+}
+
+.footer-form {
+  display: flex;
+
+  .buttons {
+    margin-left: auto;
+    display: flex;
+
+    > * {
+      margin-left: 1em;
+      margin-bottom: .5em;
+    }
+  }
+
+  .btn-next-step {
+    // background: black;
+  }
+}
+
+.pp-button {
+  background: #6e297b;
+  border: none;
+  border-radius: 1px;
+  color: white;
+  padding: 0.7em 1em;
+  transition: .3s ease;
+  -webkit-transition: .3s ease;
+
+  &:hover {
+    opacity: .6;
+  }
+}
+
+.btn-not-active{
+  pointer-events: none;
+  opacity: .6;
+}
+
+.pp-popup-add-new-contact {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(1,1,1,.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  visibility: hidden;
+  opacity: 0;
+  transition: .3s ease;
+  -webkit-transition: .3s ease;
+
+  &__inner {
+    width: 400px;
+    padding: 2em;
+    border-radius: 3px;
+    background: white;
+    box-shadow: 0 0 10px 0 rgba(1,1,1,.1);
+
+    .btn-close {
+      background: black;
+    }
+  }
+}
+
+body.__show-pp-popup-add-new-contact {
+
+  .pp-popup-add-new-contact {
+    visibility: visible;
+    opacity: 1;
+  }
+} 
+
+.add-new-contact-form {
+
+  h4 {
+    font-size: 1.2em;
+    margin-bottom: 1em;
+  }
+
+  label {
+    width: 100%;
+    display: block;
+    margin-bottom: .5em;
+  }
+
+  input[type=text], input[type=email] {
+    padding: 1em;
+  }
+
+  .buttons {
+    margin-top: 1.5em;
+    display: flex;
+
+    > * {
+      margin-left: .5em;
+    }
+
+    > *:first-child {
+      margin-left: auto;
+    }
+  }
+}
+
+.pp-notification {
+  padding: 1em;
+  background: #6e297b1c;
+  border-left: solid 2px #6e297b;
+  font-size: .9em;
+  line-height: normal;
+  margin-bottom: 1em;
+}
+
+.pp-form-loading {
+  pointer-events: none;
+  
+  > * {
+    opacity: .5;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../../images/loading.svg) no-repeat center center;
+    background-size: 30px;
+    z-index: 3;
+  }
+
+  button[type=submit] {
+    opacity: .6;
+  }
+}
+
+form.checkout.woocommerce-checkout {
+  display: none;
+}

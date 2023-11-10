@@ -176,3 +176,70 @@ function pp_ajax_find_contact_sf_by_email() {
 
 add_action('wp_ajax_pp_ajax_find_contact_sf_by_email', 'pp_ajax_find_contact_sf_by_email');
 add_action('wp_ajax_nopriv_pp_ajax_find_contact_sf_by_email', 'pp_ajax_find_contact_sf_by_email');
+
+function pp_ajax_ppsf_add_new_contact() {
+  $sf_user_metadata = pp_saleforce_current_user_metadata();
+  $account_id_default = '0019q0000045pqRAAQ'; // Ausgrid
+  $account_id = isset($sf_user_metadata['account_id']) ? $sf_user_metadata['account_id'] : $account_id_default;
+
+  $fields = $_POST['fields'];
+  $fields['AccountId'] = $account_id;
+  $newContact = ppsf_add_new_contact($fields);
+
+  if($newContact && $newContact['success'] == true) {
+    $c = ppsf_get_contact($newContact['id']);
+    $c['__Account_Data'] = !empty($account_id) ? ppsf_get_account($account_id) : '';
+    wp_send_json([
+      'success' => true,
+      'responses' => $newContact,
+      'contact' => $c
+    ]);
+  } else {
+    wp_send_json([
+      'success' => false,
+      'responses' => $newContact,
+      'contact' => ''
+    ]);
+  }
+}
+
+add_action('wp_ajax_pp_ajax_ppsf_add_new_contact', 'pp_ajax_ppsf_add_new_contact');
+add_action('wp_ajax_pp_ajax_ppsf_add_new_contact', 'pp_ajax_ppsf_add_new_contact');
+
+function pp_ajax_save_attendees_in_cart() {
+  global $woocommerce;
+  $cart = $woocommerce->cart->cart_contents;
+
+  foreach ( $cart as $cart_item_key => $cart_item ) {
+    if(!isset($_POST['contact_id'][$cart_item_key])) continue;
+
+    $c_IDs = $_POST['contact_id'][$cart_item_key];
+    $c_emails = $_POST['email'][$cart_item_key];
+    $c_fnames = $_POST['firstname'][$cart_item_key];
+    $c_lnames = $_POST['lastname'][$cart_item_key];
+    $c_organisations = $_POST['organisation'][$cart_item_key];
+
+    $woocommerce->cart->cart_contents[$cart_item_key]['__SF_CONTACT_IDS'] = $c_IDs;
+    $__SF_CONTACT_FULL = [];
+
+    foreach($c_IDs as $index => $id) {
+      array_push($__SF_CONTACT_FULL, [
+        'contact_id' => $id,
+        'email' => $c_emails[$index],
+        'firstname' => $c_fnames[$index],
+        'lastname' => $c_lnames[$index],
+        'account_id' => $c_organisations[$index]
+      ]);
+    }
+
+    $woocommerce->cart->cart_contents[$cart_item_key]['__SF_CONTACT_FULL'] = $__SF_CONTACT_FULL;
+  }
+  $woocommerce->cart->set_session();
+  
+  wp_send_json([
+    'success' => true,
+  ]);
+}
+
+add_action('wp_ajax_pp_ajax_save_attendees_in_cart', 'pp_ajax_save_attendees_in_cart');
+add_action('wp_ajax_nopriv_pp_ajax_save_attendees_in_cart', 'pp_ajax_save_attendees_in_cart');

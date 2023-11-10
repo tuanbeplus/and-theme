@@ -16,9 +16,9 @@ function ppsf_token() {
   return get_field('salesforce_api_access_token', 'option');
 }
 
-function ppsf_remote_post($url, $args = []) {
+function ppsf_remote_post($url, $args = [], $method = 'GET') {
   $_default = [
-    'method' => 'GET',
+    'method' => $method,
     'headers' => [
       'Authorization' => 'Bearer ' . ppsf_token(),
     ]];
@@ -191,5 +191,22 @@ function ppsf_find_contact_by_email($email) {
   $sql = "SELECT FIELDS(ALL) FROM Contact WHERE Email='". $email ."'  LIMIT 1";
   $url = $endpoint . '/services/data/'. $version .'/query/?q=' . urlencode($sql);
   $response = ppsf_remote_post($url);
+  return json_decode( wp_remote_retrieve_body( $response ), true );
+}
+
+function ppsf_add_new_contact($fields) {
+  list(
+    'endpoint' => $endpoint,
+    'version' => $version,
+  ) = ppsf_api_info();
+
+  $url = $endpoint . '/services/data/'. $version .'/sobjects/Contact';
+  $response = ppsf_remote_post($url, [
+    'body' => wp_json_encode($fields),
+    'headers'     => [
+      'Content-Type' => 'application/json;charset=utf-8',
+      'Authorization' => 'Bearer ' . ppsf_token(),
+    ],
+  ], 'POST'); 
   return json_decode( wp_remote_retrieve_body( $response ), true );
 }
