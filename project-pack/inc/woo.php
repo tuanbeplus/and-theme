@@ -96,8 +96,8 @@ function pp_and_woo_auto_complete_order( $order_id ) {
   foreach ($order->get_items() as $item_id => $item_obj) {
     $__SF_CONTACT_FULL = wc_get_order_item_meta( $item_id, '__SF_CONTACT_FULL', true );
     $course_information = wc_get_order_item_meta( $item_id, 'course_information', true );
-    pp_log(wp_json_encode($__SF_CONTACT_FULL));
-    pp_log(wp_json_encode($course_information));
+    // pp_log(wp_json_encode($__SF_CONTACT_FULL));
+    // pp_log(wp_json_encode($course_information));
 
     if(!$__SF_CONTACT_FULL || !isset($course_information['event_parent']['sf_event_id'])) continue;
 
