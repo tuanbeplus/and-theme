@@ -157,19 +157,31 @@ function pp_ajax_product_filter_v2() {
 add_action( 'wp_ajax_pp_ajax_product_filter_v2', 'pp_ajax_product_filter_v2' );
 add_action( 'wp_ajax_nopriv_pp_ajax_product_filter_v2', 'pp_ajax_product_filter_v2' );
 
+function pp_check_contact_inner_EventRelation($eventID = '', $contactID = '') {
+  $res = ppsf_get_EventRelation_by_event_Id($eventID);
+  if(!$res || count($res['records']) == 0) return false;
+  $records = $res['records'];
+  $found = array_search($contactID, array_column($records, 'RelationId'));
+  return (($found === false) ? false : true);
+}
+
 function pp_ajax_find_contact_sf_by_email() {
   $email = $_POST['email'];
+  $event_id = $_POST['event_id']; 
   $res = ppsf_find_contact_by_email($email);
+  
   if(count($res['records']) > 0) {
     $firstContact = $res['records'][0];
     $AccountId = $firstContact['AccountId'];
     $firstContact['__Account_Data'] = !empty($AccountId) ? ppsf_get_account($AccountId) : '';
     wp_send_json( [
       'contact' => $firstContact,
+      'joined' => pp_check_contact_inner_EventRelation($event_id, $firstContact['Id']),
     ] );
   } else {
     wp_send_json( [
-      'contact' => ''
+      'contact' => '',
+      'joined' => false,
     ] );
   }
 }
@@ -184,6 +196,7 @@ function pp_ajax_ppsf_add_new_contact() {
 
   $fields = $_POST['fields'];
   $fields['AccountId'] = $account_id;
+  $fields['RecordTypeId'] = '01228000000AX1yAAG';
   $newContact = ppsf_add_new_contact($fields);
 
   if($newContact && $newContact['success'] == true) {

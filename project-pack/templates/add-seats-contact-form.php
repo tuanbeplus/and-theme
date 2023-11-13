@@ -16,6 +16,7 @@ $account_name = isset($sf_user_metadata['salesforce_account']['Name']) ? $sf_use
     // echo '<pre>'; print_r($cart_item); echo '</pre>';
     $__SF_CONTACT_FULL = isset($cart_item['__SF_CONTACT_FULL']) ? $cart_item['__SF_CONTACT_FULL'] : [];
     $course_information = $cart_item['course_information'];
+    // echo '<pre>'; print_r($course_information); echo '</pre>';
     $product_id = $cart_item['product_id'];
     $variation_id = $cart_item['variation_id'];
     $quantity = $cart_item['quantity'];
@@ -41,7 +42,7 @@ $account_name = isset($sf_user_metadata['salesforce_account']['Name']) ? $sf_use
           <tr class="__slot-item">
             <td>#<?php echo $i + 1; ?></td>
             <td class="__td-email">
-              <input name="email[<?php echo $cart_item_key ?>][]" type="email" placeholder="<?php _e('Ex: sara@gmail.com', 'pp') ?>" required value="<?php echo isset($slot_item_data['email']) ? $slot_item_data['email'] : '' ?>" />
+              <input data-event-parent-id="<?php echo $course_information['event_parent']['sf_event_id'] ?>" name="email[<?php echo $cart_item_key ?>][]" type="email" placeholder="<?php _e('Ex: sara@gmail.com', 'pp') ?>" required value="<?php echo isset($slot_item_data['email']) ? $slot_item_data['email'] : '' ?>" />
               <input name="contact_id[<?php echo $cart_item_key ?>][]" type="hidden" value="<?php echo isset($slot_item_data['contact_id']) ? $slot_item_data['contact_id'] : '' ?>" />
               <div class="error-message"></div>
             </td>

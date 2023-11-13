@@ -15,13 +15,14 @@
     return re.test(email);
   }
 
-  const findEmailSalesforceContacts = async (email) => {
+  const findEmailSalesforceContacts = async (email, event_id) => {
     return await $.ajax({
       type: 'POST',
       url: ajax_url,
       data: {
         action: 'pp_ajax_find_contact_sf_by_email',
-        email
+        email,
+        event_id,
       },
       error: (err) => { console.log(err) }
     })
@@ -74,6 +75,7 @@
   const onEmailUpdate = () => {
     $('body').on('change', `${ FORM_ID } input[name^="email"]`, async function(e) {
       const email = e.target.value;
+      const sfEventID = $(this).data('event-parent-id');
       const isEmail = validateEmail(email);
       const $table = $(this).closest('table');
       const $tr = $(this).closest('tr');
@@ -99,8 +101,15 @@
       errorMessageUI($td, '', false);
 
       $tr.addClass('__loading')
-      const { contact } = await findEmailSalesforceContacts(email);
-      $tr.removeClass('__loading')
+      const { contact, joined } = await findEmailSalesforceContacts(email, sfEventID);
+      $tr.removeClass('__loading');
+
+      if(joined == true) {
+        errorMessageUI($td, '⚠️ Email has registered for this event!', true);
+        resetSlotItem($tr);
+        setStatus($tr, false);
+        return;
+      }
       
       if(contact) {
         updateSlotItem($tr, contact);

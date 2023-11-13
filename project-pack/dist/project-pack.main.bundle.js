@@ -3196,7 +3196,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return re.test(email);
   }
   var findEmailSalesforceContacts = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(email) {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(email, event_id) {
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
@@ -3206,7 +3206,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               url: ajax_url,
               data: {
                 action: 'pp_ajax_find_contact_sf_by_email',
-                email: email
+                email: email,
+                event_id: event_id
               },
               error: function error(err) {
                 console.log(err);
@@ -3220,7 +3221,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }, _callee);
     }));
-    return function findEmailSalesforceContacts(_x) {
+    return function findEmailSalesforceContacts(_x, _x2) {
       return _ref.apply(this, arguments);
     };
   }();
@@ -3269,27 +3270,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   var onEmailUpdate = function onEmailUpdate() {
     $('body').on('change', "".concat(FORM_ID, " input[name^=\"email\"]"), /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
-        var email, isEmail, $table, $tr, $td, dup, _yield$findEmailSales, contact;
+        var email, sfEventID, isEmail, $table, $tr, $td, dup, _yield$findEmailSales, contact, joined;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
               email = e.target.value;
+              sfEventID = $(this).data('event-parent-id');
               isEmail = validateEmail(email);
               $table = $(this).closest('table');
               $tr = $(this).closest('tr');
               $td = $(this).closest('td');
               $tr.removeClass('__invalid__');
               if (!(isEmail != true)) {
-                _context2.next = 10;
+                _context2.next = 11;
                 break;
               }
               resetSlotItem($tr);
               setStatus($tr, false);
               return _context2.abrupt("return");
-            case 10:
+            case 11:
               dup = checkDuplicateEmail(email, $table);
               if (!(dup == true)) {
-                _context2.next = 16;
+                _context2.next = 17;
                 break;
               }
               // Email attendees duplicate!
@@ -3297,15 +3299,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               resetSlotItem($tr);
               setStatus($tr, false);
               return _context2.abrupt("return");
-            case 16:
+            case 17:
               errorMessageUI($td, '', false);
               $tr.addClass('__loading');
-              _context2.next = 20;
-              return findEmailSalesforceContacts(email);
-            case 20:
+              _context2.next = 21;
+              return findEmailSalesforceContacts(email, sfEventID);
+            case 21:
               _yield$findEmailSales = _context2.sent;
               contact = _yield$findEmailSales.contact;
+              joined = _yield$findEmailSales.joined;
               $tr.removeClass('__loading');
+              if (!(joined == true)) {
+                _context2.next = 30;
+                break;
+              }
+              errorMessageUI($td, '⚠️ Email has registered for this event!', true);
+              resetSlotItem($tr);
+              setStatus($tr, false);
+              return _context2.abrupt("return");
+            case 30:
               if (contact) {
                 updateSlotItem($tr, contact);
                 setStatus($tr, true);
@@ -3320,13 +3332,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 resetSlotItem($tr);
                 setStatus($tr, false);
               }
-            case 24:
+            case 31:
             case "end":
               return _context2.stop();
           }
         }, _callee2, this);
       }));
-      return function (_x2) {
+      return function (_x3) {
         return _ref2.apply(this, arguments);
       };
     }());
@@ -3416,7 +3428,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee3, this);
       }));
-      return function (_x3) {
+      return function (_x4) {
         return _ref4.apply(this, arguments);
       };
     }());
@@ -3494,7 +3506,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }, _callee4);
         }));
-        function onSubmit(_x4, _x5) {
+        function onSubmit(_x5, _x6) {
           return _onSubmit.apply(this, arguments);
         }
         return onSubmit;
