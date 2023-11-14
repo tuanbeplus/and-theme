@@ -293,10 +293,11 @@ form.pp-form-product-variations {
 }
 
 .pp-btn-back-to-shoplanding {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  color: var(--accent-color);
+  color: var(--accent-color) !important;
   margin: 3rem 0;
+  background: none !important;
 
   @media(max-width: 425px) {
     margin: 3rem 0 1rem;

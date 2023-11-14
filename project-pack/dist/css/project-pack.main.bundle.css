@@ -494,6 +494,15 @@ form.tribe-tickets__tickets-form {
   padding-bottom: 80px;
   list-style: none;
 }
+.product-card-style .product-item .woocommerce.add_to_cart_inline {
+  display: none;
+}
+.product-card-style .product-item .item-description p {
+  margin-bottom: 0;
+}
+.product-card-style .product-item a {
+  text-decoration: none;
+}
 @media (max-width: 320px) {
   .product-card-style .product-item {
     padding-bottom: 84px;
@@ -504,14 +513,26 @@ form.tribe-tickets__tickets-form {
     width: 100%;
   }
 }
+.product-card-style .product-item .item-thumbnail {
+  line-height: 0;
+}
+.product-card-style .product-item .item-thumbnail img {
+  width: 100%;
+}
 .product-card-style .product-item .item-body {
   position: relative;
+  padding: 1.5em;
+  color: #363636;
+}
+.product-card-style .product-item .item-body .btn-read-more, .product-card-style .product-item .item-body a {
+  color: var(--accent-color);
 }
 .product-card-style .product-item h3.item-title {
   font-size: 1.5em;
   letter-spacing: 0;
   line-height: 110%;
   color: black;
+  margin-bottom: 0.5em;
 }
 @media (max-width: 425px) {
   .product-card-style .product-item h3.item-title {
@@ -530,7 +551,29 @@ form.tribe-tickets__tickets-form {
 }
 .product-card-style .product-item .item-list-info {
   padding: 0;
-  margin: 0 0 1rem 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+.product-card-style .product-item .item-list-info li {
+  list-style: none;
+  margin-right: 1.5em;
+  margin-bottom: 0.5em;
+  color: var(--accent-color);
+  font-weight: bold;
+  font-size: 0.9em;
+  position: relative;
+}
+.product-card-style .product-item .item-list-info li:not(:last-child):after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 10px;
+  background: var(--accent-color);
+  position: absolute;
+  right: -1em;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .product-card-style .product-item .item-bottom {
   position: absolute;
@@ -539,6 +582,9 @@ form.tribe-tickets__tickets-form {
   width: 100%;
   flex-wrap: wrap;
   padding: 0 30px 20px 30px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .product-card-style .product-item .item-bottom > * {
   margin-bottom: 0.5rem;
@@ -566,6 +612,16 @@ form.tribe-tickets__tickets-form {
   .product-card-style .product-item .item-button .button {
     font-size: 1rem !important;
   }
+}
+.product-card-style .product-item .item-button .add_to_cart_button {
+  position: relative;
+  z-index: 100;
+  padding: 8px 20px;
+  font-size: 1rem;
+  border-radius: 30px;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  font-weight: bold;
 }
 .product-card-style .product-item .item-button .added_to_cart {
   display: none;
@@ -1258,10 +1314,11 @@ form.pp-form-product-variations .pp-button-variantion-submit:hover {
 }
 
 .pp-btn-back-to-shoplanding {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  color: var(--accent-color);
+  color: var(--accent-color) !important;
   margin: 3rem 0;
+  background: none !important;
 }
 @media (max-width: 425px) {
   .pp-btn-back-to-shoplanding {
