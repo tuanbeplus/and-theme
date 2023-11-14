@@ -34,8 +34,12 @@ function is_member_exist($user_id)
  */
 function and_salesforce_auth_url( $url ) {
 
-	return 'https://test.salesforce.com/services/oauth2/token';
-
+    if (home_url() == 'https://and.org.au/') {
+        return 'https://login.salesforce.com/services/oauth2/token';
+    }
+    else {
+        return 'https://test.salesforce.com/services/oauth2/token';
+    }
 }
 add_filter( 'wpf_salesforce_auth_url', 'and_salesforce_auth_url' );
 
@@ -330,8 +334,10 @@ function get_old_attachments_exist()
 
 // function getSalesforceObject()
 // {
-// 	$sql = "SELECT Id, Name
-// 			FROM User LIMIT 10";
+// 	$sql = "SELECT FIELDS(ALL)
+// 			FROM Contact
+//             WHERE Id='0039h00000EsxXjAAJ'
+//             LIMIT 10";
 
 // 	$response = sf_query_object_metadata($sql);
 

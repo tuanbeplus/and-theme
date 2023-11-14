@@ -3,7 +3,8 @@
 $user_id = $_COOKIE['userId'];
 $arr_terms = array('self-assessed','index');
 $organisation_id = get_user_meta( get_current_user_id(), '__salesforce_account_id', true);
-$index_accessible_list = get_assessments_accessible_members($user_id, $organisation_id, $arr_terms);
+// $index_accessible_list = get_assessments_accessible_members($user_id, $organisation_id, $arr_terms);
+$index_accessible_list = array();
 // $sf_product_id_opp = getProductIdByOpportunity();
 // $index_product_id = isset($sf_product_id_opp['index_product_id']) ? $sf_product_id_opp['index_product_id'] : null;
 // $index_assessments_list = get_assessments_related_sf_products($index_product_id, 'index') ?? null;
