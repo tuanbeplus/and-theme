@@ -14,7 +14,7 @@ export default function ProductImportTable() {
     ImportProducts, 
     _getAllProductsEventsImportedValidate, 
     loadingItems, 
-    setLoadingItems } = useSFEventContext();
+    setLoadingItems, Loading } = useSFEventContext();
 
   const tableData = [
     {
@@ -85,7 +85,7 @@ export default function ProductImportTable() {
     <h4>Products Import Listing</h4>
     <p>Summary of object (Product2, Event, Junction_Workshop_Event__c) used in Salesforce to create the link between Workshop Events.</p>
     {/* <pre>{ JSON.stringify(ImportProducts) }</pre> */}
-    <table className="pp-table products-table">
+    { Loading ? 'Loading...' : <table className="pp-table products-table">
       <thead>
         <tr>
           {
@@ -122,6 +122,7 @@ export default function ProductImportTable() {
           })
         }
       </tbody>
-    </table>
+    </table> }
+    
   </div>
 }

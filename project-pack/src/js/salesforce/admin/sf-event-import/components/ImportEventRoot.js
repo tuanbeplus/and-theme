@@ -7,13 +7,14 @@ import Tabs from "./Tabs";
 import ProductImportTable from "./ProductImportTable";
 
 export default function ImportEventRoot() {
-  const { Junctions, JunctionsSize } = useSFEventContext();
+  const { Junctions, JunctionsSize, Loading } = useSFEventContext();
   const [tabActive, setTabActive] = useState('ProductImportTable')
 
   return <div>
     <div className="pp-container">
       <div className="pp-panel">
         <div className="pp-panel__content">
+          
           <Tabs items={[
             {
               label: "Import", 

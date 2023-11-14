@@ -281,7 +281,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function ImportEventRoot() {
   var _useSFEventContext = (0,_libs_context__WEBPACK_IMPORTED_MODULE_1__.useSFEventContext)(),
     Junctions = _useSFEventContext.Junctions,
-    JunctionsSize = _useSFEventContext.JunctionsSize;
+    JunctionsSize = _useSFEventContext.JunctionsSize,
+    Loading = _useSFEventContext.Loading;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('ProductImportTable'),
     _useState2 = _slicedToArray(_useState, 2),
     tabActive = _useState2[0],
@@ -421,7 +422,8 @@ function ProductImportTable() {
     ImportProducts = _useSFEventContext.ImportProducts,
     _getAllProductsEventsImportedValidate = _useSFEventContext._getAllProductsEventsImportedValidate,
     loadingItems = _useSFEventContext.loadingItems,
-    setLoadingItems = _useSFEventContext.setLoadingItems;
+    setLoadingItems = _useSFEventContext.setLoadingItems,
+    Loading = _useSFEventContext.Loading;
   var tableData = [{
     key: '93a07b94-37b5-4556-9622-15c389eb46ae',
     label: function label() {
@@ -524,7 +526,7 @@ function ProductImportTable() {
       children: "Products Import Listing"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
       children: "Summary of object (Product2, Event, Junction_Workshop_Event__c) used in Salesforce to create the link between Workshop Events."
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("table", {
+    }), Loading ? 'Loading...' : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("table", {
       className: "pp-table products-table",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("thead", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("tr", {
@@ -975,6 +977,10 @@ var SFEventContext_Provider = function SFEventContext_Provider(_ref) {
     _useState16 = _slicedToArray(_useState15, 2),
     loadingItems = _useState16[0],
     setLoadingItems = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
+    _useState18 = _slicedToArray(_useState17, 2),
+    Loading = _useState18[0],
+    setLoading = _useState18[1];
   var _getJunctions = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
       var _yield$getJunctions, totalSize, records;
@@ -1104,8 +1110,11 @@ var SFEventContext_Provider = function SFEventContext_Provider(_ref) {
               _context6.next = 4;
               return _getJunctions();
             case 4:
-              _getAllProductsEventsImportedValidate();
-            case 5:
+              _context6.next = 6;
+              return _getAllProductsEventsImportedValidate();
+            case 6:
+              setLoading(false);
+            case 7:
             case "end":
               return _context6.stop();
           }
@@ -1248,7 +1257,9 @@ var SFEventContext_Provider = function SFEventContext_Provider(_ref) {
     setProductsImported: setProductsImported,
     _getAllProductsEventsImportedValidate: _getAllProductsEventsImportedValidate,
     loadingItems: loadingItems,
-    setLoadingItems: setLoadingItems
+    setLoadingItems: setLoadingItems,
+    Loading: Loading,
+    setLoading: setLoading
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(SFEventContext.Provider, {
     value: value,

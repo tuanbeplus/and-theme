@@ -13,6 +13,7 @@ const SFEventContext_Provider = ({ children }) => {
   const [ImportProducts, setImportProducts] = useState([]);
   const [ProductsImported, setProductsImported] = useState([]);
   const [loadingItems, setLoadingItems] = useState([]);
+  const [Loading, setLoading] = useState(true);
 
   const _getJunctions = async () => {
     let { totalSize, records } = await getJunctions();
@@ -55,7 +56,8 @@ const SFEventContext_Provider = ({ children }) => {
       // _getEvents();
       await _prepareDataImportEvents();
       await _getJunctions();
-      _getAllProductsEventsImportedValidate();
+      await _getAllProductsEventsImportedValidate();
+      setLoading(false);
     }
 
     dataInit();
@@ -197,6 +199,7 @@ const SFEventContext_Provider = ({ children }) => {
     ProductsImported, setProductsImported,
     _getAllProductsEventsImportedValidate,
     loadingItems, setLoadingItems,
+    Loading, setLoading
   }
 
   return <SFEventContext.Provider value={ value }>
