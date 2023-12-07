@@ -13,10 +13,10 @@ if( get_row_layout() == 'slides' ):
     <section class="slides slides-ss">
         <div class="<?php if($slide_template == 'container') echo 'container slides-box'; ?>">
             <div id="slides-wrapper-<?php echo $wrapper_id; ?>" class="slides-wrapper owl-carousel">
-                <?php foreach($list_items as $item): 
+                <?php foreach($list_items as $key=>$item):
                     $item = $item['slide_item'];
                     ?>
-                    <div class="item slide-item" 
+                    <div class="item slide-item"
                         style="<?php if($item['background_color']) echo 'background-color:'.$item['background_color'].';'; ?>">
                         <div class="container <?php if($slide_template == 'container') echo 'template-container'; ?>">
                             <div class="slide-content">
@@ -26,10 +26,13 @@ if( get_row_layout() == 'slides' ):
                                 <?php if($item['description']): ?>
                                     <p class="description"><?php echo $item['description']; ?></p>
                                 <?php endif; ?>
-                                <?php if($item['cta_link']): ?>
-                                    <?php $cta_id = rand(1, 999); ?>
+                                <?php if($item['cta_link']) { ?>
+                                    <?php
+                                    $cta_id = rand(1, 999);
+                                    ?>
                                     <div class="cta-field">
-                                        <a class="cta cta-<?php echo $cta_id; ?>" role="button" href="<?php echo $item['cta_link']; ?>">
+                                        <a class="cta cta-<?php echo $cta_id; ?> >"
+                                        role="button" href="<?php echo $item['cta_link']; ?>">
                                             <?php echo $item['cta_text']; ?>
                                         </a>
                                         <style>
@@ -42,9 +45,13 @@ if( get_row_layout() == 'slides' ):
                                             }
                                         </style>
                                     </div>
-                                <?php endif; ?>
+                                <?php } else {
+                                    ?>
+                                    <a class="cta and-next-sl hidden-link" href="javascript:;"></a>
+                                    <?php
+                                } ?>
                             </div>
-                            
+
                             <div class="slide-img">
                                 <?php if($item['image']['url']){ $img_url = $item['image']['url']; }?>
                                 <img src="<?php echo $img_url; ?>" alt="<?php echo $item['image']['alt']; ?>">
@@ -55,10 +62,11 @@ if( get_row_layout() == 'slides' ):
             </div>
         </div>
     </section>
+
     <script>
         jQuery(document).ready(function(){
-            jQuery("#slides-wrapper-<?php echo $wrapper_id; ?>").owlCarousel({
-                loop: true,
+            var $slides_<?php echo $wrapper_id; ?> = jQuery("#slides-wrapper-<?php echo $wrapper_id; ?>").owlCarousel({
+                loop: false,
                 margin: 0,
                 items: 1,
                 nav: <?php echo $navigation; ?>,
@@ -74,6 +82,8 @@ if( get_row_layout() == 'slides' ):
             });
             jQuery("#slides-wrapper-<?php echo $wrapper_id; ?> .owl-dots")
                 .addClass('container <?php if($slide_template == 'container') echo 'template-container'; ?>');
+
+            jQuery("#slides-wrapper-<?php echo $wrapper_id; ?> .owl-dots").children('.owl-dot').attr('tabindex', -1).attr('role', "button")
         });
     </script>
 <?php endif; ?>

@@ -6864,7 +6864,7 @@ function __guardMethod__(obj, methodName, transform) {
             window.location = '/sitemap.xml';
         }
 
-        console.log(map);
+        // console.log(map);
     });
 
     $(document).on('click', '.member.cta a', function(e){
