@@ -3376,7 +3376,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   };
   var addAttendeesFormValidates = function addAttendeesFormValidates() {
     var pass = true;
-    $(FORM_ID).find('input[name^=contact_id').each(function () {
+    $(FORM_ID).find('input[name^=contact_id]').each(function () {
       var input = $(this);
       var $tr = input.closest('tr');
       var value = input.val();
@@ -3463,9 +3463,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 event.preventDefault();
                 fields = {
-                  "LastName": $form.find('input[name=l_name').val(),
-                  "FirstName": $form.find('input[name=f_name').val(),
-                  "Email": $form.find('input[name=c_email').val()
+                  "LastName": $form.find('input[name=l_name]').val(),
+                  "FirstName": $form.find('input[name=f_name]').val(),
+                  "Email": $form.find('input[name=c_email]').val()
                   // "AccountId": "0019q0000045pqRAAQ"
                 };
 

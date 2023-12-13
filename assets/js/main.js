@@ -769,9 +769,9 @@ equalheight = function(container){
     refresh: function() {
       var _this = this;
 
-      _this.populate();
-      _this.activate();
-      _this.utils.triggerCallback('Refresh', _this);
+      // _this.populate();
+      // _this.activate();
+      // _this.utils.triggerCallback('Refresh', _this);
     },
 
     /** Set options box width/height */
