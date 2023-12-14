@@ -13,6 +13,7 @@ jQuery.curCSS = function (element, prop, val) {
 (function (w, $) {
     'use strict';
 
+    //---Start Fix Tab Keyboard---//
     var is_tab_slide = false;
     var is_tab_keyboard = false;
     jQuery(document).on('keydown', function( e ) {
@@ -31,8 +32,7 @@ jQuery.curCSS = function (element, prop, val) {
               var $item_index = $templ.find('.owl-item.active').index();
               $item_index = !$item_index ? 1 : parseInt($item_index) + 1;
               //console.log($total_items,$item_index);
-              if($item_index == 1) return true;
-              return false;
+              if($item_index != 1) return false;
             }
         }else{
           if ( e.keyCode == 9 ) {
@@ -92,6 +92,8 @@ jQuery.curCSS = function (element, prop, val) {
         is_tab_slide = false;
       }
     }
+
+    //---End Fix Tab Keyboard---//
 
     $("#autocomplete_search").autocomplete({
         source: function (request, response) {
