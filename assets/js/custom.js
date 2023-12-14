@@ -13,6 +13,88 @@ jQuery.curCSS = function (element, prop, val) {
 (function (w, $) {
     'use strict';
 
+    //---Start Fix Tab Keyboard---//
+    var is_tab_slide = false;
+    var is_tab_keyboard = false;
+    jQuery(document).on('keydown', function( e ) {
+        // Get the focused element:
+        e.preventDefault;
+        is_tab_keyboard = true;
+
+        if(e.shiftKey && e.keyCode == 9) {
+            //console.log('prev!!!');
+            var $focused_current = $(':focus');
+            var $templ   = $focused_current.closest('.slides-ss');
+            setTimeout(triggerPrevSlide,100);
+            //Check prev tab
+            if($templ.length){
+              var $total_items = $templ.find('.owl-item').length;
+              var $item_index = $templ.find('.owl-item.active').index();
+              $item_index = !$item_index ? 1 : parseInt($item_index) + 1;
+              //console.log($total_items,$item_index);
+              if($item_index != 1) return false;
+            }
+        }else{
+          if ( e.keyCode == 9 ) {
+              //console.log('next!!!');
+              var $focused_current = $(':focus');
+              var $templ   = $focused_current.closest('.slides-ss');
+              setTimeout(triggerNextSlide,100);
+              //check next tab
+              if($templ.length){
+                var $total_items = $templ.find('.owl-item').length;
+                var $item_index = $templ.find('.owl-item.active').index();
+                $item_index = !$item_index ? 1 : parseInt($item_index) + 1;
+                //console.log($total_items,$item_index);
+                if($item_index < $total_items) return false;
+              }
+          }
+        }
+
+    });
+
+    jQuery('.slide-content .cta').focus(function( e ) {
+
+        if(!is_tab_keyboard){
+            is_tab_slide = true;
+        }
+
+        if(e.keyCode != 9){
+          is_tab_keyboard = false;
+        }
+
+    });
+
+    function triggerNextSlide(){
+      var $focused = $(':focus');
+      var $templ   = $focused.closest('.slides-ss');
+      if($templ.length > 0){
+        if(is_tab_slide)
+          $templ.find('.owl-next').click();
+        //Focus button current
+        setTimeout(function(){ $templ.find('.owl-item.active .cta').focus(); },100);
+        is_tab_slide = true;
+      }else{
+        is_tab_slide = false;
+      }
+    }
+
+    function triggerPrevSlide(){
+      var $focused = $(':focus');
+      var $templ   = $focused.closest('.slides-ss');
+      if($templ.length > 0){
+        if(is_tab_slide)
+          $templ.find('.owl-prev').click();
+        //Focus button current
+        setTimeout(function(){ $templ.find('.owl-item.active .cta').focus(); },100);
+        is_tab_slide = true;
+      }else{
+        is_tab_slide = false;
+      }
+    }
+
+    //---End Fix Tab Keyboard---//
+
     $("#autocomplete_search").autocomplete({
         source: function (request, response) {
             $.ajax({
