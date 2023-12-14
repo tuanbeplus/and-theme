@@ -99,7 +99,7 @@ $footerLinks = get_field('footer_links', 'option');
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 
-<script type="text/javascript" src="/wp-content/themes/and/assets/js/main.min.js?rand=23482371566235"></script>
+<script type="text/javascript" src="/wp-content/themes/and/assets/js/main.js?rand=2346235"></script>
 
 <?php wp_footer(); ?>
 </body>

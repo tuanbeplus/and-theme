@@ -1404,7 +1404,7 @@ section.text-blocks {
   padding: 6px 26px;
   border-radius: 20px;
   font-size: 1rem;
-  font-family: "Avenir-Heavy";
+  text-align: right;
   text-decoration: none;
 }
 

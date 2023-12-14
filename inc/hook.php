@@ -332,27 +332,6 @@ function get_old_attachments_exist()
     // return $attachments;
 }
 
-// function getSalesforceObject()
-// {
-// 	$sql = "SELECT FIELDS(ALL)
-// 			FROM Contact
-//             WHERE Id='0039h00000EsxXjAAJ'
-//             LIMIT 10";
 
-// 	$response = sf_query_object_metadata($sql);
-
-// 	if (isset($response->records)) {
-// 		return $response;
-// 	}
-// 	else {
-// 		return null;
-// 	}
-// }
- 
-// if (($_GET['test'] == 'test')) {
-//     echo "<pre>";
-//     print_r(getSalesforceObject());
-//     echo "</pre>";
-// }
 
 

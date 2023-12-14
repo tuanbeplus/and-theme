@@ -4657,7 +4657,7 @@ div.circle {
   .breadcrumbs-top span {
     color: #fff;
     display: inline-block;
-    line-height: 4px; }
+    line-height: 1.1; }
     .breadcrumbs-top span.material-icons {
       position: relative;
       top: 7px;
