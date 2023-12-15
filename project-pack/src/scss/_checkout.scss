@@ -252,6 +252,7 @@ button#place_order {
 }
 
 .step-checkout-bar {
+  display: none;
 
   .step-list {
     display: flex;
@@ -297,6 +298,8 @@ button#place_order {
 }
 
 .add-attendees-container {
+  // display: none;
+
   padding: 2em;
   background: white;
   margin-top: 3em;
@@ -564,5 +567,5 @@ body.__show-pp-popup-add-new-contact {
 }
 
 form.checkout.woocommerce-checkout {
-  display: none;
+  // display: none;
 }

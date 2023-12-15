@@ -185,7 +185,8 @@
       if(pass != true) return;
 
       console.log(pass, $form.serialize());
-      let data = $form.serialize() + '&action=pp_ajax_save_attendees_in_cart';
+      // let data = $form.serialize() + '&action=pp_ajax_save_attendees_in_cart';
+      let data = $form.serialize() + '&action=pp_ajax_save_attendees_to_order';
       //pp_ajax_save_attendees_in_cart
       const { success } = await $.ajax({
         type: 'POST',
@@ -195,7 +196,8 @@
       });
 
       if(success == true) {
-        stepUiController(2);
+        // stepUiController(2);
+        alert('Successfully.'); 
       } else {
         alert('External Error: Please try again!');
       }
@@ -269,6 +271,7 @@
     });
 
     addAttendeesFormSubmit();
+    // stepUiController(2);
   }
 
   $(init)

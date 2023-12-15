@@ -3404,7 +3404,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _context3.abrupt("return");
             case 5:
               console.log(pass, $form.serialize());
-              data = $form.serialize() + '&action=pp_ajax_save_attendees_in_cart'; //pp_ajax_save_attendees_in_cart
+              // let data = $form.serialize() + '&action=pp_ajax_save_attendees_in_cart';
+              data = $form.serialize() + '&action=pp_ajax_save_attendees_to_order'; //pp_ajax_save_attendees_in_cart
               _context3.next = 9;
               return $.ajax({
                 type: 'POST',
@@ -3418,7 +3419,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               _yield$$$ajax = _context3.sent;
               success = _yield$$$ajax.success;
               if (success == true) {
-                stepUiController(2);
+                // stepUiController(2);
+                alert('Successfully.');
               } else {
                 alert('External Error: Please try again!');
               }
@@ -3518,7 +3520,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     });
     addAttendeesFormSubmit();
+    // stepUiController(2);
   };
+
   $(init);
 })(window, jQuery);
 

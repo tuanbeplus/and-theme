@@ -1688,6 +1688,9 @@ button#place_order:hover {
   border-color: #a00 !important;
 }
 
+.step-checkout-bar {
+  display: none;
+}
 .step-checkout-bar .step-list {
   display: flex;
   align-items: center;
@@ -1951,10 +1954,6 @@ body.__show-pp-popup-add-new-contact .pp-popup-add-new-contact {
 }
 .pp-form-loading button[type=submit] {
   opacity: 0.6;
-}
-
-form.checkout.woocommerce-checkout {
-  display: none;
 }
 
 .woocommerce-order-received .woocommerce-thankyou-order-received {

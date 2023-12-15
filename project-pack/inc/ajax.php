@@ -257,3 +257,53 @@ function pp_ajax_save_attendees_in_cart() {
 
 add_action('wp_ajax_pp_ajax_save_attendees_in_cart', 'pp_ajax_save_attendees_in_cart');
 add_action('wp_ajax_nopriv_pp_ajax_save_attendees_in_cart', 'pp_ajax_save_attendees_in_cart');
+
+function pp_ajax_save_attendees_to_order() {
+  global $woocommerce;
+  $order_id = $_POST['order_id'];
+  $order = wc_get_order($order_id);
+  $items = $order->get_items();
+  $cart = $woocommerce->cart->cart_contents;
+
+  foreach ( $items as $item_key => $item ) {
+    if(!isset($_POST['contact_id'][$item_key])) continue;
+
+    $c_IDs = $_POST['contact_id'][$item_key];
+    $c_emails = $_POST['email'][$item_key];
+    $c_fnames = $_POST['firstname'][$item_key];
+    $c_lnames = $_POST['lastname'][$item_key];
+    $c_organisations = $_POST['organisation'][$item_key];
+
+    // $woocommerce->cart->cart_contents[$item_key]['__SF_CONTACT_IDS'] = $c_IDs;
+    $__SF_CONTACT_FULL = [];
+
+    foreach($c_IDs as $index => $id) {
+      array_push($__SF_CONTACT_FULL, [
+        'contact_id' => $id,
+        'email' => $c_emails[$index], 
+        'firstname' => $c_fnames[$index],
+        'lastname' => $c_lnames[$index],
+        'account_id' => $c_organisations[$index]
+      ]);
+    }
+    // wp_send_json( [$item_key, $__SF_CONTACT_FULL] ); die;
+
+    wc_update_order_item_meta($item_key, '__SF_CONTACT_IDS', $c_IDs);
+    wc_update_order_item_meta($item_key, '__SF_CONTACT_FULL', $__SF_CONTACT_FULL);
+
+    // $woocommerce->cart->cart_contents[$cart_item_key]['__SF_CONTACT_FULL'] = $__SF_CONTACT_FULL;
+    // wc_update_order_item_meta($cart_item_key, '__SF_CONTACT_FULL', $__SF_CONTACT_FULL);
+  }
+  // $woocommerce->cart->set_session();
+
+  clean_post_cache($order_id);
+  wc_delete_shop_order_transients($order);
+  wp_cache_delete('order-items-' . $order_id, 'orders');
+  
+  wp_send_json([
+    'success' => true,
+  ]);
+}
+
+add_action('wp_ajax_pp_ajax_save_attendees_to_order', 'pp_ajax_save_attendees_to_order');
+add_action('wp_ajax_nopriv_pp_ajax_save_attendees_to_order', 'pp_ajax_save_attendees_to_order');

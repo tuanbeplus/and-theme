@@ -104,6 +104,8 @@ function pp_and_woo_auto_complete_order( $order_id ) {
     $eventID = $course_information['event_parent']['sf_event_id'];
     foreach($__SF_CONTACT_FULL as $cItem) {
       $res = and_create_an_event_relation_on_salesforce($eventID, $cItem['contact_id']);
+      $relation_id = isset($res['relation_id']) ? $res['relation_id'] : '';
+      
       pp_log(wp_json_encode($res)); 
     }
     // $eventID = $course_information['event_parent']['sf_event_id'];
@@ -149,7 +151,7 @@ function ppwc_step_checkout_bar() {
   pp_load_template('step-checkout-bar');
 }
 
-add_action('woocommerce_before_checkout_form', 'ppwc_step_add_seats_contact_form');
+// add_action('woocommerce_before_checkout_form', 'ppwc_step_add_seats_contact_form');
 
 function ppwc_step_add_seats_contact_form() {
   pp_load_template('add-seats-contact-form');
