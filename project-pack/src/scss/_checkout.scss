@@ -373,6 +373,17 @@ button#place_order {
 
 .add-attendees-table {
 
+  .__remove-item {
+    text-wrap: nowrap;
+    color: var(--accent-color); 
+    text-decoration: none;
+    border-bottom: solid 1px;
+
+    &:hover {
+      opacity: .8;
+    }
+  }
+
   td, th {
     position: relative;
 

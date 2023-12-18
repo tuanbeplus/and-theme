@@ -45,6 +45,7 @@
     $tr.find('input[name^="lastname"]').val('').prop('readonly', false);
     $tr.find('input[name^="organisation"]').val(organisationIdDefault);
     $tr.find('input[name^="contact_id"]').val('');
+    $tr.find('input[name^="relation_id"]').val('');
     $tr.find('.organisation-text').text(organisationTextDefault);
   }
 
@@ -225,6 +226,48 @@
     }
   }
 
+  const removeSlot = () => {
+    $(document.body).on('attendees:remove_slot', async function(e, order_id, EventRelation_Id, cb) {
+      // console.log('__tigger', order_id, EventRelation_Id);
+      const res = await $.ajax({
+        type: 'POST',
+        url: ajax_url,
+        data: {
+          action: 'pp_ajax_remove_slot_attendees',
+          oid: order_id,
+          rid: EventRelation_Id,
+        },
+        error: (e) => {
+          console.log(e);
+          alert('Internal Error: Please reload page and try again!')
+        }
+      });
+
+      cb(res);
+    })
+
+    $('body').on('click', 'form#ADD_ATTENDEES_FORM .__remove-item', function(e) {
+      e.preventDefault();
+      let r = confirm('Are you sure delete this item?');
+      if(!r) return;
+
+      let std = $(this).find('.__std').text();
+      const { rid, orderId } = this.dataset;
+      let $tr = $(this).closest('tr.__slot-item');
+      // console.log(rid, orderId);
+      $(document.body).trigger('attendees:remove_slot', [orderId, rid, ({ success }) => {
+        if(success == true) {
+          resetSlotItem($tr);
+          setStatus($tr, false);
+
+          $tr.find('input[name^="email"]').val('')
+          $tr.find('input[name^="email"]').removeAttr('readonly');
+          $tr.find('.__slot-number').html(std); 
+        }
+      }]);
+    })
+  } 
+
   const init = () => {
     onEmailUpdate();
     FormAddNewContact = new popupAddNewContact({
@@ -270,6 +313,7 @@
       }
     });
 
+    removeSlot();
     addAttendeesFormSubmit();
     // stepUiController(2);
   }

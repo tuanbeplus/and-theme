@@ -8,6 +8,7 @@ $order = wc_get_order($order_id);
 $sf_user_metadata = pp_saleforce_current_user_metadata();
 $account_id = isset($sf_user_metadata['account_id']) ? $sf_user_metadata['account_id'] : '';
 $account_name = isset($sf_user_metadata['salesforce_account']['Name']) ? $sf_user_metadata['salesforce_account']['Name'] : '';
+$attendees = pp_get_attendees_by_order($order_id);
 ?>
 <div class="add-attendees-to-order">
   <div class="add-attendees-to-order__inner add-attendees-container">
@@ -17,8 +18,8 @@ $account_name = isset($sf_user_metadata['salesforce_account']['Name']) ? $sf_use
         // echo '<pre>'; print_r($item); echo '</pre>';
         $course_information = $item->get_meta('course_information');
         $__SF_CONTACT_FULL = $item->get_meta('__SF_CONTACT_FULL'); 
-        echo '<pre>'; print_r($course_information); echo '</pre>';
-        echo '<pre>'; print_r($__SF_CONTACT_FULL); echo '</pre>';
+        // echo '<pre>'; print_r($course_information); echo '</pre>';
+        // echo '<pre>'; print_r($__SF_CONTACT_FULL); echo '</pre>';
         $product_id = $item['product_id'];
         $variation_id = $item['variation_id'];
         $quantity = $item['quantity'];
@@ -40,10 +41,19 @@ $account_name = isset($sf_user_metadata['salesforce_account']['Name']) ? $sf_use
           </thead>
           <tbody>
             <?php for($i = 0; $i <= ($quantity - 1); $i++) : 
-              $slot_item_data = isset($__SF_CONTACT_FULL[$i]) ? $__SF_CONTACT_FULL[$i] : [];
+              $slot_item_data = isset($attendees[$i]) ? $attendees[$i] : [];
+              $rid = isset($slot_item_data['relation_id']) ? $slot_item_data['relation_id'] : '';
             ?>
             <tr class="__slot-item">
-              <td>#<?php echo $i + 1; ?></td>
+              <td class="__slot-number">
+                <?php 
+                if(empty($rid)) {
+                  echo '#' . $i + 1;
+                } else {
+                  echo '<a href="#" class="__remove-item" data-rid="'. $rid .'" data-order-id="'. $order_id .'">✕ Remove <span class="__std">#'. $i + 1 .'</span></a>';
+                }
+                ?>
+              </td>
               <td class="__td-email">
                 <input 
                   data-event-parent-id="<?php echo $course_information['event_parent']['sf_event_id'] ?>" 
@@ -58,6 +68,10 @@ $account_name = isset($sf_user_metadata['salesforce_account']['Name']) ? $sf_use
                   type="hidden" 
                   value="<?php echo isset($slot_item_data['contact_id']) ? $slot_item_data['contact_id'] : '' ?>" />
                 <div class="error-message"></div>
+                <input 
+                  type="hidden" 
+                  name="relation_id[<?php echo $item_key ?>]" 
+                  value="<?php echo $rid; ?>">
               </td>
               <td>
                 <input 

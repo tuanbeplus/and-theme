@@ -105,7 +105,10 @@ function pp_and_woo_auto_complete_order( $order_id ) {
     foreach($__SF_CONTACT_FULL as $cItem) {
       $res = and_create_an_event_relation_on_salesforce($eventID, $cItem['contact_id']);
       $relation_id = isset($res['relation_id']) ? $res['relation_id'] : '';
-      
+
+      $cItem['relation_id'] = $relation_id;
+      // pp_add_attendees_order($order_id, $cItem);
+
       pp_log(wp_json_encode($res)); 
     }
     // $eventID = $course_information['event_parent']['sf_event_id'];
@@ -116,6 +119,36 @@ function pp_and_woo_auto_complete_order( $order_id ) {
   if( $order->has_status( 'processing' ) && $order->is_paid() ) {
     $order->update_status( 'completed' );
   }
+}
+
+function pp_get_attendees_by_order($order_id) {
+  $__ATTENDEES = get_post_meta($order_id, '__ATTENDEES', true);
+  return empty($__ATTENDEES) ? [] : $__ATTENDEES;
+}
+
+/**
+ * 
+ */
+function pp_add_attendees_order($order_id, $item_data = []) {
+  // $order = wc_get_order( $order_id );
+  $__ATTENDEES = pp_get_attendees_by_order($order_id);
+  array_push($__ATTENDEES, $item_data);
+  update_post_meta($order_id, '__ATTENDEES', $__ATTENDEES);
+}
+
+function pp_remove_attendees_order($order_id, $attendees_id) {
+  $__ATTENDEES = pp_get_attendees_by_order($order_id);
+  $found_key = array_search($attendees_id, array_column($__ATTENDEES, 'relation_id'));
+  
+  if($found_key === false) return;
+  unset($__ATTENDEES[$found_key]);
+  update_post_meta($order_id, '__ATTENDEES', $__ATTENDEES);
+}
+
+function pp_get_attendees_order_by_email($order_id, $email) {
+  $__ATTENDEES = pp_get_attendees_by_order($order_id);
+  $found_key = array_search($email, array_column($__ATTENDEES, 'email'));
+  return $found_key === false ? [] : $__ATTENDEES[$found_key];
 }
 
 add_action( 'woocommerce_after_order_itemmeta', function($item_id, $item, $product) {

@@ -182,6 +182,41 @@ function ppsf_get_EventRelation_by_event_Id($eventId) {
   return json_decode( wp_remote_retrieve_body( $response ), true );
 }
 
+function ppsf_add_EventRelation($EventId, $RelationId) {
+  list(
+    'endpoint' => $endpoint,
+    'version' => $version,
+  ) = ppsf_api_info();
+
+  $fields = [
+    "EventId" => $EventId,
+    "RelationId" => $RelationId,
+    "IsInvitee" => true
+  ];
+
+  $url = $endpoint . '/services/data/'. $version .'/sobjects/EventRelation/';
+  $response = ppsf_remote_post($url, [
+    'body' => wp_json_encode($fields),
+    'headers'     => [
+      'Content-Type' => 'application/json;charset=utf-8',
+      'Authorization' => 'Bearer ' . ppsf_token(),
+    ],
+  ], 'POST');
+
+  return json_decode( wp_remote_retrieve_body( $response ), true );
+}
+
+function ppsf_delete_EventRelation_record($record_id) {
+  list(
+    'endpoint' => $endpoint,
+    'version' => $version,
+  ) = ppsf_api_info();
+
+  $url = $endpoint . '/services/data/'. $version .'/sobjects/EventRelation/' . $record_id;
+  $response = ppsf_remote_post($url, [], 'DELETE');
+  return json_decode( wp_remote_retrieve_body( $response ), true );
+}
+
 function ppsf_find_contact_by_email($email) {
   list(
     'endpoint' => $endpoint,

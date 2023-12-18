@@ -267,38 +267,40 @@ function pp_ajax_save_attendees_to_order() {
 
   foreach ( $items as $item_key => $item ) {
     if(!isset($_POST['contact_id'][$item_key])) continue;
+    
+    $course_information = wc_get_order_item_meta($item_key, 'course_information', true);
+    $eventID = $course_information['event_parent']['sf_event_id'];
 
     $c_IDs = $_POST['contact_id'][$item_key];
     $c_emails = $_POST['email'][$item_key];
     $c_fnames = $_POST['firstname'][$item_key];
     $c_lnames = $_POST['lastname'][$item_key];
     $c_organisations = $_POST['organisation'][$item_key];
+    $c_relation_ids = $_POST['relation_id'][$item_key];
 
-    // $woocommerce->cart->cart_contents[$item_key]['__SF_CONTACT_IDS'] = $c_IDs;
     $__SF_CONTACT_FULL = [];
 
     foreach($c_IDs as $index => $id) {
-      array_push($__SF_CONTACT_FULL, [
+      $r_id = $c_relation_ids[$index];
+      if(!empty($r_id)) continue;
+      
+      $res = ppsf_add_EventRelation($eventID, $id); // and_create_an_event_relation_on_salesforce($eventID, $id);
+      $relation_id = isset($res['id']) ? $res['id'] : '';
+      
+      $item_data = [
         'contact_id' => $id,
-        'email' => $c_emails[$index], 
+        'email' => $c_emails[$index],  
         'firstname' => $c_fnames[$index],
         'lastname' => $c_lnames[$index],
-        'account_id' => $c_organisations[$index]
-      ]);
+        'account_id' => $c_organisations[$index],
+        'relation_id' => $relation_id,
+      ]; 
+
+      // wp_send_json($item_data);
+      pp_add_attendees_order($order_id, $item_data);
+      pp_log('----------------------------- '. "\n" .'Event ID: ' . $eventID . "\n" . 'Event Data: ' . wp_json_encode($item_data) . "\n" . '-----------------------------');
     }
-    // wp_send_json( [$item_key, $__SF_CONTACT_FULL] ); die;
-
-    wc_update_order_item_meta($item_key, '__SF_CONTACT_IDS', $c_IDs);
-    wc_update_order_item_meta($item_key, '__SF_CONTACT_FULL', $__SF_CONTACT_FULL);
-
-    // $woocommerce->cart->cart_contents[$cart_item_key]['__SF_CONTACT_FULL'] = $__SF_CONTACT_FULL;
-    // wc_update_order_item_meta($cart_item_key, '__SF_CONTACT_FULL', $__SF_CONTACT_FULL);
   }
-  // $woocommerce->cart->set_session();
-
-  clean_post_cache($order_id);
-  wc_delete_shop_order_transients($order);
-  wp_cache_delete('order-items-' . $order_id, 'orders');
   
   wp_send_json([
     'success' => true,
@@ -307,3 +309,20 @@ function pp_ajax_save_attendees_to_order() {
 
 add_action('wp_ajax_pp_ajax_save_attendees_to_order', 'pp_ajax_save_attendees_to_order');
 add_action('wp_ajax_nopriv_pp_ajax_save_attendees_to_order', 'pp_ajax_save_attendees_to_order');
+
+function pp_ajax_remove_slot_attendees() {
+  // wp_send_json($_POST);
+
+  // Remove from Salesforce
+  ppsf_delete_EventRelation_record($_POST['rid']);
+
+  // Remove from order
+  pp_remove_attendees_order($_POST['oid'], $_POST['rid']);
+
+  wp_send_json([
+    'success' => true,
+  ]); 
+}
+
+add_action('wp_ajax_pp_ajax_remove_slot_attendees', 'pp_ajax_remove_slot_attendees');
+add_action('wp_ajax_nopriv_pp_ajax_remove_slot_attendees', 'pp_ajax_remove_slot_attendees');

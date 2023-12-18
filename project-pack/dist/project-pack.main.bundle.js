@@ -3245,6 +3245,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     $tr.find('input[name^="lastname"]').val('').prop('readonly', false);
     $tr.find('input[name^="organisation"]').val(organisationIdDefault);
     $tr.find('input[name^="contact_id"]').val('');
+    $tr.find('input[name^="relation_id"]').val('');
     $tr.find('.organisation-text').text(organisationTextDefault);
   };
   var setStatus = function setStatus($tr, status) {
@@ -3454,14 +3455,70 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         break;
     }
   };
+  var removeSlot = function removeSlot() {
+    $(document.body).on('attendees:remove_slot', /*#__PURE__*/function () {
+      var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(e, order_id, EventRelation_Id, cb) {
+        var res;
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return $.ajax({
+                type: 'POST',
+                url: ajax_url,
+                data: {
+                  action: 'pp_ajax_remove_slot_attendees',
+                  oid: order_id,
+                  rid: EventRelation_Id
+                },
+                error: function error(e) {
+                  console.log(e);
+                  alert('Internal Error: Please reload page and try again!');
+                }
+              });
+            case 2:
+              res = _context4.sent;
+              cb(res);
+            case 4:
+            case "end":
+              return _context4.stop();
+          }
+        }, _callee4);
+      }));
+      return function (_x5, _x6, _x7, _x8) {
+        return _ref5.apply(this, arguments);
+      };
+    }());
+    $('body').on('click', 'form#ADD_ATTENDEES_FORM .__remove-item', function (e) {
+      e.preventDefault();
+      var r = confirm('Are you sure delete this item?');
+      if (!r) return;
+      var std = $(this).find('.__std').text();
+      var _this$dataset = this.dataset,
+        rid = _this$dataset.rid,
+        orderId = _this$dataset.orderId;
+      var $tr = $(this).closest('tr.__slot-item');
+      // console.log(rid, orderId);
+      $(document.body).trigger('attendees:remove_slot', [orderId, rid, function (_ref6) {
+        var success = _ref6.success;
+        if (success == true) {
+          resetSlotItem($tr);
+          setStatus($tr, false);
+          $tr.find('input[name^="email"]').val('');
+          $tr.find('input[name^="email"]').removeAttr('readonly');
+          $tr.find('.__slot-number').html(std);
+        }
+      }]);
+    });
+  };
   var init = function init() {
     onEmailUpdate();
     FormAddNewContact = new popupAddNewContact({
       onSubmit: function () {
-        var _onSubmit = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4($form, event) {
+        var _onSubmit = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5($form, event) {
           var fields, _yield$$$ajax2, success, responses, contact;
-          return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-            while (1) switch (_context4.prev = _context4.next) {
+          return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+            while (1) switch (_context5.prev = _context5.next) {
               case 0:
                 event.preventDefault();
                 fields = {
@@ -3472,7 +3529,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 };
 
                 $form.addClass('pp-form-loading');
-                _context4.next = 5;
+                _context5.next = 5;
                 return $.ajax({
                   type: 'POST',
                   url: ajax_url,
@@ -3485,18 +3542,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   }
                 });
               case 5:
-                _yield$$$ajax2 = _context4.sent;
+                _yield$$$ajax2 = _context5.sent;
                 success = _yield$$$ajax2.success;
                 responses = _yield$$$ajax2.responses;
                 contact = _yield$$$ajax2.contact;
                 $form.removeClass('pp-form-loading');
                 if (!(success != true)) {
-                  _context4.next = 14;
+                  _context5.next = 14;
                   break;
                 }
                 alert('Internal Error: Please try again! \n' + JSON.stringify(responses));
                 FormAddNewContact.hide();
-                return _context4.abrupt("return");
+                return _context5.abrupt("return");
               case 14:
                 updateSlotItem($trInprogress, contact);
                 setStatus($trInprogress, true);
@@ -3504,11 +3561,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 FormAddNewContact.hide();
               case 18:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
-          }, _callee4);
+          }, _callee5);
         }));
-        function onSubmit(_x5, _x6) {
+        function onSubmit(_x9, _x10) {
           return _onSubmit.apply(this, arguments);
         }
         return onSubmit;
@@ -3519,6 +3576,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         setStatus($trInprogress, false);
       }
     });
+    removeSlot();
     addAttendeesFormSubmit();
     // stepUiController(2);
   };

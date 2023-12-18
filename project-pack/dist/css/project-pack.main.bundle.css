@@ -1795,6 +1795,15 @@ button#place_order:hover {
   background-color: #f9f9f9;
 }
 
+.add-attendees-table .__remove-item {
+  text-wrap: nowrap;
+  color: var(--accent-color);
+  text-decoration: none;
+  border-bottom: solid 1px;
+}
+.add-attendees-table .__remove-item:hover {
+  opacity: 0.8;
+}
 .add-attendees-table td, .add-attendees-table th {
   position: relative;
 }
