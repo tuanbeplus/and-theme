@@ -3421,7 +3421,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               success = _yield$$$ajax.success;
               if (success == true) {
                 // stepUiController(2);
-                alert('Successfully.');
+                // alert('Successfully.'); 
+                w.location.reload();
               } else {
                 alert('External Error: Please try again!');
               }
@@ -3491,7 +3492,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }());
     $('body').on('click', 'form#ADD_ATTENDEES_FORM .__remove-item', function (e) {
       e.preventDefault();
-      var r = confirm('Are you sure delete this item?');
+      var r = confirm('Are you sure clean this slot?');
       if (!r) return;
       var std = $(this).find('.__std').text();
       var _this$dataset = this.dataset,
@@ -3499,6 +3500,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         orderId = _this$dataset.orderId;
       var $tr = $(this).closest('tr.__slot-item');
       // console.log(rid, orderId);
+
+      $tr.addClass('__loading');
       $(document.body).trigger('attendees:remove_slot', [orderId, rid, function (_ref6) {
         var success = _ref6.success;
         if (success == true) {
@@ -3507,6 +3510,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           $tr.find('input[name^="email"]').val('');
           $tr.find('input[name^="email"]').removeAttr('readonly');
           $tr.find('.__slot-number').html(std);
+          $tr.removeClass('__loading');
         }
       }]);
     });

@@ -264,6 +264,7 @@ function pp_ajax_save_attendees_to_order() {
   $order = wc_get_order($order_id);
   $items = $order->get_items();
   $cart = $woocommerce->cart->cart_contents;
+  $__SF_CONTACT_FULL = [];
 
   foreach ( $items as $item_key => $item ) {
     if(!isset($_POST['contact_id'][$item_key])) continue;
@@ -278,8 +279,6 @@ function pp_ajax_save_attendees_to_order() {
     $c_organisations = $_POST['organisation'][$item_key];
     $c_relation_ids = $_POST['relation_id'][$item_key];
 
-    $__SF_CONTACT_FULL = [];
-
     foreach($c_IDs as $index => $id) {
       $r_id = $c_relation_ids[$index];
       if(!empty($r_id)) continue;
@@ -288,6 +287,7 @@ function pp_ajax_save_attendees_to_order() {
       $relation_id = isset($res['id']) ? $res['id'] : '';
       
       $item_data = [
+        'item_key' => $item_key, 
         'contact_id' => $id,
         'email' => $c_emails[$index],  
         'firstname' => $c_fnames[$index],
@@ -296,11 +296,14 @@ function pp_ajax_save_attendees_to_order() {
         'relation_id' => $relation_id,
       ]; 
 
+      array_push($__SF_CONTACT_FULL, $item_data);
       // wp_send_json($item_data);
-      pp_add_attendees_order($order_id, $item_data);
-      pp_log('----------------------------- '. "\n" .'Event ID: ' . $eventID . "\n" . 'Event Data: ' . wp_json_encode($item_data) . "\n" . '-----------------------------');
+      // pp_add_attendees_order($order_id, $item_data);
     }
   }
+
+  pp_save_attendees_to_order($order_id, $__SF_CONTACT_FULL);
+  pp_log('----------------------------- '. "\n" . 'Event Data: ' . wp_json_encode($__SF_CONTACT_FULL) . "\n" . '-----------------------------');
   
   wp_send_json([
     'success' => true,

@@ -198,7 +198,8 @@
 
       if(success == true) {
         // stepUiController(2);
-        alert('Successfully.'); 
+        // alert('Successfully.'); 
+        w.location.reload();
       } else {
         alert('External Error: Please try again!');
       }
@@ -248,13 +249,15 @@
 
     $('body').on('click', 'form#ADD_ATTENDEES_FORM .__remove-item', function(e) {
       e.preventDefault();
-      let r = confirm('Are you sure delete this item?');
+      let r = confirm('Are you sure clean this slot?');
       if(!r) return;
 
       let std = $(this).find('.__std').text();
       const { rid, orderId } = this.dataset;
       let $tr = $(this).closest('tr.__slot-item');
       // console.log(rid, orderId);
+
+      $tr.addClass('__loading')
       $(document.body).trigger('attendees:remove_slot', [orderId, rid, ({ success }) => {
         if(success == true) {
           resetSlotItem($tr);
@@ -263,6 +266,7 @@
           $tr.find('input[name^="email"]').val('')
           $tr.find('input[name^="email"]').removeAttr('readonly');
           $tr.find('.__slot-number').html(std); 
+          $tr.removeClass('__loading')
         }
       }]);
     })

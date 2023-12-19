@@ -9,20 +9,24 @@ $sf_user_metadata = pp_saleforce_current_user_metadata();
 $account_id = isset($sf_user_metadata['account_id']) ? $sf_user_metadata['account_id'] : '';
 $account_name = isset($sf_user_metadata['salesforce_account']['Name']) ? $sf_user_metadata['salesforce_account']['Name'] : '';
 $attendees = pp_get_attendees_by_order($order_id);
+// echo '<pre>'; print_r($attendees); echo '</pre>'; 
 ?>
 <div class="add-attendees-to-order">
   <div class="add-attendees-to-order__inner add-attendees-container">
     <form id="ADD_ATTENDEES_FORM" action="" method="POST" class="pp-form">
       <?php 
       foreach($order->get_items() as $item_key => $item) {
+        
         // echo '<pre>'; print_r($item); echo '</pre>';
         $course_information = $item->get_meta('course_information');
-        $__SF_CONTACT_FULL = $item->get_meta('__SF_CONTACT_FULL'); 
+        // $__SF_CONTACT_FULL = $item->get_meta('__SF_CONTACT_FULL'); 
         // echo '<pre>'; print_r($course_information); echo '</pre>';
         // echo '<pre>'; print_r($__SF_CONTACT_FULL); echo '</pre>';
         $product_id = $item['product_id'];
         $variation_id = $item['variation_id'];
         $quantity = $item['quantity'];
+        $_attendees = array_values(array_filter($attendees, function($a) use($item_key) { return $item_key == $a['item_key']; }));
+
         if(!isset($course_information) || empty($course_information)) continue;
         // print_r([$product_id, $variation_id, $quantity]);
       ?>
@@ -41,8 +45,9 @@ $attendees = pp_get_attendees_by_order($order_id);
           </thead>
           <tbody>
             <?php for($i = 0; $i <= ($quantity - 1); $i++) : 
-              $slot_item_data = isset($attendees[$i]) ? $attendees[$i] : [];
+              $slot_item_data = isset($_attendees[$i]) ? $_attendees[$i] : [];
               $rid = isset($slot_item_data['relation_id']) ? $slot_item_data['relation_id'] : '';
+              $email = isset($slot_item_data['email']) ? $slot_item_data['email'] : '';
             ?>
             <tr class="__slot-item">
               <td class="__slot-number">
@@ -50,7 +55,7 @@ $attendees = pp_get_attendees_by_order($order_id);
                 if(empty($rid)) {
                   echo '#' . $i + 1;
                 } else {
-                  echo '<a href="#" class="__remove-item" data-rid="'. $rid .'" data-order-id="'. $order_id .'">✕ Remove <span class="__std">#'. $i + 1 .'</span></a>';
+                  echo '<a href="#" class="__remove-item" data-rid="'. $rid .'" data-order-id="'. $order_id .'">✕ Clean <span class="__std">#'. $i + 1 .'</span></a>';
                 }
                 ?>
               </td>
@@ -60,7 +65,7 @@ $attendees = pp_get_attendees_by_order($order_id);
                   name="email[<?php echo $item_key ?>][]" 
                   type="email" 
                   placeholder="<?php _e('Ex: sara@gmail.com', 'pp') ?>" 
-                  <?php echo isset($slot_item_data['email']) ? 'readonly' : '' ?>
+                  <?php echo !empty($rid) ? 'readonly' : '' ?>
                   required 
                   value="<?php echo isset($slot_item_data['email']) ? $slot_item_data['email'] : '' ?>" />
                 <input 
@@ -70,7 +75,7 @@ $attendees = pp_get_attendees_by_order($order_id);
                 <div class="error-message"></div>
                 <input 
                   type="hidden" 
-                  name="relation_id[<?php echo $item_key ?>]" 
+                  name="relation_id[<?php echo $item_key ?>][]" 
                   value="<?php echo $rid; ?>">
               </td>
               <td>
