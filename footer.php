@@ -18,7 +18,7 @@ $facebook = get_field('facebook', 'option');
 $twitter = get_field('twitter', 'option');
 $linkedin = get_field('linkedin', 'option');
 $youtube = get_field('youtube', 'option');
-
+$footer_logo = get_field('footer_logo', 'option');
 $footerLinks = get_field('footer_links', 'option');
 
 ?>
@@ -31,7 +31,7 @@ $footerLinks = get_field('footer_links', 'option');
 		<div class="container pt-3 pb-3">
             <div class="row">
                 <div class="site-logo col-md-3">
-                    <img src="/wp-content/themes/and/assets/imgs/footer-logo.svg" alt="Australian Network on Disability"/>
+                    <img src="<?php echo $footer_logo; ?>" alt="Australian Network on Disability"/>
                 </div>
                 <div class="site-info col-md-9">
                     <div class="row">

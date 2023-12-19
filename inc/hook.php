@@ -34,7 +34,7 @@ function is_member_exist($user_id)
  */
 function and_salesforce_auth_url( $url ) {
 
-    if (home_url() == 'https://and.org.au/') {
+    if ($_SERVER['SERVER_NAME'] == 'and.org.au') {
         return 'https://login.salesforce.com/services/oauth2/token';
     }
     else {
@@ -331,6 +331,80 @@ function get_old_attachments_exist()
     }
     // return $attachments;
 }
+
+function get_user_submissions_exist($user_id, $org_id)
+{
+    $index_args = array(
+        'post_type' => 'submissions',
+        'posts_per_page' => -1,
+        'post_status' => 'publish',
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'meta_query' => array(
+            'relation' => 'AND',
+            array(
+                'key' => 'user_id',
+                'value' => $user_id,
+                'compare' => 'EXISTS',
+            ),
+            array(
+                'key' => 'organisation_id',
+                'value' => $org_id,
+                'compare' => 'EXISTS',
+            ),
+        ),
+    );
+    $index_submissions = get_posts($index_args);
+    $indexs_arr = array();
+
+    return $index_submissions;
+
+    foreach ($index_submissions as $submission) {
+        $indexs_arr[] = $submission->ID;
+    }
+
+    $dcr_args = array(
+        'post_type' => 'dcr_submissions',
+        'posts_per_page' => 1,
+        'post_status' => 'publish',
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'meta_query' => array(
+            'relation' => 'AND',
+            array(
+                'key' => 'user_id',
+                'value' => $user_id,
+                'compare' => '=',
+            ),
+            array(
+                'key' => 'organisation_id',
+                'value' => $org_id,
+                'compare' => '=',
+            ),
+        ),
+    );
+    $dcr_submissions = get_posts($dcr_args);
+    $dcrs_arr = array();
+
+    foreach ($dcr_submissions as $submission) {
+        $dcrs_arr[] = $submission->ID;
+    }
+
+    // Merge Index and DCR submissions
+    if (!empty($indexs_arr) && !empty($dcrs_arr)) {
+        return array_merge($indexs_arr, $dcrs_arr);
+    }
+    elseif (!empty($indexs_arr) && empty($dcrs_arr)) {
+        return $indexs_arr;
+    }
+    elseif (empty($indexs_arr) && !empty($dcrs_arr)) {
+        return $dcrs_arr;
+    }
+    else {
+        return null;
+    }
+}
+
 
 
 

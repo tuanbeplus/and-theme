@@ -2248,7 +2248,14 @@ img.mfp-img {
   src: url("/wp-content/themes/and/assets/fonts/Avenir-Heavy.eot?#iefix") format("embedded-opentype"), url("/wp-content/themes/and/assets/fonts/Avenir-Heavy.woff2") format("woff2"), url("/wp-content/themes/and/assets/fonts/Avenir-Heavy.woff") format("woff"), url("/wp-content/themes/and/assets/fonts/Avenir-Heavy.ttf") format("truetype"), url("/wp-content/themes/and/assets/fonts/Avenir-Heavy.svg#Avenir-Heavy") format("svg");
   font-weight: 900;
   font-style: normal;
-  font-display: swap; }
+  font-display: swap; } 
+
+@font-face {
+  font-family: 'Avenir-Black';
+  src: url("/wp-content/themes/and/assets/fonts/Avenir-Black.ttf") format("truetype");
+  font-weight: bolder;
+  font-style: normal;
+  font-display: swap; } 
 
 /* Hamburger Settings */
 section {

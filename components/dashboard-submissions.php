@@ -15,7 +15,7 @@ $args = array(
 );
 $all_submissions = get_posts($args);
 
-if( get_row_layout() == 'dashboard_submissions' && !empty( $all_submissions ) ):
+if( get_row_layout() == 'dashboard_submissions' ):
 
     $submissions_heading = get_sub_field('submissions_heading');
     ?>

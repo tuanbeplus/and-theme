@@ -211,7 +211,6 @@
 .slides-wrapper .slide-content {
   max-width: 650px;
   padding: 20px 0;
-  min-height: 400px;
 }
 
 .slides-wrapper .slide-content .headline {
@@ -225,7 +224,8 @@
 .slides-wrapper .slide-content .description {
   color: #fff;
   margin-bottom: 30px;
-  font-size: 20px;
+  font-size: 1.25rem;
+  line-height: 140%;
 }
 
 .slides-wrapper .slide-content .cta {
@@ -354,7 +354,6 @@
   .slides-wrapper .slide-content {
     padding-top: 30px;
     max-width: 430px;
-    min-height: 300px;
   }
   .slides-wrapper .template-container .slide-content {
     min-height: 400px;
@@ -417,6 +416,9 @@
   .slides-wrapper .template-container .slide-content {
     min-height: 300px;
   }
+  .slides-wrapper .slide-content .description {
+    font-size: 1.125rem;
+  }
   .slides-wrapper .slide-item .slide-img {
     min-height: 260px;
   }
@@ -439,9 +441,6 @@
 }
 
 @media only screen and (max-width: 400px) {
-  .slides-wrapper .slide-content {
-    min-height: 330px;
-  }
   .slides-wrapper .slide-content .headline {
     font-size: 1.16rem;
   }
@@ -458,7 +457,7 @@
     top: 52%;
   }
   .slides .owl-carousel .owl-dots.template-container {
-    top: 75%;
+    top: 54%;
   }
   .slides .owl-carousel .owl-dots .owl-dot {
     appearance: none;
