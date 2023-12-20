@@ -208,3 +208,12 @@ function pp_form_add_attendees_to_order($order_id) {
   if (!$order->has_status('completed')) return;
   echo do_shortcode('[add_attendees_to_order order_id='. $order_id .']');
 }
+
+add_action('woocommerce_email_customer_details', function($order, $sent_to_admin, $plain_text, $email) {
+  $view_order_url = $order->get_view_order_url();
+  ?>
+  <div style="margin: 15px 0;">
+    <p><?php _e('You can add attendees', 'pp'); ?> <a href="<?php echo $view_order_url; ?>"><?php _e('here', 'pp'); ?></a></p>
+  </div>
+  <?php
+}, 60, 4); 

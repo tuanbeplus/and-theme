@@ -9,7 +9,7 @@ $sf_user_metadata = pp_saleforce_current_user_metadata();
 $account_id = isset($sf_user_metadata['account_id']) ? $sf_user_metadata['account_id'] : '';
 $account_name = isset($sf_user_metadata['salesforce_account']['Name']) ? $sf_user_metadata['salesforce_account']['Name'] : '';
 $attendees = pp_get_attendees_by_order($order_id);
-echo '<pre>'; print_r($attendees); echo '</pre>'; 
+// echo '<pre>'; print_r($attendees); echo '</pre>'; 
 ?>
 <div class="add-attendees-to-order">
   <div class="add-attendees-to-order__inner add-attendees-container">
@@ -20,7 +20,7 @@ echo '<pre>'; print_r($attendees); echo '</pre>';
         // echo '<pre>'; print_r($item); echo '</pre>';
         $course_information = $item->get_meta('course_information');
         // $__SF_CONTACT_FULL = $item->get_meta('__SF_CONTACT_FULL'); 
-        echo '<pre>'; print_r($course_information); echo '</pre>';
+        // echo '<pre>'; print_r($course_information); echo '</pre>';
         // echo '<pre>'; print_r($__SF_CONTACT_FULL); echo '</pre>';
         $product_id = $item['product_id'];
         $variation_id = $item['variation_id'];
