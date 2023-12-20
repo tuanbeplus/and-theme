@@ -130,7 +130,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <div id="page" class="site">
 
-<script id="UsableNetSeal" data-color="dark" data-position="left" async="true" src="https://a11ystatus.usablenet.com/lv/and/6c89cc217d5b3efdeaa9328a94b157ed2ba13ef1d4/status"></script>
+<!-- <script id="UsableNetSeal" data-color="dark" data-position="left" async="true" src="https://a11ystatus.usablenet.com/lv/and/6c89cc217d5b3efdeaa9328a94b157ed2ba13ef1d4/status"></script> -->
 
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'wp-bootstrap-starter' ); ?></a>
 
