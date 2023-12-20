@@ -265,6 +265,7 @@ function pp_ajax_save_attendees_to_order() {
   $items = $order->get_items();
   $cart = $woocommerce->cart->cart_contents;
   $__SF_CONTACT_FULL = [];
+  $__ATTENDEES = pp_get_attendees_by_order($order_id);
 
   foreach ( $items as $item_key => $item ) {
     if(!isset($_POST['contact_id'][$item_key])) continue;
@@ -281,7 +282,11 @@ function pp_ajax_save_attendees_to_order() {
 
     foreach($c_IDs as $index => $id) {
       $r_id = $c_relation_ids[$index];
-      if(!empty($r_id)) continue;
+      if(!empty($r_id)) {
+        $found_index = array_search($r_id, array_column($__ATTENDEES, 'relation_id'));
+        array_push($__SF_CONTACT_FULL, $__ATTENDEES[$found_index]);
+        continue; 
+      }
       
       $res = ppsf_add_EventRelation($eventID, $id); // and_create_an_event_relation_on_salesforce($eventID, $id);
       $relation_id = isset($res['id']) ? $res['id'] : '';

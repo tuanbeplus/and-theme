@@ -1978,6 +1978,50 @@ body.__show-pp-popup-add-new-contact .pp-popup-add-new-contact {
   line-height: 1.5rem;
 }
 
+ul.woocommerce-thankyou-order-details {
+  padding: 1em;
+  background: white;
+}
+ul.woocommerce-thankyou-order-details > li {
+  border-right: 1px solid #cfc8d8 !important;
+  text-transform: initial !important;
+  font-size: 1em !important;
+}
+ul.woocommerce-thankyou-order-details > li strong {
+  font-size: 1em !important;
+  margin-top: 0.4em;
+}
+
+table.woocommerce-table--order-details th {
+  background: #f9f9f9;
+}
+table.woocommerce-table--order-details th, table.woocommerce-table--order-details td, table.woocommerce-table--order-details p {
+  font-size: 16px;
+}
+
+p.order-again {
+  text-align: right;
+}
+p.order-again a.button {
+  background: var(--accent-color);
+  color: white;
+  border-radius: 1px;
+  font-size: 16px;
+  padding: 1em 2em;
+}
+p.order-again a.button:hover {
+  opacity: 0.8;
+  background: var(--accent-color);
+  color: white;
+}
+
+.woocommerce-customer-details address {
+  background: white;
+  border-radius: 1px !important;
+  padding: 1em !important;
+  line-height: 1.5em;
+}
+
 .woocommerce-account .page-container {
   margin-bottom: 3rem;
 }
