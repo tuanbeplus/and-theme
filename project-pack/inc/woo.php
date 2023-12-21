@@ -213,7 +213,7 @@ add_action('woocommerce_email_customer_details', function($order, $sent_to_admin
   $view_order_url = $order->get_view_order_url();
   ?>
   <div style="margin: 15px 0;">
-    <a href="<?php echo $view_order_url; ?>" style="color: white; font-size: 18px; background: #6e3685; display: inline-block; width: 100%; padding: 10px 20px; border-radius: 3px;"><?php _e('You can add attendees here.', 'pp'); ?></a>
+    <a href="<?php echo $view_order_url; ?>" style="color: white; font-size: 18px; background: #6e3685; display: inline-block; width: 100%; padding: 10px 20px; border-radius: 3px; text-align: center;"><?php _e('You can add attendees here.', 'pp'); ?></a>
   </div>
   <?php
 }, 60, 4); 
