@@ -85,7 +85,7 @@ function and_get_user_capabilities( $user = null ) {
  * Add Exclude from search field to Submit box
  *
  */
-// add_action( 'post_submitbox_misc_actions', 'add_excluded_post_from_search_field');
+add_action( 'post_submitbox_misc_actions', 'add_excluded_post_from_search_field');
 function add_excluded_post_from_search_field($post)
 {
     $value = get_post_meta($post->ID, 'exclude_post_from_search', true);
@@ -108,7 +108,7 @@ function add_excluded_post_from_search_field($post)
  * Save Exclude from search meta
  *
  */
-// add_action('save_post', 'save_exclude_post_from_search');
+add_action('save_post', 'save_exclude_post_from_search');
 function save_exclude_post_from_search($post_id)
 {   
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return false;
@@ -345,19 +345,17 @@ function get_user_submissions_exist($user_id, $org_id)
             array(
                 'key' => 'user_id',
                 'value' => $user_id,
-                'compare' => 'EXISTS',
+                'compare' => '=',
             ),
             array(
                 'key' => 'organisation_id',
                 'value' => $org_id,
-                'compare' => 'EXISTS',
+                'compare' => '=',
             ),
         ),
     );
     $index_submissions = get_posts($index_args);
     $indexs_arr = array();
-
-    return $index_submissions;
 
     foreach ($index_submissions as $submission) {
         $indexs_arr[] = $submission->ID;
@@ -401,7 +399,7 @@ function get_user_submissions_exist($user_id, $org_id)
         return $dcrs_arr;
     }
     else {
-        return null;
+        return array();
     }
 }
 

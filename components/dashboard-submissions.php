@@ -1,21 +1,12 @@
 <?php
-// Get submissions survey from backend
-$user_id = $_COOKIE['userId'];
-$args = array(
-    'post_type' => 'submissions',
-    'posts_per_page' => -1,
-    'meta_query' => array(
-        'relation' => 'AND',
-        array(
-            'key' => 'user_id',
-            'value' => $user_id,
-            'compare' => '=',
-        ),
-    ),
-);
-$all_submissions = get_posts($args);
 
-if( get_row_layout() == 'dashboard_submissions' ):
+global $account_id;
+$user_id = $_COOKIE['userId'];
+
+// Get submissions survey from backend
+$all_submissions = get_user_submissions_exist($user_id, $account_id);
+
+if( get_row_layout() == 'dashboard_submissions' && !empty($all_submissions) ):
 
     $submissions_heading = get_sub_field('submissions_heading');
     ?>
@@ -38,10 +29,10 @@ if( get_row_layout() == 'dashboard_submissions' ):
                           <?php
                             if ( !empty( $all_submissions ) ) {
                                 // Show submissions
-                                foreach ($all_submissions as $key => $subs) { ?>
+                                foreach ($all_submissions as $submission_id) { ?>
                                     <li>
-                                        <a href="<?php echo get_permalink($subs->ID) ?>" target="_blank" style="color:#A22F2C;">
-                                            <?php echo $subs->post_title; ?>
+                                        <a href="<?php echo get_permalink($submission_id) ?>" target="_blank" style="color:#A22F2C;">
+                                            <?php echo get_the_title($submission_id); ?>
                                         </a>
                                     </li>
                                 <?php
