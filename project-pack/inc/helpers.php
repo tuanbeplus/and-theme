@@ -255,3 +255,10 @@ function pp_log($log_msg) {
   file_put_contents($log_file_data, $current_time .  ' — ' . $log_msg . "\n", FILE_APPEND);
 }
 
+function pp_save_Pricebook2($data) {
+  update_option('__PP_PRICEBOOK2', $data);
+}
+
+function pp_get_wp_Pricebook2() {
+  return get_option('__PP_PRICEBOOK2');
+}

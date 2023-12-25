@@ -351,8 +351,33 @@ function pp_prepare_data_import_events() {
     }
   }
 
-  return $product_need_import;
+  return apply_filters('PPSF:PRODUCT_NEED_IMPORT', $product_need_import);
 }
+
+add_filter('PPSF:PRODUCT_NEED_IMPORT', function($SF_Product2_import) {
+  $Pricebook2_data = ppsf_get_Pricebook2();
+  $Pricebook2 = $Pricebook2_data['records'];
+
+  $SF_Product2_import = array_map(function($p) use($Pricebook2) {
+    $prices = ppsft_get_PricebookEntry_by_Product2ID($p['Id']);
+    $records = isset($prices['records']) ? $prices['records'] : [];
+    $p['__prices'] = array_map(function($r) use($Pricebook2) {
+      $found_key = array_search($r['Pricebook2Id'], array_column($Pricebook2, 'Id'));
+
+      return [
+        'Id' => $r['Id'],
+        'Pricebook2Id' => $r['Pricebook2Id'],
+        'Product2Id' => $r['Product2Id'],
+        'UnitPrice' => $r['UnitPrice'],
+        'Name' => $r['Name'],
+        'Pricebook2' => isset($Pricebook2[$found_key]) ? $Pricebook2[$found_key] : [],
+      ];
+    }, $records);
+    return $p;
+  }, $SF_Product2_import);
+
+  return $SF_Product2_import;
+});
 
 add_action('wp_ajax_pp_ajax_prepare_data_import_events', 'pp_ajax_prepare_data_import_events');
 add_action('wp_ajax_nopriv_pp_ajax_prepare_data_import_events', 'pp_ajax_prepare_data_import_events');

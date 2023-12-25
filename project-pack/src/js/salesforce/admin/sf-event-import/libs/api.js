@@ -53,3 +53,15 @@ export const get_EventRelationByEventId = async (event_id) => {
     event_id,
   })
 }
+
+export const syncPricebook2 = async () => {
+  return await __Request({
+    action: 'pp_ajax_sync_Pricebook2'
+  })
+}
+
+export const getWpPricebook2 = async () => {
+  return await __Request({
+    action: 'pp_ajax_get_wp_Pricebook2'
+  });
+}

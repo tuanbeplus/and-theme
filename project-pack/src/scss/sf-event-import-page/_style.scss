@@ -39,6 +39,10 @@
   &__sidebar {
     width: 250px;
   }
+
+  &__widget {
+    margin-bottom: 3em;
+  }
 }
 
 .pp-table {
@@ -384,5 +388,28 @@ table.products-table {
       padding: 0.5em;
       
     }
+  }
+}
+
+.pp-panel__widget-Pricebook2 {
+
+  ul {
+    background: white;
+    padding: 1.5em;
+
+    li {
+      border-bottom: solid 1px #e0e0e0;
+      padding: 4px 0;
+    }
+  }
+}
+
+.ppsf-product-price-import {
+
+  &__item {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px; 
   }
 }

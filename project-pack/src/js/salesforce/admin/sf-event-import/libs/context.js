@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getJunctions, eventsImported, getEvents, prepareDataImportEvents, getAllProductsEventsImportedValidate } from './api';
+import { getJunctions, eventsImported, getEvents, prepareDataImportEvents, getAllProductsEventsImportedValidate, syncPricebook2, getWpPricebook2 } from './api';
 import { RandomColor } from './helpers';
 
 const SFEventContext = createContext();
@@ -13,6 +13,7 @@ const SFEventContext_Provider = ({ children }) => {
   const [ImportProducts, setImportProducts] = useState([]);
   const [ProductsImported, setProductsImported] = useState([]);
   const [loadingItems, setLoadingItems] = useState([]);
+  const [pricebook2Data, setPricebook2Data] = useState([]);
   const [Loading, setLoading] = useState(true);
 
   const _getJunctions = async () => {
@@ -49,6 +50,12 @@ const SFEventContext_Provider = ({ children }) => {
     setProductsImported(res);
   }
 
+  const _getWpPricebook2 = async() => {
+    const res = await getWpPricebook2();
+    setPricebook2Data(res);
+    // console.log(res);
+  }
+
   useEffect(() => {
 
     const dataInit = async () => {
@@ -57,6 +64,7 @@ const SFEventContext_Provider = ({ children }) => {
       await _prepareDataImportEvents();
       await _getJunctions();
       await _getAllProductsEventsImportedValidate();
+      await _getWpPricebook2();
       setLoading(false);
     }
 
@@ -73,6 +81,7 @@ const SFEventContext_Provider = ({ children }) => {
 
       if(pItem.__imported == true) {
         pItem.__product_edit_url = find.parent.product_edit_url;
+        pItem.__product_id = find.parent.woo_product_parent_id;  
 
         const __events = Object.values(pItem.__events).map((eItem) => {
 
@@ -187,6 +196,12 @@ const SFEventContext_Provider = ({ children }) => {
     validateImportProducts();
   }, [ProductsImported])
 
+  const syncPricebook2Data = async () => {
+    console.log('start syncPricebook2...');
+    const res = await syncPricebook2();
+    console.log(res);
+  }
+
   const value = {
     version: '1.0.0',
     Junctions, setJunctions,
@@ -199,7 +214,9 @@ const SFEventContext_Provider = ({ children }) => {
     ProductsImported, setProductsImported,
     _getAllProductsEventsImportedValidate,
     loadingItems, setLoadingItems,
-    Loading, setLoading
+    Loading, setLoading, 
+    syncPricebook2Data,
+    pricebook2Data, setPricebook2Data
   }
 
   return <SFEventContext.Provider value={ value }>

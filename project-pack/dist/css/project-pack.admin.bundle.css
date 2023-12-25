@@ -35,6 +35,9 @@
 .pp-panel__sidebar {
   width: 250px;
 }
+.pp-panel__widget {
+  margin-bottom: 3em;
+}
 
 .pp-table {
   border-collapse: collapse;
@@ -342,6 +345,22 @@ table.products-table tr.__imported > td:first-child {
   background: #c65e3c;
   color: white;
   padding: 0.5em;
+}
+
+.pp-panel__widget-Pricebook2 ul {
+  background: white;
+  padding: 1.5em;
+}
+.pp-panel__widget-Pricebook2 ul li {
+  border-bottom: solid 1px #e0e0e0;
+  padding: 4px 0;
+}
+
+.ppsf-product-price-import__item {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
 }
 
 .pp-product-variable-custom-field {

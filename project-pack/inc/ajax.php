@@ -334,3 +334,21 @@ function pp_ajax_remove_slot_attendees() {
 
 add_action('wp_ajax_pp_ajax_remove_slot_attendees', 'pp_ajax_remove_slot_attendees');
 add_action('wp_ajax_nopriv_pp_ajax_remove_slot_attendees', 'pp_ajax_remove_slot_attendees');
+
+function pp_ajax_sync_Pricebook2() {
+  $res = ppsf_get_Pricebook2();
+  $records = isset($res['records']) ? $res['records'] : [];
+  pp_save_Pricebook2($records);
+  wp_send_json($records);
+}
+
+add_action('wp_ajax_pp_ajax_sync_Pricebook2', 'pp_ajax_sync_Pricebook2');
+add_action('wp_ajax_nopriv_pp_ajax_sync_Pricebook2', 'pp_ajax_sync_Pricebook2');
+
+function pp_ajax_get_wp_Pricebook2() {
+  $wp_Pricebook2 = pp_get_wp_Pricebook2();
+  wp_send_json(($wp_Pricebook2 ? $wp_Pricebook2 : []));
+}
+
+add_action('wp_ajax_pp_ajax_get_wp_Pricebook2', 'pp_ajax_get_wp_Pricebook2');
+add_action('wp_ajax_nopriv_pp_ajax_get_wp_Pricebook2', 'pp_ajax_get_wp_Pricebook2');

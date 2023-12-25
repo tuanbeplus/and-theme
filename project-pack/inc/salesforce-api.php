@@ -245,3 +245,27 @@ function ppsf_add_new_contact($fields) {
   ], 'POST'); 
   return json_decode( wp_remote_retrieve_body( $response ), true );
 }
+
+function ppsf_get_Pricebook2() {
+  list(
+    'endpoint' => $endpoint,
+    'version' => $version,
+  ) = ppsf_api_info();
+
+  $sql = "SELECT FIELDS(ALL) FROM Pricebook2 LIMIT 200";
+  $url = $endpoint . '/services/data/'. $version .'/query/?q=' . urlencode($sql);
+  $response = ppsf_remote_post($url);
+  return json_decode( wp_remote_retrieve_body( $response ), true );
+}
+
+function ppsft_get_PricebookEntry_by_Product2ID($product2ID) {
+  list(
+    'endpoint' => $endpoint,
+    'version' => $version,
+  ) = ppsf_api_info();
+
+  $sql = "SELECT FIELDS(ALL) FROM PricebookEntry WHERE Product2Id='". $product2ID ."' LIMIT 200";
+  $url = $endpoint . '/services/data/'. $version .'/query/?q=' . urlencode($sql);
+  $response = ppsf_remote_post($url);
+  return json_decode( wp_remote_retrieve_body( $response ), true );
+}

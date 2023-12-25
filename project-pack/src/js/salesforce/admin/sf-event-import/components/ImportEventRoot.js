@@ -5,9 +5,10 @@ import ImportInfoWidget from "./ImportInfoWidget";
 import Tabs from "./Tabs";
 // import EventsTable from "./EventsTable";
 import ProductImportTable from "./ProductImportTable";
+import Pricebook2Widget from "./Pricebook2Widget";
 
 export default function ImportEventRoot() {
-  const { Junctions, JunctionsSize, Loading } = useSFEventContext();
+  const { Junctions, JunctionsSize, Loading, pricebook2Data } = useSFEventContext();
   const [tabActive, setTabActive] = useState('ProductImportTable')
 
   return <div>
@@ -42,6 +43,7 @@ export default function ImportEventRoot() {
         </div>
         <div className="pp-panel__sidebar">
           <ImportInfoWidget title="Import Informations" />
+          <Pricebook2Widget title="Pricebook2" data={ pricebook2Data } />
         </div>
       </div>
     </div>

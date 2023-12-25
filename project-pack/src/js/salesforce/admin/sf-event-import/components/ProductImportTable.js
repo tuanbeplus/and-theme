@@ -45,6 +45,30 @@ export default function ProductImportTable() {
       },
     },
     {
+      key: '3e86dc7f-72b3-4ceb-86ae-d1d6e468563e',
+      label: 'Price',
+      field: (item) => {
+        return <div className="ppsf-product-price-import">
+          {
+            item.__prices.length > 0 &&
+            item.__prices.map(price => {
+              return <div className="ppsf-product-price-import__item" key={ price.Id } title={ price?.Pricebook2?.Name }>
+                ${ price.UnitPrice } — { price?.Pricebook2?.Name }
+              </div>
+            })
+          }
+          { 
+            (item.__imported == true 
+            ? <>
+              <hr />
+              <button className="pp-button" onClick={ e => { e.preventDefault(); console.log(item) } }>Update Price</button>
+            </>
+            : '') 
+          }
+        </div>
+      }
+    },
+    {
       key: '1d070b76-386d-4c0d-ac8e-eb428d16d4eb',
       label: 'Family (Category)',
       field: 'Family',
