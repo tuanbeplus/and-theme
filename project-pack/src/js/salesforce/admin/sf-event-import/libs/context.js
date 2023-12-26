@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getJunctions, eventsImported, getEvents, prepareDataImportEvents, getAllProductsEventsImportedValidate, syncPricebook2, getWpPricebook2 } from './api';
+import { getJunctions, eventsImported, getEvents, prepareDataImportEvents, getAllProductsEventsImportedValidate, syncPricebook2, getWpPricebook2, setProductPrice } from './api';
 import { RandomColor } from './helpers';
 
 const SFEventContext = createContext();
@@ -202,6 +202,15 @@ const SFEventContext_Provider = ({ children }) => {
     console.log(res);
   }
 
+  const __productSetPrice = async (productParentID, prices) => {
+    // console.log(productParentID, prices);
+    const res = await setProductPrice({
+      productParentID, prices
+    });
+    
+    console.log(res);
+  }
+
   const value = {
     version: '1.0.0',
     Junctions, setJunctions,
@@ -216,7 +225,8 @@ const SFEventContext_Provider = ({ children }) => {
     loadingItems, setLoadingItems,
     Loading, setLoading, 
     syncPricebook2Data,
-    pricebook2Data, setPricebook2Data
+    pricebook2Data, setPricebook2Data,
+    __productSetPrice
   }
 
   return <SFEventContext.Provider value={ value }>

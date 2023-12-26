@@ -473,7 +473,8 @@ function ProductImportTable() {
     _getAllProductsEventsImportedValidate = _useSFEventContext._getAllProductsEventsImportedValidate,
     loadingItems = _useSFEventContext.loadingItems,
     setLoadingItems = _useSFEventContext.setLoadingItems,
-    Loading = _useSFEventContext.Loading;
+    Loading = _useSFEventContext.Loading,
+    __productSetPrice = _useSFEventContext.__productSetPrice;
   var tableData = [{
     key: '93a07b94-37b5-4556-9622-15c389eb46ae',
     label: function label() {
@@ -517,8 +518,9 @@ function ProductImportTable() {
         className: "ppsf-product-price-import",
         children: [item.__prices.length > 0 && item.__prices.map(function (price) {
           var _price$Pricebook, _price$Pricebook2;
+          var classes = window.PP_ADMIN_DATA.PRICEBOOK2_BASE_PRICE_ID == (price === null || price === void 0 ? void 0 : price.Pricebook2Id) ? '__base-price' : '';
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-            className: "ppsf-product-price-import__item",
+            className: ['ppsf-product-price-import__item', classes].join(' '),
             title: price === null || price === void 0 ? void 0 : (_price$Pricebook = price.Pricebook2) === null || _price$Pricebook === void 0 ? void 0 : _price$Pricebook.Name,
             children: ["$", price.UnitPrice, " \u2014 ", price === null || price === void 0 ? void 0 : (_price$Pricebook2 = price.Pricebook2) === null || _price$Pricebook2 === void 0 ? void 0 : _price$Pricebook2.Name]
           }, price.Id);
@@ -527,7 +529,7 @@ function ProductImportTable() {
             className: "pp-button",
             onClick: function onClick(e) {
               e.preventDefault();
-              console.log(item);
+              __productSetPrice(item.__product_id, item.__prices);
             },
             children: "Update Price"
           })]
@@ -802,6 +804,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getWpPricebook2: () => (/* binding */ getWpPricebook2),
 /* harmony export */   get_EventRelationByEventId: () => (/* binding */ get_EventRelationByEventId),
 /* harmony export */   prepareDataImportEvents: () => (/* binding */ prepareDataImportEvents),
+/* harmony export */   setProductPrice: () => (/* binding */ setProductPrice),
 /* harmony export */   syncPricebook2: () => (/* binding */ syncPricebook2)
 /* harmony export */ });
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
@@ -1022,6 +1025,28 @@ var getWpPricebook2 = /*#__PURE__*/function () {
   }));
   return function getWpPricebook2() {
     return _ref10.apply(this, arguments);
+  };
+}();
+var setProductPrice = /*#__PURE__*/function () {
+  var _ref11 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee11(data) {
+    return _regeneratorRuntime().wrap(function _callee11$(_context11) {
+      while (1) switch (_context11.prev = _context11.next) {
+        case 0:
+          _context11.next = 2;
+          return __Request({
+            action: 'pp_ajax_set_product_price',
+            data: data
+          });
+        case 2:
+          return _context11.abrupt("return", _context11.sent);
+        case 3:
+        case "end":
+          return _context11.stop();
+      }
+    }, _callee11);
+  }));
+  return function setProductPrice(_x3) {
+    return _ref11.apply(this, arguments);
   };
 }();
 
@@ -1409,6 +1434,30 @@ var SFEventContext_Provider = function SFEventContext_Provider(_ref) {
       return _ref9.apply(this, arguments);
     };
   }();
+  var __productSetPrice = /*#__PURE__*/function () {
+    var _ref10 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9(productParentID, prices) {
+      var res;
+      return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+        while (1) switch (_context9.prev = _context9.next) {
+          case 0:
+            _context9.next = 2;
+            return (0,_api__WEBPACK_IMPORTED_MODULE_1__.setProductPrice)({
+              productParentID: productParentID,
+              prices: prices
+            });
+          case 2:
+            res = _context9.sent;
+            console.log(res);
+          case 4:
+          case "end":
+            return _context9.stop();
+        }
+      }, _callee9);
+    }));
+    return function __productSetPrice(_x2, _x3) {
+      return _ref10.apply(this, arguments);
+    };
+  }();
   var value = {
     version: '1.0.0',
     Junctions: Junctions,
@@ -1433,7 +1482,8 @@ var SFEventContext_Provider = function SFEventContext_Provider(_ref) {
     setLoading: setLoading,
     syncPricebook2Data: syncPricebook2Data,
     pricebook2Data: pricebook2Data,
-    setPricebook2Data: setPricebook2Data
+    setPricebook2Data: setPricebook2Data,
+    __productSetPrice: __productSetPrice
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(SFEventContext.Provider, {
     value: value,

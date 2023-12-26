@@ -411,5 +411,15 @@ table.products-table {
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 220px; 
+    margin: 3px 0;
+
+    &.__base-price {
+      border: solid 1px #7da84c;
+      padding: 1px 3px;
+      line-height: normal;
+      background: #8BC34A;
+      color: white;
+      border-radius: 3px;
+    }
   }
 }

@@ -85,7 +85,7 @@ function ppsf_event_check_product_child_exists_by_junctionid($productParentId, $
   return ($res && count($res) > 0) ? $res[0]->ID : false; 
 }
 
-function ppsf_event_add_product_child($data, $productParentId) {
+function ppsf_event_add_product_child($data, $productParentId, $prices = []) {
   $default = [
     // 'DurationInMinutes' => '',
     // 'Id' => '',
@@ -101,6 +101,13 @@ function ppsf_event_add_product_child($data, $productParentId) {
     'WpEventId' => '',
   ];
   $_args = wp_parse_args($data, $default);
+  
+  $base_price_id = ppsf_base_Pricebook2_base_price_id();
+  $found_key = array_search($base_price_id, array_column($prices, 'Pricebook2Id'));
+  $UnitPrice = '';
+  if($found_key !== false) {
+    $UnitPrice = floatval($prices[$found_key]['UnitPrice']);
+  }
 
   $WpEventId = $_args['WpEventId'];
   $opt_name = $_args['Subject'];
@@ -150,8 +157,16 @@ function ppsf_event_add_product_child($data, $productParentId) {
   $variation->set_attributes(['events' => $opt_name]);
   $variation->set_name($opt_name);   
 
+  // set price $UnitPrice
+  if($UnitPrice) {
+    $variation->set_price($UnitPrice);
+  } 
+  
+
   $variation->set_manage_stock(true); 
-  $variation->set_stock_quantity((int) $stock_quantity);   
+  $variation->set_stock_quantity((int) $stock_quantity);  
+  
+  do_action('PPSF:AFTER_IMPORT_VARIATION', $variation, $productParentId, $prices);
 
   $variation->save(); 
 
@@ -249,7 +264,9 @@ function ppsf_event_import_sfevent_to_wpevent_cpt($eventData = []) {
 }
 
 function ppsf_event_product_import($data) {
+  // wp_send_json($data);
   $WooProductParentId = ppsf_event_create_product_parent($data);
+  $__prices = $data['__prices'];
   $result = [
     'parent' => [
       'product_sfid' => $data['Id'],
@@ -266,7 +283,7 @@ function ppsf_event_product_import($data) {
 
       $WpEventId = ppsf_event_import_sfevent_to_wpevent_cpt($eItem);
       $eItem['WpEventId'] = $WpEventId;
-      $WpProductChildId = ppsf_event_add_product_child($eItem, $WooProductParentId);
+      $WpProductChildId = ppsf_event_add_product_child($eItem, $WooProductParentId, $__prices); 
 
       array_push($result['childrens'], [
         'event_sfid' => $eItem['Id'],

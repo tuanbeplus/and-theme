@@ -217,3 +217,46 @@ add_action('woocommerce_email_customer_details', function($order, $sent_to_admin
   </div>
   <?php
 }, 60, 4); 
+
+function ppsf_base_Pricebook2_base_price_id() {
+  // 01s9h000000W1dhAAC (Ecommerce Price Book)
+  return '01s9h000000W1dhAAC';
+}
+
+/**
+ * set product price
+ * 
+ * @param number $productParentId
+ * @param array $prices
+ */
+function ppsf_set_product_price($productParentId = 0, $prices = []) {
+  if(!$productParentId) return;
+  $args = $visible_only_args = array( 
+    'post_parent' => (int) $productParentId, 
+    'post_type'   => 'product_variation', 
+    'orderby'     => array( 'menu_order' => 'ASC', 'ID' => 'ASC' ), 
+    'fields'      => 'ids', 
+    'post_status' => 'publish', 
+    'numberposts' => -1, 
+  );
+
+  $Pricebook2_base_price_id = ppsf_base_Pricebook2_base_price_id();
+  $found_key = array_search($Pricebook2_base_price_id, array_column($prices, 'Pricebook2Id'));
+  if($found_key === false) return;
+  $_regular_price = floatval($prices[$found_key]['UnitPrice']);
+  // wp_send_json($prices);
+
+  $products = get_children($args);
+  if($products && count($products) > 0) {
+    foreach($products as $_index => $pid) {
+      // $product_variation = new WC_Product_Variation($pid);
+      update_post_meta($pid, '_regular_price', $_regular_price);
+      do_action('PPSF::AFTER_UPDATE_REGULAR_PRICE_PRODUCT_CHILD_EACH', $pid, (int) $productParentId, $prices);
+    }
+  } 
+  
+  wp_send_json([
+    'success' => $productParentId,
+    'data' => $products,
+  ]);
+}

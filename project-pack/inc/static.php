@@ -30,6 +30,10 @@ function pp_admin_enqueue_scripts() {
   wp_enqueue_style( 'pp-admin-style', PP_URI . '/dist/css/project-pack.admin.bundle.css', false, PP_VER );
 
   wp_enqueue_script( 'pp-salesforce-admin-script', PP_URI . '/dist/salesforce.admin.bundle.js', ['jquery'], PP_VER, true );
+  
+  wp_localize_script('pp-admin-script', 'PP_ADMIN_DATA', [
+    'PRICEBOOK2_BASE_PRICE_ID' => ppsf_base_Pricebook2_base_price_id(),
+  ]);
 }
 
 add_action( 'admin_enqueue_scripts', 'pp_admin_enqueue_scripts' );

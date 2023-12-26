@@ -352,3 +352,11 @@ function pp_ajax_get_wp_Pricebook2() {
 
 add_action('wp_ajax_pp_ajax_get_wp_Pricebook2', 'pp_ajax_get_wp_Pricebook2');
 add_action('wp_ajax_nopriv_pp_ajax_get_wp_Pricebook2', 'pp_ajax_get_wp_Pricebook2');
+
+function pp_ajax_set_product_price() {
+  // wp_send_json($_POST);
+  ppsf_set_product_price($_POST['data']['productParentID'], $_POST['data']['prices']);
+}
+
+add_action('wp_ajax_pp_ajax_set_product_price', 'pp_ajax_set_product_price');
+add_action('wp_ajax_nopriv_pp_ajax_set_product_price', 'pp_ajax_set_product_price');

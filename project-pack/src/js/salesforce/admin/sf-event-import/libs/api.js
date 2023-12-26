@@ -65,3 +65,10 @@ export const getWpPricebook2 = async () => {
     action: 'pp_ajax_get_wp_Pricebook2'
   });
 }
+
+export const setProductPrice = async (data) => {
+  return await __Request({
+    action: 'pp_ajax_set_product_price',
+    data
+  })
+}

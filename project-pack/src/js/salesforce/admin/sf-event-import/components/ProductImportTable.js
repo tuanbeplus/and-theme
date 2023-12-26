@@ -14,7 +14,9 @@ export default function ProductImportTable() {
     ImportProducts, 
     _getAllProductsEventsImportedValidate, 
     loadingItems, 
-    setLoadingItems, Loading } = useSFEventContext();
+    setLoadingItems, 
+    Loading, 
+    __productSetPrice } = useSFEventContext();
 
   const tableData = [
     {
@@ -52,7 +54,8 @@ export default function ProductImportTable() {
           {
             item.__prices.length > 0 &&
             item.__prices.map(price => {
-              return <div className="ppsf-product-price-import__item" key={ price.Id } title={ price?.Pricebook2?.Name }>
+              let classes = (window.PP_ADMIN_DATA.PRICEBOOK2_BASE_PRICE_ID == price?.Pricebook2Id ? '__base-price' : '' )
+              return <div className={ ['ppsf-product-price-import__item', classes].join(' ') } key={ price.Id } title={ price?.Pricebook2?.Name }>
                 ${ price.UnitPrice } — { price?.Pricebook2?.Name }
               </div>
             })
@@ -61,7 +64,10 @@ export default function ProductImportTable() {
             (item.__imported == true 
             ? <>
               <hr />
-              <button className="pp-button" onClick={ e => { e.preventDefault(); console.log(item) } }>Update Price</button>
+              <button className="pp-button" onClick={ e => { 
+                e.preventDefault(); 
+                __productSetPrice(item.__product_id, item.__prices);
+              } }>Update Price</button> 
             </>
             : '') 
           }
