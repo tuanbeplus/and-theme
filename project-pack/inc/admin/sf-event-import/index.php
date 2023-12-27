@@ -157,6 +157,8 @@ function ppsf_add_event($event_data) {
       'workshop_times__c' => $event_data['Workshop_Times__c'],
       'total_number_of_seats__c' => $event_data['Total_Number_of_Seats__c'],
       'remaining_seats__c' => $event_data['Remaining_Seats__c'],
+      'startdatetime' => $event_data['StartDateTime'],
+      'enddatetime' => $event_data['EndDateTime']
     ], $event_data);
 
     foreach($custom_fields as $name => $value) {
@@ -204,6 +206,8 @@ function ppwc_get_all_events() {
       'workshop_times__c' => get_post_meta($e->ID, 'workshop_times__c', true),
       'total_number_of_seats__c' => get_post_meta($e->ID, 'total_number_of_seats__c', true),
       'remaining_seats__c' => get_post_meta($e->ID, 'remaining_seats__c', true),
+      'startdatetime' => get_post_meta($e->ID, 'StartDateTime', true),
+      'enddatetime' => get_post_meta($e->ID, 'EndDateTime', true),
     ];
 
     return $p;
@@ -303,6 +307,8 @@ function pp_get_event_data_by_id($eID) {
     'workshop_times__c' => get_post_meta($e->ID, 'workshop_times__c', true),
     'total_number_of_seats__c' => get_post_meta($e->ID, 'total_number_of_seats__c', true),
     'remaining_seats__c' => get_post_meta($e->ID, 'remaining_seats__c', true),
+    'startdatetime' => get_post_meta($e->ID, 'StartDateTime', true),
+    'enddatetime' => get_post_meta($e->ID, 'EndDateTime', true),
   ];
 }
 

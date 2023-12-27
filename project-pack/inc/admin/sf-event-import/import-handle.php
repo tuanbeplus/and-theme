@@ -252,6 +252,8 @@ function ppsf_event_import_sfevent_to_wpevent_cpt($eventData = []) {
     'remaining_seats__c' => $eventData['Remaining_Seats__c'],
     'whatid' => $eventData['WhatId'],
     'whoid' => $eventData['WhoId'],
+    'startdatetime' => $eventData['StartDateTime'],
+    'enddatetime' => $eventData['EndDateTime']
   ], $eventData);
 
   foreach($custom_fields as $name => $value) {
@@ -304,6 +306,8 @@ function ppsf_event_get_wpevent_data_by_id($WpEventId) {
     'workshop_times__c' => get_post_meta($WpEventId, 'workshop_times__c', true),
     'total_number_of_seats__c' => get_post_meta($WpEventId, 'total_number_of_seats__c', true),
     'remaining_seats__c' => get_post_meta($WpEventId, 'remaining_seats__c', true),
+    'startdatetime' => get_post_meta($WpEventId, 'StartDateTime', true),
+    'enddatetime' => get_post_meta($WpEventId, 'EndDateTime', true),
     'whatid' => get_post_meta($WpEventId, 'whatid', true),
     'whoid' => get_post_meta($WpEventId, 'whoid', true),
   ];

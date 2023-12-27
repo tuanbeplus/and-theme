@@ -20,6 +20,8 @@ function sf_get_event_data_from_salesforce() {
         "Remaining_Seats__c",
         "Workshop_Event_Date_Text__c",
         "Workshop_Times__c",
+        "StartDateTime",
+        "EndDateTime"
         //"Workshops_Event__c"
     ) as $key) {
       foreach($result->getElementsByTagNameNS("urn:sobject.enterprise.soap.sforce.com", $key) as $element) {

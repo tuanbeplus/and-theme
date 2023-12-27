@@ -34,6 +34,8 @@ function and_push_event_data_to_salesforce($post_id, $post, $update){
 
       // Get remaining seats to update
       $remaining_seats__c = get_field('remaining_seats__c', $post_id );
+      $startdatetime = get_field('startdatetime', $post_id );
+      $enddatetime = get_field('enddatetime', $post_id );
 
       // Get API info
       list(
@@ -48,7 +50,9 @@ function and_push_event_data_to_salesforce($post_id, $post, $update){
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => 'PATCH',
         CURLOPT_POSTFIELDS =>'{
-          "remaining_seats__c": "'.$remaining_seats__c.'"
+          "remaining_seats__c": "'.$remaining_seats__c.'",
+          "StartDateTime": "'.$startdatetime.'",
+          "EndDateTime": "'.$enddatetime.'"
         }',
         CURLOPT_HTTPHEADER => array(
           'Content-Type: application/json',
