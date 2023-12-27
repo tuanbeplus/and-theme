@@ -105,9 +105,11 @@ function ppsf_event_add_product_child($data, $productParentId, $prices = []) {
   $base_price_id = ppsf_base_Pricebook2_base_price_id();
   $found_key = array_search($base_price_id, array_column($prices, 'Pricebook2Id'));
   $UnitPrice = '';
+
   if($found_key !== false) {
     $UnitPrice = floatval($prices[$found_key]['UnitPrice']);
   }
+  // wp_send_json( [$UnitPrice] );
 
   $WpEventId = $_args['WpEventId'];
   $opt_name = $_args['Subject'];
@@ -159,7 +161,7 @@ function ppsf_event_add_product_child($data, $productParentId, $prices = []) {
 
   // set price $UnitPrice
   if($UnitPrice) {
-    $variation->set_price($UnitPrice);
+    $variation->set_regular_price($UnitPrice);
   } 
   
 
