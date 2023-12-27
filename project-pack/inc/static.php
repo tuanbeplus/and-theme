@@ -37,3 +37,11 @@ function pp_admin_enqueue_scripts() {
 }
 
 add_action( 'admin_enqueue_scripts', 'pp_admin_enqueue_scripts' );
+
+/**
+ * Acf js handle
+ */
+add_action('acf/input/admin_enqueue_scripts', 'and_acf_admin_enqueue_scripts');
+function and_acf_admin_enqueue_scripts() {
+    wp_enqueue_script( 'and-acf-js', PP_URI . '/dist/acf-handles.js', false, PP_VER );
+}

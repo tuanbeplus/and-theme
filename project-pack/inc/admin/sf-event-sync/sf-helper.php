@@ -136,3 +136,28 @@ function and_create_an_event_relation_on_salesforce($event_id, $relation_id) {
   }
 }
 
+/**
+ * Apply to sync event data when click button in backend
+ */
+add_action('acfe/fields/button/key=field_658bd082f0b27', 'and_event_acf_button_ajax_handle', 10, 2);
+function and_event_acf_button_ajax_handle($field, $post_id){
+    $eventID = get_field('sf_event_id', $post_id);
+
+    $event_data = ppsf_get_event($eventID);
+    $custom_fields = apply_filters('PPSF/EVENT_CUSTOM_FIELDS_FILTER', [
+      //'sf_event_id' => $event_data['Id'],
+      'workshop_event_date_text__c' => $event_data['Workshop_Event_Date_Text__c'],
+      'workshop_times__c' => $event_data['Workshop_Times__c'],
+      'total_number_of_seats__c' => $event_data['Total_Number_of_Seats__c'],
+      'remaining_seats__c' => $event_data['Remaining_Seats__c'],
+      'startdatetime' => $event_data['StartDateTime'],
+      'enddatetime' => $event_data['EndDateTime']
+    ], $event_data);
+
+    foreach($custom_fields as $name => $value) {
+      update_post_meta($post_id, $name, $value);
+    }
+    
+    wp_send_json_success("Success! Event has synced from Salesforce.");
+    
+}
