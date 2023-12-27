@@ -210,6 +210,23 @@
 .pp__block-content .pp__block-content-entry p {
   line-height: normal;
 }
+.pp__block-content .pp__block-content-entry .month-bucket {
+  position: relative;
+  margin-bottom: 24px;
+  border: 1px solid #ccc;
+  padding: 16px 16px 10px;
+  border-radius: 4px;
+}
+.pp__block-content .pp__block-content-entry .month-bucket:last-child {
+  margin-bottom: 0;
+}
+.pp__block-content .pp__block-content-entry .month-bucket .month__name {
+  position: absolute;
+  top: -13px;
+  background-color: #fff;
+  padding: 0 4px;
+  font-family: "Avenir-Medium";
+}
 @media (max-width: 425px) {
   .pp__block-content .pp__block-content-entry {
     padding: 1rem;

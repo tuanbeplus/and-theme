@@ -1490,12 +1490,6 @@ section.posts-grid {
   z-index: 9;
 }
 
-@media only screen and (min-width: 1441px) {
-  .slides .slides-wrapper .slide-item .slide-img img {
-    max-width: 936px;
-  }
-}
-
 .slides .slides-wrapper .slide-content .cta {
   font-family: "Avenir-Heavy";
 }

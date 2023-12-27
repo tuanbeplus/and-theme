@@ -252,7 +252,7 @@ function pp_product_single_widget_buy_tag($product) {
   <div class="pp-widget pp-widget__buy">
     <div class="pp-widget__inner">
       <div class="pp-widget__title">
-        <h4><?php _e('Buy', 'pp') ?></h4>
+        <h4><?php _e('Purchase', 'pp') ?></h4>
       </div>
       <div class="pp-wg-wrap-content">
         <table class="pp-wg-table">
@@ -323,44 +323,56 @@ function pp_product_variable_choose_options_tag($product) {
         data-product-id="<?php echo $product->get_id(); ?>" 
         data-variations='<?php echo json_encode($variations); ?>'>
         <div class="options">
-          <?php foreach($variations as $_index => $item) : 
-          $_price_html = $item['price_html'];
-          $_in_stock = $item['is_in_stock'];
-
-          $eventData = ppwc_get_event_data_by_product_variation_id($item['variation_id']);
-          // echo '<pre>'; print_r($eventData); echo '</pre>';
+          <?php 
+            $allEventData = array();
+            foreach($variations as $_index => $item) {
+              $eventData = ppwc_get_event_data_by_product_variation_id($item['variation_id']);
+              $eventData['price_html']  = $item['price_html'];
+              $eventData['is_in_stock'] = $item['is_in_stock'];
+              $eventData['attributes']  = $item['attributes'];
+              $allEventData[] = $eventData;
+            }
+            $EventDataAfterSort = groupAndSortEventsByMonth($allEventData, 'ASC')
           ?>
-          <div class="option-block product-variable-item <?php echo $_in_stock ? '' : '__disable'; ?>">
-            <?php if(!$_in_stock) {
-              echo '<span class="pp__out-of-stock">'. __('Out of stock', 'pp') .'</span>';
-            } ?>
-            <label class="product-variation-item-label" <?php echo (!$_in_stock) ? '' : 'tabindex="0"'; ?>>
-              <input name="product_variation[]" type="checkbox" style="display: none;" value="<?php echo $item['variation_id']; ?>">
-              <h4>
-                <?php echo implode(' — ', $item['attributes']); ?> <?php echo ! empty($_price_html) ? "<span class=\"pp-amount\">$_price_html</span>" : '' ?>
-              </h4>
-              <div class="schedule-course">
-                <div class="time-box schedule-course_start <?php echo (empty($eventData['event_child']) ? '__full' : '') ?>">
-                  <div class="pp__checkbox-fake-ui">
-                    <span class="pp__checkbox-fake-ui-box"></span>
-                  </div>
-                  <div>
-                    <!-- <div class="__date"><?php echo pp_date_format($item['start_date']) ?></div>
-                    <div class="__time"><?php echo $item['start_time'] ?></div> -->
-                    <div class="__date"><?php echo $eventData['event_parent']['workshop_event_date_text__c'] ?></div>
-                    <div class="__time"><?php echo $eventData['event_parent']['workshop_times__c'] ?></div>
-                  </div>
+          <?php foreach ($EventDataAfterSort as $monthName => $monthBucket): ?>
+            <?php if (!empty($monthBucket)): ?>
+            <div class="month-bucket">
+              <span class="month__name"><?php echo $monthName ?? ''; ?></span>
+              <?php foreach ($monthBucket as $event): ?>
+                <div class="option-block product-variable-item <?php echo $event['is_in_stock'] ? '' : '__disable'; ?>">
+                  <?php if(!$event['is_in_stock']) {
+                    echo '<span class="pp__out-of-stock">'. __('Out of stock', 'pp') .'</span>';
+                  } ?>
+                  <label class="product-variation-item-label" <?php echo (!$event['is_in_stock']) ? '' : 'tabindex="0"'; ?>>
+                    <input name="product_variation[]" type="checkbox" style="display: none;" value="<?php echo $item['variation_id']; ?>">
+                    <h4>
+                      <?php echo implode(' — ', $event['attributes']); ?> <?php echo ! empty($event['price_html']) ? "<span class=\"pp-amount\">{$event['price_html']}</span>" : '' ?>
+                    </h4>
+                    <div class="schedule-course">
+                      <div class="time-box schedule-course_start <?php echo (empty($eventData['event_child']) ? '__full' : '') ?>">
+                        <div class="pp__checkbox-fake-ui">
+                          <span class="pp__checkbox-fake-ui-box"></span>
+                        </div>
+                        <div>
+                          <!-- <div class="__date"><?php //echo pp_date_format($item['start_date']) ?></div>
+                          <div class="__time"><?php //echo $item['start_time'] ?></div> -->
+                          <div class="__date"><?php echo $event['event_parent']['workshop_event_date_text__c'] ?></div>
+                          <div class="__time"><?php echo $event['event_parent']['workshop_times__c'] ?></div>
+                        </div>
+                      </div>
+                      <?php if(!empty($event['event_child'])) : ?>
+                      <span class="__splicing">+</span>
+                      <div class="time-box schedule-course_end">
+                        <div class="__date"><?php echo $event['event_child']['workshop_event_date_text__c'] ?></div>
+                        <div class="__time"><?php echo $event['event_child']['workshop_times__c'] ?></div>
+                      </div>
+                      <?php endif; ?>
+                    </div>
+                  </label>
                 </div>
-                <?php if(!empty($eventData['event_child'])) : ?>
-                <span class="__splicing">+</span>
-                <div class="time-box schedule-course_end">
-                  <div class="__date"><?php echo $eventData['event_child']['workshop_event_date_text__c'] ?></div>
-                  <div class="__time"><?php echo $eventData['event_child']['workshop_times__c'] ?></div>
-                </div>
-                <?php endif; ?>
-              </div>
-            </label>
-          </div>
+              <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
           <?php endforeach; ?>
         </div>
         <button 
@@ -373,6 +385,40 @@ function pp_product_variable_choose_options_tag($product) {
     </div>
   </div>
   <?php 
+}
+
+function groupAndSortEventsByMonth($eventsArray, $sortDirection = 'ASC') {
+  $groupedAndSortedArrays = array();
+
+  // List all names of months in the year
+  for ($month = 1; $month <= 12; $month++) {
+    $monthName = date("F", mktime(0, 0, 0, $month, 1, date("Y")));
+    $groupedAndSortedArrays[$monthName] = array();
+  }
+
+  // Sorting events by date and time
+  usort($eventsArray, function($a, $b) use ($sortDirection) {
+      $dateA = strtotime($a['event_parent']['startdatetime']);
+      $dateB = strtotime($b['event_parent']['startdatetime']);
+
+      return ($sortDirection === 'ASC') ? ($dateA - $dateB) : ($dateB - $dateA);
+  });
+
+  // Group events by month
+  foreach ($eventsArray as $event) {
+    $date = strtotime($event['event_parent']['startdatetime']);
+    $monthKey = date('F', $date);
+    
+    // Just Add future Events
+    if ($date > strtotime('now')) {
+
+      // Add the child array to the month key
+      if (isset($monthKey)) {
+        $groupedAndSortedArrays[$monthKey][] = $event;
+      }
+    }
+  }
+  return $groupedAndSortedArrays;
 }
 
 function pp_product_list_item_info_tag($product) {

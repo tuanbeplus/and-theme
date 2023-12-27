@@ -307,8 +307,8 @@ function pp_get_event_data_by_id($eID) {
     'workshop_times__c' => get_post_meta($e->ID, 'workshop_times__c', true),
     'total_number_of_seats__c' => get_post_meta($e->ID, 'total_number_of_seats__c', true),
     'remaining_seats__c' => get_post_meta($e->ID, 'remaining_seats__c', true),
-    'startdatetime' => get_post_meta($e->ID, 'StartDateTime', true),
-    'enddatetime' => get_post_meta($e->ID, 'EndDateTime', true),
+    'startdatetime' => get_post_meta($e->ID, 'startdatetime', true),
+    'enddatetime' => get_post_meta($e->ID, 'enddatetime', true),
   ];
 }
 
