@@ -100,7 +100,8 @@ export default function ProductImportTable() {
           e.preventDefault();
           const r = confirm('Are you sure you want to import?');
           if(!r) return;
-
+          console.log(item); return;
+          
           setLoadingItems([item.Id]);
           await importProduct(item); 
           await _getAllProductsEventsImportedValidate();

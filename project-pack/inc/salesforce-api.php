@@ -144,7 +144,7 @@ function ppsf_get_events() {
     'version' => $version,
   ) = ppsf_api_info();
 
-  $sql = "SELECT Id, Subject, Total_Number_of_Seats__c, Remaining_Seats__c, Workshop_Event_Date_Text__c, Workshop_Times__c, WhoId, WhatId, DurationInMinutes, Description
+  $sql = "SELECT Id, Subject, Total_Number_of_Seats__c, Remaining_Seats__c, Workshop_Event_Date_Text__c, Workshop_Times__c, WhoId, WhatId, DurationInMinutes, Description, StartDateTime, EndDateTime 
           FROM Event 
           WHERE Workshops_Event__c=true";
 

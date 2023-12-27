@@ -575,15 +575,14 @@ function ProductImportTable() {
                   }
                   return _context.abrupt("return");
                 case 4:
-                  setLoadingItems([item.Id]);
-                  _context.next = 7;
-                  return (0,_libs_actions__WEBPACK_IMPORTED_MODULE_2__.importProduct)(item);
-                case 7:
-                  _context.next = 9;
-                  return _getAllProductsEventsImportedValidate();
+                  console.log(item);
+                  return _context.abrupt("return");
                 case 9:
+                  _context.next = 11;
+                  return _getAllProductsEventsImportedValidate();
+                case 11:
                   setLoadingItems([]);
-                case 10:
+                case 12:
                 case "end":
                   return _context.stop();
               }
