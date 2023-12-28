@@ -330,6 +330,7 @@ function pp_product_variable_choose_options_tag($product) {
               $eventData['price_html']  = $item['price_html'];
               $eventData['is_in_stock'] = $item['is_in_stock'];
               $eventData['attributes']  = $item['attributes'];
+              $eventData['variation_id']  = $item['variation_id'];
               $allEventData[] = $eventData;
             }
             $eventDataAfterSort = groupAndSortEventsByMonth($allEventData, 'ASC');
@@ -347,7 +348,7 @@ function pp_product_variable_choose_options_tag($product) {
                       echo '<span class="pp__out-of-stock">'. __('Out of stock', 'pp') .'</span>';
                     } ?>
                     <label class="product-variation-item-label" <?php echo (!$event['is_in_stock']) ? '' : 'tabindex="0"'; ?>>
-                      <input name="product_variation[]" type="checkbox" style="display: none;" value="<?php echo $item['variation_id']; ?>">
+                      <input name="product_variation[]" type="checkbox" style="display: none;" value="<?php echo $event['variation_id']; ?>">
                       <h4>
                         <?php echo implode(' — ', $event['attributes']); ?> <?php echo ! empty($event['price_html']) ? "<span class=\"pp-amount\">{$event['price_html']}</span>" : '' ?>
                       </h4>
