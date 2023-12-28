@@ -333,12 +333,15 @@ function pp_product_variable_choose_options_tag($product) {
               $allEventData[] = $eventData;
             }
             $eventDataAfterSort = groupAndSortEventsByMonth($allEventData, 'ASC');
+            $upcomingEvents = array();
           ?>
           <?php foreach ($eventDataAfterSort as $monthName => $monthBucket): ?>
             <?php if (!empty($monthBucket)): ?>
               <div class="month-bucket">
                 <span class="month__name"><?php echo $monthName ?? ''; ?></span>
-                <?php foreach ($monthBucket as $event): ?>
+                <?php foreach ($monthBucket as $event): 
+                      $upcomingEvents[] = $event;
+                  ?>
                   <div class="option-block product-variable-item <?php echo $event['is_in_stock'] ? '' : '__disable'; ?>">
                     <?php if(!$event['is_in_stock']) {
                       echo '<span class="pp__out-of-stock">'. __('Out of stock', 'pp') .'</span>';
@@ -375,12 +378,17 @@ function pp_product_variable_choose_options_tag($product) {
             <?php endif; ?>
           <?php endforeach; ?>
         </div>
-        <button 
-          type="submit" 
-          class="pp-button pp-button-submit pp-button-variantion-submit"
-          data-template-has-item="<?php _e('Add %CHECKED_NUMBER% item to basket', 'pp') ?>" 
-          data-template-has-items="<?php _e('Add %CHECKED_NUMBER% items to basket', 'pp') ?>" 
-          data-template-no-item="<?php _e('Choose Slots', 'pp') ?>" ><?php _e('Choose Slots', 'pp') ?></button>
+        <?php if (!empty($upcomingEvents)): ?>
+          <button 
+            type="submit" 
+            class="pp-button pp-button-submit pp-button-variantion-submit"
+            data-template-has-item="<?php _e('Add %CHECKED_NUMBER% item to basket', 'pp') ?>" 
+            data-template-has-items="<?php _e('Add %CHECKED_NUMBER% items to basket', 'pp') ?>" 
+            data-template-no-item="<?php _e('Choose Slots', 'pp') ?>" ><?php _e('Choose Slots', 'pp') ?>
+          </button>
+        <?php else: ?>
+          <h4 class="no-events-message">There are no upcoming events.</h4>
+        <?php endif; ?>
       </form>
     </div>
   </div>

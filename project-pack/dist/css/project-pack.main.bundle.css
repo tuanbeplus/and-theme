@@ -228,6 +228,10 @@
   font-size: 1.25rem;
   font-family: "Avenir-Heavy";
 }
+.pp__block-content .pp__block-content-entry .no-events-message {
+  width: 100%;
+  text-align: center;
+}
 @media (max-width: 425px) {
   .pp__block-content .pp__block-content-entry {
     padding: 1rem;
