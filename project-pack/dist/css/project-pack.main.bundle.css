@@ -214,7 +214,7 @@
   position: relative;
   margin-bottom: 24px;
   border: 1px solid #ccc;
-  padding: 16px 16px 10px;
+  padding: 20px 16px 10px;
   border-radius: 4px;
 }
 .pp__block-content .pp__block-content-entry .month-bucket:last-child {
@@ -225,7 +225,12 @@
   top: -13px;
   background-color: #fff;
   padding: 0 4px;
-  font-family: "Avenir-Medium";
+  font-size: 1.25rem;
+  font-family: "Avenir-Heavy";
+}
+.pp__block-content .pp__block-content-entry .no-events-message {
+  width: 100%;
+  text-align: center;
 }
 @media (max-width: 425px) {
   .pp__block-content .pp__block-content-entry {
@@ -1216,6 +1221,7 @@ body.__pp-offcanvas-active .pp-offcanvas__container {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  font-family: "Avenir-Heavy";
 }
 .product-variable-options .product-variable-item h4 .price {
   font-size: 1rem;
@@ -1308,7 +1314,12 @@ body.__pp-offcanvas-active .pp-offcanvas__container {
 }
 .product-variable-options .product-variable-item .schedule-course .time-box .__date {
   margin-bottom: 0.1rem;
+  font-family: "Avenir-Medium";
 }
+.product-variable-options .product-variable-item .schedule-course .time-box .__time {
+  font-family: "Avenir-Medium";
+}
+
 form.pp-form-product-variations label {
   font-weight: initial;
   line-height: initial;
