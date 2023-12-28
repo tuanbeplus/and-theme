@@ -153,6 +153,7 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
+      font-family: "Avenir-Heavy";
 
       .price {
         font-size: 1rem;
@@ -259,8 +260,11 @@
 
         .__date {
           margin-bottom: .1rem;
+          font-family: "Avenir-Medium";
         }
-        .__time {}
+        .__time {
+          font-family: "Avenir-Medium";
+        }
       }
     }
   }
