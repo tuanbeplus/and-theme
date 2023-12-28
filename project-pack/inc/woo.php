@@ -219,8 +219,16 @@ add_action('woocommerce_email_customer_details', function($order, $sent_to_admin
 }, 60, 4); 
 
 function ppsf_base_Pricebook2_base_price_id() {
-  // 01s9h000000W1dhAAC (Ecommerce Price Book)
-  return '01s9h000000W1dhAAC';
+  $__role_based_pricing = get_field('__role-based_pricing', 'option');
+  $role = 'regular_price';
+  $default = '01s9h000000W1dhAAC'; // 01s9h000000W1dhAAC (Ecommerce Price Book)
+
+  if(!$__role_based_pricing || count($__role_based_pricing) == 0) return $default;
+
+  $found_key = array_search($role, array_column($__role_based_pricing, 'role'));
+  if($found_key === false) return $default;
+
+  return $__role_based_pricing[$found_key]['pricebook2'];
 }
 
 /**

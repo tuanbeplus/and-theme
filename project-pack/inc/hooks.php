@@ -56,3 +56,41 @@ function pp_add_sf_contact_data_to_order_item_meta($item_id, $item_values, $item
       $custom_meta_field,  
       $item_values[$custom_meta_field] ); 
 }
+
+add_action('init', function() {
+  if(!isset($_GET['__debug'])) return;
+  // print_r(get_field('__role-based_pricing', 'option'));
+  // echo ppsf_base_Pricebook2_base_price_id();
+  // echo '<pre>'; print_r(get_post_meta(19406)); echo '</pre>'; 
+  // echo '<pre>'; print_r(get_post_meta(19406, 'product_role_based_price', true)); echo '</pre>'; 
+  // echo '<pre>'; print_r(get_post_meta(19406, 'product_role_based_price_PRIMARY_MEMBERS', true)); echo '</pre>'; 
+  // echo '<pre>'; print_r(get_post_meta(19406, 'product_role_based_price_MEMBERS', true)); echo '</pre>'; 
+});
+
+add_action('PPSF::AFTER_UPDATE_REGULAR_PRICE_PRODUCT_CHILD_EACH', 'ppsf_update_role_based_pricing', 20, 3);
+
+function ppsf_update_role_based_pricing($pid, $productParentId, $prices) {
+  // wp_send_json( [$pid, $productParentId, $prices] );
+  $__role_based_pricing = get_field('__role-based_pricing', 'option');
+  if(empty($__role_based_pricing) || count($__role_based_pricing) == 0) return;
+  $data_update = [];
+  // wp_send_json( $__role_based_pricing );
+  foreach($__role_based_pricing as $key => $item) {
+    if($item['role'] == 'regular_price') continue;
+    $pricebook2 = $item['pricebook2'];
+
+    $found_key = array_search($pricebook2, array_column($prices, 'Pricebook2Id'));
+    if($found_key === false) continue;
+
+    $UnitPrice = $prices[$found_key]['UnitPrice'];
+    update_post_meta($pid, 'product_role_based_price_' . $item['role'], floatval($UnitPrice));
+    
+    $data_update[$item['role']] = [
+      'role_price' => floatval($UnitPrice)
+    ];
+  }
+
+  if(count($data_update) > 0) {
+    update_post_meta($pid, 'product_role_based_price', $data_update);
+  }
+}
