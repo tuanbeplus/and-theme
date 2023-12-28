@@ -327,10 +327,10 @@ function pp_product_variable_choose_options_tag($product) {
             $allEventData = array();
             foreach($variations as $_index => $item) {
               $eventData = ppwc_get_event_data_by_product_variation_id($item['variation_id']);
-              $eventData['price_html']  = $item['price_html'];
-              $eventData['is_in_stock'] = $item['is_in_stock'];
-              $eventData['attributes']  = $item['attributes'];
-              $eventData['variation_id']  = $item['variation_id'];
+              $eventData['price_html']   = $item['price_html'];
+              $eventData['is_in_stock']  = $item['is_in_stock'];
+              $eventData['attributes']   = $item['attributes'];
+              $eventData['variation_id'] = $item['variation_id'];
               $allEventData[] = $eventData;
             }
             $eventDataAfterSort = groupAndSortEventsByMonth($allEventData, 'ASC');

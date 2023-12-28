@@ -122,8 +122,8 @@ var __TABLE_DATA = [{
   label: 'Subject',
   field: function field(item) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-      children: ["\u21B3 ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("strong", {
-        children: item.Subject
+      children: ["\u21B3 ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("strong", {
+        children: [item.Subject, " ", item !== null && item !== void 0 && item.__old ? '[OLD]' : '']
       }), item.__imported == true ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
         className: "open-url",
         target: "_blank",
@@ -221,12 +221,14 @@ function EventTableChild(_ref) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tbody", {
         children: events.map(function (item) {
           var __style = {};
+          // console.log(item?.__old);
           __style = item !== null && item !== void 0 && item.__jcolor ? _objectSpread(_objectSpread({}, __style), {}, {
             borderLeftColor: item.__jcolor,
             borderStyle: 'solid',
             borderWidth: '0 0 0 2px'
           }) : __style;
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("tr", {
+            className: [item !== null && item !== void 0 && item.__old ? '__old' : ''].join(' '),
             style: __style,
             children: tableData.filter(function (_i) {
               return _i.enable != false;
@@ -619,6 +621,7 @@ function ProductImportTable() {
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("tbody", {
         children: ImportProducts.map(function (item) {
+          // console.log(item);
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("tr", {
               className: item.__imported ? '__imported' : '',
@@ -1378,9 +1381,28 @@ var SFEventContext_Provider = function SFEventContext_Provider(_ref) {
           }
         });
 
+        // Sort by date
+        __events.sort(function (a, b) {
+          var c = Date.parse(a.StartDateTime);
+          var d = Date.parse(b.StartDateTime);
+          // console.log(c, d, a.StartDateTime, b.StartDateTime);
+          return c - d;
+        });
+
         // Valiadate of Junctions
         __events.map(function (eItem) {
           eItem.__ready_import = true;
+          var SydneyDateTimeNow = new Date().toLocaleString("en-US", {
+            timeZone: "Australia/Sydney"
+          });
+          var s = eItem.StartDateTime;
+          var d = new Date(s);
+          var sydneyTimeEvent = d.toLocaleString(undefined, {
+            timeZone: "Australia/Sydney"
+          });
+          if (Date.parse(SydneyDateTimeNow) > Date.parse(sydneyTimeEvent)) {
+            eItem.__old = true;
+          }
           if (eItem.__event_type == '__PARENT__') {
             var found = __events.find(function (e) {
               return eItem.__junctions_id == e.__junctions_id && e.__event_type == '__CHILDREN__';

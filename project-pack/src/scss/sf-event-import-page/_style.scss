@@ -423,3 +423,10 @@ table.products-table {
     }
   }
 }
+
+table.events-table {
+
+  tr.__old {
+    opacity: .5;
+  }
+}

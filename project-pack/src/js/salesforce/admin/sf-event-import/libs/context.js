@@ -142,16 +142,34 @@ const SFEventContext_Provider = ({ children }) => {
         })
 
         // Sort couple of Junctions
-        __events.sort((a ,b) => {    
+        __events.sort((a, b) => {    
           if(a.__junctions_id == b.__junctions_id) {
             if(a.__event_type == '__PARENT__') { return -1 }
             return 0;
           } else { return -1 }
         })
 
+        // Sort by date
+        __events.sort((a, b) => {
+          let c = Date.parse(a.StartDateTime);
+          let d = Date.parse(b.StartDateTime);
+          // console.log(c, d, a.StartDateTime, b.StartDateTime);
+          return c - d;
+        })
+
         // Valiadate of Junctions
         __events.map((eItem) => {
           eItem.__ready_import = true;
+
+          let SydneyDateTimeNow = new Date().toLocaleString("en-US", {timeZone: "Australia/Sydney"});
+          
+          let s = eItem.StartDateTime;
+          let d = new Date(s);
+          let sydneyTimeEvent = d.toLocaleString(undefined, {timeZone: "Australia/Sydney"});
+
+          if(Date.parse(SydneyDateTimeNow) > Date.parse(sydneyTimeEvent)) {
+            eItem.__old = true;
+          }
 
           if(eItem.__event_type == '__PARENT__') { 
             const found = __events.find(e => {
