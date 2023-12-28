@@ -332,46 +332,46 @@ function pp_product_variable_choose_options_tag($product) {
               $eventData['attributes']  = $item['attributes'];
               $allEventData[] = $eventData;
             }
-            $EventDataAfterSort = groupAndSortEventsByMonth($allEventData, 'ASC')
+            $eventDataAfterSort = groupAndSortEventsByMonth($allEventData, 'ASC');
           ?>
-          <?php foreach ($EventDataAfterSort as $monthName => $monthBucket): ?>
+          <?php foreach ($eventDataAfterSort as $monthName => $monthBucket): ?>
             <?php if (!empty($monthBucket)): ?>
-            <div class="month-bucket">
-              <span class="month__name"><?php echo $monthName ?? ''; ?></span>
-              <?php foreach ($monthBucket as $event): ?>
-                <div class="option-block product-variable-item <?php echo $event['is_in_stock'] ? '' : '__disable'; ?>">
-                  <?php if(!$event['is_in_stock']) {
-                    echo '<span class="pp__out-of-stock">'. __('Out of stock', 'pp') .'</span>';
-                  } ?>
-                  <label class="product-variation-item-label" <?php echo (!$event['is_in_stock']) ? '' : 'tabindex="0"'; ?>>
-                    <input name="product_variation[]" type="checkbox" style="display: none;" value="<?php echo $item['variation_id']; ?>">
-                    <h4>
-                      <?php echo implode(' — ', $event['attributes']); ?> <?php echo ! empty($event['price_html']) ? "<span class=\"pp-amount\">{$event['price_html']}</span>" : '' ?>
-                    </h4>
-                    <div class="schedule-course">
-                      <div class="time-box schedule-course_start <?php echo (empty($eventData['event_child']) ? '__full' : '') ?>">
-                        <div class="pp__checkbox-fake-ui">
-                          <span class="pp__checkbox-fake-ui-box"></span>
+              <div class="month-bucket">
+                <span class="month__name"><?php echo $monthName ?? ''; ?></span>
+                <?php foreach ($monthBucket as $event): ?>
+                  <div class="option-block product-variable-item <?php echo $event['is_in_stock'] ? '' : '__disable'; ?>">
+                    <?php if(!$event['is_in_stock']) {
+                      echo '<span class="pp__out-of-stock">'. __('Out of stock', 'pp') .'</span>';
+                    } ?>
+                    <label class="product-variation-item-label" <?php echo (!$event['is_in_stock']) ? '' : 'tabindex="0"'; ?>>
+                      <input name="product_variation[]" type="checkbox" style="display: none;" value="<?php echo $item['variation_id']; ?>">
+                      <h4>
+                        <?php echo implode(' — ', $event['attributes']); ?> <?php echo ! empty($event['price_html']) ? "<span class=\"pp-amount\">{$event['price_html']}</span>" : '' ?>
+                      </h4>
+                      <div class="schedule-course">
+                        <div class="time-box schedule-course_start <?php echo (empty($eventData['event_child']) ? '__full' : '') ?>">
+                          <div class="pp__checkbox-fake-ui">
+                            <span class="pp__checkbox-fake-ui-box"></span>
+                          </div>
+                          <div>
+                            <!-- <div class="__date"><?php //echo pp_date_format($item['start_date']) ?></div>
+                            <div class="__time"><?php //echo $item['start_time'] ?></div> -->
+                            <div class="__date"><?php echo $event['event_parent']['workshop_event_date_text__c'] ?></div>
+                            <div class="__time"><?php echo $event['event_parent']['workshop_times__c'] ?></div>
+                          </div>
                         </div>
-                        <div>
-                          <!-- <div class="__date"><?php //echo pp_date_format($item['start_date']) ?></div>
-                          <div class="__time"><?php //echo $item['start_time'] ?></div> -->
-                          <div class="__date"><?php echo $event['event_parent']['workshop_event_date_text__c'] ?></div>
-                          <div class="__time"><?php echo $event['event_parent']['workshop_times__c'] ?></div>
+                        <?php if(!empty($event['event_child'])) : ?>
+                        <span class="__splicing">+</span>
+                        <div class="time-box schedule-course_end">
+                          <div class="__date"><?php echo $event['event_child']['workshop_event_date_text__c'] ?></div>
+                          <div class="__time"><?php echo $event['event_child']['workshop_times__c'] ?></div>
                         </div>
+                        <?php endif; ?>
                       </div>
-                      <?php if(!empty($event['event_child'])) : ?>
-                      <span class="__splicing">+</span>
-                      <div class="time-box schedule-course_end">
-                        <div class="__date"><?php echo $event['event_child']['workshop_event_date_text__c'] ?></div>
-                        <div class="__time"><?php echo $event['event_child']['workshop_times__c'] ?></div>
-                      </div>
-                      <?php endif; ?>
-                    </div>
-                  </label>
-                </div>
-              <?php endforeach; ?>
-            </div>
+                    </label>
+                  </div>
+                <?php endforeach; ?>
+              </div>
             <?php endif; ?>
           <?php endforeach; ?>
         </div>
@@ -406,12 +406,24 @@ function groupAndSortEventsByMonth($eventsArray, $sortDirection = 'ASC') {
 
   // Group events by month
   foreach ($eventsArray as $event) {
-    $date = strtotime($event['event_parent']['startdatetime']);
-    $monthKey = date('F', $date);
+    $dateTimeString = $event['event_parent']['startdatetime'];
+
+    // Create a DateTime object from the given string
+    $dateTimeUtc = new DateTime($dateTimeString, new DateTimeZone('UTC'));
+
+    // get option WP time zone string
+    $wpTimeZone = get_option('timezone_string');
+
+    // Set the time zone to WP time zone
+    $dateTimeUtc->setTimezone(new DateTimeZone($wpTimeZone));
+
+    // Format the converted date and time
+    $convertedDateTime = strtotime($dateTimeUtc->format('Y-m-d H:i:s P'));
+
+    $monthKey = date('F', $convertedDateTime);
     
     // Just Add future Events
-    if ($date > strtotime('now')) {
-
+    if ($convertedDateTime > strtotime('now')) {
       // Add the child array to the month key
       if (isset($monthKey)) {
         $groupedAndSortedArrays[$monthKey][] = $event;
