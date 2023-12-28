@@ -372,6 +372,10 @@ table.products-table tr.__imported > td:first-child {
   border-radius: 3px;
 }
 
+table.events-table tr.__old {
+  opacity: 0.5;
+}
+
 .pp-product-variable-custom-field {
   width: 100%;
   border: solid #eee;

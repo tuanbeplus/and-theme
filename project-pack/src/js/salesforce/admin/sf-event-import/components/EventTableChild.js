@@ -7,7 +7,7 @@ const __TABLE_DATA = [
     label: 'Subject',
     field: (item) => {
       return <>
-        ↳ <strong>{ item.Subject }</strong> 
+        ↳ <strong>{ item.Subject } { (item?.__old ? '[OLD]' : '') }</strong> 
         { 
           (item.__imported == true 
           ? <a className="open-url" target="_blank" href={ item.__event_edit_url }>
@@ -89,8 +89,9 @@ export default function EventTableChild({ events, product }) {
         {
           events.map((item) => {
             let __style = {};
+            // console.log(item?.__old);
             __style = (item?.__jcolor ? { ...__style, borderLeftColor: item.__jcolor, borderStyle: 'solid', borderWidth: '0 0 0 2px' } : __style);
-            return <tr key={ item.Id } style={ __style }>
+            return <tr className={ [(item?.__old ? '__old' : '')].join(' ') } key={ item.Id } style={ __style }>
               {
                 tableData.filter( _i => (_i.enable != false) ).map(({ field, key }) => {
                   return <td key={ `__name-item-${ key }` }>

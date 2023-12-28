@@ -132,6 +132,7 @@ export default function ProductImportTable() {
       <tbody>
         {
           ImportProducts.map((item) => {
+            // console.log(item);
             return <Fragment key={ item.Id } >
               <tr className={ item.__imported ? '__imported' : '' }>
                 {
