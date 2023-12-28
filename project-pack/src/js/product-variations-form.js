@@ -118,6 +118,8 @@ import { notificationGlobal } from "./general";
           return accumulator;
         }, [])
 
+        // console.log(variationsSelected.map((i) => i.variation_id), formData.product_variation);
+
         let __hasItemText = $buttonSubmit.data('template-has-item').replace('%CHECKED_NUMBER%', variationsSelected.length);
 
         if(parseInt(variationsSelected.length) > 1) {

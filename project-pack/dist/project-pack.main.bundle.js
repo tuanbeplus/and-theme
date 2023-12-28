@@ -4791,6 +4791,9 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
           }
           return accumulator;
         }, []);
+
+        // console.log(variationsSelected.map((i) => i.variation_id), formData.product_variation);
+
         var __hasItemText = $buttonSubmit.data('template-has-item').replace('%CHECKED_NUMBER%', variationsSelected.length);
         if (parseInt(variationsSelected.length) > 1) {
           __hasItemText = $buttonSubmit.data('template-has-items').replace('%CHECKED_NUMBER%', variationsSelected.length);
