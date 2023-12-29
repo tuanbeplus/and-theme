@@ -166,11 +166,11 @@ function ppsf_event_add_product_child($data, $productParentId, $prices = []) {
   
 
   $variation->set_manage_stock(true); 
-  $variation->set_stock_quantity((int) $stock_quantity);  
-  
-  do_action('PPSF:AFTER_IMPORT_VARIATION', $variation, $productParentId, $prices);
+  $variation->set_stock_quantity((int) $stock_quantity); 
 
   $variation->save(); 
+
+  do_action('PPSF:AFTER_IMPORT_VARIATION', $variation->get_id(), $productParentId, $prices);
 
   pp_log('Message: Added product variation successfully #' . $variation->get_id());
 

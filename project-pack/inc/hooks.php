@@ -68,6 +68,7 @@ add_action('init', function() {
 });
 
 add_action('PPSF::AFTER_UPDATE_REGULAR_PRICE_PRODUCT_CHILD_EACH', 'ppsf_update_role_based_pricing', 20, 3);
+add_action('PPSF:AFTER_IMPORT_VARIATION', 'ppsf_update_role_based_pricing', 20, 3);
 
 function ppsf_update_role_based_pricing($pid, $productParentId, $prices) {
   // wp_send_json( [$pid, $productParentId, $prices] );
