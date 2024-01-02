@@ -312,6 +312,7 @@ function pp_product_variable_choose_options_tag($product) {
   }
   
   $variations = $product->get_available_variations();
+  // echo '<pre>'; print_r($variations); echo '</pre>';
   if(!$variations || count($variations) <= 0) return;
   ?>
   <div id="PRODUCT_BLOCK_CONTENT_CHOOSE_OPTIONS" class="pp__block-content product-variable-options">
@@ -326,11 +327,13 @@ function pp_product_variable_choose_options_tag($product) {
           <?php 
             $allEventData = array();
             foreach($variations as $_index => $item) {
+              $product_variation = new WC_Product_Variation($item['variation_id']);
+              // echo $product_variation->get_price_html();
               $eventData = ppwc_get_event_data_by_product_variation_id($item['variation_id']);
               $eventData['price_html']   = $item['price_html'];
               $eventData['is_in_stock']  = $item['is_in_stock'];
               $eventData['attributes']   = $item['attributes'];
-              $eventData['variation_id'] = $item['variation_id'];
+              $eventData['variation_id'] = $item['variation_id']; 
               $allEventData[] = $eventData;
             }
             $eventDataAfterSort = groupAndSortEventsByMonth($allEventData, 'ASC');
@@ -342,8 +345,10 @@ function pp_product_variable_choose_options_tag($product) {
                 <span class="month__name"><?php echo $monthName ?? ''; ?></span>
                 <?php foreach ($monthBucket as $event): 
                       $upcomingEvents[] = $event;
+                      
+                      // print_r($event);
                   ?>
-                  <div class="option-block product-variable-item <?php echo $event['is_in_stock'] ? '' : '__disable'; ?>">
+                  <div class="option-block product-variable-item product-variable-item__id-<?php echo $event['variation_id'] ?> <?php echo $event['is_in_stock'] ? '' : '__disable'; ?>">
                     <?php if(!$event['is_in_stock']) {
                       echo '<span class="pp__out-of-stock">'. __('Out of stock', 'pp') .'</span>';
                     } ?>
@@ -406,12 +411,23 @@ function groupAndSortEventsByMonth($eventsArray, $sortDirection = 'ASC') {
   }
 
   // Sorting events by date and time
+  // echo '<pre>'; print_r($eventsArray); echo '</pre>'; return;
+  // if(is_array($eventsArray)) return [];
+
+  $eventsArray = array_filter($eventsArray, function($v, $k) {
+    return !empty($v['event_parent']['startdatetime']) ? true : false;
+  }, ARRAY_FILTER_USE_BOTH);
+
   usort($eventsArray, function($a, $b) use ($sortDirection) {
+      if(!isset($a['event_parent']['startdatetime']) || !isset($b['event_parent']['startdatetime'])) return;
+
       $dateA = strtotime($a['event_parent']['startdatetime']);
       $dateB = strtotime($b['event_parent']['startdatetime']);
 
       return ($sortDirection === 'ASC') ? ($dateA - $dateB) : ($dateB - $dateA);
   });
+  
+  // echo '<pre>'; print_r($eventsArray); echo '</pre>'; return [];
 
   // Group events by month
   foreach ($eventsArray as $event) {

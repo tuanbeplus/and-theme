@@ -95,3 +95,21 @@ function ppsf_update_role_based_pricing($pid, $productParentId, $prices) {
     update_post_meta($pid, 'product_role_based_price', $data_update);
   }
 }
+
+add_action('wp_head', function() {
+  // $product_variation = new WC_Product_Variation(19433);
+  // $regular_price = $product_variation->regular_price;
+  // var_dump($regular_price); 
+
+  // global $current_user;
+
+  // $user_roles = $current_user->roles;
+  // $current_user_role = $user_roles[0];
+  // // print_r($user_roles);
+  // $product_variation = new WC_Product_Variation(19433);
+  // echo $product_variation->get_meta( 'product_role_based_price_' . $current_user_role );
+});
+
+// add_filter('woocommerce_product_variation_get_price', function($price = '', $product = null) {
+//   return $price;
+// }, 100, 2);
