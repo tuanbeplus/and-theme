@@ -108,6 +108,9 @@ add_action('wp_head', function() {
   // // print_r($user_roles);
   // $product_variation = new WC_Product_Variation(19433);
   // echo $product_variation->get_meta( 'product_role_based_price_' . $current_user_role );
+  // $product = wc_get_product(19375);
+  // $product = new WC_Product_Variation(19486);
+  // echo $product->get_sku() . 'dev';
 });
 
 // add_filter('woocommerce_product_variation_get_price', function($price = '', $product = null) {
