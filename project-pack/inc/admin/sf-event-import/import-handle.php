@@ -25,6 +25,10 @@ function ppsf_event_create_product_parent($data) {
   $product->set_name($_args['Name']);
   $product->set_description($_args['Woocommerce_Description__c']);
 
+  if(!empty($_args['ProductCode'])) {
+    $product->set_sku('ProductCode');
+  } 
+
   // Event attribute
   $attribute = new WC_Product_Attribute();
   $attribute->set_name('Events');
