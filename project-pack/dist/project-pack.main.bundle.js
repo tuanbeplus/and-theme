@@ -3314,7 +3314,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context2.next = 30;
                 break;
               }
-              errorMessageUI($td, '⚠️ Email has registered for this event!', true);
+              errorMessageUI($td, '⚠️ Email has already been registered for this event!', true);
               resetSlotItem($tr);
               setStatus($tr, false);
               return _context2.abrupt("return");
@@ -3492,7 +3492,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }());
     $('body').on('click', 'form#ADD_ATTENDEES_FORM .__remove-item', function (e) {
       e.preventDefault();
-      var r = confirm('Are you sure clean this slot?');
+      var r = confirm('Are you sure you wish to remove this attendee?');
       if (!r) return;
       var std = $(this).find('.__std').text();
       var _this$dataset = this.dataset,

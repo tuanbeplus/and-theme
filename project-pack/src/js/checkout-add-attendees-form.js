@@ -106,7 +106,7 @@
       $tr.removeClass('__loading');
 
       if(joined == true) {
-        errorMessageUI($td, '⚠️ Email has registered for this event!', true);
+        errorMessageUI($td, '⚠️ Email has already been registered for this event!', true);
         resetSlotItem($tr);
         setStatus($tr, false);
         return;
@@ -249,11 +249,11 @@
 
     $('body').on('click', 'form#ADD_ATTENDEES_FORM .__remove-item', function(e) {
       e.preventDefault();
-      let r = confirm('Are you sure clean this slot?');
+      let r = confirm('Are you sure you wish to remove this attendee?');
       if(!r) return;
 
       let std = $(this).find('.__std').text();
-      const { rid, orderId } = this.dataset;
+      const { rid, orderId } = this.dataset; 
       let $tr = $(this).closest('tr.__slot-item');
       // console.log(rid, orderId);
 

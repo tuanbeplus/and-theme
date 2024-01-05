@@ -116,3 +116,15 @@ add_action('wp_head', function() {
 // add_filter('woocommerce_product_variation_get_price', function($price = '', $product = null) {
 //   return $price;
 // }, 100, 2);
+
+add_filter('woocommerce_get_price_html', function($price, $_) {
+  if($_->is_type( 'variable' ) == true) {
+    $current_products = $_->get_available_variations();
+    // print_r($current_products[0]);
+    if(isset($current_products[0])) {
+      return $current_products[0]['price_html'];
+    }
+  }
+  
+  return $price;
+}, 999, 2);
