@@ -66,6 +66,65 @@ function and_push_event_data_to_salesforce($post_id, $post, $update){
   }
 }
 
+/**
+ * Push event field data to salesforce
+ */
+add_action('updated_post_meta', 'and_push_event_meta_field_to_salesforce', 10, 4);
+function and_push_event_meta_field_to_salesforce($meta_id, $post_id, $meta_key, $meta_value){
+
+  $meta_key_lst = ['remaining_seats__c', 'startdatetime','enddatetime'];
+  if( in_array($meta_key, $meta_key_lst) ){
+      $sf_event_id = get_field('sf_event_id', $post_id );
+
+      if ( ! $sf_event_id ) return;
+
+      $field_key = '';
+
+      switch ($meta_key) {
+        case 'remaining_seats__c':
+          $field_key = 'remaining_seats__c';
+          break;
+
+        case 'enddatetime':
+          $field_key = 'StartDateTime';
+          break;
+
+        case 'startdatetime':
+          $field_key = 'EndDateTime';
+          break;
+        
+        default:
+          # code...
+          break;
+      }
+
+      // Get API info
+      list(
+        'endpoint' => $sf_endpoint_url,
+        'version' => $sf_api_version,
+        'access_token' => $sf_api_access_token
+      ) = and_get_sf_api_info();
+      
+      $curl = curl_init();
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => $sf_endpoint_url.'/services/data/'.$sf_api_version.'/sobjects/Event/'.$sf_event_id,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_CUSTOMREQUEST => 'PATCH',
+        CURLOPT_POSTFIELDS =>'{
+          "'.$field_key.'": "'.$meta_value.'",
+        }',
+        CURLOPT_HTTPHEADER => array(
+          'Content-Type: application/json',
+          'Authorization: Bearer '.$sf_api_access_token,
+        ),
+      ));
+
+      $response = curl_exec($curl);
+      curl_close($curl);
+      // echo $response;
+  }
+}
+
 /** 
  * Function to push Event data from WP to Salesforce
  */
