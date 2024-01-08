@@ -262,3 +262,14 @@ function pp_save_Pricebook2($data) {
 function pp_get_wp_Pricebook2() {
   return get_option('__PP_PRICEBOOK2');
 }
+
+function pp_update_wp_event_push_Remaining_Seats__c($qty, $wpEventId) {
+  $postId = ppsf_find_event_by_sfevent_id($wpEventId);
+  if(!$postId && $postId == 0) return;
+
+  $old_seats = get_field('remaining_seats__c', (int) $postId);
+  $old_seats = ($old_seats ? $old_seats : 0);
+  
+  $new_seats_number = ((int) $qty + (int) $old_seats);
+  update_field('remaining_seats__c', $new_seats_number, $postId);
+}
