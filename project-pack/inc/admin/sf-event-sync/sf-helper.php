@@ -111,7 +111,7 @@ function and_push_event_meta_field_to_salesforce($meta_id, $post_id, $meta_key, 
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => 'PATCH',
         CURLOPT_POSTFIELDS =>'{
-          "'.$field_key.'": "'.$meta_value.'",
+          "'.$field_key.'": "'.$meta_value.'"
         }',
         CURLOPT_HTTPHEADER => array(
           'Content-Type: application/json',
