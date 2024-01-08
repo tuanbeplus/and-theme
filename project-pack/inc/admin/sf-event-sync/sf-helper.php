@@ -85,11 +85,11 @@ function and_push_event_meta_field_to_salesforce($meta_id, $post_id, $meta_key, 
           $field_key = 'remaining_seats__c';
           break;
 
-        case 'enddatetime':
+        case 'startdatetime':
           $field_key = 'StartDateTime';
           break;
 
-        case 'startdatetime':
+        case 'enddatetime':
           $field_key = 'EndDateTime';
           break;
         
