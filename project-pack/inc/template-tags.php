@@ -187,14 +187,26 @@ function pp_product_first_term_name_tag($product, $template = '%s') {
 }
 
 function pp_cart_item_qtt_update_tag($product, $cart_item, $cart_item_key) {
+  $max_qtt = '';
+  if($product->is_type('variation')) {
+    $variation_o = new WC_Product_Variation($product->get_id());
+    $max_qtt = $product->get_stock_quantity();
+  }
+  $title = ($max_qtt ? 'title="'. sprintf('Maximum stock quantity %s', $max_qtt) .'"' : '');
+  $__increase_class_disable = ($max_qtt && ($cart_item['quantity'] >= $max_qtt)) ? '__disable' : '';
+  $__decrease_class_disable = ($cart_item['quantity'] <= 1) ? '__disable' : '';
   ?>
   <div class="pp-product-qtt-update-ui" data-cart-item-key="<?php echo $cart_item_key ?>">
     <label class="__label" title="<?php _e('Quantity', 'pp') ?>"><?php _e('Seats', 'pp') ?></label>
-    <button class="pp-button __decrease" title="<?php _e('Decrease', 'pp') ?>">-</button>
-    <input type="number" value="<?php echo $cart_item['quantity']; ?>" min=0> 
-    <button class="pp-button __increase" title="<?php _e('Increase', 'pp') ?>">+</button>
+    <button class="pp-button __decrease <?php echo $__decrease_class_disable; ?>" title="<?php _e('Decrease', 'pp') ?>">-</button>
+    <input 
+      <?php echo $title; ?> 
+      type="number" 
+      value="<?php echo $cart_item['quantity']; ?>" 
+      min=0 <?php echo ($max_qtt ? "max='". $max_qtt ."'" : '') ?>> 
+    <button class="pp-button __increase <?php echo $__increase_class_disable; ?>" title="<?php _e('Increase', 'pp') ?>">+</button>
   </div>
-  <?php
+  <?php 
 }
 
 /**

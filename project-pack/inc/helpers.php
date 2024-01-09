@@ -269,7 +269,25 @@ function pp_update_wp_event_push_Remaining_Seats__c($qty, $wpEventId) {
 
   $old_seats = get_field('remaining_seats__c', (int) $postId);
   $old_seats = ($old_seats ? $old_seats : 0);
-  
+
   $new_seats_number = ((int) $qty + (int) $old_seats);
   update_field('remaining_seats__c', $new_seats_number, $postId);
+}
+
+function pp_validate_update_cart_qtt($cart_item_key, $qtt_number) {
+  if($qtt_number == 0) return true;
+  $cart_item = WC()->cart->get_cart_item($cart_item_key);
+  $product_id = $cart_item['product_id'];
+  $variation_id = $cart_item['variation_id'];
+
+  if($variation_id) {
+    $variation_o = new WC_Product_Variation($variation_id);
+    $max_qtt = $variation_o->get_stock_quantity();
+
+    if($qtt_number > $max_qtt) {
+      return false;
+    }
+  }
+
+  return true;
 }

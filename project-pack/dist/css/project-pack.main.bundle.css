@@ -860,6 +860,10 @@ form.tribe-tickets__tickets-form {
   font-size: 1.3rem;
   line-height: 0;
 }
+.pp-product-qtt-update-ui .pp-button.__disable {
+  opacity: 0.6;
+  pointer-events: none;
+}
 
 table.shop_table {
   border-radius: 0 !important;

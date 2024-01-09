@@ -554,6 +554,11 @@
     height: 30px;
     font-size: 1.3rem;
     line-height: 0;
+
+    &.__disable {
+      opacity: .6;
+      pointer-events: none;
+    }
   }
 }
 
