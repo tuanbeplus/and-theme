@@ -357,8 +357,7 @@ function pp_product_variable_choose_options_tag($product) {
                 <span class="month__name"><?php echo $monthName ?? ''; ?></span>
                 <?php foreach ($monthBucket as $event): 
                       $upcomingEvents[] = $event;
-                      
-                      // print_r($event);
+                      // echo '<pre>'; print_r($event); echo '</pre>';
                   ?>
                   <div class="option-block product-variable-item product-variable-item__id-<?php echo $event['variation_id'] ?> <?php echo $event['is_in_stock'] ? '' : '__disable'; ?>">
                     <?php if(!$event['is_in_stock']) {
@@ -367,7 +366,9 @@ function pp_product_variable_choose_options_tag($product) {
                     <label class="product-variation-item-label" <?php echo (!$event['is_in_stock']) ? '' : 'tabindex="0"'; ?>>
                       <input name="product_variation[]" type="checkbox" style="display: none;" value="<?php echo $event['variation_id']; ?>">
                       <h4>
-                        <?php echo implode(' — ', $event['attributes']); ?> <?php echo ! empty($event['price_html']) ? "<span class=\"pp-amount\">{$event['price_html']}</span>" : '' ?>
+                        <?php echo implode(' — ', $event['attributes']); ?> 
+                        <?php echo ! empty($event['price_html']) ? "<span class=\"pp-amount\">{$event['price_html']}</span>" : '' ?>
+                        <?php echo pp_woo_remaining_seats_available($event); ?>
                       </h4>
                       <div class="schedule-course">
                         <div class="time-box schedule-course_start <?php echo (empty($eventData['event_child']) ? '__full' : '') ?>">

@@ -154,14 +154,26 @@
       justify-content: space-between;
       align-items: flex-end;
       font-family: "Avenir-Heavy";
+      align-items: center;
 
-      .price {
+      .pp-amount {
+        margin-left: auto;
+      }
+
+      .__remaining-seats {
+        margin-left: 6px;
+        font-weight: normal;
+      }
+
+      .price, .__remaining-seats {
         font-size: 1rem;
       }
 
       del {
         font-weight: normal;
       }
+
+
     }
 
     label {

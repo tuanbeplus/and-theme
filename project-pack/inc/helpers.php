@@ -270,7 +270,7 @@ function pp_update_wp_event_push_Remaining_Seats__c($qty, $wpEventId) {
   $old_seats = get_field('remaining_seats__c', (int) $postId);
   $old_seats = ($old_seats ? $old_seats : 0);
 
-  $new_seats_number = ((int) $qty + (int) $old_seats);
+  $new_seats_number = ((int) $old_seats - (int) $qty);
   update_field('remaining_seats__c', $new_seats_number, $postId);
 }
 

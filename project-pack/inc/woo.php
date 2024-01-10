@@ -275,3 +275,20 @@ function ppsf_set_product_price($productParentId = 0, $prices = []) {
     'data' => $products,
   ]);
 }
+
+function pp_woo_remaining_seats_available($event) {
+  $total_number_of_seats__c = $event['event_parent']['total_number_of_seats__c'];
+  $remaining_seats__c = $event['event_parent']['remaining_seats__c'];
+  
+  if(!$remaining_seats__c) {
+    $remaining_seats__c = $total_number_of_seats__c;
+  }
+
+  ob_start();
+  ?>
+  <span class="__remaining-seats"> 
+    <?php echo sprintf(__('(Remaining Seats %s/%s)', 'pp'), $remaining_seats__c, $total_number_of_seats__c); ?>
+  </span> <!-- .__remaining-seats -->
+  <?php
+  return ob_get_clean();
+}

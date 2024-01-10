@@ -344,6 +344,11 @@
   margin-bottom: 3rem;
   position: relative;
 
+  .__remaining-seats {
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
   .woocommerce-mini-cart__empty-message {
     background: black;
     padding: 2em;

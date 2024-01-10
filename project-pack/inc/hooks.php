@@ -128,3 +128,11 @@ add_filter('woocommerce_get_price_html', function($price, $_) {
   
   return $price;
 }, 999, 2);
+
+add_action('pp/mini_cart_item_after_title', function($cart_item, $_product) {
+  // echo '<pre>'; print_r($cart_item); echo '</pre>';
+  if(isset($cart_item['course_information'])) {
+    echo pp_woo_remaining_seats_available($cart_item['course_information']);
+  }
+  
+}, 20, 2);
