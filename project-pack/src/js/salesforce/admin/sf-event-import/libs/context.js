@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { getJunctions, eventsImported, getEvents, prepareDataImportEvents, getAllProductsEventsImportedValidate, syncPricebook2, getWpPricebook2, setProductPrice } from './api';
-import { RandomColor } from './helpers';
+import { RandomColor, EventOrderBy } from './helpers';
 
 const SFEventContext = createContext();
 
@@ -120,7 +120,7 @@ const SFEventContext_Provider = ({ children }) => {
       // Junctions
       // console.log(Junctions);
       if(Junctions && Junctions.length > 0) {
-        const __events = Object.values(pItem.__events).map((eItem) => {
+        let __events = Object.values(pItem.__events).map((eItem) => {
           Junctions.forEach((jItem) => {
             const { Child_Event__c, Parent_Event__c } = jItem;
             if(jItem.Parent_Event__c == eItem.Id) {
@@ -150,12 +150,14 @@ const SFEventContext_Provider = ({ children }) => {
         })
 
         // Sort by date
-        __events.sort((a, b) => {
-          let c = Date.parse(a.StartDateTime);
-          let d = Date.parse(b.StartDateTime);
-          // console.log(c, d, a.StartDateTime, b.StartDateTime);
-          return c - d;
-        })
+        // __events.sort((a, b) => {
+        //   let c = Date.parse(a.StartDateTime);
+        //   let d = Date.parse(b.StartDateTime);
+        //   // console.log(c, d, a.StartDateTime, b.StartDateTime);
+        //   return c - d;
+        // })
+
+        __events = EventOrderBy(__events);
 
         // Valiadate of Junctions
         __events.map((eItem) => {
