@@ -46,9 +46,9 @@ function pp_add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
   $variation->get_formatted_name();
 
   $cart_item_data['course_information'] = [
-    'name' => wp_strip_all_tags($variation->get_formatted_name()),
+    'name' => $variation->get_name(), // wp_strip_all_tags($variation->get_formatted_name()),
     'event_parent' => pp_get_event_data_by_id((int) $wp_event_parent_id),
-    'event_child' => pp_get_event_data_by_id((int) $wp_event_child_id),
+    'event_child' => pp_get_event_data_by_id((int) $wp_event_child_id), 
 
     // 'start_date' => $start_date,
     // 'start_time' => $start_time,

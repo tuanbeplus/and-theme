@@ -21,6 +21,8 @@ $attendees = pp_get_attendees_by_order($order_id);
         $course_information = $item->get_meta('course_information');
         // $__SF_CONTACT_FULL = $item->get_meta('__SF_CONTACT_FULL'); 
         // echo '<pre>'; print_r($course_information); echo '</pre>';
+        $event_title = $course_information['event_parent']['post_title'];
+
         // echo '<pre>'; print_r($__SF_CONTACT_FULL); echo '</pre>';
         $product_id = $item['product_id'];
         $variation_id = $item['variation_id'];
@@ -31,7 +33,7 @@ $attendees = pp_get_attendees_by_order($order_id);
         // print_r([$product_id, $variation_id, $quantity]);
       ?>
       <div class="__item">
-        <h4 class="product-name"><?php echo $course_information['name'] ?></h4>
+        <h4 class="product-name"><?php echo $event_title; ?></h4>
         <table class="pp-table add-attendees-table">
           <thead>
             <tr>

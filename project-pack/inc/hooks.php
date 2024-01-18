@@ -136,3 +136,28 @@ add_action('pp/mini_cart_item_after_title', function($cart_item, $_product) {
   }
   
 }, 20, 2);
+
+add_filter('woocommerce_cart_item_name', 'pp_woo_cart_item_name', 90, 2);
+add_filter('woocommerce_order_item_name', 'pp_woo_order_item_name', 90, 2);
+
+function pp_woo_order_item_name($name, $item) {
+  $product_id = $item['product_id'];
+  return sprintf('<a href="%s">%s<a/>', get_the_permalink($product_id), get_the_title($product_id)) ;
+}
+
+function pp_woo_cart_item_name($name, $item) {
+  $product_id = $item['product_id'];
+  $variation_id = $item['variation_id'];
+
+  if($variation_id) {
+    $product = wc_get_product($product_id);
+    $variation_attributes = $product->get_variation_attributes($variation_id); 
+    if($variation_attributes && isset($variation_attributes['Events'])) {
+      // $sub = sprintf('<p><small>Event: %s</small></p>', $variation_attributes['Events'][0]);
+      return sprintf('<a href="%s">%s</a>', get_the_permalink($product_id), $variation_attributes['Events'][0]);
+    }
+  }
+
+  // $variation_attributes = $product->get_variation_attributes( $item );
+  return sprintf('<a href="%s">%s</a>', get_the_permalink($product_id), get_the_title($product_id)) ;
+}
