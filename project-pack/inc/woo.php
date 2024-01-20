@@ -93,34 +93,23 @@ function pp_and_woo_auto_complete_order( $order_id ) {
   }
 
   $order = wc_get_order( $order_id );
-  foreach ($order->get_items() as $item_id => $item_obj) {
+  $_updated_remaining_seats = get_post_meta($order_id, '_updated_remaining_seats', true);
+  if($_updated_remaining_seats != 'yes') {
+    foreach ($order->get_items() as $item_id => $item_obj) {
 
-    $__SF_CONTACT_FULL = wc_get_order_item_meta( $item_id, '__SF_CONTACT_FULL', true );
-    $course_information = wc_get_order_item_meta( $item_id, 'course_information', true );
-    // pp_log(wp_json_encode($__SF_CONTACT_FULL));
-    // pp_log(wp_json_encode($course_information));
-
-    // qty
-    $qty = $item_obj->get_quantity();
-
-    if(!isset($course_information['event_parent']['sf_event_id'])) continue;
-    $eventID = $course_information['event_parent']['sf_event_id'];
-
-    // Update Remaining_Seats
-    pp_update_wp_event_push_Remaining_Seats__c($qty, $eventID);
-
-    // foreach($__SF_CONTACT_FULL as $cItem) {
-      // $res = and_create_an_event_relation_on_salesforce($eventID, $cItem['contact_id']);
-      // $relation_id = isset($res['relation_id']) ? $res['relation_id'] : '';
-
-      // $cItem['relation_id'] = $relation_id;
-      // pp_add_attendees_order($order_id, $cItem); 
-
-      // pp_log(wp_json_encode($res)); 
-    // }
-    // $eventID = $course_information['event_parent']['sf_event_id'];
-    // pp_log(wp_json_encode($__SF_CONTACT_FULL));
-    // pp_log('Event ID: ' . $eventID);
+      $__SF_CONTACT_FULL = wc_get_order_item_meta( $item_id, '__SF_CONTACT_FULL', true );
+      $course_information = wc_get_order_item_meta( $item_id, 'course_information', true );
+  
+      // qty
+      $qty = $item_obj->get_quantity();
+  
+      if(!isset($course_information['event_parent']['sf_event_id'])) continue;
+      $eventID = $course_information['event_parent']['sf_event_id'];
+  
+      // Update Remaining_Seats
+      pp_update_wp_event_push_Remaining_Seats__c($qty, $eventID);
+      update_post_meta($order_id, '_updated_remaining_seats', 'yes');
+    }
   }
 
   if( $order->has_status( 'processing' ) && $order->is_paid() ) {

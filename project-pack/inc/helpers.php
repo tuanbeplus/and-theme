@@ -267,8 +267,9 @@ function pp_update_wp_event_push_Remaining_Seats__c($qty, $wpEventId) {
   $postId = ppsf_find_event_by_sfevent_id($wpEventId);
   if(!$postId && $postId == 0) return;
 
+  $total_seats = get_field('total_number_of_seats__c', (int) $postId);
   $old_seats = get_field('remaining_seats__c', (int) $postId);
-  $old_seats = ($old_seats ? $old_seats : 0);
+  $old_seats = ($old_seats ? $old_seats : $total_seats);
 
   $new_seats_number = ((int) $old_seats - (int) $qty);
   update_field('remaining_seats__c', $new_seats_number, $postId);
