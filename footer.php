@@ -67,7 +67,7 @@ $footerLinks = get_field('footer_links', 'option');
                         <img src="/wp-content/themes/and/assets/imgs/facebook.svg" alt="Facebook" />
                     </a>
                     <a href="<?php echo $twitter; ?>" target="_blank">
-                        <img src="/wp-content/themes/and/assets/imgs/twitter.svg" alt="Twitter" />
+                        <img src="/wp-content/themes/and/assets/imgs/social-icons-x.svg" alt="Twitter" style="width:30px" />
                     </a>
                     <a href="<?php echo $linkedin; ?>" target="_blank">
                         <img src="/wp-content/themes/and/assets/imgs/linkedin.svg" alt="LinkedIn" />
@@ -85,7 +85,7 @@ $footerLinks = get_field('footer_links', 'option');
                             <?php endforeach; endif; ?>
                         </div>
                         <div class="col-md-6 copyrights">
-                            <p>ACN 605 683 369      &copy; 2021 AND</p>
+                            <p>ACN 605 683 369 &copy; 2024 Australian Disability Network</p>
                         </div>
                     </div>
                 </div>

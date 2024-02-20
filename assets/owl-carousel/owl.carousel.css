@@ -524,9 +524,6 @@
   .slides .owl-carousel .owl-dots {
     top: 52%;
   }
-  .slides .owl-carousel .owl-dots.template-container {
-    top: 54%;
-  }
   .slides .owl-carousel .owl-dots .owl-dot {
     appearance: none;
     -webkit-appearance: none;

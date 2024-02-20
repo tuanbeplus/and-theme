@@ -123,45 +123,95 @@ function andorgau_list_recent_posts_template($atts){
  * refresh Salesforce access token when it expired or invalid
  * 
  */
-function sf_refresh_token($response_error) {
+function and_refresh_sf_access_token() {
 
-	if (isset($response_error[0]->errorCode)) {
+	$sf_site_url = get_field('salesforce_site_url', 'option');
+	$sf_client_id = get_field('salesforce_client_id', 'option');
+	$sf_client_secret = get_field('salesforce_client_secret', 'option');
+	$sf_refresh_token = get_field('salesforce_api_refresh_token', 'option');
 
-		$sf_site_url = get_field('salesforce_site_url', 'option');
-		$sf_client_id = get_field('salesforce_client_id', 'option');
-		$sf_client_secret = get_field('salesforce_client_secret', 'option');
-		$sf_refresh_token = get_field('salesforce_api_refresh_token', 'option');
+	$curl = curl_init();
+	curl_setopt_array($curl, array(
+		CURLOPT_URL => $sf_site_url .'/services/oauth2/token',
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'POST',
+		CURLOPT_POSTFIELDS => array(
+			'client_id' => $sf_client_id,
+			'client_secret' => $sf_client_secret,
+			'grant_type' => 'refresh_token',
+			'refresh_token' => $sf_refresh_token,
+		),
+		CURLOPT_HTTPHEADER => array(
+			'Cookie: BrowserId=oe5jPfO4Ee2pBweEgW6i5Q; 
+			CookieConsentPolicy=0:0; 
+			LSKey-c$CookieConsentPolicy=0:0'
+		),
+	));
 
-		$curl = curl_init();
-		curl_setopt_array($curl, array(
-			CURLOPT_URL => $sf_site_url .'/services/oauth2/token',
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_ENCODING => '',
-			CURLOPT_MAXREDIRS => 10,
-			CURLOPT_TIMEOUT => 0,
-			CURLOPT_FOLLOWLOCATION => true,
-			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-			CURLOPT_CUSTOMREQUEST => 'POST',
-			CURLOPT_POSTFIELDS => array(
-				'client_id' => $sf_client_id,
-				'client_secret' => $sf_client_secret,
-				'grant_type' => 'refresh_token',
-				'refresh_token' => $sf_refresh_token,
-			),
-			CURLOPT_HTTPHEADER => array(
-				'Cookie: BrowserId=oe5jPfO4Ee2pBweEgW6i5Q; 
-				CookieConsentPolicy=0:0; 
-				LSKey-c$CookieConsentPolicy=0:0'
-			),
-		));
+	$response = curl_exec($curl);
+	curl_close($curl);
+	$response = json_decode($response);
 
-		$response = curl_exec($curl);
-		curl_close($curl);
-		$response = json_decode($response);
+	if (isset($response->access_token)) {
+		update_field('salesforce_api_access_token', $response->access_token, 'option');
+		// echo 'Refreshed the access token at '.date('d/m/Y H:i:s', time());
+		return true;
+	}
+}
 
-		if (isset($response->access_token)) {
-			update_field('salesforce_api_access_token', $response->access_token, 'option');
+/**
+ * Check access token expiration & refresh
+ * 
+ */
+function and_sf_access_token_expired() {
+
+    $sf_access_token = get_field('salesforce_api_access_token', 'option');
+    $sf_endpoint_url = get_field('salesforce_endpoint_url', 'option');
+	$sf_api_ver = get_field('salesforce_api_version', 'option');
+
+    $curl = curl_init();
+    $sql = "SELECT FIELDS(ALL) FROM User LIMIT 1";
+
+	curl_setopt_array($curl, array(
+		CURLOPT_URL => $sf_endpoint_url.'/services/data/'.$sf_api_ver.'/query/?q='. urlencode($sql),
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => '',
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 0,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => 'GET',
+		CURLOPT_HTTPHEADER => array(
+			'Authorization: Bearer '.$sf_access_token,
+			'Cookie: BrowserId=gRbOFTL-Eey5HuWIRJTEZw; CookieConsentPolicy=0:1; LSKey-c$CookieConsentPolicy=0:1'
+		),
+	));
+
+	$response = curl_exec($curl);
+	curl_close($curl);
+	$response = json_decode($response);
+
+    if (is_array($response)) {
+		if (isset($response[0]->errorCode)) {
+			if ($response[0]->errorCode == 'INVALID_SESSION_ID') {
+				// Refresh the access token
+				and_refresh_sf_access_token();
+			}
 		}
+	}
+	else {
+		if (isset($response->records)) {
+            return true;
+        }
+        else { ?>
+			<script>console.log('An Unknow Error on Refresh access token.');</script>
+			<?php
+        }
 	}
 }
 
@@ -195,13 +245,16 @@ function sf_query_object_metadata($sql) {
 	curl_close($curl);
 	$response = json_decode($response);
 
-	if (isset($response->records)) {
-		return $response;
-	}
-	elseif (isset($response[0]->errorCode)) {
-		if ($response[0]->errorCode == 'INVALID_SESSION_ID') {
-			sf_refresh_token($response);
+	if (is_array($response)) {
+		if (isset($response[0]->errorCode)) {
+			if ($response[0]->errorCode == 'INVALID_SESSION_ID') {
+				// Refresh the access token
+				and_refresh_sf_access_token();
+			}
 		}
+	}
+	else {
+		return $response;
 	}
 }
 
@@ -238,7 +291,8 @@ function sf_get_object_metadata($obj_name, $obj_id) {
 	if (is_array($response)) {
 		if (isset($response[0]->errorCode)) {
 			if ($response[0]->errorCode == 'INVALID_SESSION_ID') {
-				sf_refresh_token($response);
+				// Refresh the access token
+				and_refresh_sf_access_token();
 			}
 		}
 	}

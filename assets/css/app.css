@@ -5348,7 +5348,11 @@ header {
         header #site-navigation ul li a {
           color: #fff;
           opacity: 0.75;
-          text-align: left; } }
+          text-align: left; } 
+          header .is-active .buttons {
+            margin-bottom: 26px;
+          }
+        }
 
 footer.site-footer {
   background: #545454 !important;

@@ -1538,6 +1538,9 @@ section.posts-grid {
   .slides .slides-wrapper.owl-carousel .owl-dots {
     top: calc(100% - 270px);
   }
+  .slides .slides-wrapper.owl-carousel .owl-dots.template-container {
+    top: 42%;
+  }
 }
 
 @media only screen and (max-width: 480px) {
@@ -1555,6 +1558,9 @@ section.posts-grid {
   }
   .slides .slides-wrapper.owl-carousel .owl-dots {
     top: calc(100% - 250px);
+  }
+  .slides .slides-wrapper.owl-carousel .owl-dots.template-container {
+    top: 54%;
   }
   .slides .slides-wrapper .slide-item .slide-img {
     min-height: 200px;

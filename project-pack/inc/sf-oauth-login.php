@@ -1,4 +1,5 @@
 <?php
+
 function fn_wp_user_exists($email = '') {
     return email_exists($email);
 }
@@ -218,8 +219,8 @@ function sf_http_request( $url, $data, $headers = array(), $method = 'GET', $opt
   
 function sf_request_token( $code ) {
 
-    $sf_client_id = get_field('salesforce_client_id', 'option');
-    $sf_client_secret = get_field('salesforce_client_secret', 'option');
+    $sf_client_id = get_field('salesforce_members_login_client_id', 'option');
+    $sf_client_secret = get_field('salesforce_members_login_client_secret', 'option');
     $sf_callback_url = get_field('salesforce_callback_url', 'option');
     $sf_community_url = get_field('salesforce_community_url', 'option');
 
@@ -299,6 +300,10 @@ function sf_oauth_login() {
                 setcookie('sf_user_email', $user_info['email'], time() + (86400 * 30), "/"); // 86400 = 1 day
                 setcookie('sf_access_token', $data['access_token'], time() + (86400 * 30), "/"); // 86400 = 1 day
 
+                // Check access token expiration & refresh
+                and_sf_access_token_expired();
+
+                // Sync user from Salesforce & login WP
                 fn_sync_user($user_info['user_id'], $data['access_token']);
 
                 ?><script>
