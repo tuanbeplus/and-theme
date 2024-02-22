@@ -106,7 +106,7 @@
       $tr.removeClass('__loading');
 
       if(joined == true) {
-        errorMessageUI($td, '⚠️ Email has registered for this event!', true);
+        errorMessageUI($td, '⚠️ Email has already been registered for the event!', true);
         resetSlotItem($tr);
         setStatus($tr, false);
         return;

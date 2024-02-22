@@ -39,7 +39,7 @@ $attendees = pp_get_attendees_by_order($order_id);
               <th width="30%"><?php _e('Email Address', 'pp') ?></th>
               <th width="20%"><?php _e('First Name', 'pp') ?></th>
               <th width="20%"><?php _e('Last Name', 'pp') ?></th>
-              <th width="20%"><?php _e('Organisation', 'pp') ?></th>
+              <th width="20%" style="display: none;"><?php _e('Organisation', 'pp') ?></th>
               <th><?php _e('Status', 'pp') ?></th>
             </tr>
           </thead>
@@ -55,7 +55,7 @@ $attendees = pp_get_attendees_by_order($order_id);
                 if(empty($rid)) {
                   echo '#' . $i + 1;
                 } else {
-                  echo '<a href="#" class="__remove-item" data-rid="'. $rid .'" data-order-id="'. $order_id .'">✕ Clean <span class="__std">#'. $i + 1 .'</span></a>';
+                  echo '<a href="#" class="__remove-item" data-rid="'. $rid .'" data-order-id="'. $order_id .'">✕ Remove <span class="__std">#'. $i + 1 .'</span></a>';
                 }
                 ?>
               </td>
@@ -96,7 +96,7 @@ $attendees = pp_get_attendees_by_order($order_id);
                   <?php echo isset($slot_item_data['lastname']) ? 'readonly' : '' ?>
                   value="<?php echo isset($slot_item_data['lastname']) ? $slot_item_data['lastname'] : '' ?>" />
               </td>
-              <td>
+              <td style="display: none;">
                 <span class="organisation-text" data-default-text="<?php echo $account_name; ?>">
                   <?php echo isset($slot_item_data['account_id']) ? $slot_item_data['account_id'] : $account_name ?>
                 </span>

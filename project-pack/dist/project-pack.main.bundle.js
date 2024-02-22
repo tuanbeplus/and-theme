@@ -3314,7 +3314,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context2.next = 30;
                 break;
               }
-              errorMessageUI($td, '⚠️ Email has registered for this event!', true);
+              errorMessageUI($td, '⚠️ Email has already been registered for the event!', true);
               resetSlotItem($tr);
               setStatus($tr, false);
               return _context2.abrupt("return");
