@@ -51,6 +51,12 @@ import { doTippyGlobal, notificationGlobal } from "./general";
         }
       })
 
+      if(result?.successful == false) {
+        notificationGlobal(result?.message, 3);
+        $('.pp-minicart.pp__loading').removeClass('pp__loading');
+        return;
+      }
+
       $(document.body).trigger('wc_fragment_refresh');
 
     });
@@ -62,6 +68,13 @@ import { doTippyGlobal, notificationGlobal } from "./general";
       let $qttInput = $wrap.find('input[type=number]');
       let oldValue = parseInt($qttInput.val());
       let newValue = oldValue += 1;
+      let maxValue = $qttInput.attr('max');
+
+      if(maxValue && newValue > parseInt(maxValue)) {
+        newValue = maxValue;
+        $qttInput.val(newValue);
+        return;
+      }
 
       $qttInput.val(newValue);
       $(document.body).trigger('pp:woo_update_qtt', [key, newValue])
@@ -73,6 +86,7 @@ import { doTippyGlobal, notificationGlobal } from "./general";
       let key = $wrap.data('cart-item-key');
       let $qttInput = $wrap.find('input[type=number]');
       let oldValue = parseInt($qttInput.val());
+      let maxValue = $qttInput.attr('max');
       let newValue = oldValue -= 1;
 
       if(newValue <= 0) {
@@ -88,9 +102,14 @@ import { doTippyGlobal, notificationGlobal } from "./general";
       const $wrap = $(this).parent();
       let key = $wrap.data('cart-item-key');
       let value = parseInt(this.value);
+      let maxValue = $(this).attr('max');
 
       if(value <= 0) {
-        this.value = 1
+        this.value = 1;
+      }
+
+      if(maxValue && value > parseInt(maxValue)) {
+        this.value = maxValue;
       }
 
       $(document.body).trigger('pp:woo_update_qtt', [key, this.value])

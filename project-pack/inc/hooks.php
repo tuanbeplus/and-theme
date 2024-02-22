@@ -116,3 +116,48 @@ add_action('wp_head', function() {
 // add_filter('woocommerce_product_variation_get_price', function($price = '', $product = null) {
 //   return $price;
 // }, 100, 2);
+
+add_filter('woocommerce_get_price_html', function($price, $_) {
+  if($_->is_type( 'variable' ) == true) {
+    $current_products = $_->get_available_variations();
+    // print_r($current_products[0]);
+    if(isset($current_products[0])) {
+      return $current_products[0]['price_html'];
+    }
+  }
+  
+  return $price;
+}, 999, 2);
+
+add_action('pp/mini_cart_item_after_title', function($cart_item, $_product) {
+  // echo '<pre>'; print_r($cart_item); echo '</pre>';
+  if(isset($cart_item['course_information'])) {
+    echo pp_woo_remaining_seats_available($cart_item['course_information']);
+  }
+  
+}, 20, 2);
+
+add_filter('woocommerce_cart_item_name', 'pp_woo_cart_item_name', 90, 2);
+add_filter('woocommerce_order_item_name', 'pp_woo_order_item_name', 90, 2);
+
+function pp_woo_order_item_name($name, $item) {
+  $product_id = $item['product_id'];
+  return sprintf('<a href="%s">%s<a/>', get_the_permalink($product_id), get_the_title($product_id)) ;
+}
+
+function pp_woo_cart_item_name($name, $item) {
+  $product_id = $item['product_id'];
+  $variation_id = $item['variation_id'];
+
+  if($variation_id) {
+    $product = wc_get_product($product_id);
+    $variation_attributes = $product->get_variation_attributes($variation_id); 
+    if($variation_attributes && isset($variation_attributes['Events'])) {
+      // $sub = sprintf('<p><small>Event: %s</small></p>', $variation_attributes['Events'][0]);
+      return sprintf('<a href="%s">%s</a>', get_the_permalink($product_id), $variation_attributes['Events'][0]);
+    }
+  }
+
+  // $variation_attributes = $product->get_variation_attributes( $item );
+  return sprintf('<a href="%s">%s</a>', get_the_permalink($product_id), get_the_title($product_id)) ;
+}

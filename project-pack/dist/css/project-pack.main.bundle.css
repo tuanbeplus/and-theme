@@ -681,6 +681,10 @@ form.tribe-tickets__tickets-form {
   margin-bottom: 3rem;
   position: relative;
 }
+.pp-minicart .__remaining-seats {
+  display: inline-block;
+  margin-bottom: 8px;
+}
 .pp-minicart .woocommerce-mini-cart__empty-message {
   background: black;
   padding: 2em;
@@ -859,6 +863,10 @@ form.tribe-tickets__tickets-form {
   height: 30px;
   font-size: 1.3rem;
   line-height: 0;
+}
+.pp-product-qtt-update-ui .pp-button.__disable {
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 table.shop_table {
@@ -1222,8 +1230,16 @@ body.__pp-offcanvas-active .pp-offcanvas__container {
   justify-content: space-between;
   align-items: flex-end;
   font-family: "Avenir-Heavy";
+  align-items: center;
 }
-.product-variable-options .product-variable-item h4 .price {
+.product-variable-options .product-variable-item h4 .pp-amount {
+  margin-left: auto;
+}
+.product-variable-options .product-variable-item h4 .__remaining-seats {
+  margin-left: 6px;
+  font-weight: normal;
+}
+.product-variable-options .product-variable-item h4 .price, .product-variable-options .product-variable-item h4 .__remaining-seats {
   font-size: 1rem;
 }
 .product-variable-options .product-variable-item h4 del {

@@ -262,3 +262,33 @@ function pp_save_Pricebook2($data) {
 function pp_get_wp_Pricebook2() {
   return get_option('__PP_PRICEBOOK2');
 }
+
+function pp_update_wp_event_push_Remaining_Seats__c($qty, $wpEventId) {
+  $postId = ppsf_find_event_by_sfevent_id($wpEventId);
+  if(!$postId && $postId == 0) return;
+
+  $total_seats = get_field('total_number_of_seats__c', (int) $postId);
+  $old_seats = get_field('remaining_seats__c', (int) $postId);
+  $old_seats = ($old_seats ? $old_seats : $total_seats);
+
+  $new_seats_number = ((int) $old_seats - (int) $qty);
+  update_field('remaining_seats__c', $new_seats_number, $postId);
+}
+
+function pp_validate_update_cart_qtt($cart_item_key, $qtt_number) {
+  if($qtt_number == 0) return true;
+  $cart_item = WC()->cart->get_cart_item($cart_item_key);
+  $product_id = $cart_item['product_id'];
+  $variation_id = $cart_item['variation_id'];
+
+  if($variation_id) {
+    $variation_o = new WC_Product_Variation($variation_id);
+    $max_qtt = $variation_o->get_stock_quantity();
+
+    if($qtt_number > $max_qtt) {
+      return false;
+    }
+  }
+
+  return true;
+}

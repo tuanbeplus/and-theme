@@ -46,9 +46,9 @@ function pp_add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
   $variation->get_formatted_name();
 
   $cart_item_data['course_information'] = [
-    'name' => wp_strip_all_tags($variation->get_formatted_name()),
+    'name' => $variation->get_name(), // wp_strip_all_tags($variation->get_formatted_name()),
     'event_parent' => pp_get_event_data_by_id((int) $wp_event_parent_id),
-    'event_child' => pp_get_event_data_by_id((int) $wp_event_child_id),
+    'event_child' => pp_get_event_data_by_id((int) $wp_event_child_id), 
 
     // 'start_date' => $start_date,
     // 'start_time' => $start_time,
@@ -93,27 +93,23 @@ function pp_and_woo_auto_complete_order( $order_id ) {
   }
 
   $order = wc_get_order( $order_id );
-  foreach ($order->get_items() as $item_id => $item_obj) {
-    $__SF_CONTACT_FULL = wc_get_order_item_meta( $item_id, '__SF_CONTACT_FULL', true );
-    $course_information = wc_get_order_item_meta( $item_id, 'course_information', true );
-    // pp_log(wp_json_encode($__SF_CONTACT_FULL));
-    // pp_log(wp_json_encode($course_information));
+  $_updated_remaining_seats = get_post_meta($order_id, '_updated_remaining_seats', true);
+  if($_updated_remaining_seats != 'yes') {
+    foreach ($order->get_items() as $item_id => $item_obj) {
 
-    if(!$__SF_CONTACT_FULL || !isset($course_information['event_parent']['sf_event_id'])) continue;
-
-    $eventID = $course_information['event_parent']['sf_event_id'];
-    foreach($__SF_CONTACT_FULL as $cItem) {
-      // $res = and_create_an_event_relation_on_salesforce($eventID, $cItem['contact_id']);
-      // $relation_id = isset($res['relation_id']) ? $res['relation_id'] : '';
-
-      // $cItem['relation_id'] = $relation_id;
-      // pp_add_attendees_order($order_id, $cItem);
-
-      // pp_log(wp_json_encode($res)); 
+      $__SF_CONTACT_FULL = wc_get_order_item_meta( $item_id, '__SF_CONTACT_FULL', true );
+      $course_information = wc_get_order_item_meta( $item_id, 'course_information', true );
+  
+      // qty
+      $qty = $item_obj->get_quantity();
+  
+      if(!isset($course_information['event_parent']['sf_event_id'])) continue;
+      $eventID = $course_information['event_parent']['sf_event_id'];
+  
+      // Update Remaining_Seats
+      pp_update_wp_event_push_Remaining_Seats__c($qty, $eventID);
+      update_post_meta($order_id, '_updated_remaining_seats', 'yes');
     }
-    // $eventID = $course_information['event_parent']['sf_event_id'];
-    // pp_log(wp_json_encode($__SF_CONTACT_FULL));
-    // pp_log('Event ID: ' . $eventID);
   }
 
   if( $order->has_status( 'processing' ) && $order->is_paid() ) {
@@ -267,4 +263,21 @@ function ppsf_set_product_price($productParentId = 0, $prices = []) {
     'success' => $productParentId,
     'data' => $products,
   ]);
+}
+
+function pp_woo_remaining_seats_available($event) {
+  $total_number_of_seats__c = $event['event_parent']['total_number_of_seats__c'];
+  $remaining_seats__c = $event['event_parent']['remaining_seats__c'];
+  
+  if(!$remaining_seats__c) {
+    $remaining_seats__c = $total_number_of_seats__c;
+  }
+
+  ob_start();
+  ?>
+  <span class="__remaining-seats"> 
+    <?php echo sprintf(__('(Remaining Seats %s/%s)', 'pp'), $remaining_seats__c, $total_number_of_seats__c); ?>
+  </span> <!-- .__remaining-seats -->
+  <?php
+  return ob_get_clean();
 }

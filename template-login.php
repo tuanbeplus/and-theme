@@ -3,7 +3,7 @@
 * Template Name: Login
 */
 
-$sf_client_id = get_field('salesforce_client_id', 'option');
+$sf_client_id = get_field('salesforce_members_login_client_id', 'option');
 $sf_callback_url = get_field('salesforce_callback_url', 'option');
 $sf_community_url = get_field('salesforce_community_url', 'option');
 

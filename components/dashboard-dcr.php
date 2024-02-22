@@ -1,8 +1,8 @@
 <?php
-
+global $account_id;
 $user_id = $_COOKIE['userId'];
 $arr_terms = array('dcr');
-$organisation_id = get_user_meta( get_current_user_id(), '__salesforce_account_id', true);
+$organisation_id = $account_id;
 $dcr_accessible_all_users = get_assessments_accessible_all_users($organisation_id, $arr_terms);
 $sf_product_id_opp = getProductIdByOpportunity();
 $drc_product_id = isset($sf_product_id_opp['dcr_product_id']) ? $sf_product_id_opp['dcr_product_id'] : null;

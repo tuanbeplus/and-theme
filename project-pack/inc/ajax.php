@@ -65,7 +65,17 @@ add_action( 'wp_ajax_nopriv_pp_get_product_card_style', 'pp_get_product_card_sty
 function pp_ajax_woo_update_qtt() {
   extract($_POST);
   global $woocommerce;
-  $woocommerce->cart->set_quantity($data['cart_item_key'], (int) $data['qtt_number']); 
+
+  $pass = pp_validate_update_cart_qtt($data['cart_item_key'], (int) $data['qtt_number']);
+  if($pass == true) {
+    $woocommerce->cart->set_quantity($data['cart_item_key'], (int) $data['qtt_number']); 
+  } else {
+    // not update
+    wp_send_json([
+      'successful' => false,
+      'message' => __('Update cart fail. Exceed quantity stock!', 'pp'),
+    ]);
+  }
 }
 
 add_action( 'wp_ajax_pp_ajax_woo_update_qtt', 'pp_ajax_woo_update_qtt' );

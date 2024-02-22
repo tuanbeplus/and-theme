@@ -1382,12 +1382,14 @@ var SFEventContext_Provider = function SFEventContext_Provider(_ref) {
         });
 
         // Sort by date
-        __events.sort(function (a, b) {
-          var c = Date.parse(a.StartDateTime);
-          var d = Date.parse(b.StartDateTime);
-          // console.log(c, d, a.StartDateTime, b.StartDateTime);
-          return c - d;
-        });
+        // __events.sort((a, b) => {
+        //   let c = Date.parse(a.StartDateTime);
+        //   let d = Date.parse(b.StartDateTime);
+        //   // console.log(c, d, a.StartDateTime, b.StartDateTime);
+        //   return c - d;
+        // })
+
+        __events = (0,_helpers__WEBPACK_IMPORTED_MODULE_2__.EventOrderBy)(__events);
 
         // Valiadate of Junctions
         __events.map(function (eItem) {
@@ -1529,10 +1531,44 @@ var useSFEventContext = function useSFEventContext() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   EventOrderBy: () => (/* binding */ EventOrderBy),
 /* harmony export */   RandomColor: () => (/* binding */ RandomColor)
 /* harmony export */ });
 var RandomColor = function RandomColor() {
   return '#' + Math.round(0x1000000 + 0xffffff * Math.random()).toString(16).slice(1);
+};
+var EventOrderBy = function EventOrderBy(events) {
+  var onlyParentEvents = events.filter(function (_e) {
+    if (!_e.__junctions_id || _e.__junctions_id == '') {
+      return true;
+    }
+    return _e.__event_type === '__PARENT__';
+  });
+  var onlyChildEvents = events.filter(function (_e) {
+    return _e.__event_type === '__CHILDREN__';
+  });
+
+  // Sort by date
+  onlyParentEvents.sort(function (a, b) {
+    var c = Date.parse(a.StartDateTime);
+    var d = Date.parse(b.StartDateTime);
+    // console.log(c, d, a.StartDateTime, b.StartDateTime);
+    return d - c;
+  });
+  onlyChildEvents.map(function (_e) {
+    var child_junctions_id = _e.__junctions_id;
+    var _parentIndex = onlyParentEvents.findIndex(function (_i) {
+      return _i.__junctions_id == child_junctions_id;
+    });
+    if (_parentIndex !== -1) {
+      onlyParentEvents.splice(_parentIndex + 1, 0, _e);
+    }
+    return _e;
+  });
+
+  // console.log(onlyParentEvents);
+
+  return onlyParentEvents;
 };
 
 /***/ }),

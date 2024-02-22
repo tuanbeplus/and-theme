@@ -3084,8 +3084,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               });
             case 4:
               result = _context2.sent;
+              if (!((result === null || result === void 0 ? void 0 : result.successful) == false)) {
+                _context2.next = 9;
+                break;
+              }
+              (0,_general__WEBPACK_IMPORTED_MODULE_0__.notificationGlobal)(result === null || result === void 0 ? void 0 : result.message, 3);
+              $('.pp-minicart.pp__loading').removeClass('pp__loading');
+              return _context2.abrupt("return");
+            case 9:
               $(document.body).trigger('wc_fragment_refresh');
-            case 6:
+            case 10:
             case "end":
               return _context2.stop();
           }
@@ -3102,6 +3110,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var $qttInput = $wrap.find('input[type=number]');
       var oldValue = parseInt($qttInput.val());
       var newValue = oldValue += 1;
+      var maxValue = $qttInput.attr('max');
+      if (maxValue && newValue > parseInt(maxValue)) {
+        newValue = maxValue;
+        $qttInput.val(newValue);
+        return;
+      }
       $qttInput.val(newValue);
       $(document.body).trigger('pp:woo_update_qtt', [key, newValue]);
     });
@@ -3111,6 +3125,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var key = $wrap.data('cart-item-key');
       var $qttInput = $wrap.find('input[type=number]');
       var oldValue = parseInt($qttInput.val());
+      var maxValue = $qttInput.attr('max');
       var newValue = oldValue -= 1;
       if (newValue <= 0) {
         return;
@@ -3123,8 +3138,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var $wrap = $(this).parent();
       var key = $wrap.data('cart-item-key');
       var value = parseInt(this.value);
+      var maxValue = $(this).attr('max');
       if (value <= 0) {
         this.value = 1;
+      }
+      if (maxValue && value > parseInt(maxValue)) {
+        this.value = maxValue;
       }
       $(document.body).trigger('pp:woo_update_qtt', [key, this.value]);
     });
@@ -3314,7 +3333,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context2.next = 30;
                 break;
               }
-              errorMessageUI($td, '⚠️ Email has already been registered for the event!', true);
+              errorMessageUI($td, '⚠️ Email has already been registered for this event!', true);
               resetSlotItem($tr);
               setStatus($tr, false);
               return _context2.abrupt("return");
@@ -3492,7 +3511,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }());
     $('body').on('click', 'form#ADD_ATTENDEES_FORM .__remove-item', function (e) {
       e.preventDefault();
-      var r = confirm('Are you sure clean this slot?');
+      var r = confirm('Are you sure you wish to remove this attendee?');
       if (!r) return;
       var std = $(this).find('.__std').text();
       var _this$dataset = this.dataset,
