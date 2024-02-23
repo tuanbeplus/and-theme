@@ -52,23 +52,34 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 						$cart_item_key
 					);
 
-          ?>
-          <div class="product-entry">
-            <a href="<?php echo esc_url( $product_permalink ); ?>" class="__thumb"><?php echo $thumbnail; ?></a>
-            <div class="__entry">
+					// Get SF event start date & convert to strtotime
+					$sf_event_start_date = $cart_item['course_information']['event_parent']['startdatetime'] ?? '';
+					$sf_event_start_date = strtotime($sf_event_start_date);
+					$strtotime_now = strtotime('now');
+					?>
+					<?php if (!empty($sf_event_start_date) && $sf_event_start_date < $strtotime_now): ?>
+						<div class="event-out-date">
+							<p class="__label">Out date event</p>
+						</div>
+					<?php endif; ?>
+					<div class="event-out-date">
+						<p class="__label">Out date event</p>
+					</div>
+					<div class="product-entry">
+						<a href="<?php echo esc_url( $product_permalink ); ?>" class="__thumb"><?php echo $thumbnail; ?></a>
+						<div class="__entry">
 							<?php do_action( 'pp/mini_cart_item_before_title', $cart_item, $_product ) ?>
-              <h4>
-                <a href="<?php echo esc_url( $product_permalink ); ?>">
-                  <?php echo wp_kses_post( $product_name ); ?>
-                </a>
-              </h4>
+							<h4>
+								<a href="<?php echo esc_url( $product_permalink ); ?>">
+								<?php echo wp_kses_post( $product_name ); ?>
+								</a>
+							</h4>
 							<?php do_action( 'pp/mini_cart_item_after_title', $cart_item, $_product ) ?>
-              <?php echo wc_get_formatted_cart_item_data( $cart_item ); ?>
-					    <?php echo apply_filters( 'woocommerce_widget_cart_item_quantity', '<span class="quantity">' . sprintf( '%s &times; %s', $cart_item['quantity'], $product_price ) . '</span>', $cart_item, $cart_item_key ); ?>
+							<?php echo wc_get_formatted_cart_item_data( $cart_item ); ?>
+							<?php echo apply_filters( 'woocommerce_widget_cart_item_quantity', '<span class="quantity">' . sprintf( '%s &times; %s', $cart_item['quantity'], $product_price ) . '</span>', $cart_item, $cart_item_key ); ?>
 							<?php pp_cart_item_qtt_update_tag($_product, $cart_item, $cart_item_key); ?>
-            </div>
-          </div>
-          
+						</div>
+					</div>
 				</li>
 				<?php
 			}

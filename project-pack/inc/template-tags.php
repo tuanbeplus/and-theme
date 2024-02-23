@@ -399,6 +399,7 @@ function pp_product_variable_choose_options_tag($product) {
         </div>
         <?php if (!empty($upcomingEvents)): ?>
           <button 
+            style="display:none;"
             type="submit" 
             class="pp-button pp-button-submit pp-button-variantion-submit"
             data-template-has-item="<?php _e('Add %CHECKED_NUMBER% item to basket', 'pp') ?>" 

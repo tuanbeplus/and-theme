@@ -43,6 +43,11 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 				if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
 					$product_permalink = apply_filters( 'woocommerce_cart_item_permalink', $_product->is_visible() ? $_product->get_permalink( $cart_item ) : '', $cart_item, $cart_item_key );
+					
+					// Get SF event start date & convert to strtotime
+					$sf_event_start_date = $cart_item['course_information']['event_parent']['startdatetime'] ?? '';
+					$sf_event_start_date = strtotime($sf_event_start_date);
+					$strtotime_now = strtotime('now');
 					?>
 					<tr class="woocommerce-cart-form__cart-item <?php echo esc_attr( apply_filters( 'woocommerce_cart_item_class', 'cart_item', $cart_item, $cart_item_key ) ); ?>">
 
@@ -127,6 +132,13 @@ do_action( 'woocommerce_before_cart' ); ?>
 								echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key ); // PHPCS: XSS ok.
 							?>
 						</td>
+						
+						<?php if (!empty($sf_event_start_date) && $sf_event_start_date < $strtotime_now): ?>
+							<td class="event-out-date">
+								<p class="__label">Out date event</p>
+							</td>
+						<?php endif; ?>
+						
 					</tr>
 					<?php
 				}

@@ -165,7 +165,7 @@ function and_refresh_sf_access_token() {
 }
 
 /**
- * Check access token expiration & refresh
+ * Check access token expiration & refresh when it expired
  * 
  */
 function and_sf_access_token_expired() {

@@ -28,6 +28,26 @@
       font-size: 1.125rem;
     }
   }
+
+  .woocommerce-message {
+
+    .empty-cart-message {
+      margin-top: 30px;
+    }
+  
+    .button {
+      float: none;
+      margin-top: 10px;
+      font-family: "Avenir-Medium";
+      color: #fff;
+      background-color: #6e3685!important;
+
+      &:hover {
+        color: #fff!important;
+      }
+    }
+  }
+
 }
 
 form.woocommerce-checkout {

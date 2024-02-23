@@ -21,7 +21,7 @@ $attendees = pp_get_attendees_by_order($order_id);
         $course_information = $item->get_meta('course_information');
         // $__SF_CONTACT_FULL = $item->get_meta('__SF_CONTACT_FULL'); 
         // echo '<pre>'; print_r($course_information); echo '</pre>';
-        $event_title = $course_information['event_parent']['post_title'];
+        $event_title = $course_information['event_parent']['post_title'] ?? '';
 
         // echo '<pre>'; print_r($__SF_CONTACT_FULL); echo '</pre>';
         $product_id = $item['product_id'];

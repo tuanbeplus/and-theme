@@ -29,7 +29,7 @@ add_action( 'pp/product_single_sidebar', 'pp_product_single_widget_buy_tag' );
 add_action( 'pp/single_product_widget_by_end', 'pp_product_button_add_to_cart_tag' );
 add_action( 'pp/product_single_after_content', 'pp_product_variable_choose_options_tag' );
 add_filter( 'woocommerce_product_add_to_cart_text', 'pp_custom_addtocart_button_text', 20, 2 );
-add_action( 'pp/product_single_end', 'pp_product_button_add_to_cart_tag', 20 );
+// add_action( 'pp/product_single_end', 'pp_product_button_add_to_cart_tag', 20 );
 add_action( 'pp/product_single_end', 'pp_button_back_to_shoplanding_tag', 22 );
 add_action( 'pp/mini_cart_item_after_title', 'pp_woo_product_minus_string_tag', 22, 2 );
 
@@ -161,3 +161,61 @@ function pp_woo_cart_item_name($name, $item) {
   // $variation_attributes = $product->get_variation_attributes( $item );
   return sprintf('<a href="%s">%s</a>', get_the_permalink($product_id), get_the_title($product_id)) ;
 }
+
+// Remove variations of a product from the cart before checkout
+function remove_product_variations_before_checkout() {
+
+  // Check if it's the checkout page
+  if (is_checkout()) {
+    $item_removed_arr = array();
+
+    // Get the cart
+    $cart = WC()->cart;
+    $cart_contents = $cart->get_cart();
+
+    // Loop through cart items
+    foreach ( $cart_contents as $cart_item_key => $cart_item ) {
+      
+      // Get SF event start date & convert to strtotime
+      $sf_event_start_date = $cart_item['course_information']['event_parent']['startdatetime'] ?? '';
+      $sf_event_start_date = strtotime($sf_event_start_date);
+      $strtotime_now = strtotime('now');
+      
+      // Find & remove out date Events
+      if (!empty($sf_event_start_date) && $sf_event_start_date < $strtotime_now) {
+        // get event title
+        $sf_event_title = $cart_item['course_information']['event_parent']['post_title'];
+
+        // Remove the variation from the cart
+        $cart->remove_cart_item( $cart_item_key );
+
+        // Push items removed to an array
+        $item_removed_arr[] = $sf_event_title;
+      }
+    }
+
+    // Show removed items message
+    if (!empty($item_removed_arr)) {
+      $message  = '<div class="removed-items-message">';
+      $message .= '<p>The out-dated events have been removed from the Cart:</p>';
+      $message .= '<ul>';
+      foreach ($item_removed_arr as $item_title)  {
+        $message .= '<li style="margin-top:8px;">'. $item_title .'</li>';
+      }
+      $message .= '</ul>';
+      $message .= '</div>';
+
+      // Empty Cart
+    if ($cart->is_empty()) {
+      $message .= '<div class="empty-cart-message" style="margin-top:30px;">';
+      $message .= '<p>Your cart is currently empty.</p>';
+      $message .= '<p><a class="button" href="' . esc_url(wc_get_page_permalink('shop')) . '">Return to Shop</a></p>';
+      $message .= '</div>';
+    }
+
+      // Display a success notice
+      wc_add_notice($message, 'success');
+    }
+  }
+}
+add_action('wp_head', 'remove_product_variations_before_checkout');

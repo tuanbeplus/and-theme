@@ -220,3 +220,39 @@ function and_event_acf_button_ajax_handle($field, $post_id){
     wp_send_json_success("Success! Event has synced from Salesforce.");
     
 }
+
+/**
+ * Add Event ID column to Admin table
+ */
+add_filter('manage_sf-event_posts_columns', 'custom_sf_event_admin_column');
+function custom_sf_event_admin_column($columns)
+{
+  $columns['sf_event_id'] = 'Salesforce Event ID';
+  $columns['sf_event_date'] = 'Event Date';
+  return $columns;
+}
+
+add_action('manage_sf-event_posts_custom_column', 'custom_sf_event_admin_column_value', 10, 2);
+function custom_sf_event_admin_column_value($column_key, $post_id): void
+{
+  // Salesforce Event ID column
+  if ($column_key == 'sf_event_id') {
+    $sf_event_id = get_field('sf_event_id', $post_id);
+    if (isset($sf_event_id)) {
+      echo $sf_event_id;
+    }
+  }
+
+  // Event Date column
+  if ($column_key == 'sf_event_date') {
+    $workshop_event_date = get_field('workshop_event_date_text__c', $post_id);
+    $workshop_times = get_field('workshop_times__c', $post_id);
+    if (isset($workshop_event_date)) {
+      echo $workshop_event_date;
+    }
+    if (isset($workshop_times)) {
+      echo '<br>at ';
+      echo $workshop_times;
+    }
+  }
+}

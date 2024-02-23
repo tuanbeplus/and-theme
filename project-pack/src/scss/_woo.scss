@@ -418,6 +418,25 @@
           clear: both;
         }
 
+        .event-out-date {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(255, 255, 255, 0.5);
+          z-index: 8;
+          top: -2px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .__label {
+            padding: 8px 12px;
+            background-color: #444;
+            color: #fff;
+            font-size: 16px;
+          }
+        }
+
         a {
           display: inline-block;
         }
@@ -435,6 +454,7 @@
           background: none !important;
           box-shadow: none !important;
           outline: none !important;
+          font-family: "Avenir-Heavy";
 
           &:focus {
             border-color: black !important;
@@ -581,6 +601,10 @@ table.shop_table {
     }
   }
 
+  tr {
+    position: relative;
+  }
+
   th {
     font-family: var(--primary-font-heavy);
   }
@@ -588,6 +612,31 @@ table.shop_table {
   th, td {
     border-top: none !important;
     border-bottom: solid 1px #ddd !important;
+  }
+
+  .cart_item {
+    .remove {
+      z-index: 10;
+    }
+    td.event-out-date{
+      position: absolute;
+      width: 100%!important;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.6);
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 8;
+    }
+  
+    td.event-out-date .__label {
+      padding: 8px 12px;
+      font-size: 16px;
+      background-color: #444;
+      color: #fff;
+    }
   }
 }
 
