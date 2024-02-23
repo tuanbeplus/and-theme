@@ -931,6 +931,24 @@ table.shop_table th, table.shop_table td {
   margin-bottom: 5em;
 }
 
+.woocommerce .u-column1.col-1,
+.woocommerce .u-column2.col-2 {
+  max-width: none !important;
+}
+
+.woocommerce-form-login .form-row label {
+  display: block;
+  width: 100%;
+}
+.woocommerce-form-login .password-input {
+  width: 100%;
+}
+
+form.woocommerce-form-login,
+form.woocommerce-form-register {
+  background: white;
+}
+
 .__sidebar-sticky {
   position: sticky;
   top: 40px;

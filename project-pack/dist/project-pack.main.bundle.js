@@ -3396,6 +3396,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   };
   var addAttendeesFormValidates = function addAttendeesFormValidates() {
     var pass = true;
+    return pass;
     $(FORM_ID).find('input[name^=contact_id]').each(function () {
       var input = $(this);
       var $tr = input.closest('tr');
