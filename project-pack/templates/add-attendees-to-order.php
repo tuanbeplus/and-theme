@@ -10,6 +10,16 @@ $account_id = isset($sf_user_metadata['account_id']) ? $sf_user_metadata['accoun
 $account_name = isset($sf_user_metadata['salesforce_account']['Name']) ? $sf_user_metadata['salesforce_account']['Name'] : '';
 $attendees = pp_get_attendees_by_order($order_id);
 // echo '<pre>'; print_r($attendees); echo '</pre>'; 
+
+$event_variations = array();
+foreach($order->get_items() as $item_key => $item) {
+  $course_information = $item->get_meta('course_information');
+  if (isset($course_information) && !empty($course_information)) {
+    $event_variations[] = $item;
+  }
+}
+// return if order doesn't exist any event variations
+if (empty($event_variations)) return;
 ?>
 <div class="add-attendees-to-order">
   <div class="add-attendees-to-order__inner add-attendees-container">

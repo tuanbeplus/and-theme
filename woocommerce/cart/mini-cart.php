@@ -62,9 +62,6 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 							<p class="__label">Out date event</p>
 						</div>
 					<?php endif; ?>
-					<div class="event-out-date">
-						<p class="__label">Out date event</p>
-					</div>
 					<div class="product-entry">
 						<a href="<?php echo esc_url( $product_permalink ); ?>" class="__thumb"><?php echo $thumbnail; ?></a>
 						<div class="__entry">
