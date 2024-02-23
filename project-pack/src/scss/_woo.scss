@@ -686,3 +686,27 @@ table.shop_table {
 .product-landing-v2-no-term {
   margin-bottom: 5em;
 }
+
+.woocommerce {
+  .u-column1.col-1,
+  .u-column2.col-2 {
+    max-width: none !important;
+  }
+} 
+
+.woocommerce-form-login {
+
+  .form-row label {
+    display: block;
+    width: 100%;
+  }
+
+  .password-input {
+    width: 100%;
+  }
+}
+
+form.woocommerce-form-login,
+form.woocommerce-form-register {
+  background: white;
+}

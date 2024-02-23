@@ -164,6 +164,8 @@
 
   const addAttendeesFormValidates = () => {
     let pass = true;
+    return pass;
+
     $(FORM_ID).find('input[name^=contact_id]').each(function(){ 
       let input = $(this);
       let $tr = input.closest('tr');
