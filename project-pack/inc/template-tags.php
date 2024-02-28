@@ -318,6 +318,18 @@ function pp_date_format($date_str = '', $format = "l, j F Y") {
   return date_format($date, $format);
 }
 
+function pp_product_variable_old_event_toggle_html() {
+  ?>
+  <label class="__old-event-toggle">
+    <input type="checkbox" id="VARIABLE_OLD_EVENT_TOGGLE_INPUT">
+    <div class="__toggle-fake">
+      <span class="__toggle-fake-dot"></span>
+    </div>
+    <div class="__toggle-label"><?php _e('Show Old Events', 'pp') ?></div>
+  </label>
+  <?php 
+}
+
 function pp_product_variable_choose_options_tag($product) {
   if( !$product->is_type( 'variable' ) ){
     return;
@@ -328,7 +340,10 @@ function pp_product_variable_choose_options_tag($product) {
   if(!$variations || count($variations) <= 0) return;
   ?>
   <div id="PRODUCT_BLOCK_CONTENT_CHOOSE_OPTIONS" class="pp__block-content product-variable-options">
-    <h4 class="pp__block-content-title"><?php _e('Training courses available', 'pp'); ?></h4>
+    <h4 class="pp__block-content-title">
+      <?php _e('Training courses available', 'pp'); ?>
+      <?php pp_product_variable_old_event_toggle_html(); ?>
+    </h4>
     <div class="pp-content pp__block-content-entry">
       <form 
         class="pp-form-product-variations" 
@@ -348,7 +363,9 @@ function pp_product_variable_choose_options_tag($product) {
               $eventData['variation_id'] = $item['variation_id']; 
               $allEventData[] = $eventData;
             }
+            
             $eventDataAfterSort = groupAndSortEventsByMonth($allEventData, 'ASC');
+            // echo count($eventDataAfterSort);
             $upcomingEvents = array();
           ?>
           <?php foreach ($eventDataAfterSort as $monthName => $monthBucket): ?>
@@ -358,8 +375,9 @@ function pp_product_variable_choose_options_tag($product) {
                 <?php foreach ($monthBucket as $event): 
                       $upcomingEvents[] = $event;
                       // echo '<pre>'; print_r($event); echo '</pre>';
+                      $old_class = ((isset($event['__OLD_EVENT']) && $event['__OLD_EVENT']) == 1 ? '__old-event __disable' : '');
                   ?>
-                  <div class="option-block product-variable-item product-variable-item__id-<?php echo $event['variation_id'] ?> <?php echo $event['is_in_stock'] ? '' : '__disable'; ?>">
+                  <div class="<?php echo $old_class; ?> option-block product-variable-item product-variable-item__id-<?php echo $event['variation_id'] ?> <?php echo $event['is_in_stock'] ? '' : '__disable'; ?>">
                     <?php if(!$event['is_in_stock']) {
                       echo '<span class="pp__out-of-stock">'. __('Out of stock', 'pp') .'</span>';
                     } ?>
@@ -461,13 +479,18 @@ function groupAndSortEventsByMonth($eventsArray, $sortDirection = 'ASC') {
 
     $monthKey = date('F', $convertedDateTime);
     
+    
     // Just Add future Events
     if ($convertedDateTime > strtotime('now')) {
       // Add the child array to the month key
       if (isset($monthKey)) {
-        $groupedAndSortedArrays[$monthKey][] = $event;
+        // $groupedAndSortedArrays[$monthKey][] = $event;
       }
+    } else {
+      $event['__OLD_EVENT'] = true;
     }
+
+    $groupedAndSortedArrays[$monthKey][] = $event;
   }
   return $groupedAndSortedArrays;
 }

@@ -4789,6 +4789,36 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
     return ProductVariationsForm;
   }();
   $(function () {
+    var displayGroup = function displayGroup() {
+      var $monthBucket = $('.month-bucket');
+      if ($monthBucket.length == 0) return;
+      var isShow = $('#VARIABLE_OLD_EVENT_TOGGLE_INPUT').prop('checked');
+      // console.log($monthBucket.length, isShow);
+      $monthBucket.each(function () {
+        var $self = $(this);
+        var eventLength = $self.find('.product-variable-item').length;
+        var oldEventLength = $self.find('.__old-event').length;
+        // console.log(eventLength, oldEventLength);
+        if (eventLength == oldEventLength) {
+          if (isShow) {
+            $self.css('display', 'block');
+          } else {
+            $self.css('display', 'none');
+          }
+        }
+      });
+    };
+    displayGroup();
+    $('body').on('change', '#VARIABLE_OLD_EVENT_TOGGLE_INPUT', function (e) {
+      e.preventDefault();
+      var isShow = e.target.checked;
+      if (isShow) {
+        $('.__old-event').addClass('__show');
+      } else {
+        $('.__old-event').removeClass('__show');
+      }
+      displayGroup();
+    });
     $('form.pp-form-product-variations').each(function () {
       var $form = $(this);
       var $buttonSubmit = $form.find('button[type=submit]');

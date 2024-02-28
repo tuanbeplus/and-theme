@@ -92,6 +92,43 @@ import { notificationGlobal } from "./general";
   }
 
   $(() => {
+
+    const displayGroup = () => {
+      const $monthBucket = $('.month-bucket');
+      if($monthBucket.length == 0) return;
+      
+      const isShow = $('#VARIABLE_OLD_EVENT_TOGGLE_INPUT').prop('checked');
+      // console.log($monthBucket.length, isShow);
+      $monthBucket.each(function() {
+        const $self = $(this);
+        const eventLength = $self.find('.product-variable-item').length;
+        const oldEventLength = $self.find('.__old-event').length;
+        // console.log(eventLength, oldEventLength);
+        if(eventLength == oldEventLength) {
+          if(isShow) {
+            $self.css('display', 'block');
+          } else {
+            $self.css('display', 'none');
+          }
+        }
+      })
+    }
+
+    displayGroup();
+
+    $('body').on('change', '#VARIABLE_OLD_EVENT_TOGGLE_INPUT', e => {
+      e.preventDefault();
+      const isShow = e.target.checked;
+
+      if(isShow) {
+        $('.__old-event').addClass('__show')
+      } else {
+        $('.__old-event').removeClass('__show')
+      }
+
+      displayGroup();
+    })
+
     $('form.pp-form-product-variations').each(function() {
       const $form = $(this);
       const $buttonSubmit = $form.find('button[type=submit]');

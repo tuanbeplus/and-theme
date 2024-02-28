@@ -284,12 +284,14 @@ function pp_woo_remaining_seats_available($event) {
 
 add_action( 'woocommerce_variation_header', function($variation, $loop) {
   $wp_parent_event_id = get_post_meta( $variation->ID, 'wp_parent_event_id', true );
-  // if(empty($wp_parent_event_id)); return;
-  $startdatetime = get_field('startdatetime', $wp_parent_event_id);
-  $date = new DateTime($startdatetime);
-  $startTimestamp = $date->getTimestamp();
-  $currentTimestamp = current_time('timestamp');
-  $isUpcoming = ($startTimestamp < $currentTimestamp ? false : true);
+  if(!empty($wp_parent_event_id)) {
+    $startdatetime = get_field('startdatetime', $wp_parent_event_id);
+    $date = new DateTime($startdatetime);
+    $startTimestamp = $date->getTimestamp();
+    $currentTimestamp = current_time('timestamp');
+    $isUpcoming = ($startTimestamp < $currentTimestamp ? false : true);
 
-  echo sprintf('<span style="'. ($isUpcoming ? 'color: green;' : 'color: gray;') .'" title="%s">[%s]</span>', $startdatetime, ($isUpcoming ? 'UPCOMING' : 'OLD EVENT'));
+    echo sprintf('<span style="'. ($isUpcoming ? 'color: green;' : 'color: gray;') .'" title="%s">[%s]</span>', $startdatetime, ($isUpcoming ? 'UPCOMING' : 'OLD EVENT'));
+  }
+  
 }, 20, 2 );
