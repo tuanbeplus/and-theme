@@ -18040,7 +18040,7 @@ function __guardMethod__(obj, methodName, transform) {
           '" class="circle dark-red"><span class="material-icons">arrow_forward</span><span class="text">' +
           $(this).text() +
           "</span></a></li>";
-        $($addToMenu).insertBefore(".on-this-page ul li.cta");
+        $($addToMenu).insertBefore(".on-this-page.default ul li.cta");
       }
     });
 

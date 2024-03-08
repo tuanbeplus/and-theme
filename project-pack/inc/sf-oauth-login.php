@@ -1,5 +1,4 @@
 <?php
-
 function fn_wp_user_exists($email = '') {
     return email_exists($email);
 }

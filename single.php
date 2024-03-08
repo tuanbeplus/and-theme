@@ -16,7 +16,11 @@ $onThisPageCustomLinks = get_field('on_this_page_custom_links', $post->ID);
 $sidebarCta = get_field('sidebar_cta', $post->ID);
 $showOnPageMainCta = get_field('main_sidebar_cta', $post->ID);
 $program_id = get_field('stepping_into_program_id', 'options');
-
+// Get custom_page_sidebar meta data
+$custom_page_sidebar = get_post_meta($post->ID, 'custom_page_sidebar', true);
+$menu_title = isset($custom_page_sidebar['menu_title']) ? $custom_page_sidebar['menu_title'] : 'On this page';
+$is_custom_menu = isset($custom_page_sidebar['is_custom_menu']) ? $custom_page_sidebar['is_custom_menu'] : '0';
+$menu_items = isset($custom_page_sidebar['menu_items']) ? $custom_page_sidebar['menu_items'] : array();
 ?>
 
 	<section id="primary">
@@ -45,7 +49,7 @@ $program_id = get_field('stepping_into_program_id', 'options');
                 endif;
         ?>
 
-<?php if($showOnThisPage == 'no'): ?>
+    <?php if($showOnThisPage == 'no'): ?>
         <div class="sidetab <?php echo $sidebarCta; ?>">
             <?php if($sidebarCta == 'internship'): ?>
             <a href="https://andau.force.com/forms/s/andforms?formtype=stepping_into_application&programid=<?php echo $program_id; ?>" class="internship">
@@ -104,9 +108,10 @@ $program_id = get_field('stepping_into_program_id', 'options');
                     ?>
 
 
-                <?php if($showOnThisPage == 'yes'): $links = '';?>
-
-                    <?php if(!empty($onThisPageCustomLinks)):
+                <?php 
+                    $links = '';
+                    if($showOnThisPage == 'yes'):
+                        if(!empty($onThisPageCustomLinks)):
                             foreach($onThisPageCustomLinks as $customLinks):
                                 if($customLinks['external'] == 'yes') {
                                     $external = 'external';
@@ -120,13 +125,33 @@ $program_id = get_field('stepping_into_program_id', 'options');
                                         </li>';
 
                             endforeach;
-                          endif;
+                        endif;
                     ?>
-                <div class="col-md-12 col-lg-3 on-this-page sidebar">
+                <div class="col-md-12 col-lg-3 on-this-page sidebar <?php echo ($is_custom_menu == true) ? 'custom' : 'default'; ?>">
                     <div class="inner">
-                        <p>On this page</p>
+                        <p><?php echo $menu_title; ?></p>
                         <ul>
+                            <!-- Custom links -->
                             <?php echo $links; ?>
+                            <!-- /Custom links -->
+
+                            <?php if ($is_custom_menu == true): ?>
+                                <?php if (!empty($menu_items)): ?>
+                                    <!-- Custom menu items -->
+                                    <?php foreach ($menu_items as $index => $item): ?>
+                                        <?php if (isset($item['custom_item'])): ?>
+                                        <li>
+                                            <a href="#point-<?php echo $index; ?>" id="<?php echo $index; ?>" class="circle dark-red">
+                                                <span class="material-icons">arrow_forward</span>
+                                                <span class="text"><?php echo $item['custom_item']; ?></span>
+                                            </a>
+                                        </li>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                    <!-- /Custom menu items -->
+                                <?php endif; ?>
+                            <?php endif; ?>
+                            
                             <?php if($showOnPageMainCta == 'internship'){ ?>
                             <li class="yellow cta">
                                 <a href="https://andau.force.com/forms/s/andforms?formtype=stepping_into_application&programid=<?php echo $program_id; ?>">

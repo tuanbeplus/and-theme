@@ -242,6 +242,17 @@ function wp_bootstrap_starter_scripts()
 }
 add_action('wp_enqueue_scripts', 'wp_bootstrap_starter_scripts');
 
+
+/**
+ * Admin enqueue scripts and stylesheet
+ */
+function and_admin_enqueue_scripts()
+{
+    wp_enqueue_style('admin-style', get_template_directory_uri() . '/assets/css/admin.css?r=' . rand());
+}
+add_action('admin_enqueue_scripts', 'and_admin_enqueue_scripts');
+
+
 /**
  * Add Preload for CDN scripts and stylesheet
  */
@@ -312,6 +323,11 @@ require get_template_directory() . '/inc/rest-api.php';
  * Custom functions Hook
  */
 require get_template_directory() . '/inc/hook.php';
+
+/**
+ * Custom page sidebar functions
+ */
+require get_template_directory() . '/inc/custom-page-sidebar.php';
 
 /**
  * Load custom WordPress nav walker.

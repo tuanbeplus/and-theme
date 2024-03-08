@@ -1,0 +1,63 @@
+table.menu-option {
+    width: 100%;
+    margin-top: 12px;
+}
+
+table.menu-option td:first-child{
+    width: 40%;
+    padding-right: 30px;
+}
+
+table.menu-option td p:first-child {
+    margin-top: 0;
+    font-weight: 600;
+}
+
+table.menu-option td input[type="text"] {
+    width: 100%;
+}
+
+.gr-radio-btn {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 30px;
+    row-gap: 10px;
+}
+
+.table-menu {
+    width: 100%;
+    margin-top: 18px;
+    padding-top: 8px;
+    border-top: 1px solid #ccc;
+    border-spacing: 0;
+}
+
+.table-menu tr:nth-child(even) {
+    background-color: #f6f7f7;
+}
+
+.table-menu th {
+    padding: 10px 0;
+    text-align: left;
+    font-weight: 600;
+}
+
+.table-menu td:first-child {
+    width: 40%;
+    padding: 0 10px;
+    font-weight: 500;
+}
+
+.table-menu td:last-child {
+    padding-top: 6px;
+}
+
+.table-menu textarea {
+    width: 100%;
+}
+
+.no-found-mess {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+}
