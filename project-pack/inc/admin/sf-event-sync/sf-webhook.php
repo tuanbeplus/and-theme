@@ -1,7 +1,11 @@
 <?php
-add_action( 'init', 'sf_get_event_data_from_salesforce', 10 );
-function sf_get_event_data_from_salesforce() {
-  if(isset($_GET['action']) && $_GET['action'] == 'event-change') {
+add_action( 'init', 'sf_get_object_data_from_salesforce', 10 );
+function sf_get_object_data_from_salesforce() {
+  if(isset($_GET['action']) && $_GET['action'] == 'event-change&') {
+    
+    wp_remote_post('https://43220378982f26ae3cb65f4454b5273d.m.pipedream.net', [
+      'body'    => file_get_contents('php://input'),
+    ]);
 
     $xml = file_get_contents('php://input');
 
@@ -37,6 +41,47 @@ function sf_get_event_data_from_salesforce() {
     sf_log_data($response);
     
     ppsf_return_webhook();
+  }
+
+  if(isset($_GET['action']) && $_GET['action'] == 'product-change') {
+    
+    // wp_remote_post('https://43220378982f26ae3cb65f4454b5273d.m.pipedream.net', [
+    //   'body'    => file_get_contents('php://input'),
+    // ]);
+
+    $xml = file_get_contents('php://input');
+
+    if(empty($xml)) {
+      return;
+    }
+  
+    $requiredData = array();
+    $result = new DOMDocument();
+    $result->loadXML($xml);
+  
+    foreach(array(
+        "Id",
+        "Description",
+        "Family",
+        "IsActive",
+        "Name",
+        "ProductCode",
+        "Woocommerce_Description__c"
+    ) as $key) {
+      foreach($result->getElementsByTagNameNS("urn:sobject.enterprise.soap.sforce.com", $key) as $element) {
+        if($element instanceof DOMElement) {
+          $requiredData[$key] = $element->textContent;
+        }
+      }
+    }
+    
+    and_pull_product_data_from_salesforce($requiredData);
+
+    $response = json_encode($requiredData);
+    sf_log_data($response);
+    
+    ppsf_return_webhook();
+    
   }
 }
 

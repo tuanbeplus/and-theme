@@ -6,7 +6,7 @@ function sf_log_data( $data ) {
   $file = SF_DIR . 'sf-sync-log.txt';
   $current = file_get_contents($file);
   $datetime = date('Y-m-d H:i:s');
-  $current .= "\nDate Time: {$datetime}\n Data: {$data} \n";
+  $current = "\nDate Time: {$datetime}\n Data: {$data} \n" . $current;
   file_put_contents($file, $current);
 }
 
@@ -126,7 +126,7 @@ function and_push_event_meta_field_to_salesforce($meta_id, $post_id, $meta_key, 
 }
 
 /** 
- * Function to push Event data from WP to Salesforce
+ * Function to pull Event data from Salesforce to WP
  */
 function and_pull_event_data_from_salesforce($event_fields){
   ob_start();
@@ -145,6 +145,115 @@ function and_pull_event_data_from_salesforce($event_fields){
       }
     }
   }
+  
+  ob_get_clean();
+}
+
+/** 
+ * Sync Product data from Salesforce to WP
+ */
+function and_set_category($product_id, $tax_title, $tax_slug){
+  if (taxonomy_exists($tax_slug) === true) {
+    if(isset($tax_title) && !empty($tax_title)){
+      $term = term_exists(sanitize_title($tax_title), $tax_slug);
+      
+      if (is_array( $term )) {
+        $term_id = (int)$term['term_id'];
+        wp_update_term($term_id, $tax_slug, array('name' => trim(preg_replace('/\s+/', ' ', $tax_title))));
+        $category_id = $term_id;
+      } else {
+        $newterm = wp_insert_term(trim(preg_replace('/\s+/', ' ', $tax_title)), $tax_slug, array('parent' => intval(0), 'slug' => sanitize_title($tax_title)));
+        $category_id = $newterm['term_id'];
+      }
+    }
+
+    wp_set_object_terms((int)$product_id, $category_id, $tax_slug);
+  }
+}
+
+function and_update_product($product_id, $product_fields){
+  $post_args = [
+    "ID" => (int)$product_id,
+    "post_title" => $product_fields['Name'],
+    "post_content" => $product_fields['Woocommerce_Description__c'],
+    "post_excerpt" => $product_fields['Description']
+  ];
+  
+  // Update post
+  $post_id = wp_update_post( $post_args );
+  
+  if ( is_wp_error( $post_id ) ) {
+    sf_log_data('Update product ID ' . $post_id . ' failed!');
+  } else {
+    // Update Category
+    and_set_category($post_id, $product_fields['Family'], 'product_cat');
+
+    // Update Meta Fields
+    update_post_meta($post_id, '_sku', $product_fields['ProductCode']);
+    update_post_meta($post_id, '__sf_product_id', $product_fields['Id']);
+    update_post_meta($post_id, '__sf_family', $product_fields['Family']);
+    update_post_meta($post_id, '__sf_productcode', $product_fields['ProductCode']);
+  }
+}
+
+function and_inset_product($product_fields){
+  $post_args = [
+    'post_status'  => 'publish',
+    'post_title'   => trim(preg_replace('/\s+/', ' ', $product_fields['Name'])),
+    "post_content" => $product_fields['Woocommerce_Description__c'],
+    "post_excerpt" => $product_fields['Description'],
+    'post_name'		 => sanitize_title($product_fields['Name']),
+    'post_type'    => 'product'
+  ];
+
+  // Update post
+  $post_id = wp_insert_post( $post_args );
+    
+  if ( is_wp_error( $post_id ) ) {
+    sf_log_data('Insert product ID ' . $post_id . ' failed!');
+  } else {
+    // Update Category
+    and_set_category($post_id, $product_fields['Family'], 'product_cat');
+
+    // Update Meta Fields
+    update_post_meta($post_id, '_sku', $product_fields['ProductCode']);
+    update_post_meta($post_id, 'cfx_sales_id', $product_fields['Id']);
+    update_post_meta($post_id, '__sf_product_id', $product_fields['Id']);
+    update_post_meta($post_id, '__sf_family', $product_fields['Family']);
+    update_post_meta($post_id, '__sf_productcode', $product_fields['ProductCode']);
+  }
+}
+
+function and_find_product_by_sfproduct_id($sf_product_id) {
+  $_posts = get_posts([
+    'post_type' => 'product',
+    'status' => 'any',
+    'meta_query' => [
+      [
+        'key'   => 'cfx_sales_id',
+			  'value' => $sf_product_id,
+        'compare' => '='
+      ]
+    ]
+  ]);
+
+  return (($_posts && count($_posts)) > 0 ? $_posts[0]->ID : false);
+}
+
+function and_pull_product_data_from_salesforce($product_fields){
+  ob_start();
+  $product_id = and_find_product_by_sfproduct_id($product_fields['Id']);
+  
+  if($product_id) {
+    // Update Product
+    and_update_product($product_id, $product_fields);
+
+  } else {
+    // Create Product
+    
+    and_inset_product($product_fields);
+  }
+
   ob_get_clean();
 }
 
