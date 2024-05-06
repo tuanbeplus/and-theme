@@ -415,23 +415,21 @@ function and_custom_nav_menu_atts($atts, $item, $args) {
 }
 add_filter('nav_menu_link_attributes', 'and_custom_nav_menu_atts', 10, 3);
 
-// Refresh access token in admin
-function and_refresh_access_token_admin() {
-    // Is Single post type SF Events
-    if (isset($_GET['post']) && !empty($_GET['post'])) {
-        $post_id = $_GET['post'];
-        if (get_post_type($post_id) == 'sf-event') {
-            // Refresh token
-            and_sf_access_token_expired();
-        }
-    }
-    // Is SF Events import page
-    if (isset($_GET['page']) && $_GET['page'] == 'sf-event-import-page') {
+// Refresh Salesforce access token once per day
+function and_refresh_sf_access_token_once_per_day() {
+    // Check if the function has already been run today
+    $already_run_today = get_transient('sf_refresh_access_token_run_today');
+
+    // If not, run the function
+    if (!$already_run_today) {
         // Refresh token
-        and_sf_access_token_expired();
+        and_sf_access_token_expired(); 
+
+        // Set transient to indicate that the function has been run today
+        set_transient('sf_refresh_access_token_run_today', true, DAY_IN_SECONDS);
     }
 }
-add_action('admin_init', 'and_refresh_access_token_admin');
+add_action('init', 'and_refresh_sf_access_token_once_per_day');
 
 // ===================== REST API =======================
 
