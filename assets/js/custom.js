@@ -50,7 +50,6 @@ jQuery.curCSS = function (element, prop, val) {
               }
           }
         }
-
     });
 
     jQuery('.slide-content .cta').focus(function( e ) {
@@ -120,9 +119,17 @@ jQuery.curCSS = function (element, prop, val) {
         $('.template-form-search .search-form').submit();
     });
 
+    // Click to toggle search popup
     $('.cta-search').on('click', function (e) {
         e.stopPropagation();
         let $menuHeader = $('#menu-header');
+        let cta_link = $menuHeader.find('.cta-search .nav-link');
+        if (cta_link.attr('aria-expanded') == 'false') {
+            cta_link.attr('aria-expanded', 'true')
+        }
+        else {
+            cta_link.attr('aria-expanded', 'false')
+        }
         $menuHeader.find('.dropdown-menu').removeClass('show')
         $('.template-form-search-genrenal').toggleClass('show')
     });
@@ -133,10 +140,22 @@ jQuery.curCSS = function (element, prop, val) {
 
     $('#menu-header >li:not(.cta-search)').on('click', function (e) {
         $('.template-form-search-genrenal').removeClass('show')
+        let $menuHeader = $('#menu-header');
+        $menuHeader.find('.cta-search .nav-link').attr('aria-expanded', 'false')
     })
 
-    $('.template-form-search__close').on('click', function (e) {
-        $('.template-form-search-genrenal').removeClass('show')
+    // Click button to close search popup
+    $('#btn-close-search-popup').on('click', function (e) {
+        $(this).closest('.template-form-search-genrenal').removeClass('show')
+        let $menuHeader = $('#menu-header');
+        $menuHeader.find('.cta-search .nav-link').attr('aria-expanded', 'false')
+    })
+
+    // Close saerch popup by event focus out (blur)
+    $('.suggestions-search .btn-suggestions.last-btn').on('blur', function (e) {
+        $(this).closest('.template-form-search-genrenal').removeClass('show')
+        let $menuHeader = $('#menu-header');
+        $menuHeader.find('.cta-search .nav-link').attr('aria-expanded', 'false')
     })
 
     var cookie_user_id = (document.cookie.match(/^(?:.*;)?\s*userId\s*=\s*([^;]+)(?:.*)?$/) || [, null])[1]

@@ -17989,6 +17989,13 @@ function __guardMethod__(obj, methodName, transform) {
     $(this).find(".chevron").toggleClass("up bottom");
     $(this).toggleClass("open");
     $(this).next().toggleClass("open");
+    let aria_expanded = $(this).attr('aria-expanded')
+    if (aria_expanded == 'false') {
+      $(this).attr('aria-expanded', 'true')
+    }
+    else {
+      $(this).attr('aria-expanded', 'false')
+    }
   });
 
   $(document).on("click", "#faqs .categories .category", function (e) {

@@ -403,6 +403,38 @@ function get_user_submissions_exist($user_id, $org_id)
     }
 }
 
+// Add custom attribute to a specific WordPress navigation menu item using CSS class
+function and_custom_nav_menu_atts($atts, $item, $args) {
+    // Check if it's the specific menu item you want to modify
+    if (in_array('cta-search', $item->classes)) {
+        // Add custom attribute and value 
+        $atts['aria-expanded'] = 'false';
+        $atts['aria-controls'] = 'genrenal-search';
+    }
+    return $atts;
+}
+add_filter('nav_menu_link_attributes', 'and_custom_nav_menu_atts', 10, 3);
+
+// Refresh access token in admin
+function and_refresh_access_token_admin() {
+    // Is Single post type SF Events
+    if (isset($_GET['post']) && !empty($_GET['post'])) {
+        $post_id = $_GET['post'];
+        if (get_post_type($post_id) == 'sf-event') {
+            // Refresh token
+            and_sf_access_token_expired();
+        }
+    }
+    // Is SF Events import page
+    if (isset($_GET['page']) && $_GET['page'] == 'sf-event-import-page') {
+        // Refresh token
+        and_sf_access_token_expired();
+    }
+}
+add_action('admin_init', 'and_refresh_access_token_admin');
+
+// ===================== REST API =======================
+
 function register_custom_menu_endpoint() {
     register_rest_route('custom/v1', '/menu/', array(
         'methods' => 'GET',
@@ -454,8 +486,6 @@ function build_menu_hierarchy($menu_items, $parent_id) {
     }
     return $result;
 }
-
-
 
 
 

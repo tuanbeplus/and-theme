@@ -1,4 +1,8 @@
 <?php
+/**
+ * Add Custom Menu Sidebar meta box
+ * 
+ */
 function init_meta_boxes_admin_page() {
     add_meta_box(
         'custom_page_sidebar',   

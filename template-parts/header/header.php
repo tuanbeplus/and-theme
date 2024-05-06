@@ -25,7 +25,10 @@ if($path == '/global-header.php') {
                     <img src="<?php echo get_template_directory_uri().'/assets/imgs/logo-mobile.svg'; ?>" alt="<?php echo esc_attr( get_bloginfo( 'name' ) ); ?>">
                 </a>
             </div>
-            <button class="hamburger hamburger--spring" type="button" data-target="#primary-menu-wrap" aria-controls="primary-menu-wrap" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="hamburger hamburger--spring" type="button" 
+                data-target="#primary-menu-wrap" 
+                aria-controls="primary-menu-wrap" 
+                aria-expanded="false">
                 <span class="hamburger-box">
                     <span class="hamburger-inner"></span>
                     <span class="text">Menu</span>
@@ -50,7 +53,7 @@ if($path == '/global-header.php') {
             ?>
         </nav>
     </div>
-    <div class="template-form-search-genrenal"> 
+    <div id="genrenal-search" class="template-form-search-genrenal"> 
         <?php get_template_part( 'searchform-autocomplete') ?> 
     </div>
 </header><!-- #masthead -->
