@@ -30,7 +30,7 @@ if ( !empty($assessment_accessible_list) ) {
                             <div class="inside">
                                 <div class="row">
                                     <div class="col-md-6 title">
-                                        <img src="/wp-content/themes/and/assets/imgs/DCR Icon.svg" alt="Index"/>
+                                        <img src="/wp-content/themes/and-theme/assets/imgs/DCR Icon.svg" alt="Index"/>
                                         <h2><?php echo $index_heading; ?></h2>
                                     </div>
                                 </div>

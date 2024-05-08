@@ -18,9 +18,9 @@
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-            <link rel="apple-touch-icon" sizes="180x180" href="/wp-content/themes/and/assets/imgs/apple-touch-icon-1.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/wp-content/themes/and/assets/imgs/favicon-32x32-1.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/wp-content/themes/and/assets/imgs/favicon-16x16-1.png">
+            <link rel="apple-touch-icon" sizes="180x180" href="/wp-content/themes/and-theme/assets/imgs/apple-touch-icon-1.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/wp-content/themes/and-theme/assets/imgs/favicon-32x32-1.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/wp-content/themes/and-theme/assets/imgs/favicon-16x16-1.png">
 <?php wp_head();
 
 $colourScheme = get_field('colour_scheme');
@@ -269,7 +269,7 @@ function onLogin(identity) {
         eraseCookie('lgi');
         eraseCookie('userId');
 		 jQuery('a#login').attr('href','/login');
-        jQuery('a#login img').attr('src', '/wp-content/themes/and/assets/imgs/user-icon.svg');
+        jQuery('a#login img').attr('src', '/wp-content/themes/and-theme/assets/imgs/user-icon.svg');
 		jQuery('#login span').text('Login');
          window.location = '/';
 	}

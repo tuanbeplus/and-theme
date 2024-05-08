@@ -5,7 +5,7 @@
     .site-content { 
         position: relative;
         &:before {
-            background: url("/wp-content/themes/and/assets/imgs/side-arrow-purple.svg") no-repeat;
+            background: url("/wp-content/themes/and-theme/assets/imgs/side-arrow-purple.svg") no-repeat;
             background-size: cover;
         }
     }
@@ -25,7 +25,7 @@
                     border: none;
                     &:before {
                         content: '';
-                        background: url('/wp-content/themes/and/assets/imgs/mem-prof.svg') no-repeat;
+                        background: url('/wp-content/themes/and-theme/assets/imgs/mem-prof.svg') no-repeat;
                         width: 40px;
                         height: 40px;
                         position: absolute;

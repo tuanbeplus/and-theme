@@ -64,16 +64,16 @@ $footerLinks = get_field('footer_links', 'option');
                 <div class="social col-12">
                     <p>Follow us</p>
                     <a href="<?php echo $facebook; ?>" target="_blank">
-                        <img src="/wp-content/themes/and/assets/imgs/facebook.svg" alt="Facebook" />
+                        <img src="/wp-content/themes/and-theme/assets/imgs/facebook.svg" alt="Facebook" />
                     </a>
                     <a href="<?php echo $twitter; ?>" target="_blank">
-                        <img src="/wp-content/themes/and/assets/imgs/social-icons-x.svg" alt="Twitter" style="width:30px" />
+                        <img src="/wp-content/themes/and-theme/assets/imgs/social-icons-x.svg" alt="Twitter" style="width:30px" />
                     </a>
                     <a href="<?php echo $linkedin; ?>" target="_blank">
-                        <img src="/wp-content/themes/and/assets/imgs/linkedin.svg" alt="LinkedIn" />
+                        <img src="/wp-content/themes/and-theme/assets/imgs/linkedin.svg" alt="LinkedIn" />
                     </a>
                     <a href="<?php echo $youtube; ?>" target="_blank">
-                        <img src="/wp-content/themes/and/assets/imgs/youtube.svg" alt="YouTube" />
+                        <img src="/wp-content/themes/and-theme/assets/imgs/youtube.svg" alt="YouTube" />
                     </a>
                 </div>
                 <div class="col-12 bottom">
@@ -93,13 +93,12 @@ $footerLinks = get_field('footer_links', 'option');
 		</div>
     </footer>
 
-
 <?php endif; ?>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 
-<script type="text/javascript" src="/wp-content/themes/and/assets/js/main.js?rand=2346235"></script>
+<script type="text/javascript" src="/wp-content/themes/and-theme/assets/js/main.js?rand=2346235"></script>
 
 <?php wp_footer(); ?>
 </body>
