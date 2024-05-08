@@ -2796,7 +2796,7 @@ ul.gfield_radio input[type="radio"]:checked + label:before {
     text-transform: uppercase; }
   p {
     font-size: 1rem;
-    line-height: 120%; }
+    line-height: 132%; }
   .breadcrumbs {
     margin: 30px 0;
     margin-left: -15px; }
@@ -2831,9 +2831,7 @@ ul.gfield_radio input[type="radio"]:checked + label:before {
         padding-right: 0; }
       table td:last-of-type {
         display: none; }
-  /* OUR TEAM */
-  .postid-749 .on-this-page {
-    display: none; } }
+   }
 
 @keyframes fadein {
   from {
@@ -3112,9 +3110,19 @@ div.circle {
   background: #fff;
   box-shadow: 0px 14px 28px rgba(0, 0, 0, 0.08); }
   .accordion .accordion-title {
-    cursor: pointer;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
     border-bottom: 1px solid #DFDFDF; }
-    .accordion .accordion-title h1 {
+    .accordion button.accordion-title:focus {
+      position: relative;
+      border: none!important;
+    }
+    .accordion .accordion-title .heading {
       font-size: 1.25rem;
       padding: 22px 20px;
       line-height: 28px;
@@ -3177,7 +3185,11 @@ div.circle {
     .our-members-data .container {
       padding: 0; }
   .accordion {
-    margin-bottom: 30px; } }
+    margin-bottom: 30px; } 
+  .accordion .accordion-title .heading {
+    text-transform: none;
+  }
+}
 
 .cards .the-card {
   margin-bottom: 30px; }
@@ -3490,7 +3502,17 @@ div.circle {
 
 @media (max-width: 1023px) {
   .sidetab {
-    display: none; } }
+    float: none!important; 
+    margin: 0 20px 24px;
+  } 
+  .sidetab:not(.latest-news) a {
+    position: relative;
+    right: unset;
+    top: unset;
+    float: none;
+    display: inline-block;
+  }
+}
 
 .quotes {
   padding-top: 64px;
@@ -3644,7 +3666,7 @@ div.circle {
 
 @media (max-width: 767px) {
   .text-content-block {
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     padding: 0; }
     .text-content-block > h1 {
       display: none; }
@@ -4560,6 +4582,10 @@ div.circle {
     padding-left: 10px; }
 
 @media (max-width: 991px) {
+  .single.postid-1901 #primary .container .main-area {
+    flex: 100%;
+    max-width: 100%;
+  }
   .page-tiles.narrow .container {
     padding: 0 20px; }
   .page-tiles.narrow .cards .the-card {
@@ -4568,6 +4594,8 @@ div.circle {
 @media (max-width: 767px) {
   .page-tiles {
     margin-top: 10px; }
+    .page-tiles.news {
+      margin-top: 10px; }
     .page-tiles.narrow {
       margin-top: 0; }
     .page-tiles .cards .the-card {

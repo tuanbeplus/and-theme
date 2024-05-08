@@ -24,9 +24,6 @@ button:focus,
   align-items: center;
   flex-wrap: wrap;
 }
-.template-form-search .close {
-  display: none;
-}
 
 .template-form-search .search-form label[for="autocomplete_search"] {
   width: calc(100% - 150px);
@@ -585,20 +582,11 @@ body a {
     top: 195px;
   }
 }
-.template-form-search .search-form,
-.template-form-search .close {
+
+.template-form-search .search-form {
   width: 100%;
 }
-/* .template-form-search .template-form-search__close.close {
-  max-width: 700px;
-  margin: 0 auto 50px auto;
-  float: inherit;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  opacity: 1;
-  cursor: pointer;
-} */
+
 .template-form-search .template-form-search__close.close span {
   font-size: 1.125rem;
   color: #fff;
@@ -610,6 +598,28 @@ body a {
 }
 .template-form-search-genrenal.show {
   display: block;
+}
+
+#btn-close-search-popup {
+  display: none;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  border: 2px solid transparent;
+  background: none;
+  color: #fff;
+  font-size: 1.125rem;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: "Avenir-Medium";
+}
+#btn-close-search-popup .xmark-icon {
+  font-size: 1.25rem;
+}
+
+.template-form-search-genrenal #btn-close-search-popup {
+  display: inline-block;
 }
 
 #menu-header > li.cta-search {
@@ -1309,11 +1319,13 @@ section.error-404 {
   margin: auto;
   max-width: 1000px;
   margin-bottom: 80px;
+  text-align: center;
 }
 
 .error-404 .search-form {
   display: flex;
   margin-top: 16px;
+  justify-content: center;
 }
 
 .error-404 .search-form label {
@@ -1808,10 +1820,18 @@ section.posts-grid {
 
 @media only screen and (max-width: 400px) {
   section.posts-grid {
+    margin-bottom: 0;
     width: 100%;
     overflow-x: hidden;
   }
+  .posts-grid .owl-carousel .owl-stage {
+    display: flex;
+  }
+  .cards .post-card {
+    height: 100%;
+  }
 }
+
 
 /* Icons list */
 section.icons-list {
@@ -1963,5 +1983,97 @@ footer.site-footer .bottom .ctas a:hover {
 @media only screen and (max-width: 480px) {
   footer.site-footer .bottom .ctas a {
     font-size: 0.875rem;
+  }
+}
+
+/* Membership table */
+.membership-table-wrapper[tabindex] {
+  padding: 10px;
+  overflow-x: auto;
+  background: linear-gradient(to right, #faf9f9 30%, rgba(255, 255, 255, 0)), 
+              linear-gradient(to right, rgba(255, 255, 255, 0), #faf9f9 70%) 0 100%, 
+              radial-gradient(farthest-side at 0% 50%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)), 
+              radial-gradient(farthest-side at 100% 50%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) 0 100%;
+  background-repeat: no-repeat;
+  background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+  background-position: 0 0, 100%, 0 0, 100%;
+  background-attachment: local, local, scroll, scroll;
+}
+.membership-table-wrapper[tabindex]:focus {
+  box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.5)!important;
+  outline: 0.1em solid rgba(0, 0, 0, 0.1)!important;
+  border: none!important;
+}
+table#membership-table {
+  margin-bottom: 10px;
+}
+table#membership-table th {
+  width: 25%;
+  padding-right: 10px;
+  text-align: center;
+  vertical-align: top;
+}
+table#membership-table th:first-of-type {
+  text-align: left;
+}
+table#membership-table td {
+  width: 25%;
+  padding-right: 10px;
+  text-align: center;
+  vertical-align: top;
+}
+table#membership-table td:first-of-type {
+  padding-right: 10px;
+  text-align: left;
+}
+table#membership-table .heading .price {
+  margin: 6px 0 12px;
+  font-family: "Avenir-Medium";
+}
+table#membership-table a.cta.d-md-inline {
+  margin: 0 10px;
+  padding: 12px 40px;
+  width: auto;
+  display: inline-block!important;
+  background: #663077;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-family: "Avenir-Roman";
+  color: #fff;
+  text-decoration: none;
+}
+table#membership-table caption {
+  margin-top: 20px;
+  font-size: 1.125rem;
+  text-align: center;
+  font-style: italic;
+  color: #212529;
+}
+table#membership-table tr:last-child > td:first-child {
+  font-family: "Avenir-Heavy";
+}
+
+@media only screen and (max-width: 767px) {
+  table#membership-table {
+    margin-top: 40px;
+  }
+  table#membership-table td:first-of-type {
+    min-width: 180px;
+  }
+  table#membership-table td:last-of-type {
+    display: revert!important;
+  }
+  table#membership-table td {
+    font-size: 1rem;
+  }
+  table#membership-table a.cta.d-md-inline {
+    margin: 0;
+    padding: 10px 20px;
+  }
+  table#membership-table a.cta.d-md-none {
+    display: none!important;
+  }
+  table#membership-table caption {
+    font-size: 1rem;
   }
 }

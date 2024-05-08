@@ -403,6 +403,36 @@ function get_user_submissions_exist($user_id, $org_id)
     }
 }
 
+// Add custom attribute to a specific WordPress navigation menu item using CSS class
+function and_custom_nav_menu_atts($atts, $item, $args) {
+    // Check if it's the specific menu item you want to modify
+    if (in_array('cta-search', $item->classes)) {
+        // Add custom attribute and value 
+        $atts['aria-expanded'] = 'false';
+        $atts['aria-controls'] = 'genrenal-search';
+    }
+    return $atts;
+}
+add_filter('nav_menu_link_attributes', 'and_custom_nav_menu_atts', 10, 3);
+
+// Refresh Salesforce access token once per day
+function and_refresh_sf_access_token_once_per_day() {
+    // Check if the function has already been run today
+    $already_run_today = get_transient('sf_refresh_access_token_run_today');
+
+    // If not, run the function
+    if (!$already_run_today) {
+        // Refresh token
+        and_sf_access_token_expired(); 
+
+        // Set transient to indicate that the function has been run today
+        set_transient('sf_refresh_access_token_run_today', true, DAY_IN_SECONDS);
+    }
+}
+add_action('init', 'and_refresh_sf_access_token_once_per_day');
+
+// ===================== REST API =======================
+
 function register_custom_menu_endpoint() {
     register_rest_route('custom/v1', '/menu/', array(
         'methods' => 'GET',
@@ -454,8 +484,6 @@ function build_menu_hierarchy($menu_items, $parent_id) {
     }
     return $result;
 }
-
-
 
 
 
