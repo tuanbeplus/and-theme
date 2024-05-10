@@ -95,7 +95,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$menuTitle = '<a href="/about-us">About us</a>';
 			}
 			$output .= "{$n}{$indent}<ul$class_names $labelledby role=\"menu\">$n";
-			$output .= "<div class='top-area'><div class='close'><img src='/wp-content/themes/and/assets/imgs/the-close.svg' alt='Close'/><span>Close</span></div></div>";
+			$output .= "<div class='top-area'><div class='close'><img src='/wp-content/themes/and-theme/assets/imgs/the-close.svg' alt='Close'/><span>Close</span></div></div>";
 		}
 
 		/**

@@ -53,13 +53,13 @@ $menu_items = isset($custom_page_sidebar['menu_items']) ? $custom_page_sidebar['
         <div class="sidetab <?php echo $sidebarCta; ?>">
             <?php if($sidebarCta == 'internship'): ?>
             <a href="https://andau.force.com/forms/s/andforms?formtype=stepping_into_application&programid=<?php echo $program_id; ?>" class="internship">
-                <img src="/wp-content/themes/and/assets/imgs/mail.svg" alt="Mail icon"/>
+                <img src="/wp-content/themes/and-theme/assets/imgs/mail.svg" alt="Mail icon"/>
                 <span class="text">Apply for an internship</span>
             </a>
             <?php endif; ?>
             <?php if($sidebarCta == 'opportunites'): ?>
             <a href="/students-jobseekers/" class="opportunities">
-                <img src="/wp-content/themes/and/assets/imgs/opportunities.svg" alt="Hear about opportunities"/>
+                <img src="/wp-content/themes/and-theme/assets/imgs/opportunities.svg" alt="Hear about opportunities"/>
                 <span class="text">Hear about opportunities</span>
             </a>
             <?php endif; ?>
@@ -72,13 +72,13 @@ $menu_items = isset($custom_page_sidebar['menu_items']) ? $custom_page_sidebar['
                 </li>
                 <li class="pink">
                     <a href="mailto:info@and.org.au" target="_blank" class="circle">
-                        <img src="/wp-content/themes/and/assets/imgs/relation.svg" alt="Relationship Manager"/><span class="text">Contact your Relationship Manager</span>
+                        <img src="/wp-content/themes/and-theme/assets/imgs/relation.svg" alt="Relationship Manager"/><span class="text">Contact your Relationship Manager</span>
                     </a>
                 </li>
             <?php endif; ?>
             <?php if($sidebarCta !== 'internship' && $sidebarCta !== 'opportunites' && $sidebarCta !== 'latest-news' && $sidebarCta !== 'none' && !isset($_COOKIE['lgi'])): ?>
             <a href="<?php echo get_field('become_member_cta','option'); ?>" class="member">
-                <img src="/wp-content/themes/and/assets/imgs/member-icon-cta.svg" alt="Member icon" />
+                <img src="/wp-content/themes/and-theme/assets/imgs/member-icon-cta.svg" alt="Member icon" />
                 <span class="text">Become a member</span>
             </a>
             <?php endif; ?>
@@ -155,27 +155,27 @@ $menu_items = isset($custom_page_sidebar['menu_items']) ? $custom_page_sidebar['
                             <?php if($showOnPageMainCta == 'internship'){ ?>
                             <li class="yellow cta">
                                 <a href="https://andau.force.com/forms/s/andforms?formtype=stepping_into_application&programid=<?php echo $program_id; ?>">
-                                    <img src="/wp-content/themes/and/assets/imgs/mail.svg" alt="Mail icon"/>
+                                    <img src="/wp-content/themes/and-theme/assets/imgs/mail.svg" alt="Mail icon"/>
                                     <span class="text">Apply for an internship</span>
                                 </a>
                             </li>
                             <?php } else if($showOnPageMainCta == 'apply-mentee') { ?>
                             <li class="member cta">
                                 <a href="<?php echo get_field('mentee_cta','option'); ?>">
-                                    <img src="/wp-content/themes/and/assets/imgs/member-icon.svg" alt="Member icon"/>
+                                    <img src="/wp-content/themes/and-theme/assets/imgs/member-icon.svg" alt="Member icon"/>
                                     <span class="text">Apply to be a mentee</span>
                                 </a>
                             </li>
                             <?php } else if($showOnPageMainCta == 'become-member' && !isset($_COOKIE['lgi'])) { ?>
                             <li class="member cta">
                                 <a href="<?php echo get_field('become_member_cta','option'); ?>">
-                                    <img src="/wp-content/themes/and/assets/imgs/member-icon.svg" alt="Member icon"/><span class="text">Become a member</span>
+                                    <img src="/wp-content/themes/and-theme/assets/imgs/member-icon.svg" alt="Member icon"/><span class="text">Become a member</span>
                                 </a>
                             </li>
                             <?php } else if($showOnPageMainCta !== 'none' && !isset($_COOKIE['lgi'])) { ?>
                             <li class="member cta">
                                 <a href="<?php echo get_field('member_cta','option'); ?>">
-                                    <img src="/wp-content/themes/and/assets/imgs/member-icon.svg" alt="Member icon"/><span class="text">Login for Member content</span>
+                                    <img src="/wp-content/themes/and-theme/assets/imgs/member-icon.svg" alt="Member icon"/><span class="text">Login for Member content</span>
                                 </a>
                             </li>
                             <?php } else { ?>

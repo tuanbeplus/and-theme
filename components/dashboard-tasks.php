@@ -16,7 +16,7 @@ if( get_row_layout() == 'dashboard_tasks' ):
                         <div class="inside">
                             <div class="row">
                                 <div class="col-md-6 title">
-                                    <img src="/wp-content/themes/and/assets/imgs/tasks.svg" alt="Tasks"/>
+                                    <img src="/wp-content/themes/and-theme/assets/imgs/tasks.svg" alt="Tasks"/>
                                     <h2><?php echo $tasks_heading; ?></h2>
                                 </div>
                                 <div class="col-md-6 remaining-hours">

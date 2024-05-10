@@ -35,7 +35,7 @@ if (isset($opportunities->records)) {
     <!-- E-learn loading -->
     <div class="elearn-loading-wrapper container" style="">
         <p class="loading-corprorate-name"><?php echo $organisationData['Name']; ?></p>
-        <img class="img-loading" src="/wp-content/themes/and/assets/imgs/handshake_loading.png" alt="Handshake E-learn loading">
+        <img class="img-loading" src="/wp-content/themes/and-theme/assets/imgs/handshake_loading.png" alt="Handshake E-learn loading">
         <p class="loading-description">We're taking you to your e-learn lorem ipsum dolor</p>
     </div>
     <!-- /E-learn loading -->
@@ -73,7 +73,7 @@ if (isset($opportunities->records)) {
                                             <div class="inside">
                                                 <div class="row">
                                                     <div class="col-md-6 title">
-                                                        <img class="" src="/wp-content/themes/and/assets/imgs/tasks.svg" alt="Purchased e-learns"/>
+                                                        <img class="" src="/wp-content/themes/and-theme/assets/imgs/tasks.svg" alt="Purchased e-learns"/>
                                                         <h2><?php echo $purchased_e_learns_heading; ?></h2>
                                                     </div>
                                                 </div>
@@ -203,7 +203,7 @@ if (isset($opportunities->records)) {
                                             <div class="inside">
                                                 <div class="row">
                                                     <div class="col-md-12 title">
-                                                        <img src="/wp-content/themes/and/assets/imgs/upcoming-events.svg" />
+                                                        <img src="/wp-content/themes/and-theme/assets/imgs/upcoming-events.svg" />
                                                         <h2><?php echo $e_learn_usage_to_date_heading; ?></h2>
                                                     </div>
                                                 </div>

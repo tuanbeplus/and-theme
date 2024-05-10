@@ -15,7 +15,7 @@ if( get_row_layout() == 'dashboard_membership' ):
                           <div class="inside">
                               <div class="row">
                                   <div class="col-md-12 title">
-                                      <img src="/wp-content/themes/and/assets/imgs/membership.svg" alt="Membership" />
+                                      <img src="/wp-content/themes/and-theme/assets/imgs/membership.svg" alt="Membership" />
                                       <h2 class="membership-heading">
                                         <span><?php echo $organisationData['Name']; ?></span><br>
                                         Membership (Level: <span class="__level"><?php echo $organisationData['membership_level']; ?></span>)

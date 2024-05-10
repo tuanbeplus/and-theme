@@ -356,7 +356,7 @@ add_filter('get_the_archive_title', function ($title) {
 add_filter("gform_ajax_spinner_url", "spinner_url", 10, 2);
 function spinner_url($image_src, $form)
 {
-	return "/wp-content/themes/and/assets/imgs/form-load.gif";
+	return "/wp-content/themes/and-theme/assets/imgs/form-load.gif";
 }
 
 
@@ -548,7 +548,7 @@ function and_add_security_header() {
  */
 function and_wpseo_stylesheet_url($s)
 {
-    return str_replace('/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl', '/wp-content/themes/and/yoast/css/and-sitemap.xsl', $s);
+    return str_replace('/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl', '/wp-content/themes/and-theme/yoast/css/and-sitemap.xsl', $s);
 }
 add_filter('wpseo_stylesheet_url', 'and_wpseo_stylesheet_url');
 

@@ -30,7 +30,7 @@ if ( !empty($assessment_accessible_list) ) {
                             <div class="inside">
                                 <div class="row">
                                     <div class="col-md-6 title">
-                                        <img src="/wp-content/themes/and/assets/imgs/A&I Icon.svg" alt="DCR"/>
+                                        <img src="/wp-content/themes/and-theme/assets/imgs/A&I Icon.svg" alt="DCR"/>
                                         <h2><?php echo $dcr_heading; ?></h2>
                                     </div>
                                 </div>

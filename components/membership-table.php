@@ -14,21 +14,21 @@ if( get_row_layout() == 'member_table_features' ):
                     </th>
                     <th>
                         <div class="icons">
-                            <img src="/wp-content/themes/and/assets/imgs/bronze-level.svg" alt="Bronze Membership Level"/>
+                            <img src="/wp-content/themes/and-theme/assets/imgs/bronze-level.svg" alt="Bronze Membership Level"/>
                             <p>Bronze</p>
                         </div>
                         <p class="price"><?php echo $member_pricing['bronze_member_pricing'] ?></p>
                     </th>
                     <th>
                         <div class="icons">
-                            <img src="/wp-content/themes/and/assets/imgs/silver-level.svg" alt="Silver Membership Level"/>
+                            <img src="/wp-content/themes/and-theme/assets/imgs/silver-level.svg" alt="Silver Membership Level"/>
                             <p>Silver</p>
                         </div>
                         <p class="price"><?php echo $member_pricing['silver_menber_pricing'] ?></p>
                     </th>
                     <th>
                         <div class="icons">
-                            <img src="/wp-content/themes/and/assets/imgs/gold-level.svg" alt="Gold Membership Level"/>
+                            <img src="/wp-content/themes/and-theme/assets/imgs/gold-level.svg" alt="Gold Membership Level"/>
                             <p>Gold</p>
                         </div>
                         <p class="price"><?php echo $member_pricing['gold_menber_pricing'] ?></p>

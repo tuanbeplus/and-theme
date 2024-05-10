@@ -451,7 +451,7 @@ if( have_rows('page_builder') ):
                     <div class="row cards">
                         <div class="col-12 col-md-6 the-card">
                             <div class="inner">
-                                <img src="/wp-content/themes/and/assets/imgs/event.jpg" />
+                                <img src="/wp-content/themes/and-theme/assets/imgs/event.jpg" />
                                 <div class="detail">
                                     <div class="row info">
                                         <div class="col-md-6">
@@ -480,7 +480,7 @@ if( have_rows('page_builder') ):
                         </div>
                         <div class="col-12 col-md-6 the-card">
                             <div class="inner">
-                                <img src="/wp-content/themes/and/assets/imgs/event.jpg" />
+                                <img src="/wp-content/themes/and-theme/assets/imgs/event.jpg" />
                                 <div class="detail">
                                     <div class="row info">
                                         <div class="col-6 col-md-6">
@@ -525,7 +525,7 @@ if( have_rows('page_builder') ):
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 image">
-                            <img src="/wp-content/themes/and/assets/imgs/frame.png" alt="Frame image" />
+                            <img src="/wp-content/themes/and-theme/assets/imgs/frame.png" alt="Frame image" />
                         </div>
                         <div class="col-md-6 col-lg-6 text-content-block">
                             '.$textContent.'
