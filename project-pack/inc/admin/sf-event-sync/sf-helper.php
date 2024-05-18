@@ -234,7 +234,7 @@ function and_find_product_by_sfproduct_id($sf_product_id) {
 			  'value' => $sf_product_id,
         'compare' => '='
       ]
-    ]
+    ],
   ]);
 
   return (($_posts && count($_posts)) > 0 ? $_posts[0]->ID : false);

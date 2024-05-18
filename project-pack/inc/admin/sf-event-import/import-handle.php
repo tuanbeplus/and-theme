@@ -107,12 +107,17 @@ function ppsf_event_add_product_child($data, $productParentId, $prices = []) {
   $_args = wp_parse_args($data, $default);
   
   $base_price_id = ppsf_base_Pricebook2_base_price_id();
-  $found_key = array_search($base_price_id, array_column($prices, 'Pricebook2Id'));
   $UnitPrice = '';
 
-  if($found_key !== false) {
-    $UnitPrice = floatval($prices[$found_key]['UnitPrice']);
-  }
+  if (is_array($prices) && !empty($prices)) {
+    if ($base_price_id !== null) {
+      $found_key = array_search($base_price_id, array_column($prices, 'Pricebook2Id'));
+      if ($found_key !== false) {
+        // Assuming you want to do something with the found key
+        $UnitPrice = floatval($prices[$found_key]['UnitPrice']);
+      }
+    }
+  } 
   // wp_send_json( [$UnitPrice] );
 
   $WpEventId = $_args['WpEventId'];
@@ -168,15 +173,17 @@ function ppsf_event_add_product_child($data, $productParentId, $prices = []) {
     $variation->set_regular_price($UnitPrice);
   } 
   
-
   $variation->set_manage_stock(true); 
   $variation->set_stock_quantity((int) $stock_quantity); 
 
   $variation->save(); 
 
-  do_action('PPSF:AFTER_IMPORT_VARIATION', $variation->get_id(), $productParentId, $prices);
+  do_action('PPSF:AFTER_IMPORT_VARIATION', $variation_id, $productParentId, $prices);
 
-  pp_log('Message: Added product variation successfully #' . $variation->get_id());
+  $variation_id = $variation->get_id();
+  if (isset($variation_id) && !empty($variation_id)) {
+    pp_log('Message: Added product variation successfully #' . $variation_id);
+  }
 
   // Update meta fields
   $meta_fields = apply_filters( 'PPSF/event_import_meta_fields_filter', [
@@ -190,17 +197,35 @@ function ppsf_event_add_product_child($data, $productParentId, $prices = []) {
   }
 
   do_action( 'PPSF/after_add_variation_hook', $variation, $variation->get_id(), $_args);
+
   return $variation->get_id();
 }
 
 function ppwc_event_add_product_attr_opts($pid, $name) {
   $attributes = get_post_meta($pid, '_product_attributes', true);
 
+  // Initialize attributes array if it's empty
+  if (!$attributes || empty($attributes) || $attributes == '') {
+    $attributes = array();
+  }
+  // Add the new Events attribute to the attributes array if it doesn't already exist
+  if (!array_key_exists('events', $attributes)) {
+    $attributes['events'] = array(
+      'name'         => 'Events',
+      'value'        => '',
+      'position'     => 0,
+      'is_visible'   => 1,
+      'is_variation' => 1,
+      'is_taxonomy'  => 0,
+    );
+  }
   // add new item opt
   $eventOptions = explode(' | ', $attributes['events']['value']);
+
   array_push($eventOptions, $name);
 
   $attributes['events']['value'] = implode(' | ', $eventOptions);
+
   update_post_meta($pid, '_product_attributes', $attributes);
 }
 
@@ -272,8 +297,10 @@ function ppsf_event_import_sfevent_to_wpevent_cpt($eventData = []) {
 }
 
 function ppsf_event_product_import($data) {
+
   // wp_send_json($data);
   $WooProductParentId = ppsf_event_create_product_parent($data);
+
   $__prices = $data['__prices'];
   $result = [
     'parent' => [
@@ -290,6 +317,7 @@ function ppsf_event_product_import($data) {
       }
 
       $WpEventId = ppsf_event_import_sfevent_to_wpevent_cpt($eItem);
+
       $eItem['WpEventId'] = $WpEventId;
       $WpProductChildId = ppsf_event_add_product_child($eItem, $WooProductParentId, $__prices); 
 

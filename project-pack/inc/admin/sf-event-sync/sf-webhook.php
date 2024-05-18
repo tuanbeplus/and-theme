@@ -74,8 +74,11 @@ function sf_get_object_data_from_salesforce() {
         }
       }
     }
-    
-    and_pull_product_data_from_salesforce($requiredData);
+
+    // Only pull Workshops or On-demand products
+    if ($requiredData['Family'] == 'Workshops' || $requiredData['Family'] == 'On-demand') {
+      and_pull_product_data_from_salesforce($requiredData);
+    }
 
     $response = json_encode($requiredData);
     sf_log_data($response);

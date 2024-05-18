@@ -160,7 +160,8 @@ function ppsf_get_all_products() {
   ) = ppsf_api_info();
 
   $sql = "SELECT Id, Name, ProductCode, Description, Family, Woocommerce_Description__c 
-          FROM Product2";
+          FROM Product2
+          WHERE Family='Workshops' OR Family='On-demand'";
 
   $url = $endpoint . '/services/data/'. $version .'/query/?q=' . urlencode($sql);
   $response = ppsf_remote_post($url);

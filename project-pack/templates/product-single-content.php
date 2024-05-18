@@ -8,7 +8,7 @@
 
 global $product;
 $image = wp_get_attachment_image_src( get_post_thumbnail_id( $product->get_id() ), 'full' );
-$image_url = isset($image[0]) ? $image[0] : '';
+$image_url = isset($image[0]) ? $image[0] : '/wp-content/uploads/2021/07/Mask-Group-1.jpg';
 $content_block = get_field('block_content', $product->get_id());
 ?>
 <div class="product-single-content">
@@ -17,7 +17,7 @@ $content_block = get_field('block_content', $product->get_id());
   </div>
   <div class="full-width-image">
     <div 
-      class="full-width-image__background-layer background-parallax-layer" 
+      class="full-width-image__background-layer" 
       data-ratio="0.15"
       style="background: url(<?php echo $image_url; ?>) no-repeat center center / cover, #333"></div>
   </div>

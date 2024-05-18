@@ -71,18 +71,26 @@ add_action('PPSF::AFTER_UPDATE_REGULAR_PRICE_PRODUCT_CHILD_EACH', 'ppsf_update_r
 add_action('PPSF:AFTER_IMPORT_VARIATION', 'ppsf_update_role_based_pricing', 20, 3);
 
 function ppsf_update_role_based_pricing($pid, $productParentId, $prices) {
+
   // wp_send_json( [$pid, $productParentId, $prices] );
   $__role_based_pricing = get_field('__role-based_pricing', 'option');
+  
   if(empty($__role_based_pricing) || count($__role_based_pricing) == 0) return;
   $data_update = [];
-  // wp_send_json( $__role_based_pricing );
+
+  return wp_send_json( $__role_based_pricing );
+  die;
+
   foreach($__role_based_pricing as $key => $item) {
     if($item['role'] == 'regular_price') continue;
     $pricebook2 = $item['pricebook2'];
-
-    $found_key = array_search($pricebook2, array_column($prices, 'Pricebook2Id'));
+    if (is_array($prices) && !empty($prices)) {
+      if ($pricebook2 !== null) {
+        $found_key = array_search($pricebook2, array_column($prices, 'Pricebook2Id'));
+      }
+    }
     if($found_key === false) continue;
-
+    
     $UnitPrice = $prices[$found_key]['UnitPrice'];
     update_post_meta($pid, 'product_role_based_price_' . $item['role'], floatval($UnitPrice));
     
