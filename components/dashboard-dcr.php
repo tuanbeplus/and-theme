@@ -12,8 +12,8 @@ $arr_terms = array('dcr');
 $organisation_id = $account_id;
 $dcr_accessible_all_users = get_assessments_accessible_all_users($organisation_id, $arr_terms);
 $sf_product_id_opp = getProductIdByOpportunity();
-$drc_product_id = isset($sf_product_id_opp['dcr_product_id']) ? $sf_product_id_opp['dcr_product_id'] : null;
-$dcr_list = get_assessments_related_sf_products($drc_product_id, 'dcr') ?? null;
+$drc_products_id = $sf_product_id_opp['dcr_product_id'] ?? array();
+$dcr_list = get_assessments_related_sf_products($drc_products_id, 'dcr') ?? array();
 $merge_assessment_list = array_merge($dcr_list, $dcr_accessible_all_users);
 $assessment_accessible_list = get_assessments_on_dashboard($user_id, $organisation_id, $merge_assessment_list);
 

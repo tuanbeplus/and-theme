@@ -228,9 +228,10 @@ function wp_bootstrap_starter_scripts()
 	}
 
 	wp_enqueue_style('app-css', get_template_directory_uri() . '/assets/css/app.css?r=' . rand());
-
 	wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/css/custom.css?r=' . rand());
 	wp_enqueue_style('jquery-ui', '//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css');
+
+	// jQuery UI
 	wp_enqueue_script('jquery-ui', 'https://code.jquery.com/ui/1.13.2/jquery-ui.js',array('jquery'), '', true);
 
 	// Owl Carousel
@@ -238,7 +239,8 @@ function wp_bootstrap_starter_scripts()
 	wp_enqueue_script('owl-carousel', get_template_directory_uri() . '/assets/owl-carousel/owl.carousel.js', array('jquery-ui'), rand(), true);
 
 	// Custom JS
-	wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/custom.js',array('jquery-ui'), rand(), true);
+	wp_enqueue_script('custom-script', get_template_directory_uri() . '/assets/js/custom.js',array('jquery-ui'), rand(), true);
+
 }
 add_action('wp_enqueue_scripts', 'wp_bootstrap_starter_scripts');
 
@@ -272,7 +274,6 @@ function wp_bootstrap_starter_preload($hints, $relation_type)
 }
 
 add_filter('wp_resource_hints', 'wp_bootstrap_starter_preload', 10, 2);
-
 
 
 function wp_bootstrap_starter_password_form()
@@ -356,7 +357,7 @@ add_filter('get_the_archive_title', function ($title) {
 add_filter("gform_ajax_spinner_url", "spinner_url", 10, 2);
 function spinner_url($image_src, $form)
 {
-	return "/wp-content/themes/and-theme/assets/imgs/form-load.gif";
+	return AND_IMG_URI."form-load.gif";
 }
 
 

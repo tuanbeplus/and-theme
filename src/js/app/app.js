@@ -174,13 +174,6 @@
     });
   }
 
-  // Redirect Thank you page after 5 seconds
-  if ($(".page-id-1204").length > 0) {
-    window.setTimeout(function () {
-      window.location = "/login";
-    }, 5000);
-  }
-
   var map = {};
   $(document).keydown(function (e) {
     if (!$("body").hasClass("single-assessments")) {

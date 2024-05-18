@@ -78,9 +78,9 @@ if( get_row_layout() == 'wp_data_feeds' ):
                         <h2><a href="'.get_permalink($feedData).'">'.get_the_title($feedData).'</a></h2>
                         <p class="date">'.get_the_date('l d F Y', $feedData).'</p>
                     </div>
-                    <a href="'.get_permalink($feedData).'" class="btn circle dark-red">
+                    <div class="btn circle">
                         <span class="material-icons">arrow_forward</span>
-                    </a>
+                    </div>
                 </div>
             </li>';
         }
