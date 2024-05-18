@@ -12,8 +12,8 @@ $arr_terms = array('self-assessed','index');
 $organisation_id = $account_id;
 $assessments_accessible_all_users = get_assessments_accessible_all_users($organisation_id, $arr_terms);
 $sf_product_id_opp = getProductIdByOpportunity();
-$index_product_id = isset($sf_product_id_opp['index_product_id']) ? $sf_product_id_opp['index_product_id'] : null;
-$index_list = get_assessments_related_sf_products($index_product_id, 'index') ?? null;
+$index_products_id = $sf_product_id_opp['index_product_id'] ?? array();
+$index_list = get_assessments_related_sf_products($index_products_id, 'index') ?? array();
 $merge_assessment_list = array_merge($index_list, $assessments_accessible_all_users);
 $assessment_accessible_list = get_assessments_on_dashboard($user_id, $organisation_id, $merge_assessment_list);
 

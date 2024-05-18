@@ -2438,7 +2438,7 @@ a {
       color: #fff !important; }
 
 table {
-  margin-bottom: 88px; }
+  margin-bottom: 80px; }
   table tr,
   table td {
     font-family: "Avenir-Roman";
@@ -2453,17 +2453,6 @@ table {
       display: inline !important; }
       table td a[target="_blank"] {
         padding-right: 25px; }
-        table td a[target="_blank"]:after {
-          content: '';
-          background: url("/wp-content/themes/and-theme/assets/imgs/external.svg");
-          width: 16px;
-          height: 16px;
-          background-size: 100%;
-          position: absolute;
-          right: 0;
-          bottom: 5px; }
-    table td ul li {
-      margin-bottom: 0px !important; }
     table td:first-of-type {
       padding-right: 130px;
       width: 296px !important; }
@@ -2487,7 +2476,7 @@ ol {
   ol li {
     font-size: 1.125rem;
     font-family: "Avenir-Roman";
-    margin-bottom: 5px;
+    margin-bottom: 12px;
     line-height: 120%; }
     ol li:last-of-type {
       margin-bottom: 0; }
@@ -2824,6 +2813,7 @@ ul.gfield_radio input[type="radio"]:checked + label:before {
     margin-bottom: 30px; }
     table tr,
     table td {
+      font-size: 1rem;
       height: auto !important; }
     table td {
       padding: 12px 0; }
@@ -3198,7 +3188,10 @@ div.circle {
     border-radius: 0px 0px 6px 6px;
     box-shadow: 0px 14px 28px rgba(0, 0, 0, 0.08); }
   .cards .the-card img {
-    width: 100%; }
+    width: 100%; 
+    height: 240px;
+    object-fit: cover;
+  }
   .cards .the-card .detail {
     padding: 20px 20px;
     border-top: 4px solid #663077;
@@ -3214,7 +3207,11 @@ div.circle {
     margin-top: -95px; }
   .cards.services .the-card:nth-child(4) {
     margin-top: 0; }
-
+@media (max-width: 1200px) {
+  .cards .the-card img {
+    height: 220px;
+  }
+}
 @media (max-width: 991px) {
   .cards.services .the-card:nth-child(3) {
     margin-top: -65px; }
@@ -3228,7 +3225,11 @@ div.circle {
     max-width: 70%; }
   .cards.services .the-card:nth-child(2), .cards.services .the-card:nth-child(3) {
     margin-top: 0; } }
-
+@media (max-width: 425px) {
+  .cards .the-card img {
+    height: 180px;
+  }
+}
 .hero {
   position: relative;
   margin-bottom: 100px; }
@@ -3613,7 +3614,7 @@ div.circle {
     font-size: 1.125rem;
     line-height: 130%;
     position: relative;
-    margin-bottom: 5px;
+    margin-bottom: 12px;
     padding-left: 25px; }
     .text-content-block ul li a {
       display: inline;
@@ -3632,18 +3633,21 @@ div.circle {
 .text-content-block a {
   color: #A22F2C;
   position: relative;
+  text-decoration: underline;
+  line-height: 1.5rem;
   display: inline-block; }
   .text-content-block a[target="_blank"] {
     padding-right: 25px; }
-    .text-content-block a[target="_blank"]:after {
-      content: '';
-      background: url("/wp-content/themes/and-theme/assets/imgs/external.svg");
-      width: 16px;
-      height: 16px;
-      background-size: 100%;
-      position: absolute;
-      right: 0;
-      bottom: 5px; }
+  .text-content-block a[target="_blank"] span.external-link-icon {
+    display: inline-block;
+    background: url("/wp-content/themes/and-theme/assets/imgs/external.svg");
+    width: 16px;
+    height: 16px;
+    background-size: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 5px; 
+  }
   .text-content-block a.cta {
     display: inline-block;
     color: #fff;
@@ -3755,7 +3759,7 @@ div.circle {
   margin-bottom: 20px; }
 
 .team {
-  margin-top: -20px;
+  margin-top: 32px;
   order: 1; }
   .team .heading {
     margin-bottom: 36px; }
@@ -4525,15 +4529,12 @@ div.circle {
       margin-bottom: 15px; }
     .page-tiles .cards .the-card .detail h2 {
       font-size: 1.5rem;
-      line-height: 32px;
-      font-weight: 400; }
+      line-height: 32px; }
       .page-tiles .cards .the-card .detail h2 a {
         text-decoration: none !important;
         color: inherit;
-        font-weight: 400;
+        line-height: 130%;
         font-family: "Avenir-Heavy"; }
-    .page-tiles .cards .the-card .detail p {
-      font-family: 'Avenir-Roman'; }
   .page-tiles .cards .the-card .circle {
     padding: 0 20px 30px;
     text-align: left; }
@@ -4548,26 +4549,23 @@ div.circle {
       text-transform: uppercase;
       font-size: 0.875rem;
       color: #663077; }
-    .page-tiles.sf-data .cards .the-card .inner {
-      height: auto; }
     .page-tiles.sf-data .cards .the-card span {
       font-weight: bold; }
 
 .page-tiles p.category {
   text-transform: uppercase;
   font-size: 0.875rem;
-  font-weight: bold;
+  font-family: "Avenir-Heavy";
   color: #663077;
   margin-bottom: 20px; }
 
 .page-tiles p.date {
   font-size: 0.875rem;
+  font-family: "Avenir-Medium";
   color: #545454; }
 
 .page-tiles.news {
   margin-top: 40px; }
-  .page-tiles.news .cards .the-card .inner {
-    height: auto; }
   .page-tiles.news .cards .the-card .detail h3 {
     font-family: "Avenir-Roman"; }
 
@@ -4637,6 +4635,9 @@ div.circle {
   .back-page.bottom {
     margin-top: 80px;
     order: 10; }
+  .back-page a.circle {
+    text-decoration: none;
+  }
   .back-page a.circle span {
     vertical-align: top;
     color: #CC3A32; }
@@ -4680,7 +4681,7 @@ div.circle {
 .breadcrumbs-top {
   background: #663077;
   padding: 20px 0;
-  margin-bottom: 80px; }
+  margin-bottom: 60px; }
   .breadcrumbs-top.amount-4 span[property="itemListElement"]:nth-of-type(1), .breadcrumbs-top.amount-4 span[property="itemListElement"]:nth-of-type(2), .breadcrumbs-top.amount-4 span[property="itemListElement"]:nth-of-type(3) {
     display: none; }
   .breadcrumbs-top.amount-4 span.material-icons:nth-of-type(1), .breadcrumbs-top.amount-4 span.material-icons:nth-of-type(2), .breadcrumbs-top.amount-4 span.material-icons:nth-of-type(3), .breadcrumbs-top.amount-4 span.material-icons:nth-of-type(4) {
@@ -4689,6 +4690,9 @@ div.circle {
     display: none; }
   .breadcrumbs-top.amount-5 span.material-icons:nth-of-type(1), .breadcrumbs-top.amount-5 span.material-icons:nth-of-type(2), .breadcrumbs-top.amount-5 span.material-icons:nth-of-type(3), .breadcrumbs-top.amount-5 span.material-icons:nth-of-type(4), .breadcrumbs-top.amount-5 span.material-icons:nth-of-type(5), .breadcrumbs-top.amount-5 span.material-icons:nth-of-type(6) {
     display: none; }
+  .breadcrumbs-top a {
+    line-height: 1.5rem;
+  }
   .breadcrumbs-top span {
     color: #fff;
     display: inline-block;
@@ -4703,7 +4707,7 @@ div.circle {
       margin-top: -2px;
       margin-left: -4px;
       vertical-align: middle;
-      line-height: 30px;
+      line-height: 1.5rem;
       max-width: 280px;
       white-space: nowrap; }
 
@@ -4713,7 +4717,6 @@ div.circle {
     padding: 2px; }
     .breadcrumbs-top span {
       display: none; } }
-
 .on-this-page {
   order: 4; }
   .on-this-page .inner {
@@ -4721,12 +4724,18 @@ div.circle {
     box-shadow: 0px 14px 28px rgba(0, 0, 0, 0.08);
     padding: 28px 0 0;
     left: initial !important; }
-    .on-this-page .inner p {
-      font-family: "Avenir-Medium";
-      font-size: 1.5rem;
-      line-height: 130%;
-      padding-right: 15.5px;
-      padding-left: 15.5px; }
+  .on-this-page .inner h2 {
+    font-family: "Avenir-Medium";
+    font-size: 1.5rem;
+    line-height: 130%;
+    padding-right: 15.5px;
+    padding-left: 15.5px; }
+  .on-this-page .inner p {
+    font-family: "Avenir-Medium";
+    font-size: 1.5rem;
+    line-height: 130%;
+    padding-right: 15.5px;
+    padding-left: 15.5px; }
   .on-this-page .inner-wrapper-sticky {
     left: initial !important; }
   .on-this-page ul li {
@@ -4772,9 +4781,6 @@ div.circle {
         color: #3D3D3D !important; }
       .on-this-page ul li.yellow + .member {
         display: none; }
-
-.single-about-us .on-this-page {
-  order: 0; }
 
 @media (min-width: 990px) and (max-width: 1330px) {
   .on-this-page .inner {
@@ -5394,6 +5400,15 @@ footer.site-footer {
     margin-bottom: 30px;
     flex: 0 0 20%;
     max-width: 20%; }
+    footer.site-footer .site-info .detail h2 {
+      color: #FAF9F9;
+      font-size: 0.875rem;
+      margin-bottom: 0.725rem;
+      text-transform: uppercase;
+    }
+    footer.site-footer .site-info .detail p br {
+      margin-top: 4px;
+    }
     footer.site-footer .site-info .detail p,
     footer.site-footer .site-info .detail a {
       color: #fff !important;
@@ -5412,6 +5427,14 @@ footer.site-footer {
   footer.site-footer .social {
     text-align: right;
     margin-top: 20px; }
+    footer.site-footer .social h2 {
+      margin-right: 20px;
+      display: inline-block;
+      color: #FAF9F9;
+      font-size: 1rem;
+      font-family: "Avenir-Medium";
+      line-height: 1.825rem;
+    }
     footer.site-footer .social p,
     footer.site-footer .social a {
       display: inline-block;
@@ -6255,7 +6278,7 @@ form .notice p {
   width: calc(60% - 8px) !important; }
 
 .gform_wrapper {
-  margin-top: 50px; }
+  margin: 50px 0; }
   .gform_wrapper .gform_title {
     font-size: 1.25rem;
     line-height: 26px;

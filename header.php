@@ -16,11 +16,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="profile" href="http://gmpg.org/xfn/11">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-            <link rel="apple-touch-icon" sizes="180x180" href="/wp-content/themes/and-theme/assets/imgs/apple-touch-icon-1.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/wp-content/themes/and-theme/assets/imgs/favicon-32x32-1.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/wp-content/themes/and-theme/assets/imgs/favicon-16x16-1.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo AND_IMG_URI.'apple-touch-icon-1.png'; ?>">
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo AND_IMG_URI.'favicon-32x32-1.png'; ?>">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo AND_IMG_URI.'favicon-16x16-1.png'; ?>">
 <?php wp_head();
 
 $colourScheme = get_field('colour_scheme');
@@ -154,13 +153,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </div>';
         endif;
     ?>
-<style media="screen">
-/* @viewport {
-  zoom: 1.0;
-  min-zoom: 1.0;
-  max-zoom: 2.0;
-} */
-</style>
 <script>
 
 jQuery(document).on('click', '#sfid-login-button', function(e){
@@ -262,16 +254,6 @@ function onLogin(identity) {
 		lightbox.appendChild(wrapper);
 
 		document.body.appendChild(lightbox);
-	}
-
-	function onLogout() {
-			SFIDWidget.init();
-        eraseCookie('lgi');
-        eraseCookie('userId');
-		 jQuery('a#login').attr('href','/login');
-        jQuery('a#login img').attr('src', '/wp-content/themes/and-theme/assets/imgs/user-icon.svg');
-		jQuery('#login span').text('Login');
-         window.location = '/';
 	}
 
 </script>

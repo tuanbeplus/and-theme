@@ -26,7 +26,6 @@ $footerLinks = get_field('footer_links', 'option');
 
     </div><!-- #content -->
 
-
 	<footer id="colophon" class="site-footer <?php echo wp_bootstrap_starter_bg_class(); ?>" role="contentinfo">
 		<div class="container pt-3 pb-3">
             <div class="row">
@@ -36,44 +35,40 @@ $footerLinks = get_field('footer_links', 'option');
                 <div class="site-info col-md-9">
                     <div class="row">
                         <div class="col-md-6 col-lg-2 detail">
-                            <p><strong>Head office</strong></p>
-                            <p>
-                                <?php echo $headOffice; ?>
-                            </p>
+                            <h2>Head office</h2>
+                            <p><?php echo $headOffice; ?></p>
                         </div>
                         <div class="col-md-6 col-lg-2 detail">
-                            <p><strong>Postal address</strong></p>
-                            <p>
-                                <?php echo $postalAddress; ?>
-                            </p>
+                            <h2>Postal address</h2>
+                            <p><?php echo $postalAddress; ?></p>
                         </div>
                         <div class="col-md-6 col-lg-2 detail">
-                            <p><strong>Phone</strong></p>
+                            <h2>Phone</h2>
                             <a href="tel:<?php echo $phone; ?>"><?php echo $phone; ?></a>
                         </div>
                         <div class="col-md-6 col-lg-2 detail">
-                            <p><strong>National</strong></p>
+                            <h2>National</h2>
                             <a href="tel:<?php echo $national; ?>"><?php echo $national; ?></a>
                         </div>
                         <div class="col-md-6 col-lg-2 detail">
-                            <p><strong>Email</strong></p>
+                            <h2>Email</h2>
                             <a href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
                         </div>
                     </div>
                 </div>
                 <div class="social col-12">
-                    <p>Follow us</p>
+                    <h2>Follow us</h2>
                     <a href="<?php echo $facebook; ?>" target="_blank">
-                        <img src="/wp-content/themes/and-theme/assets/imgs/facebook.svg" alt="Facebook" />
+                        <img src="<?php echo AND_IMG_URI.'facebook.svg'; ?>" alt="Facebook" />
                     </a>
                     <a href="<?php echo $twitter; ?>" target="_blank">
-                        <img src="/wp-content/themes/and-theme/assets/imgs/social-icons-x.svg" alt="Twitter" style="width:30px" />
+                        <img src="<?php echo AND_IMG_URI.'social-icons-x.svg'; ?>" alt="Twitter" style="width:30px" />
                     </a>
                     <a href="<?php echo $linkedin; ?>" target="_blank">
-                        <img src="/wp-content/themes/and-theme/assets/imgs/linkedin.svg" alt="LinkedIn" />
+                        <img src="<?php echo AND_IMG_URI.'linkedin.svg'; ?>" alt="LinkedIn" />
                     </a>
                     <a href="<?php echo $youtube; ?>" target="_blank">
-                        <img src="/wp-content/themes/and-theme/assets/imgs/youtube.svg" alt="YouTube" />
+                        <img src="<?php echo AND_IMG_URI.'youtube.svg'; ?>" alt="YouTube" />
                     </a>
                 </div>
                 <div class="col-12 bottom">
@@ -98,7 +93,7 @@ $footerLinks = get_field('footer_links', 'option');
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 
-<script type="text/javascript" src="/wp-content/themes/and-theme/assets/js/main.js?rand=2346235"></script>
+<script type="text/javascript"  src="<?php echo get_template_directory_uri().'/assets/js/main.js?rand=2346236'; ?>"></script>
 
 <?php wp_footer(); ?>
 </body>

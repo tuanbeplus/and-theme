@@ -43,7 +43,7 @@ $lastArr = $wpdb->get_results( "SELECT * FROM $table_name WHERE username = 'admi
 
     <div class="on-this-page sidebar">
         <div class="inner">
-            <p>In this section</p>
+            <h2>In this section</h2>
             <ul>
               <li>
                 <a href="/quiz/" id="1" class="circle dark-red">

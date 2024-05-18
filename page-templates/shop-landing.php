@@ -57,7 +57,7 @@ get_footer(); return; ?>
                 <?php if($showOnThisPage == 'yes'): ?>
                     <div class="col-md-12 col-lg-3 on-this-page sidebar">
                         <div class="inner">
-                            <p>On this page</p>
+                            <h2>On this page</h2>
                             <ul id="toc-list"></ul>
                             <div id="btn-mini-cart">
                                 <div class="icon-box">

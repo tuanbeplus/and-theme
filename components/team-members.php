@@ -38,7 +38,7 @@ if( get_row_layout() == 'team_members' ):
                                                 </div>
                                             </div>
                                             <div class="cta bio">
-                                                <button data-fancybox="dialog" title="See full bio" aria-label="See full bio" data-src="#dialog-content-'.$memberNumber.'" class="cta">See full bio</button>
+                                                <button class="cta btn-open-lightbox" data-fancybox="dialog" title="See full bio" aria-label="See full bio" data-src="#dialog-content-'.$memberNumber.'">See full bio</button>
                                             </div>
                                         </div>
                                     </div>

@@ -5,7 +5,14 @@ button:focus,
   border: 2px solid #fff !important;
   outline: none !important;
 }
-
+br {
+  content: "";
+  display: block;
+  margin-top: 10px;
+}
+body a {
+  outline: none;
+}
 .container {
   max-width: 1392px;
 }
@@ -14,6 +21,7 @@ button:focus,
   padding: 40px 20px 20px;
 }
 .content-search .entry-title a {
+  line-height: 1.5rem;
   color: #a22f2c;
 }
 
@@ -59,6 +67,7 @@ button:focus,
 }
 
 .suggestions-search a {
+  line-height: 1.5rem;
   color: #fff;
   text-decoration: underline;
   display: inline-block;
@@ -171,7 +180,7 @@ body.search .suggestions-search {
 body.search .all-result-text,
 body.search .count-results {
   line-height: normal;
-  font-weight: bold;
+  font-family: "Avenir-Heavy";
   font-size: 1rem;
 }
 
@@ -195,13 +204,14 @@ body.search .item-search .entry-title {
   margin: 0;
   border: none;
   line-height: 120%;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   text-transform: capitalize;
 }
 
 body.search .item-search .entry-link-code a {
-  color: #333;
+  color: #663077;
   font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 body.search .pagination {
@@ -427,6 +437,7 @@ header.version-2 .navbar-brand a.logo {
 
 header.version-2 #main-nav .navbar-nav li a {
   font-size: 1.25rem;
+  line-height: 1.5rem;
   color: #fff;
   font-family: "Avenir-Medium";
 }
@@ -518,10 +529,6 @@ header.version-2 .hamburger.is-active .hamburger-box {
 header.version-2 .hamburger .text {
   right: 18px;
   color: #fff;
-}
-
-body a {
-  outline: none;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -1503,6 +1510,7 @@ section.posts-grid {
 }
 
 .slides .slides-wrapper .slide-content .cta {
+  line-height: 120%;
   font-family: "Avenir-Heavy";
 }
 .slides .slides-wrapper .slide-content .hidden-link,
@@ -1640,10 +1648,6 @@ section.posts-grid {
   margin-bottom: 10px;
   line-height: 130%;
   overflow: hidden;
-  /* text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical; */
 }
 
 .post-card .card__title a {
@@ -1655,7 +1659,7 @@ section.posts-grid {
 }
 
 .post-card .card__title a:focus {
-  border: 1px solid #3788ff !important;
+  border: 2px solid #3788ff !important;
 }
 
 .post-card .card__footer {
@@ -1890,7 +1894,7 @@ section.icons-list {
 }
 
 .icons .icon-item ._cta a:hover {
-  color: #faa919;
+  color: #6e297b;
 }
 
 .icons .icon-item ._cta a::after {
@@ -2076,4 +2080,8 @@ table#membership-table tr:last-child > td:first-child {
   table#membership-table caption {
     font-size: 1rem;
   }
+}
+
+.site-content .row.content-with-sidebar {
+  /* flex-direction: row-reverse; */
 }

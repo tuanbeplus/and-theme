@@ -18030,7 +18030,6 @@ function __guardMethod__(obj, methodName, transform) {
   });
 
   // On This Page Item Generation
-
   if ($(".single").length > 0) {
     $counter = 0;
     $(".single-column-content h2, .heading h2").each(function () {
@@ -18038,7 +18037,9 @@ function __guardMethod__(obj, methodName, transform) {
       $addToMenu = "";
       if ($section !== "" && !$(this).hasClass("no-menu")) {
         $counter++;
+        $(this).attr("id", "point-" + $counter);
         $(this).attr("class", "point-" + $counter);
+        $(this).attr("tabindex", "-1");
         $addToMenu +=
           '<li><a href="#point-' +
           $counter +
@@ -18071,16 +18072,6 @@ function __guardMethod__(obj, methodName, transform) {
         }
       }
     });
-  }
-
-  if (window.location.hash) {
-    var hash = window.location.hash.replace("#", "");
-    $("html,body").animate(
-      {
-        scrollTop: $("." + hash).offset().top - 20,
-      },
-      5
-    );
   }
 
   $(document).on("click", ".lightbox a.cta", function (e) {
@@ -18121,13 +18112,6 @@ function __guardMethod__(obj, methodName, transform) {
       innerWrapperSelector: ".inner",
       containerSelector: ".holder",
     });
-  }
-
-  // Redirect Thank you page after 5 seconds
-  if ($(".page-id-1204").length > 0) {
-    window.setTimeout(function () {
-      window.location = "/login";
-    }, 5000);
   }
 
   var map = {};

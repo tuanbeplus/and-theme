@@ -26,7 +26,7 @@ get_header(); ?>
 						 </div>
 						 <div class="row">
 						 		<div class="col-sm-12 col-lg-2">
-						 			<strong class="all-result-text">All website results:</strong>
+						 			<h1 class="all-result-text">All website results:</h1>
 						 		</div>
 								<div class="col-sm-12 col-lg-10">
 						 			<?php

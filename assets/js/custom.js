@@ -184,9 +184,52 @@ jQuery.curCSS = function (element, prop, val) {
         }
     });
 
+    // Close Our team Dialog lightbox 
     $(document).on("click", '.lightbox .btn-close-lightbox', function (e) {
         let btn_close_top = $(this).closest('.lightbox').find('.is-close')
         btn_close_top.click()
     })
+
+    // Click to Custom attr Our team Modal Dialog
+    $(document).on("click", '.btn-open-lightbox[data-fancybox=dialog]', function (e) {
+        // Call func on click
+        custom_attr_our_team_modal_dialog();
+    })
+
+    // Custom Attributes Our team Modal Dialog
+    function custom_attr_our_team_modal_dialog() {
+        let fancybox_container =  $('.fancybox__container[role=dialog]')
+        let dialog_content_id = fancybox_container.find('.fancybox__slide.is-selected .fancybox__content').attr('id')
+
+        // Add attr
+        fancybox_container.removeAttr('aria-label')
+        fancybox_container.attr('aria-describedby', 'dialog-instruction')
+        fancybox_container.attr('aria-labelledby', dialog_content_id)
+        // Add instruction
+        fancybox_container.prepend('<p id="dialog-instruction"> You can close this modal content with the ESC key. </p>')
+    }
+    // Call func on load
+    custom_attr_our_team_modal_dialog();
+
+    // Select all <table> elements and add role
+    $('.single-column-content table').each(function() {
+        $(this).attr('role', 'presentation');
+    });
+
+    // Smooth scrolling to anchor links
+    $(document).on('click', 'a[href^="#"]', function(e) {
+        let target = $(this.getAttribute('href'));
+        if( target.length ) {
+            e.preventDefault();
+            $('html, body').stop().animate({
+                scrollTop: target.offset().top - 24
+            }, 300);
+        }
+    });
+
+    // Find all target blank anchor tag and add External link Icon
+    $('.text-content-block a[target=_blank]').each(function() {
+        $(this).append('<span class="external-link-icon" role="img" aria-label="External"></span>')
+    });
 
 })(window, jQuery);

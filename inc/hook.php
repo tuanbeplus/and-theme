@@ -485,9 +485,3 @@ function build_menu_hierarchy($menu_items, $parent_id) {
     return $result;
 }
 
-
-
-
-
-
-
