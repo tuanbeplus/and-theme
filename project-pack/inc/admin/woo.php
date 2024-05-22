@@ -48,12 +48,14 @@ function pp_woo_add_btn_custom_date_data_to_variations($loop, $variation_data, $
     'value' => $wp_parent_event_id
   ) );
 
-  woocommerce_wp_text_input( array(
-    'id' => 'wp_child_event_id[' . $loop . ']',
-    'class' => 'short hidden',
-    'label' => __( 'SF Event Children ID', 'pp' ) . ' ' . (isset($e_child['sf_event_id']) ? $e_child['sf_event_id'] : ''),
-    'value' => $wp_child_event_id
-  ) );
+  if ( $wp_child_event_id ) {
+    woocommerce_wp_text_input( array(
+      'id' => 'wp_child_event_id[' . $loop . ']',
+      'class' => 'short hidden',
+      'label' => __( 'SF Event Children ID', 'pp' ) . ' ' . (isset($e_child['sf_event_id']) ? $e_child['sf_event_id'] : ''),
+      'value' => $wp_child_event_id
+    ) );
+  }
 
   echo '</div>';
 }

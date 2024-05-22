@@ -414,7 +414,10 @@ add_action( 'init', function() {
   // $junction_id = 'a1y9h000000Ar6HAAS'; 
   // print_r(ppsf_check_product_create_by_junction_exists($junction_id));
   // ppsf_import_by_junction_id($junction_id);
-  echo '<pre>'; print_r(ppwc_product_sfevent_validate_import()); echo '</pre>';
-  echo 'TEST import...!'; 
+  // echo '<pre>'; print_r(ppwc_product_sfevent_validate_import()); echo '</pre>';
+  // echo 'TEST import...!'; 
+
+  // $__role_based_pricing = get_field('__role-based_pricing', 'option');
+  // print_r($__role_based_pricing);
 } );
 # End for test

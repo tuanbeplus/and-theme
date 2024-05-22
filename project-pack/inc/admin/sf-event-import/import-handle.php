@@ -105,7 +105,7 @@ function ppsf_event_add_product_child($data, $productParentId, $prices = []) {
     'WpEventId' => '',
   ];
   $_args = wp_parse_args($data, $default);
-  
+
   $base_price_id = ppsf_base_Pricebook2_base_price_id();
   $UnitPrice = '';
 
@@ -186,6 +186,10 @@ function ppsf_event_add_product_child($data, $productParentId, $prices = []) {
   }
 
   // Update meta fields
+  $parent_event_id = get_field('sf_event_id', $WpEventId);
+  update_post_meta($variation_id, 'wp_parent_event_id', $parent_event_id);
+  update_post_meta($variation_id, 'wp_child_event_id', $__junctions_id);
+
   $meta_fields = apply_filters( 'PPSF/event_import_meta_fields_filter', [
     $update_field => $WpEventId,
     '__junctions_id' => $__junctions_id,

@@ -78,9 +78,6 @@ function ppsf_update_role_based_pricing($pid, $productParentId, $prices) {
   if(empty($__role_based_pricing) || count($__role_based_pricing) == 0) return;
   $data_update = [];
 
-  return wp_send_json( $__role_based_pricing );
-  die;
-
   foreach($__role_based_pricing as $key => $item) {
     if($item['role'] == 'regular_price') continue;
     $pricebook2 = $item['pricebook2'];

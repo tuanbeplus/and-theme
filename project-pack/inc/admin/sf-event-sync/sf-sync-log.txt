@@ -1,0 +1,624 @@
+
+Date Time: 2024-05-20 22:52:42
+ Data: {"Id":"00U9h000001IWwvEAG","Subject":"Inclusive Customer experiences","Total_Number_of_Seats__c":"15.0","Remaining_Seats__c":"11.0","Workshop_Event_Date_Text__c":"Thursday, 23rd May 2024","Workshop_Times__c":"12:00 PM - 2:00 PM (Sydney Time)"} 
+
+Date Time: 2024-05-20 22:52:40
+ Data: {"ID":19793,"post_title":"Inclusive Customer experiences"} 
+
+Date Time: 2024-05-20 04:04:28
+ Data: {"Id":"00U9h000001IX09EAG","Subject":"Disability Confident Workforces","Total_Number_of_Seats__c":"25.0","Workshop_Event_Date_Text__c":"Friday, 31st May 2024","Workshop_Times__c":"1:00 PM - 3:00 PM (Sydney Time)"} 
+
+Date Time: 2024-05-20 04:03:58
+ Data: {"Id":"00U9h000001IWvJEAW","Subject":"Inclusive Customer Experiences","Total_Number_of_Seats__c":"20.0","Workshop_Event_Date_Text__c":"Friday, 31st May 2024","Workshop_Times__c":"9:00 AM - 11:00 AM (Sydney Time)"} 
+
+Date Time: 2024-05-20 04:03:11
+ Data: {"Id":"00U9h000001IWyXEAW","Subject":"Disability Confident Workforces","Total_Number_of_Seats__c":"25.0","Workshop_Event_Date_Text__c":"Thursday, 23rd May 2024","Workshop_Times__c":"3:00 PM - 5:00 PM (Sydney Time)"} 
+
+Date Time: 2024-05-20 03:54:33
+ Data: {"Id":"00U9h000001IWwvEAG","Subject":"Inclusive Customer experiences","Total_Number_of_Seats__c":"15.0","Workshop_Event_Date_Text__c":"Thursday, 23rd May 2024","Workshop_Times__c":"12:00 PM - 2:00 PM (Sydney Time)"} 
+
+Date Time: 2024-05-20 03:53:44
+ Data: {"Id":"00U9h000001IWnFEAW","Subject":"Disability Confident Managers","Total_Number_of_Seats__c":"25.0","Workshop_Event_Date_Text__c":"Thursday, 23rd May 2024","Workshop_Times__c":"9:00 AM - 10:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-16 09:18:03
+ Data: {"Id":"01t9q000000FaIsAAK","Description":"eLearn The Customer Experiences Journey Module 10","Family":"Learning Solutions","IsActive":"true","Name":"eLearn The Customer Experiences Journey Module 10","ProductCode":"ELI000010","Woocommerce_Description__c":"<p><strong>Marketing to provide Information<\/strong><\/p><p>About our It is a long established fact that a reader learning<\/p><p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text.<\/p><p><br><\/p><p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.<\/p>"} 
+
+Date Time: 2024-05-16 09:17:10
+ Data: {"Id":"01t9q000000FaIsAAK","Description":"eLearn The Customer Experiences Journey Module 10","Family":"Learning Solutions","IsActive":"true","Name":"eLearn The Customer Experiences Journey Module 10 - tom test 123","ProductCode":"ELI000010","Woocommerce_Description__c":"<p><strong>Marketing to provide Information<\/strong><\/p><p>About our It is a long established fact that a reader learning<\/p><p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text.<\/p><p><br><\/p><p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.<\/p>"} 
+
+Date Time: 2024-05-16 09:16:11
+ Data: {"Id":"01t9h000001zlW5AAI","Description":"Training Calendar - 60 minutes - per person","Family":"Workshops","IsActive":"true","Name":"Training Calendar - 60 minutes - per person","ProductCode":"WORK00060P","Woocommerce_Description__c":"<h4><strong>About our It is a long established fact that a reader learning<\/strong><\/h4><p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text.<\/p><p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.<\/p><ul><li>It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc<\/li><\/ul><p><br><\/p>"} 
+
+Date Time: 2024-05-16 09:15:37
+ Data: {"Id":"01t9h000001zlW5AAI","Description":"Training Calendar - 60 minutes - per person","Family":"Workshops","IsActive":"true","Name":"Training Calendar - 60 minutes - per person - test","ProductCode":"WORK00060P","Woocommerce_Description__c":"<h4><strong>About our It is a long established fact that a reader learning<\/strong><\/h4><p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text.<\/p><p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.<\/p><ul><li>It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc<\/li><\/ul><p><br><\/p>"} 
+
+Date Time: 2024-05-16 09:14:17
+ Data: {"Id":"01t9q000000FaIiAAK","Description":"On Demand DCR Program Bundle Modules 5-7","Family":"On-demand","IsActive":"true","Name":"Learn DCR Program Bundle Modules 5-7","ProductCode":"ELIB00057","Woocommerce_Description__c":"<p>Building on knowledge already gained via Disability Confident Workforces, the Disability Confident Recruitment bundle help to identify and remove common barriers people with disability face through the recruitment process. Contains modules 5 through 7.<\/p>"} 
+
+Date Time: 2024-05-16 09:13:38
+ Data: {"Id":"01t9q000000FaIiAAK","Description":"On Demand DCR Program Bundle Modules 5-7","Family":"On-demand","IsActive":"true","Name":"e(Tom test) Learn DCR Program Bundle Modules 5-7","ProductCode":"ELIB00057","Woocommerce_Description__c":"<p>11111 Building on knowledge already gained via Disability Confident Workforces, the Disability Confident Recruitment bundle help to identify and remove common barriers people with disability face through the recruitment process. Contains modules 5 through 7.<\/p>"} 
+
+Date Time: 2024-05-16 08:57:00
+ Data: {"Id":"01t9q000000FaIoAAK","Description":"eLearn Workplace Adjustments Module 6","Family":"Learning Solutions","IsActive":"true","Name":"eLearn Workplace Adjustments Module 6 (test123)","ProductCode":"ELI000006","Woocommerce_Description__c":"<p><strong>Marketing to provide Information<\/strong><\/p><p>About our It is a long established fact that a reader learning<\/p><p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text.<\/p><p><br><\/p><p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.<\/p>"} 
+
+Date Time: 2024-05-16 08:54:06
+ Data: {"Id":"01t9h000001uinNAAQ","Description":"Inclusive Customer Experiences","Family":"Workshops","IsActive":"true","Name":"Inclusive Customer Experiences","ProductCode":"WORK020120","Woocommerce_Description__c":"<p>This course will build disability confidence by teaching participants how to support customers with disability accessibly and inclusively. Suitable for people in customer service and customer facing roles. This training explores hypothetical customer and client-facing scenarios and give a greater awareness of providing adjustments in customer service.<\/p>"} 
+
+Date Time: 2024-05-16 08:53:28
+ Data: {"Id":"01t9h000001uinNAAQ","Description":"Inclusive Customer Experiences","Family":"Workshops","IsActive":"true","Name":"Inclusive Customer Experiences (Test)","ProductCode":"WORK020120","Woocommerce_Description__c":"<p>(Test)This course will build disability confidence by teaching participants how to support customers with disability accessibly and inclusively. Suitable for people in customer service and customer facing roles. This training explores hypothetical customer and client-facing scenarios and give a greater awareness of providing adjustments in customer service.<\/p>"} 
+
+Date Time: 2024-05-16 08:52:30
+ Data: {"Id":"01t9q000000FaIoAAK","Description":"eLearn Workplace Adjustments Module 6","Family":"Learning Solutions","IsActive":"true","Name":"eLearn Workplace Adjustments Module 6","ProductCode":"ELI000006","Woocommerce_Description__c":"<p><strong>Marketing to provide Information<\/strong><\/p><p>About our It is a long established fact that a reader learning<\/p><p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text.<\/p><p><br><\/p><p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.<\/p>"} 
+
+Date Time: 2024-05-16 08:51:40
+ Data: {"Id":"01t9q000000FaIoAAK","Description":"eLearn Workplace Adjustments Module 6","Family":"Learning Solutions","IsActive":"true","Name":"eLearn Workplace Adjustments Module 6 (Tom)","ProductCode":"ELI000006","Woocommerce_Description__c":"<p><strong>(TOm) Marketing to provide Information<\/strong><\/p><p>About our It is a long established fact that a reader learning<\/p><p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text.<\/p><p><br><\/p><p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don&#39;t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn&#39;t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.<\/p>"} 
+
+Date Time: 2024-05-16 08:50:35
+ Data: {"Id":"01t9q000000FaIeAAK","Description":"eLearn Disability Confident Workforces Bundle Modules 1-4","Family":"On-demand","IsActive":"true","Name":"eLearn Disability Confident Workforces Bundle Modules 1-4","ProductCode":"ELIB00014","Woocommerce_Description__c":"<p>Our Disability Confident Workforces modules provide foundational learning by introducing disability and what it means to be accessible and inclusive. These modules are the steppingstones towards becoming Disability Confident. Contains modules 1, 2 3 and 4.<\/p>"} 
+
+Date Time: 2024-05-16 08:50:05
+ Data: {"Id":"01t9q000000FaIeAAK","Description":"eLearn Disability Confident Workforces Bundle Modules 1-4","Family":"On-demand","IsActive":"true","Name":"eLearn Disability Confident Workforces Bundle Modules 1-4 (222)","ProductCode":"ELIB00014","Woocommerce_Description__c":"<p>222 Our Disability Confident Workforces modules provide foundational learning by introducing disability and what it means to be accessible and inclusive. These modules are the steppingstones towards becoming Disability Confident. Contains modules 1, 2 3 and 4.<\/p>"} 
+
+Date Time: 2024-05-16 08:49:50
+ Data: {"Id":"01t9q000000FaIeAAK","Description":"eLearn Disability Confident Workforces Bundle Modules 1-4","Family":"On-demand","IsActive":"true","Name":"eLearn Disability Confident Workforces Bundle Modules 1-4 (222)","ProductCode":"ELIB00014","Woocommerce_Description__c":"<p>Our Disability Confident Workforces modules provide foundational learning by introducing disability and what it means to be accessible and inclusive. These modules are the steppingstones towards becoming Disability Confident. Contains modules 1, 2 3 and 4.<\/p>"} 
+
+Date Time: 2024-05-16 08:48:23
+ Data: {"Id":"01t9q000000FaIeAAK","Description":"eLearn Disability Confident Workforces Bundle Modules 1-4","Family":"On-demand","IsActive":"true","Name":"eLearn Disability Confident Workforces Bundle Modules 1-4 (test)","ProductCode":"ELIB00014","Woocommerce_Description__c":"<p>Our Disability Confident Workforces modules provide foundational learning by introducing disability and what it means to be accessible and inclusive. These modules are the steppingstones towards becoming Disability Confident. Contains modules 1, 2 3 and 4.<\/p>"} 
+
+Date Time: 2024-05-16 06:23:19
+ Data: {"Id":"01t9q000000FaIeAAK","Description":"eLearn Disability Confident Workforces Bundle Modules 1-4","Family":"On-demand","IsActive":"true","Name":"eLearn Disability Confident Workforces Bundle Modules 1-4","ProductCode":"ELIB00014","Woocommerce_Description__c":"<p>Our Disability Confident Workforces modules provide foundational learning by introducing disability and what it means to be accessible and inclusive. These modules are the steppingstones towards becoming Disability Confident. Contains modules 1, 2 3 and 4.<\/p>"} 
+
+Date Time: 2024-05-16 03:57:47
+ Data: {"Id":"01t9q000000FaIeAAK","Description":"eLearn Disability Confident Workforces Bundle Modules 1-4","Family":"On-demand","IsActive":"true","Name":"eLearn Disability Confident Workforces Bundle Modules 1-4 (Tom test)","ProductCode":"ELIB00014","Woocommerce_Description__c":"<p>Our Disability Confident Workforces modules provide foundational learning by introducing disability and what it means to be accessible and inclusive. These modules are the steppingstones towards becoming Disability Confident. Contains modules 1, 2 3 and 4.<\/p>"} 
+
+Date Time: 2024-05-10 07:52:06
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:52:05
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:52:04
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:52:03
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:52:01
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:52:01
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:52:00
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:51:59
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:51:59
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:58
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:57
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:51:56
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:51:56
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:55
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:54
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:51:53
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:51:53
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:52
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:51
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:51:50
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:51:50
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:48
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:48
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:51:47
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:51:47
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:45
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:51:10
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:09
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:51:08
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:07
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:07
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:51:06
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:51:05
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:04
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:04
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:51:03
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:51:02
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:02
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:51:01
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:51:00
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:59
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:58
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:58
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:57
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:56
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:55
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:55
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:54
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:53
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:52
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:51
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:50
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:50
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:49
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:48
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:47
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:47
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:46
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:45
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:44
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:43
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:43
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:42
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:41
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:41
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:39
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:39
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:38
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:37
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:36
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:36
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:35
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:34
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:33
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:33
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:31
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:31
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:29
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:29
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:28
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:27
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:27
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:26
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:25
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:25
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:23
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:23
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:21
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:20
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:20
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:19
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:18
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:50:18
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"2.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:50:15
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:45:15
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:45:14
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:42:46
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024###","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)###","Workshops_Event__c":"true"} 
+
+Date Time: 2024-05-10 07:42:45
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 07:39:37
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:39:36
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:39:34
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:39:34
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:39:33
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:39:32
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:39:30
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:39:29
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:34
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:34
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:31
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:30
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:30
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:29
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:27
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:26
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:26
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:25
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:23
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:22
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:22
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:20
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:19
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:18
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:17
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:16
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:15
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:14
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:13
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:12
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:11
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:10
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:09
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:08
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:07
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:06
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:05
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:04
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:04
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:38:02
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:38:02
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:37:59
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:37:59
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:37:58
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:37:57
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:37:55
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:37:55
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:37:53
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:37:53
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:37:51
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:37:51
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:37:49
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:37:49
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:37:47
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:37:47
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:37:46
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:37:45
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:37:44
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:37:43
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:37:42
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:37:41
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:37:40
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:37:39
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:37:38
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:37:37
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:37:35
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 07:37:34
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"22.0","Remaining_Seats__c":"1.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 07:37:32
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 03:55:51
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 03:55:50
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person"} 
+
+Date Time: 2024-05-10 03:53:20
+ Data: {"Id":"00U9h000001D5e1EAC","Subject":"Training Calendar - 2 x 90 minutes - per person###","Total_Number_of_Seats__c":"21.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Sunday, 17th March 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 03:53:18
+ Data: {"ID":19613,"post_title":"Training Calendar - 2 x 90 minutes - per person###"} 
+
+Date Time: 2024-05-10 03:43:31
+ Data: {"Id":"00U9h000001HXTdEAO","Subject":"Inclusive Recruitment##","Total_Number_of_Seats__c":"30.0","Remaining_Seats__c":"0.0","Workshop_Event_Date_Text__c":"Monday, 13th May 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 03:43:29
+ Data: {"ID":19688,"post_title":"Inclusive Recruitment##"} 
+
+Date Time: 2024-05-10 03:43:25
+ Data: {"Id":"00U9h000001HXTdEAO","Subject":"Inclusive Recruitment##","Total_Number_of_Seats__c":"30.0","Workshop_Event_Date_Text__c":"Monday, 13th May 2024","Workshop_Times__c":"10:00 AM - 11:30 AM (Sydney Time)"} 
+
+Date Time: 2024-05-10 03:43:23
+ Data: {"ID":19688,"post_title":"Inclusive Recruitment##"} 
+
+Date Time: 2024-05-10 02:49:35
+ Data: {"Id":"01t9h0000012gNZAAY","Description":"Accessible Communications","Family":"Workshops","IsActive":"true","Name":"Accessible Communications","ProductCode":"WORK00290","Woocommerce_Description__c":"<p>This course is for anyone interested in creating accessible content. We&#39;ll explore barriers created by non-inclusive communications and find practical solutions to get your message out to the widest potential pool of people! Participants will learn how to check accessibility in MS Office and create accessible tables, spreadsheets and PDF&#39;s. Investigating representation of people with disability in media, this training also provides overviews on accessible social media, hyperlinks, captioning and Web Content Accessibility Guidelines (WCAG).<\/p>"} 
+
+Date Time: 2024-05-10 02:48:40
+ Data: {"Id":"01t9h0000012gNZAAY","Description":"Accessible Communications","Family":"Workshops","IsActive":"true","Name":"Accessible Communications 222","ProductCode":"WORK00290","Woocommerce_Description__c":"<p>This course is for anyone interested in creating accessible content. We&#39;ll explore barriers created by non-inclusive communications and find practical solutions to get your message out to the widest potential pool of people! Participants will learn how to check accessibility in MS Office and create accessible tables, spreadsheets and PDF&#39;s. Investigating representation of people with disability in media, this training also provides overviews on accessible social media, hyperlinks, captioning and Web Content Accessibility Guidelines (WCAG).<\/p>"} 
+
+Date Time: 2024-05-10 02:43:00
+ Data: {"Id":"01t9h0000012gNZAAY","Description":"Accessible Communications","Family":"Workshops","IsActive":"true","Name":"Accessible Communications","ProductCode":"WORK00290","Woocommerce_Description__c":"<p>This course is for anyone interested in creating accessible content. We&#39;ll explore barriers created by non-inclusive communications and find practical solutions to get your message out to the widest potential pool of people! Participants will learn how to check accessibility in MS Office and create accessible tables, spreadsheets and PDF&#39;s. Investigating representation of people with disability in media, this training also provides overviews on accessible social media, hyperlinks, captioning and Web Content Accessibility Guidelines (WCAG).<\/p>"} 
+
+Date Time: 2024-05-10 02:41:51
+ Data: {"Id":"01t9h0000012gNZAAY","Description":"Accessible Communications","Family":"Workshops","IsActive":"true","Name":"Accessible Communications 111","ProductCode":"WORK00290","Woocommerce_Description__c":"<p>This course is for anyone interested in creating accessible content. We&#39;ll explore barriers created by non-inclusive communications and find practical solutions to get your message out to the widest potential pool of people! Participants will learn how to check accessibility in MS Office and create accessible tables, spreadsheets and PDF&#39;s. Investigating representation of people with disability in media, this training also provides overviews on accessible social media, hyperlinks, captioning and Web Content Accessibility Guidelines (WCAG).<\/p>"} 
+
+Date Time: 2024-05-09 09:20:00
+ Data: {"Id":"01t280000011nqvAAA","IsActive":"true","Name":"Workplace Adjustment Passport","ProductCode":"020"} 
+
+Date Time: 2024-05-09 09:18:10
+ Data: {"Id":"01t280000011nqvAAA","IsActive":"true","Name":"Workplace Adjustment Passport###","ProductCode":"020"} 
+
+Date Time: 2024-05-09 09:14:28
+ Data: {"Id":"01t9h0000012gNZAAY","Description":"Accessible Communications","Family":"Workshops","IsActive":"true","Name":"Accessible Communications","ProductCode":"WORK00290","Woocommerce_Description__c":"<p>This course is for anyone interested in creating accessible content. We&#39;ll explore barriers created by non-inclusive communications and find practical solutions to get your message out to the widest potential pool of people! Participants will learn how to check accessibility in MS Office and create accessible tables, spreadsheets and PDF&#39;s. Investigating representation of people with disability in media, this training also provides overviews on accessible social media, hyperlinks, captioning and Web Content Accessibility Guidelines (WCAG).<\/p>"} 
+
+Date Time: 2024-05-09 09:14:08
+ Data: {"Id":"01t9h0000012gNZAAY","Description":"Accessible Communications","Family":"Workshops","IsActive":"true","Name":"Accessible Communications###","ProductCode":"WORK00290","Woocommerce_Description__c":"<p>This course is for anyone interested in creating accessible content. We&#39;ll explore barriers created by non-inclusive communications and find practical solutions to get your message out to the widest potential pool of people! Participants will learn how to check accessibility in MS Office and create accessible tables, spreadsheets and PDF&#39;s. Investigating representation of people with disability in media, this training also provides overviews on accessible social media, hyperlinks, captioning and Web Content Accessibility Guidelines (WCAG).<\/p>"} 
+
+Date Time: 2024-05-08 09:05:33
+ Data: {"Id":"01t9h0000012gNZAAY","Description":"Accessible Communications","Family":"Workshops","IsActive":"true","Name":"Accessible Communications","ProductCode":"WORK00290","Woocommerce_Description__c":"<p>This course is for anyone interested in creating accessible content. We&#39;ll explore barriers created by non-inclusive communications and find practical solutions to get your message out to the widest potential pool of people! Participants will learn how to check accessibility in MS Office and create accessible tables, spreadsheets and PDF&#39;s. Investigating representation of people with disability in media, this training also provides overviews on accessible social media, hyperlinks, captioning and Web Content Accessibility Guidelines (WCAG).<\/p>"} 
+
+Date Time: 2024-05-08 09:05:00
+ Data: {"Id":"01t9h0000012gNZAAY","Description":"Accessible Communications","Family":"Workshops","IsActive":"true","Name":"Accessible Communications (test)","ProductCode":"WORK00290","Woocommerce_Description__c":"<p>This course is for anyone interested in creating accessible content. We&#39;ll explore barriers created by non-inclusive communications and find practical solutions to get your message out to the widest potential pool of people! Participants will learn how to check accessibility in MS Office and create accessible tables, spreadsheets and PDF&#39;s. Investigating representation of people with disability in media, this training also provides overviews on accessible social media, hyperlinks, captioning and Web Content Accessibility Guidelines (WCAG).<\/p>"} 
