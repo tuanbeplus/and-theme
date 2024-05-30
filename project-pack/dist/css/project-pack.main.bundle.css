@@ -27,6 +27,11 @@
   width: 100%;
   height: 100%;
 }
+@media (max-width: 768px) {
+  .full-width-image {
+    height: 260px;
+  }
+}
 
 .content-and-right-sidebar {
   display: flex;
@@ -78,7 +83,6 @@
 .faqs-content .faqs-nav ul li {
   padding: 0.3rem 0;
   line-height: normal;
-  margin: 0;
   list-style: none;
   padding: 0;
 }
@@ -96,11 +100,11 @@
     margin-bottom: 2rem;
   }
 }
-.faqs-content .faqs-block__item-heading h4 {
+.faqs-content .faqs-block__item-heading h3 {
   font-size: 1.2rem;
   margin-bottom: 1rem;
 }
-.faqs-content .faqs-block__item-body h4 {
+.faqs-content .faqs-block__item-body h3 {
   font-size: 1rem;
   margin-bottom: 0.5rem;
 }
@@ -155,11 +159,6 @@
   color: var(--accent-color);
   opacity: 0.8;
 }
-.pp-content h2:nth-child(1) {
-  font-size: 1.3rem;
-  line-height: normal;
-  margin-bottom: 1rem;
-}
 .pp-content h4 {
   font-size: 1.3rem;
   line-height: normal;
@@ -172,7 +171,7 @@
 .pp-content ul {
   list-style: disc;
   margin: 1rem 0;
-  padding-left: 1em;
+  padding-left: 2em;
 }
 @media (max-width: 425px) {
   .pp-content ul {
@@ -309,7 +308,7 @@
   border: none;
   min-width: 200px;
   max-width: 100%;
-  font-weight: bold;
+  font-family: "Avenir-Heavy";
   position: relative;
   display: inherit;
   margin: 0 auto 1em auto;
@@ -399,11 +398,16 @@ form.tribe-tickets__tickets-form {
 .shop-lading .page-heading,
 .woocommerce-container .page-heading {
   margin-bottom: 1em;
-  margin-top: 1em;
 }
 .shop-lading .main-content,
 .woocommerce-container .main-content {
   margin: 3em 0;
+}
+@media (max-width: 767px) {
+  .shop-lading .page-heading,
+  .woocommerce-container .page-heading {
+    margin-top: 1em;
+  }
 }
 
 .product-seach-filter-tag {
@@ -411,7 +415,7 @@ form.tribe-tickets__tickets-form {
   color: white;
   padding: 1.5em;
   border-radius: 3px;
-  margin: 2em 0 5em;
+  margin: 2em 0 4em;
 }
 .product-seach-filter-tag h4 {
   font-size: 1.5em;
@@ -569,7 +573,7 @@ form.tribe-tickets__tickets-form {
   font-size: 1rem !important;
 }
 .product-card-style .product-item .price * {
-  font-weight: bold;
+  font-family: "Avenir-Heavy";
 }
 .product-card-style .product-item .item-list-info {
   padding: 0;
@@ -582,7 +586,7 @@ form.tribe-tickets__tickets-form {
   margin-right: 1.5em;
   margin-bottom: 0.5em;
   color: var(--accent-color);
-  font-weight: bold;
+  font-family: "Avenir-Heavy";
   font-size: 0.9em;
   position: relative;
 }
@@ -643,7 +647,7 @@ form.tribe-tickets__tickets-form {
   border-radius: 30px;
   border: 2px solid var(--accent-color);
   color: var(--accent-color);
-  font-weight: bold;
+  font-family: "Avenir-Heavy";
 }
 .product-card-style .product-item .item-button .added_to_cart {
   display: none;
@@ -867,7 +871,6 @@ form.tribe-tickets__tickets-form {
   text-align: center;
   border: none;
   background: white;
-  -moz-appearance: textfield;
 }
 .pp-product-qtt-update-ui input[type=number]::-webkit-outer-spin-button, .pp-product-qtt-update-ui input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -951,7 +954,7 @@ table.shop_table .cart_item td.event-out-date .__label {
 }
 
 .product-by-group-term {
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
 }
 .product-by-group-term .term-html-each {
   margin-bottom: 2rem;
@@ -1006,7 +1009,7 @@ form.woocommerce-form-register {
 }
 .pp-widget__title h4 {
   font-size: 1.3rem;
-  font-weight: bold;
+  font-family: "Avenir-Heavy";
   margin: 0;
   line-height: normal;
 }
@@ -1413,10 +1416,10 @@ body.__pp-offcanvas-active .pp-offcanvas__container {
 .product-variable-options .product-variable-item .schedule-course .__splicing {
   font-size: 1rem;
   color: black;
-  font-weight: bold;
+  font-family: "Avenir-Heavy";
 }
 .product-variable-options .product-variable-item .schedule-course .schedule-course_start {
-  font-weight: bold;
+  font-family: "Avenir-Heavy";
   display: flex;
   align-items: center;
 }
@@ -1619,7 +1622,7 @@ form.pp-form-product-variations .pp-button-variantion-submit:hover {
 }
 .cart-collaterals .cart_totals .wc-proceed-to-checkout .checkout-button {
   background: var(--accent-color);
-  font-weight: bold;
+  font-family: "Avenir-Heavy";
   letter-spacing: 0;
   font-size: 1.1rem;
   padding: 1.3rem;
@@ -1675,6 +1678,46 @@ form.pp-form-product-variations .pp-button-variantion-submit:hover {
 }
 .woocommerce-checkout .woocommerce-message .button:hover {
   color: #fff !important;
+}
+.woocommerce-checkout .required-login-wrapper {
+  margin-bottom: 80px;
+  text-align: center;
+}
+.woocommerce-checkout .required-login-wrapper .heading {
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+}
+.woocommerce-checkout .required-login-wrapper .btn {
+  min-width: 132px;
+  margin-right: 20px;
+  padding: 10px 32px;
+  font-size: 1.125rem;
+  line-height: 120%;
+  background-color: #A22F2C;
+  border-radius: 30px;
+  font-family: "Avenir-Medium";
+}
+.woocommerce-checkout .shop_table .amount {
+  font-family: "Avenir-Heavy";
+}
+.woocommerce-checkout .shop_table .amount * {
+  font-family: "Avenir-Heavy";
+}
+.woocommerce-checkout .shop_table .product-total .amount {
+  font-family: "Avenir-Medium";
+}
+.woocommerce-checkout .shop_table .product-total .amount * {
+  font-family: "Avenir-Medium";
+}
+@media (max-width: 767px) {
+  .woocommerce-checkout .required-login-wrapper {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+  .woocommerce-checkout .required-login-wrapper .btn {
+    margin-top: 20px;
+    font-size: 1rem;
+  }
 }
 
 form.woocommerce-checkout {
@@ -1844,9 +1887,16 @@ table.woocommerce-checkout-review-order-table td:last-of-type {
   font-size: 1rem;
   margin-bottom: 1rem;
 }
+#payment .wc_payment_method label {
+  font-size: 1rem;
+  font-family: "Avenir-Medium";
+  text-transform: none;
+}
 
 button#place_order {
   width: 100%;
+  font-size: 1.125rem;
+  font-family: "Avenir-Heavy";
   background: var(--accent-color);
   padding: 1.2rem;
   text-transform: capitalize;
@@ -1884,7 +1934,7 @@ button#place_order:hover {
 }
 .step-checkout-bar .step-list .step-item.__active {
   opacity: 1;
-  font-weight: bold;
+  font-family: "Avenir-Heavy";
 }
 .step-checkout-bar .step-list .step-item .__icon {
   display: inline-flex;
@@ -2019,7 +2069,7 @@ button#place_order:hover {
   z-index: 9;
   visibility: hidden;
   opacity: 0;
-  font-weight: bold;
+  font-family: "Avenir-Heavy";
   transition: 0.3s ease;
   -webkit-transition: 0.3s ease;
 }

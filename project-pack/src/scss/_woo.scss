@@ -1,17 +1,18 @@
 .shop-lading,
 .woocommerce-container {
-
   p {
     margin-bottom: 1em;
   }
-
   .page-heading {
     margin-bottom: 1em;
-    margin-top: 1em;
   }
-
   .main-content {
     margin: 3em 0;
+  }
+  @media(max-width: 767px) {
+    .page-heading {
+      margin-top: 1em;
+    }
   }
 }
 
@@ -20,7 +21,7 @@
   color: white;
   padding: 1.5em;
   border-radius: 3px;
-  margin: 2em 0 5em;
+  margin: 2em 0 4em;
 
   h4 {
     font-size: 1.5em;
@@ -203,9 +204,8 @@
 
     .price {
       font-size: 1rem !important;
-
       * {
-        font-weight: bold;
+        font-family: "Avenir-Heavy";
       }
     }
     
@@ -220,7 +220,7 @@
         margin-right: 1.5em;
         margin-bottom: .5em;
         color: var(--accent-color);
-        font-weight: bold;
+        font-family: "Avenir-Heavy";
         font-size: .9em;
         position: relative;
         
@@ -295,7 +295,7 @@
         border-radius: 30px;
         border: 2px solid var(--accent-color);
         color: var(--accent-color);
-        font-weight: bold;
+        font-family: "Avenir-Heavy";
       }
 
       .added_to_cart {
@@ -562,8 +562,6 @@
     border: none;
     background: white;
 
-    -moz-appearance: textfield;
-
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
@@ -658,7 +656,7 @@ table.shop_table {
 }
 
 .product-by-group-term {
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
   
   .term-html-each {
     margin-bottom: 2rem;

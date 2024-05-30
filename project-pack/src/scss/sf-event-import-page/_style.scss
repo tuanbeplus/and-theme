@@ -90,7 +90,7 @@ a.pp-button {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: bold;
+  font-family: "Avenir-Heavy";
   border-radius: 1px;
   display: flex;
   justify-content: space-between;
@@ -125,7 +125,7 @@ a.pp-button {
     margin: 0;
     color: white;
     box-sizing: border-box;
-    font-weight: bold;
+    font-family: "Avenir-Heavy";
     font-size: .9em;
     padding: .7em 1em;
   }
@@ -192,7 +192,7 @@ a.pp-button {
 }
 .import-status {
   font-size: 16px;
-  font-weight: bold;
+  font-family: "Avenir-Heavy";
   width: 100%;
   display: block;
   text-align: center;
@@ -231,7 +231,7 @@ a.pp-button {
         box-shadow: 0px 2px 0 -1px #FFF;
         opacity: 1;
         background: white;
-        font-weight: bold;
+        font-family: "Avenir-Heavy";
       }
 
       &:first-child {
@@ -329,7 +329,7 @@ table.products-table {
   line-height: normal;
   margin: 0.5em 0;
   font-size: .9em;
-  font-weight: bold;
+  font-family: "Avenir-Heavy";
 
   &.__error {
     border-color: #c65e3d;

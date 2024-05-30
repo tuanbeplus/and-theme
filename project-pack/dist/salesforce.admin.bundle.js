@@ -319,7 +319,6 @@ function ImportEventRoot() {
             //   content: <EventsTable />
             // }
             ],
-
             active: tabActive,
             onClick: function onClick(name) {
               setTabActive(name);
@@ -563,7 +562,7 @@ function ProductImportTable() {
       var isLoading = loadingItems.includes(item.Id);
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
         className: ["pp-button button-import", item.__imported == true ? '__imported' : '', isLoading ? '__is-loading' : ''].join(' '),
-        onClick: /*#__PURE__*/function () {
+        onClick: ( /*#__PURE__*/function () {
           var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e) {
             var r;
             return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -596,7 +595,7 @@ function ProductImportTable() {
           return function (_x) {
             return _ref.apply(this, arguments);
           };
-        }(),
+        }()),
         children: [item.__imported == true ? 'Imported' : 'Import', " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(IconImport, {})]
       });
     }

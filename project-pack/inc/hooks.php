@@ -224,3 +224,18 @@ function remove_product_variations_before_checkout() {
   }
 }
 add_action('wp_head', 'remove_product_variations_before_checkout');
+
+// Custom required login or register in Checkout page
+function and_custom_checkout_login_message() {
+  $register_url = get_field('ecomm_register_url', 'option');
+  ?>
+  <div class="required-login-wrapper">
+    <h3 class="heading">Please login or register to checkout.</h3>
+    <a href="/login" class="btn" role="button">Login</a>
+    <?php if (!empty($register_url)): ?>
+      <a href="<?php echo $register_url ?>" class="btn" role="button">Register</a>
+    <?php endif; ?>
+  </div>
+  <?php
+}
+add_filter('woocommerce_checkout_must_be_logged_in_message', 'and_custom_checkout_login_message');

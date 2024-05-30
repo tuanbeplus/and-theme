@@ -48,6 +48,51 @@
     }
   }
 
+  .required-login-wrapper {
+    margin-bottom: 80px;
+    text-align: center;
+    .heading {
+      margin-bottom: 24px;
+      font-size: 1.5rem;
+    }
+    .btn {
+      min-width: 132px;
+      margin-right: 20px;
+      padding: 10px 32px;
+      font-size: 1.125rem;
+      line-height: 120%;
+      background-color: #A22F2C;
+      border-radius: 30px;
+      font-family: "Avenir-Medium";
+    }
+  }
+  .shop_table {
+    .amount {
+      font-family: "Avenir-Heavy";
+      * {
+        font-family: "Avenir-Heavy";
+      }
+    }
+    .product-total {
+      .amount {
+        font-family: "Avenir-Medium";
+        * {
+          font-family: "Avenir-Medium";
+        }
+      }
+    }
+  }
+  @media(max-width: 767px) {
+    .required-login-wrapper {
+      margin-top: 60px;
+      margin-bottom: 60px;
+      .btn {
+        margin-top: 20px;
+        font-size: 1rem;
+      }
+    }
+  }
+
 }
 
 form.woocommerce-checkout {
@@ -252,10 +297,19 @@ table.woocommerce-checkout-review-order-table {
       margin-bottom: 1rem;
     }
   }
+  .wc_payment_method {
+    label {
+      font-size: 1rem;
+      font-family: "Avenir-Medium";
+      text-transform: none;
+    }
+  }
 }
 
 button#place_order {
   width: 100%;
+  font-size: 1.125rem;
+  font-family: "Avenir-Heavy";
   background: var(--accent-color);
   padding: 1.2rem;
   text-transform: capitalize;
@@ -296,7 +350,7 @@ button#place_order {
 
       &.__active {
         opacity: 1;
-        font-weight: bold;
+        font-family: "Avenir-Heavy";
       }
       
       .__icon {
@@ -453,7 +507,7 @@ button#place_order {
     z-index: 9;
     visibility: hidden;
     opacity: 0;
-    font-weight: bold;
+    font-family: "Avenir-Heavy";
     transition: .3s ease;
     -webkit-transition: .3s ease;
   }

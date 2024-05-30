@@ -23,12 +23,7 @@
             ?>
             <img class="card__thumb" src="<?php echo $img_url; ?>" alt="<?php echo get_the_title($post_id); ?>" loading="lazy">
             <div class="card__body">
-                <?php if ($post_type == 'product'): ?>
-                    <?php if (isset($product)) pp_product_list_item_info_tag($product); ?>
-                <?php else: ?>
-                    <span class="card__meta"><?php echo get_the_date('d/m/Y', $post_id) ?></span>
-                <?php endif; ?>
-                
+                <span class="card__meta"><?php echo get_the_date('d/m/Y', $post_id) ?></span>
                 <h3 class="card__title">
                     <a class="card__action" href="<?php echo get_the_permalink($post_id); ?>">
                         <?php 

@@ -340,8 +340,15 @@ add_action('wp_logout', function (){
     setcookie('sf_user_email', null, time() - 3600 * 24, '/');
     setcookie('sf_access_token', null, time() - 3600 * 24, '/');
   
-    // redirect to Home page
-    wp_redirect( home_url() );
+    // Redirect to current page
+    ?><script>
+        if (localStorage) {
+            var redirect_url = localStorage.getItem('sf_login_redirect_url');
+            if (redirect_url) {
+                window.location.href = redirect_url;
+            }
+        }
+    </script><?php
     exit();
-  });
+});
 

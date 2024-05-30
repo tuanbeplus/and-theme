@@ -171,4 +171,19 @@ import { notificationGlobal } from "./general";
     })
   })
 
+  // Smooth scrolling to anchor links
+  $(document).on('click', 'a[href^="#"]', function(e) {
+    let target = $(this.getAttribute('href'));
+    let offsetTop = 24;
+    if ($('#wpadminbar').length > 0) {
+      offsetTop = offsetTop + $('#wpadminbar').outerHeight();
+    }
+    if( target.length ) {
+      e.preventDefault();
+      $('html, body').stop().animate({
+          scrollTop: target.offset().top - offsetTop
+      }, 300);
+    }
+  });
+
 })(window, jQuery);

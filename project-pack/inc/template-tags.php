@@ -74,7 +74,7 @@ function pp_faq_tags($data) {
       ?>
       <div class="<?php echo implode(' ', $classes); ?>">
         <div class="faqs-block__item-heading">
-          <h4><?php echo sprintf('%s. %s', $_index + 1, $item['question']); ?></h4>
+          <h3><?php echo sprintf('%s. %s', $_index + 1, $item['question']); ?></h3>
         </div>
         <div class="faqs-block__item-body"> 
           <?php echo wpautop($item['answer']); ?>

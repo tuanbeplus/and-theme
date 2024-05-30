@@ -27,7 +27,7 @@
         let _QID = self.randID();
         $(this).attr('id', _QID);
 
-        let q = $(this).find('.faqs-block__item-heading h4').text();
+        let q = $(this).find('.faqs-block__item-heading h3').text();
         let a = $(this).find('.faqs-block__item-body');
         let child = [];
 
