@@ -9,6 +9,11 @@
   .main-content {
     margin: 3em 0;
   }
+  @media(max-width: 1024px) {
+    .page-heading {
+      font-size: 2.25rem;
+    }
+  }
   @media(max-width: 767px) {
     .page-heading {
       margin-top: 1em;
@@ -191,9 +196,13 @@
       line-height: 110%;
       color: black;
       margin-bottom: .5em;
+      @media(max-width: 1024px) {
+        font-size: 1.425rem;
+        line-height: normal;
+      }
 
       @media(max-width: 425px) {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
         line-height: normal;
       }
     }
@@ -287,11 +296,12 @@
         }
       }
       
-      .add_to_cart_button {
+      .button, .add_to_cart_button {
         position: relative;
         z-index: 100;
-        padding: 8px 20px;
+        padding: 10px 20px;
         font-size: 1rem;
+        line-height: 120%;
         border-radius: 30px;
         border: 2px solid var(--accent-color);
         color: var(--accent-color);
@@ -393,12 +403,10 @@
   }
 
   &__inner {
-
-
     h4 {
       font-size: 1.3rem;
       color: black;
-      margin: 0 0 1rem;
+      margin: 0 0 2rem;
     }
   }
 
@@ -570,7 +578,8 @@
   }
 
   .pp-button {
-    width: 30px;
+    min-width: 40px;
+    padding: 10px;
     border: none;
     background: var(--accent-color);
     color: white;
