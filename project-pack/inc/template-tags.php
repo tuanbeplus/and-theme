@@ -348,8 +348,8 @@ function pp_product_variable_choose_options_tag($product) {
       <form 
         class="pp-form-product-variations" 
         type="POST" 
-        data-product-id="<?php echo $product->get_id(); ?>" 
-        data-variations='<?php echo json_encode($variations); ?>'>
+        data-product-id="<?php echo esc_attr($product->get_id()); ?>" 
+        data-variations='<?php echo esc_attr(json_encode($variations)); ?>'>
         <div class="options">
           <?php 
             $allEventData = array();

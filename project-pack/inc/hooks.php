@@ -151,20 +151,17 @@ function pp_woo_order_item_name($name, $item) {
 }
 
 function pp_woo_cart_item_name($name, $item) {
-  $product_id = $item['product_id'];
-  $variation_id = $item['variation_id'];
+  $product_id = $item['product_id'] ?? '';
+  $variation_id = $item['variation_id'] ?? '';
+  $event_name = $item['variation']['attribute_events'] ?? '';
 
-  if($variation_id) {
-    $product = wc_get_product($product_id);
-    $variation_attributes = $product->get_variation_attributes($variation_id); 
-    if($variation_attributes && isset($variation_attributes['Events'])) {
-      // $sub = sprintf('<p><small>Event: %s</small></p>', $variation_attributes['Events'][0]);
-      return sprintf('<a href="%s">%s</a>', get_the_permalink($product_id), $variation_attributes['Events'][0]);
+  if (!empty($product_id)) {
+    $product = '<a href="'.get_the_permalink($product_id).'">'. get_the_title($product_id) .'</a>';
+    if (!empty($variation_id) && !empty($event_name)) {
+      $product .= '<br><strong>Event:</strong> '. $event_name;
     }
   }
-
-  // $variation_attributes = $product->get_variation_attributes( $item );
-  return sprintf('<a href="%s">%s</a>', get_the_permalink($product_id), get_the_title($product_id)) ;
+  return $product;
 }
 
 // Remove variations of a product from the cart before checkout

@@ -1969,10 +1969,9 @@ button#place_order:hover {
 }
 
 .add-attendees-container {
-  padding: 2em;
+  padding: 24px 32px;
   background: white;
-  margin-top: 3em;
-  margin-bottom: 3em;
+  margin: 24px 0;
 }
 .add-attendees-container .__item {
   border-bottom: solid 1px #ddd;
@@ -2011,6 +2010,10 @@ button#place_order:hover {
   opacity: 0.6;
   background: #f4f4f4;
 }
+.add-attendees-container .btn-submit {
+  padding: 12px 24px;
+  font-family: "Avenir-Medium";
+}
 
 .pp-table {
   border-collapse: collapse;
@@ -2025,12 +2028,15 @@ button#place_order:hover {
 .pp-table .pp-table {
   margin: 0;
 }
+.pp-table th {
+  font-family: "Avenir-Medium";
+}
 .pp-table th, .pp-table td {
   padding: 0.5em;
   border: solid #e0e0e0;
   border-width: 0 1px 1px 0;
   box-sizing: border-box;
-  font-size: 0.8em;
+  font-size: 1rem;
 }
 .pp-table thead th {
   text-align: left;
@@ -2207,6 +2213,26 @@ body.__show-pp-popup-add-new-contact .pp-popup-add-new-contact {
   opacity: 0.6;
 }
 
+.woocommerce .simplify-embedded-payment-form {
+  margin: 24px auto;
+  padding: 0 12px;
+  display: block;
+  background-color: #fff;
+}
+.woocommerce .button.cancel {
+  margin: 32px 0;
+  padding: 12px 24px;
+  background-color: #6e3685;
+  color: #fff;
+  font-size: 1rem;
+  font-family: "Avenir-Medium";
+}
+.woocommerce .button.cancel:hover {
+  background-color: #6e3685;
+  color: #fff;
+  opacity: 0.8;
+}
+
 .woocommerce-order-received .woocommerce-thankyou-order-received {
   margin-bottom: 1rem;
 }
@@ -2245,11 +2271,12 @@ p.order-again {
   text-align: right;
 }
 p.order-again a.button {
-  background: var(--accent-color);
+  padding: 12px 24px;
   color: white;
   border-radius: 1px;
   font-size: 16px;
-  padding: 1em 2em;
+  font-family: "Avenir-Medium";
+  background: var(--accent-color);
 }
 p.order-again a.button:hover {
   opacity: 0.8;
@@ -2267,9 +2294,28 @@ p.order-again a.button:hover {
 .woocommerce-account .page-container {
   margin-bottom: 3rem;
 }
-
-.woocommerce-MyAccount-content {
-  font-family: Arial, Helvetica, sans-serif;
+.woocommerce-account .woocommerce-MyAccount-content mark {
+  font-family: "Avenir-Heavy";
+}
+.woocommerce-account .woocommerce-MyAccount-content table.shop_table .woocommerce-Price-amount {
+  font-family: "Avenir-Heavy";
+}
+.woocommerce-account .woocommerce-MyAccount-content table.shop_table .woocommerce-Price-amount * {
+  font-family: "Avenir-Heavy";
+}
+.woocommerce-account .woocommerce-order-details h2 {
+  margin: 24px 0;
+}
+.woocommerce-account .woocommerce-customer-details h2 {
+  margin-bottom: 24px;
+}
+.woocommerce-account .woocommerce-customer-details address br {
+  content: "";
+  display: block;
+  margin-top: 8px;
+}
+.woocommerce-account .woocommerce-customer-details address p {
+  margin-top: 8px;
 }
 
 .woocommerce-MyAccount-navigation ul {
@@ -2294,10 +2340,17 @@ p.order-again a.button:hover {
 }
 
 table.woocommerce-orders-table.woocommerce-MyAccount-orders .button {
+  margin-right: 8px;
   background: var(--accent-color2);
   color: white;
-  font-size: 0.9em;
-  margin-right: 0.3em;
+  font-size: 1rem;
+  font-family: "Avenir-Medium";
+}
+table.woocommerce-orders-table.woocommerce-MyAccount-orders th {
+  font-family: "Avenir-Heavy";
+}
+table.woocommerce-orders-table.woocommerce-MyAccount-orders th * {
+  font-family: "Avenir-Heavy";
 }
 table.woocommerce-orders-table.woocommerce-MyAccount-orders th.woocommerce-orders-table__header-order-date {
   width: 20%;

@@ -1,16 +1,43 @@
 .woocommerce-account {
-
   .page-container {
     margin-bottom: 3rem;
   }
-}
-
-.woocommerce-MyAccount-content {
-  font-family: Arial, Helvetica, sans-serif;
+  .woocommerce-MyAccount-content {
+    mark {
+      font-family: "Avenir-Heavy";
+    }
+    table.shop_table {
+      .woocommerce-Price-amount {
+        font-family: "Avenir-Heavy";
+        * {
+          font-family: "Avenir-Heavy";
+        }
+      }
+    }
+  }
+  .woocommerce-order-details {
+    h2 {
+      margin: 24px 0;
+    }
+  }
+  .woocommerce-customer-details {
+    h2 {
+      margin-bottom: 24px;
+    }
+    address {
+      br {
+        content: "";
+        display: block;
+        margin-top: 8px;
+      }
+      p {
+        margin-top: 8px;
+      }
+    }
+  }
 }
 
 .woocommerce-MyAccount-navigation {
-
   ul {
     border: solid 1px #eee;
     background: white;
@@ -41,12 +68,18 @@
 }
 
 table.woocommerce-orders-table.woocommerce-MyAccount-orders {
-
   .button {
+    margin-right: 8px;
     background: var(--accent-color2);
     color: white;
-    font-size: .9em;
-    margin-right: 0.3em;
+    font-size: 1rem;
+    font-family: "Avenir-Medium";
+  }
+  th {
+    font-family: "Avenir-Heavy";
+    * {
+      font-family: "Avenir-Heavy";
+    }
   }
 
   th.woocommerce-orders-table__header-order-date {

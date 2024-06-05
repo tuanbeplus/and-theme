@@ -47,11 +47,12 @@ p.order-again {
   text-align: right;
 
   a.button {
-    background: var(--accent-color);
+    padding: 12px 24px;
     color: white;
     border-radius: 1px;
     font-size: 16px;
-    padding: 1em 2em;
+    font-family: "Avenir-Medium";
+    background: var(--accent-color);
 
     &:hover {
       opacity: .8;

@@ -66,11 +66,7 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 						<a href="<?php echo esc_url( $product_permalink ); ?>" class="__thumb"><?php echo $thumbnail; ?></a>
 						<div class="__entry">
 							<?php do_action( 'pp/mini_cart_item_before_title', $cart_item, $_product ) ?>
-							<h4>
-								<a href="<?php echo esc_url( $product_permalink ); ?>">
-								<?php echo wp_kses_post( $product_name ); ?>
-								</a>
-							</h4>
+							<h4><?php echo $product_name ?></h4>
 							<?php do_action( 'pp/mini_cart_item_after_title', $cart_item, $_product ) ?>
 							<?php echo wc_get_formatted_cart_item_data( $cart_item ); ?>
 							<?php echo apply_filters( 'woocommerce_widget_cart_item_quantity', '<span class="quantity">' . sprintf( '%s &times; %s', $cart_item['quantity'], $product_price ) . '</span>', $cart_item, $cart_item_key ); ?>
@@ -106,6 +102,8 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 <?php else : ?>
 
 	<p class="woocommerce-mini-cart__empty-message"><?php esc_html_e( 'No products in the cart.', 'woocommerce' ); ?></p>
+
+	<p style="margin-top:24px;"><a href="<?php echo wc_get_page_permalink('shop') ?>"><?php echo 'Go to Shop'; ?></a></p>
 
 <?php endif; ?>
 

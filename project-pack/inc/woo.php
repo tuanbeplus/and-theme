@@ -205,14 +205,79 @@ function pp_form_add_attendees_to_order($order_id) {
   echo do_shortcode('[add_attendees_to_order order_id='. $order_id .']');
 }
 
+/**
+ * Customize Order Confirmation Email for Workshop products
+ */
 add_action('woocommerce_email_customer_details', function($order, $sent_to_admin, $plain_text, $email) {
-  $view_order_url = $order->get_view_order_url();
-  ?>
-  <div style="margin: 15px 0;">
-    <a href="<?php echo $view_order_url; ?>" style="color: white; font-size: 18px; background: #6e3685; display: inline-block; width: 100%; padding: 10px 20px; border-radius: 3px; text-align: center;"><?php _e('You can add attendees here.', 'pp'); ?></a>
-  </div>
-  <?php
-}, 60, 4); 
+  // Get the order items
+  $items = $order->get_items();
+  // Flag to determine if any item belongs to the 'workshops' category
+  $has_workshop_product = false;
+  // Loop through each item in the order
+  if (!empty($items)) {
+    foreach ($items as $item) {
+      // Get the product object
+      $product = $item->get_product();
+      // Check if the product is a variation
+      if ($product->is_type('variation')) {
+        // Get the parent product ID
+        $parent_id = $product->get_parent_id();
+        // Get the parent product object
+        $parent_product = wc_get_product($parent_id);
+      } 
+      else {
+        $parent_product = $product;
+      }
+      // Check if the product belongs to the 'workshops' category
+      if (has_term('workshops', 'product_cat', $parent_product->get_id())) {
+        $has_workshop_product = true;
+        break;
+      }
+    }
+  }
+  // If there's at least one product from the 'workshops' category, print the HTML
+  if ($has_workshop_product) {
+    $view_order_url = $order->get_view_order_url();
+    ?>
+    <div style="margin: 15px 0;">
+      <a href="<?php echo $view_order_url; ?>" style="color: white; font-size: 18px; 
+        background: #6e3685; display: block; padding: 10px 30px; 
+        border-radius: 3px; text-decoration: none; text-align: center;">
+        <?php _e('You can add attendees here', 'pp'); ?>
+      </a>
+    </div>
+    <?php
+  }
+}, 60, 4);  
+
+// add_action( 'woocommerce_view_order', 'and_woo_after_account_orders_action' );
+function and_woo_after_account_orders_action( $order_id ){
+  $order = new WC_Order( $order_id );
+  $items = $order->get_items(); 
+
+  foreach ($items as $item) {
+    // Get the product object
+    $product = $item->get_product();
+    // Check if the product is a variation
+    if ($product->is_type('variation')) {
+      // Get the parent product ID
+      $parent_id = $product->get_parent_id();
+      // Get the parent product object
+      $parent_product = wc_get_product($parent_id);
+    } 
+    else {
+      $parent_product = $product;
+    }
+    echo "<pre>";
+    // Check if the product belongs to the 'workshops' category
+    if (has_term('workshops', 'product_cat', $parent_product->get_id())) {
+      echo 'true';
+      break;
+    }
+    echo "</pre>";
+  }
+  
+}
 
 function ppsf_base_Pricebook2_base_price_id() {
   $__role_based_pricing = get_field('__role-based_pricing', 'option');
@@ -276,7 +341,7 @@ function pp_woo_remaining_seats_available($event) {
   ob_start();
   ?>
   <span class="__remaining-seats"> 
-    <?php echo sprintf(__('(Remaining Seats %s/%s)', 'pp'), $remaining_seats__c, $total_number_of_seats__c); ?>
+    <?php echo sprintf(__('(Remaining Seats %s/%s)', 'pp'), (int)$remaining_seats__c, (int)$total_number_of_seats__c); ?>
   </span> <!-- .__remaining-seats -->
   <?php
   return ob_get_clean();

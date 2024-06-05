@@ -372,12 +372,10 @@ button#place_order {
 }
 
 .add-attendees-container {
-  // display: none;
 
-  padding: 2em;
+  padding: 24px 32px;
   background: white;
-  margin-top: 3em;
-  margin-bottom: 3em;
+  margin: 24px 0;
 
   .__item {
     border-bottom: solid 1px #ddd;
@@ -412,6 +410,10 @@ button#place_order {
       background: #f4f4f4;
     }
   }
+  .btn-submit {
+    padding: 12px 24px;
+    font-family: "Avenir-Medium";
+  }
 }
 
 .pp-table {
@@ -428,12 +430,16 @@ button#place_order {
     margin: 0;
   }
 
+  th {
+    font-family: "Avenir-Medium";
+  }
+
   th, td {
     padding: .5em;
     border: solid #e0e0e0;
     border-width: 0 1px 1px 0;
     box-sizing: border-box;
-    font-size: .8em;
+    font-size: 1rem;
   }
 
   thead {
@@ -651,6 +657,24 @@ body.__show-pp-popup-add-new-contact {
   }
 }
 
-form.checkout.woocommerce-checkout {
-  // display: none;
+.woocommerce {
+  .simplify-embedded-payment-form {
+    margin: 24px auto;
+    padding: 0 12px;
+    display: block;
+    background-color: #fff;
+  }
+  .button.cancel {
+    margin: 32px 0;
+    padding: 12px 24px;
+    background-color: #6e3685;
+    color: #fff;
+    font-size: 1rem;
+    font-family: "Avenir-Medium";
+    &:hover {
+      background-color: #6e3685;
+      color: #fff;
+      opacity: 0.8;
+    }
+  }
 }
