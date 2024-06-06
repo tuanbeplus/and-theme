@@ -1285,6 +1285,9 @@ body.__pp-offcanvas-active .pp-offcanvas__container {
 .pp-amount .price > .amount {
   color: var(--accent-color);
 }
+.pp-amount .price .amount * {
+  font-family: "Avenir-Heavy";
+}
 
 .__old-event-toggle {
   display: flex;
@@ -1317,6 +1320,9 @@ body.__pp-offcanvas-active .pp-offcanvas__container {
   border-radius: 30px;
   transition: 0.3s ease;
   -webkit-transition: 0.3s ease;
+}
+.__old-event-toggle .__toggle-fake .__toggle-label {
+  font-family: "Avenir-Heavy";
 }
 .__old-event-toggle > input[type=checkbox] {
   display: none;
