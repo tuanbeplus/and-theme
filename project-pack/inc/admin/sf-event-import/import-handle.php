@@ -20,13 +20,14 @@ function ppsf_event_create_product_parent($data) {
     'Woocommerce_Description__c' => '',
   ];
   $_args = wp_parse_args($data, $default); 
+
   $product = new WC_Product_Variable();
   // Name and Description
   $product->set_name($_args['Name']);
   $product->set_description($_args['Woocommerce_Description__c']);
 
   if(!empty($_args['ProductCode'])) {
-    $product->set_sku('ProductCode');
+    $product->set_sku($_args['ProductCode']);
   } 
 
   // Event attribute
@@ -46,6 +47,7 @@ function ppsf_event_create_product_parent($data) {
   update_post_meta($product->get_id(), '__sf_product_id', $_args['Id']); 
   update_post_meta($product->get_id(), '__sf_family', $_args['Family']); 
   update_post_meta($product->get_id(), '__sf_productcode', $_args['ProductCode']); 
+  update_post_meta($product->get_id(), 'cfx_sales_id', $_args['Id']); 
 
   do_action( 'PPSF/after_add_product_parent_hook', $product, $product->get_id(), $_args);
   return $product->get_id();
