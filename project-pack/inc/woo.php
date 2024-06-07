@@ -282,7 +282,7 @@ function and_woo_after_account_orders_action( $order_id ){
 function ppsf_base_Pricebook2_base_price_id() {
   $__role_based_pricing = get_field('__role-based_pricing', 'option');
   $role = 'regular_price';
-  $default = '01s9h000000W1dhAAC'; // 01s9h000000W1dhAAC (Ecommerce Price Book)
+  $default = '01s28000006rWeWAAU'; // Standard Price Book
 
   if(!$__role_based_pricing || count($__role_based_pricing) == 0) return $default;
 

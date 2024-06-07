@@ -1321,7 +1321,7 @@ body.__pp-offcanvas-active .pp-offcanvas__container {
   transition: 0.3s ease;
   -webkit-transition: 0.3s ease;
 }
-.__old-event-toggle .__toggle-fake .__toggle-label {
+.__old-event-toggle .__toggle-label {
   font-family: "Avenir-Heavy";
 }
 .__old-event-toggle > input[type=checkbox] {
