@@ -16,11 +16,11 @@ if( get_row_layout() == 'dashboard_resources' ):
 
     foreach($resources as $resource) {
         $resourcesHtml .= '<li>
-                                <a href="'.get_permalink($resource->ID).'">
-                                    <span class="material-icons">arrow_forward</span>
-                                    '.get_the_title($resource->ID).'
-                                </a>
-                            </li>';
+            <a href="'.get_permalink($resource->ID).'">
+                <span class="material-icons">arrow_forward</span>
+                '.get_the_title($resource->ID).'
+            </a>
+        </li>';
     } 
     ?>
         <section class="dashboard resources-widget">

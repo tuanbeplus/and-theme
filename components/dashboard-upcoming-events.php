@@ -2,11 +2,11 @@
 
 if( get_row_layout() == 'dashboard_upcoming_events' ):
     
+    global $contact_id, $account_id, $user_profile;
     $response = getCampains();
     $upcoming_events_heading = get_sub_field('upcoming_events_heading');
     $upcoming_events_cta = get_sub_field('upcoming_events_cta');
     $user_data = getUser($_COOKIE['userId']);
-    $profile_id = $user_data->records[0]->ProfileId;
 ?>
         <section class="dashboard upcoming-events">
                 <div class="container">
@@ -34,7 +34,7 @@ if( get_row_layout() == 'dashboard_upcoming_events' ):
                                     $date_now = strtotime("now");
                                     $event_date = strtotime($event->StartDate);
                                     
-                                    if ($profile_id == NONE_MEMBER) {
+                                    if ($user_profile == 'NON_MEMBERS') {
                                         if ($event_date > $date_now && $event->Event_Type__c == 'Public') { //Event_Date__c
                                             echo '<li class="event">
                                                     <div class="event-info">
@@ -48,7 +48,7 @@ if( get_row_layout() == 'dashboard_upcoming_events' ):
                                             $events_array[] = $event->Name;
                                         }
                                     }
-                                    elseif ($profile_id == PRIMARY_MEMBER || $profile_id == GENERAL_MEMBER) {
+                                    elseif ($user_profile == 'PRIMARY_MEMBERS' || $user_profile == 'MEMBERS') {
                                         if ($event_date > $date_now ) {
                                             echo '<li class="event">
                                                     <div class="event-info">

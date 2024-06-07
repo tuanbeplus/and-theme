@@ -2,13 +2,13 @@
 
 if( get_row_layout() == 'dashboard_e_learn' ):
 
+    global $contact_id, $account_id, $user_profile;
+
     $e_learn_heading = get_sub_field('e_learn_heading');
     $e_learns_fields_title = get_sub_field('e_learns_fields_title');
     $e_learn_cta = get_sub_field('e_learn_cta');
     $organisationData = getAccountMember();
     $user_data = getUser($_COOKIE['userId']);
-    $profile_id = $user_data->records[0]->ProfileId;
-    $contact_id = $user_data->records[0]->ContactId;
     $opportunities = getOpportunity();
     $elearns_arr = array();
 
@@ -73,7 +73,7 @@ if( get_row_layout() == 'dashboard_e_learn' ):
                                 'DCR_Program_Bundle__c' => $elearn->DCR_Program_Bundle__c,
                             );
                                 
-                            if ($profile_id == PRIMARY_MEMBER) { 
+                            if ($user_profile == 'PRIMARY_MEMBERS') { 
                                 $is_elearn_arr[] = $elearn->Id; ?>
                                 <li elearn_id="<?php echo $elearn->Id;?>">
                                     <span class="elearn-contact">
@@ -97,7 +97,7 @@ if( get_row_layout() == 'dashboard_e_learn' ):
                                 if ($i++ > 3) break;
                             }
 
-                            if ($profile_id == GENERAL_MEMBER || $profile_id == NONE_MEMBER) {
+                            if ($user_profile == 'MEMBERS' || $user_profile == 'NON_MEMBERS') {
                                 if ($elearn->Contact__c == $contact_id) {
                                     $is_elearn_arr[] = $elearn->Id;
                                     ?>

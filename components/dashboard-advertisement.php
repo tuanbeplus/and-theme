@@ -2,11 +2,10 @@
 <?php
 
 if( get_row_layout() == 'dashboard_advertisement' ):
-
+    global $contact_id, $account_id, $user_profile;
     $upcomingEvents = getEvents('dashboard');
-    $ProfileId = getUser($_COOKIE['userId'])->records[0]->ProfileId;
     ?>
-          <section class="dashboard advertisement <?php if($ProfileId == NONE_MEMBER) echo 'non-member'; ?>">
+          <section class="dashboard advertisement <?php if($user_profile == 'NON_MEMBERS') echo 'non-member'; ?>">
               <div class="container">
                   <?php dynamic_sidebar( 'dashboard_advertisement' ); ?>
               </div>

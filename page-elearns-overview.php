@@ -12,12 +12,43 @@ const NONE_MEMBER = '00e9q000000LrVRAA0';
 
 global $sf_user_id;
 $organisationData = getAccountMember();
+
+$wp_user_id = get_current_user_id();
 $user_data = getUser($_COOKIE['userId']);
-$profile_id = $user_data->records[0]->ProfileId;
-$contact_id = $user_data->records[0]->ContactId;
+$wp_user_meta_json = get_user_meta($wp_user_id, '__salesforce_user_meta', true);
+$wp_user_meta = json_decode($wp_user_meta_json, true);
+
+// get WP User Role
+$wp_user_roles = get_userdata($wp_user_id)->roles ?? array();
+
+// get Salesforce Contact ID
+$contact_id = $wp_user_meta['ContactId'] ?? '';
+if (empty($contact_id)) {
+    $contact_id = $user_data->records[0]->ContactId;
+}
+// get Salesforce Account ID
+$account_id = $wp_user_meta['AccountId'] ?? '';
+if (empty($account_id)) {
+    $account_id = $user_data->records[0]->AccountId;
+}
+// get Salesforce member profile
+$user_profile = '';
+$is_member = $wp_user_meta['Members__c'] ?? false;
+$is_non_member = $wp_user_meta['Non_Members__c'] ?? false;
+$is_primary_member = $wp_user_meta['Primary_Members__c'] ?? false;
+
+if ($is_member == true || in_array('MEMBERS', $wp_user_roles)) {
+    $user_profile = 'MEMBERS';
+}
+elseif ($is_non_member == true || in_array('NON_MEMBERS', $wp_user_roles)) {
+    $user_profile = 'NON_MEMBERS';
+}
+elseif ($is_primary_member == true || in_array('PRIMARY_MEMBERS', $wp_user_roles)) {
+    $user_profile = 'PRIMARY_MEMBERS';
+}
+
 $opportunities = getOpportunity();
 $elearns_arr = array();
-
 if (isset($opportunities->records)) {
     foreach ($opportunities->records as $opportunity) {
         $elearns_by_opportunity_id = getElearnsByOpportunityId($opportunity->Id);
@@ -111,7 +142,7 @@ if (isset($opportunities->records)) {
                                                     'DCR_Program_Bundle__c' => $elearn->DCR_Program_Bundle__c,
                                                 );
                                                 
-                                                if ($profile_id == PRIMARY_MEMBER) {
+                                                if ($user_profile == 'PRIMARY_MEMBERS') {
                                                     $is_elearn_arr[] = $elearn->Id;
                                                     ?>
                                                     <li elearn_id="<?php echo $elearn->Id;?>">
@@ -140,7 +171,7 @@ if (isset($opportunities->records)) {
                                                     if ($i++ > 3) break;
                                                 }
 
-                                                if ($profile_id == GENERAL_MEMBER || $profile_id == NONE_MEMBER) {
+                                                if ($user_profile == 'MEMBERS' || $user_profile == 'NON_MEMBERS') {
                                                     if ($elearn->Contact__c == $contact_id) {
                                                         $is_elearn_arr[] = $elearn->Id;
                                                         ?>
@@ -242,7 +273,7 @@ if (isset($opportunities->records)) {
                                                     'DCR_Program_Bundle__c' => $elearn->DCR_Program_Bundle__c,
                                                 );
                                                 
-                                                if ($profile_id == PRIMARY_MEMBER) {
+                                                if ($user_profile == 'PRIMARY_MEMBERS') {
                                                     if ($elearn->Commenced_Date__c){ 
                                                         $elearns_commenced_array[] = $elearn->Id; ?>
 
@@ -270,7 +301,7 @@ if (isset($opportunities->records)) {
                                                     } 
                                                 }
 
-                                                if ($profile_id == GENERAL_MEMBER || $profile_id == NONE_MEMBER) {
+                                                if ($user_profile == 'MEMBERS' || $user_profile == 'NON_MEMBERS') {
                                                     if ($elearn->Contact__c == $contact_id && $elearn->Commenced_Date__c){ 
                                                         $elearns_commenced_array[] = $elearn->Id; ?>
 

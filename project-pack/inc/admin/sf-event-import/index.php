@@ -409,6 +409,16 @@ function pp_ajax_get_EventRelation_by_event_Id() {
 
 # For test
 add_action( 'init', function() {
+  // if (($_GET['test'] == 'test')) { 
+  //   $sf_pricebook2_id = '01sOn0000001iOnIAI';
+  //   $sf_product2_id = '01tOn000003dWntIAE';
+  //   echo "<pre>";
+  //   // print_r(ppsft_get_PricebookEntry_by_Product2ID('01tOn000003dWntIAE'));
+  //   print_r(ppsf_get_unitprice_from_pricebook_entry($sf_pricebook2_id, $sf_product2_id));
+  //   // print_r(get_post_meta(42585, 'product_role_based_price_PRIMARY_MEMBERS', true));
+  //   // update_post_meta( 42585, 'product_role_based_price_PRIMARY_MEMBERS', '100' );
+  //   echo "</pre>";
+  // }
   if(!isset($_GET['test_import'])) return;
 
   // $junction_id = 'a1y9h000000Ar6HAAS'; 

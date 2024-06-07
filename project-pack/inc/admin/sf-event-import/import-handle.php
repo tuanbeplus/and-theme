@@ -187,6 +187,9 @@ function ppsf_event_add_product_child($data, $productParentId, $prices = []) {
     pp_log('Message: Added product variation successfully #' . $variation_id);
   }
 
+  // Update Role base price from PriceBook2
+  // ppsf_update_role_base_price_product_variation($variation_id, $productParentId);
+
   // Update meta fields
   $parent_event_id = get_field('sf_event_id', $WpEventId);
   update_post_meta($variation_id, 'wp_parent_event_id', $parent_event_id);
@@ -205,6 +208,59 @@ function ppsf_event_add_product_child($data, $productParentId, $prices = []) {
   do_action( 'PPSF/after_add_variation_hook', $variation, $variation->get_id(), $_args);
 
   return $variation->get_id();
+}
+
+/**
+ * Update Role base price from PriceBook2 to Product Variation
+ */
+function ppsf_update_role_base_price_product_variation($variation_id, $product_parent_id) {
+  // get Salesforce Product2 ID
+  $sf_product2_id = get_post_meta( $product_parent_id, '__sf_product_id', true );
+
+  if (empty($sf_product2_id)) return;
+
+  $role_based_list = get_field('__role-based_pricing', 'option');
+
+  if (!empty($role_based_list)) {
+    foreach ($role_based_list as $role_base) {
+      $role_name = $role_base['role']; 
+      $pricebook2_id = $role_base['pricebook2'];
+      // Primary Members
+      if (!empty($role_name) && $role_name != 'PRIMARY_MEMBERS') {
+        # code...
+      }
+    }
+  }
+  
+}
+
+/**
+ * Get the SF Unit Price from PricebookEntry object
+ * 
+ * @param $sf_pricebook2_id   Salesforce PriceBook2 ID
+ * @param $sf_product2_id     Salesforce Product2 ID
+ * 
+ * @return UnitPrice number
+ * 
+ */
+function ppsf_get_unitprice_from_pricebook_entry($sf_pricebook2_id, $sf_product2_id) {
+  // Get PricebookEntry object
+  $pricebook_entry = ppsft_get_PricebookEntry_by_Product2ID($sf_product2_id);
+
+  if (!empty($pricebook_entry)) {
+    $records = $pricebook_entry['records'];
+    if (isset($records) && !empty($records)) {
+      foreach ($records as $row) {
+        if (isset($row['Pricebook2Id'])) {
+          if ($row['Pricebook2Id'] == $sf_pricebook2_id) {
+            $unit_price = $row['UnitPrice'] ?? '';
+            // Return the Unit Price
+            return $unit_price;
+          }
+        }
+      }
+    }
+  }
 }
 
 function ppwc_event_add_product_attr_opts($pid, $name) {

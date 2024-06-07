@@ -4,7 +4,6 @@ if( get_row_layout() == 'dashboard_membership' ):
 
     $renew_membership_cta = get_sub_field('renew_membership_cta');
     $organisationData = getAccountMember();
-    $ProfileId = getUser($_COOKIE['userId'])->records[0]->ProfileId;
     $user_data = getUser($organisationData['manager'])->records[0]->Name;
     ?>
     <section id="membership" class="dashboard membership">

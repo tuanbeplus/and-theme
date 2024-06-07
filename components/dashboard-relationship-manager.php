@@ -6,7 +6,6 @@ if( get_row_layout() == 'dashboard_relationship_manager' ):
 
     $relationship_manager_heading = get_sub_field('relationship_manager_heading');
     $organisationData = getAccountMember();
-    $ProfileId = getUser($_COOKIE['userId'])->records[0]->ProfileId;
     $user_data = getUser($organisationData['manager'])->records[0]->Name;
     ?>
     <section class="dashboard membership relationship-manager">
