@@ -5,9 +5,9 @@
 get_header();
 
 // Profile member
-const PRIMARY_MEMBER = '00e9q000000LrVSAA0';
 const GENERAL_MEMBER = '00e9q000000Lqn7AAC';
 const NONE_MEMBER = '00e9q000000LrVRAA0';
+const PRIMARY_MEMBER = '00e9q000000LrVSAA0';
 
 $organisationData = getAccountMember();
 $wp_user_id = get_current_user_id();

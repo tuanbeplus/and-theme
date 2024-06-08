@@ -82,7 +82,6 @@ function pp_ajax_request_sf_user_data() {
     'LastName' => $LastName,
     'FirstName' => $FirstName,
     'Email' => $Email, 
-    'ProfileId' => $ProfileId,
     'Street' => $Street,
     'City' => $City,
     'State' => $State,
@@ -93,7 +92,22 @@ function pp_ajax_request_sf_user_data() {
     'CompanyName' => $CompanyName,
     'AccountId' => $AccountId,
     'ContactId' => $ContactId,
+    'Members__c' => $Members__c,
+    'Non_Members__c' => $Non_Members__c,
+    'Primary_Members__c' => $Primary_Members__c,
   ) = $response ;
+
+  // Customize Salesforce User's ProfileID
+  $ProfileId = '';
+  if ($Members__c == true) {
+    $ProfileId = '00e9q000000Lqn7AAC';
+  }
+  elseif ($Non_Members__c == true) {
+    $ProfileId = '00e9q000000LrVRAA0';
+  }
+  elseif ($Primary_Members__c == true) {
+    $ProfileId = '00e9q000000LrVSAA0';
+  }
 
   $accountInfo = ppsf_get_account($AccountId);
 
@@ -123,6 +137,7 @@ function pp_ajax_request_sf_user_data() {
     '__sf_last_updated_userinfo' => current_time('mysql'), // last updated timestamp
     'salesforce_contact_id' => $ContactId ?? '',
     '__salesforce_account_id' => $AccountId ?? '',
+    '__salesforce_profile_id' => $ProfileId ?? '',
     '__salesforce_account_json' => wp_json_encode( $accountInfo )
   ]);
 

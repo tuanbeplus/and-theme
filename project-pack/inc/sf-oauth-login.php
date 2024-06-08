@@ -36,7 +36,6 @@ function fn_sync_user($user_id = 0, $access_token = '') {
       'LastName' => $LastName,
       'FirstName' => $FirstName,
       'Email' => $Email,
-      'ProfileId' => $ProfileId,
       'Street' => $Street,
       'City' => $City,
       'State' => $State,
@@ -47,8 +46,23 @@ function fn_sync_user($user_id = 0, $access_token = '') {
       'CompanyName' => $CompanyName,
       'AccountId' => $AccountId,
       'ContactId' => $ContactId,
+      'Members__c' => $Members__c,
+      'Non_Members__c' => $Non_Members__c,
+      'Primary_Members__c' => $Primary_Members__c,
     ) = $userData ;
-  
+
+    // Customize Salesforce User's ProfileID
+    $ProfileId = '';
+    if ($Members__c == true) {
+        $ProfileId = '00e9q000000Lqn7AAC';
+    }
+    elseif ($Non_Members__c == true) {
+        $ProfileId = '00e9q000000LrVRAA0';
+    }
+    elseif ($Primary_Members__c == true) {
+        $ProfileId = '00e9q000000LrVSAA0';
+    }
+
     $WP_UserID = fn_wp_user_exists($Email);
   
     if($WP_UserID !== false) {
@@ -57,17 +71,13 @@ function fn_sync_user($user_id = 0, $access_token = '') {
         if ( !metadata_exists( 'user', $WP_UserID, '__salesforce_user_id' ) ) {
             update_user_meta($WP_UserID, '__salesforce_user_id', $user_id );
         }
-    
-        if ( !metadata_exists( 'user', $WP_UserID, '__salesforce_profile_id' ) ) {
-            update_user_meta($WP_UserID, '__salesforce_profile_id', $ProfileId );
-        }
 
         update_user_meta($WP_UserID, 'salesforce_contact_id', $ContactId);
+        update_user_meta($WP_UserID, '__salesforce_account_id', $AccountId);
         update_user_meta($WP_UserID, '__salesforce_profile_id', $ProfileId);
         update_user_meta($WP_UserID, '__salesforce_user_meta', wp_json_encode($userData));
         update_user_meta($WP_UserID, '__salesforce_access_token', $access_token);
-        update_user_meta($WP_UserID, '__salesforce_account_id', $AccountId);
-
+        
     } else {
         # not exists (Add new)
     
@@ -100,12 +110,11 @@ function fn_sync_user($user_id = 0, $access_token = '') {
         ]);
       
         update_user_meta($WP_UserID, '__salesforce_user_id', $user_id );
-        update_user_meta($WP_UserID, '__salesforce_profile_id', $ProfileId );
-        update_user_meta($WP_UserID, '__salesforce_user_meta', wp_json_encode($userData));
-        update_user_meta($WP_UserID, '__salesforce_access_token', $access_token);
-    
         update_user_meta($WP_UserID, 'salesforce_contact_id', $ContactId);
         update_user_meta($WP_UserID, '__salesforce_account_id', $AccountId);
+        update_user_meta($WP_UserID, '__salesforce_profile_id', $ProfileId);
+        update_user_meta($WP_UserID, '__salesforce_access_token', $access_token);
+        update_user_meta($WP_UserID, '__salesforce_user_meta', wp_json_encode($userData));
         update_user_meta($WP_UserID, '__salesforce_account_json', wp_json_encode($accountInfo));
     }
   
@@ -312,8 +321,10 @@ function sf_oauth_login() {
                             window.location.href = redirect_url;
                         }
                     }
+                    else {
+                        window.location.href = '/';
+                    }
                 </script><?php
-                die;
 
             }else{
                 ?><script>
@@ -347,6 +358,9 @@ add_action('wp_logout', function (){
             if (redirect_url) {
                 window.location.href = redirect_url;
             }
+        }
+        else {
+            window.location.href = '/';
         }
     </script><?php
     exit();

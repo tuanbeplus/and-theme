@@ -6,14 +6,6 @@
 function pp_salesforce_roles() {
   return apply_filters( 'pp/custom_roles', [
     [
-      'name' => 'PRIMARY_MEMBERS',
-      'label' => 'Primary Members',
-      'code' => '00e9q000000LrVSAA0', // salesforce profile ID
-      'capabilities' => [
-        'read' => true
-      ]
-    ],
-    [
       'name' => 'MEMBERS',
       'label' => 'Members',
       'code' => '00e9q000000Lqn7AAC', // salesforce profile ID
@@ -25,6 +17,14 @@ function pp_salesforce_roles() {
       'name' => 'NON_MEMBERS',
       'label' => 'Non Members',
       'code' => '00e9q000000LrVRAA0', // salesforce profile ID
+      'capabilities' => [
+        'read' => true
+      ]
+    ],
+    [
+      'name' => 'PRIMARY_MEMBERS',
+      'label' => 'Primary Members',
+      'code' => '00e9q000000LrVSAA0', // salesforce profile ID
       'capabilities' => [
         'read' => true
       ]
