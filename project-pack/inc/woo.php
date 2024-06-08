@@ -360,3 +360,12 @@ add_action( 'woocommerce_variation_header', function($variation, $loop) {
   }
   
 }, 20, 2 );
+
+// Hide the WooCommerce "product" post type from search results
+add_filter('register_post_type_args', 'pp_hide_woocommerce_products_from_search', 10, 2);
+function pp_hide_woocommerce_products_from_search($args, $post_type) {
+  if ($post_type === 'product') {
+    $args['exclude_from_search'] = true;
+  }
+  return $args;
+}
