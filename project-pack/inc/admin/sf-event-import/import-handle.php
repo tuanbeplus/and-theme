@@ -188,7 +188,7 @@ function ppsf_event_add_product_child($data, $productParentId, $prices = []) {
   }
 
   // Update Role base price from PriceBook2
-  // ppsf_update_role_base_price_product_variation($variation_id, $productParentId);
+  ppsf_update_role_base_price_product_variation($variation_id, $productParentId);
 
   // Update meta fields
   $parent_event_id = get_field('sf_event_id', $WpEventId);
@@ -218,6 +218,7 @@ function ppsf_update_role_base_price_product_variation($variation_id, $product_p
   $sf_product2_id = get_post_meta( $product_parent_id, '__sf_product_id', true );
 
   if (empty($sf_product2_id)) return;
+  if (empty($variation_id)) return;
 
   $role_based_list = get_field('__role-based_pricing', 'option');
 
@@ -225,9 +226,16 @@ function ppsf_update_role_base_price_product_variation($variation_id, $product_p
     foreach ($role_based_list as $role_base) {
       $role_name = $role_base['role']; 
       $pricebook2_id = $role_base['pricebook2'];
+      // Get UnitPrice
+      $unit_price = ppsf_get_unitprice_from_pricebook_entry($pricebook2_id, $sf_product2_id);
+      
+      // Members
+      if (!empty($role_name) && $role_name == 'MEMBERS') {
+        update_post_meta($variation_id, 'product_role_based_price_MEMBERS', $unit_price);
+      }
       // Primary Members
-      if (!empty($role_name) && $role_name != 'PRIMARY_MEMBERS') {
-        # code...
+      if (!empty($role_name) && $role_name == 'PRIMARY_MEMBERS') {
+        update_post_meta($variation_id, 'product_role_based_price_PRIMARY_MEMBERS', $unit_price);
       }
     }
   }
@@ -244,6 +252,10 @@ function ppsf_update_role_base_price_product_variation($variation_id, $product_p
  * 
  */
 function ppsf_get_unitprice_from_pricebook_entry($sf_pricebook2_id, $sf_product2_id) {
+
+  if (empty($sf_pricebook2_id)) return;
+  if (empty($sf_product2_id)) return;
+
   // Get PricebookEntry object
   $pricebook_entry = ppsft_get_PricebookEntry_by_Product2ID($sf_product2_id);
 
