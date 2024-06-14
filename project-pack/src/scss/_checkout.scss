@@ -659,7 +659,7 @@ body.__show-pp-popup-add-new-contact {
 
 .woocommerce {
   .simplify-embedded-payment-form {
-    margin: 24px auto;
+    margin: 40px auto 24px;
     padding: 0 12px;
     display: block;
     background-color: #fff;
@@ -675,6 +675,16 @@ body.__show-pp-popup-add-new-contact {
       background-color: #6e3685;
       color: #fff;
       opacity: 0.8;
+    }
+  }
+  ul.order_details {
+    li {
+      strong {
+        margin-top: 8px;
+        * {
+          font-family: "Avenir-Heavy";
+        }
+      }
     }
   }
 }
