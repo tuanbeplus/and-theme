@@ -535,6 +535,4 @@ function ppsf_set_product_category($product, $product_id, $args) {
   wp_set_object_terms($product_id, $catID, 'product_cat');
   pp_log('Message: Added product '. $product_id .' to category ' . $catName . '('. $catID .')');
 }
-/**
- * End add Category (Proccess import) 
- */
+// End add Category (Proccess import) 

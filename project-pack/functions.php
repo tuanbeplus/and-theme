@@ -14,6 +14,15 @@
 
 {
   /**
+   * Salesforce
+   */
+  require(PP_DIR . '/inc/salesforce-api.php');
+  require(PP_DIR . '/inc/sf-oauth-login.php');
+  require(PP_DIR . '/inc/admin/users-sf-sync.php');
+} 
+
+{
+  /**
    * Inc
    */
   require(PP_DIR . '/inc/admin/woo.php');
@@ -42,12 +51,3 @@
    */
   require(PP_DIR . '/inc/outlook-calendar/index.php');
 }
-
-{
-  /**
-   * Salesforce
-   */
-  require(PP_DIR . '/inc/salesforce-api.php');
-  require(PP_DIR . '/inc/sf-oauth-login.php');
-  require(PP_DIR . '/inc/admin/users-sf-sync.php');
-} 
