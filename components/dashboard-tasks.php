@@ -3,10 +3,8 @@
 <?php
 
 if( get_row_layout() == 'dashboard_tasks' ):
-
+    global $sf_org_data;
     $tasks_heading = get_sub_field('tasks_heading');
-    $response = getTasks();
-    $organisationData = getAccountMember();
     ?>
     <section class="dashboard tasks">
         <div class="container">
@@ -28,10 +26,10 @@ if( get_row_layout() == 'dashboard_tasks' ):
                     <div class="col-12 the-details">
                         <?php 
                             echo '<ul>
-                                    <li class="task '.($organisationData['tasks']['network'] ? 'completed' : '').'">Maintains an Employee Network</li>
-                                    <li class="task '.($organisationData['tasks']['review'] ? 'completed' : '').'">Recruitment Review</li>
-                                    <li class="task '.($organisationData['tasks']['workplace'] ? 'completed' : '').'">Workplace Adjustment Policy or Procedure</li>
-                                    <li class="task '.($organisationData['tasks']['action_plan'] ? 'completed' : '').'">Accessibility Action Plan in place</li>
+                                    <li class="task '.($sf_org_data['tasks']['network'] ? 'completed' : '').'">Maintains an Employee Network</li>
+                                    <li class="task '.($sf_org_data['tasks']['review'] ? 'completed' : '').'">Recruitment Review</li>
+                                    <li class="task '.($sf_org_data['tasks']['workplace'] ? 'completed' : '').'">Workplace Adjustment Policy or Procedure</li>
+                                    <li class="task '.($sf_org_data['tasks']['action_plan'] ? 'completed' : '').'">Accessibility Action Plan in place</li>
                                 </ul>' 
                             ?>
                     </div>

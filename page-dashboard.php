@@ -9,54 +9,28 @@ const GENERAL_MEMBER = '00e9q000000Lqn7AAC';
 const NONE_MEMBER = '00e9q000000LrVRAA0';
 const PRIMARY_MEMBER = '00e9q000000LrVSAA0';
 
-$organisationData = getAccountMember();
-$wp_user_id = get_current_user_id();
-$user_data = getUser($_COOKIE['userId']);
-$wp_user_meta_json = get_user_meta($wp_user_id, '__salesforce_user_meta', true);
-$wp_user_meta = json_decode($wp_user_meta_json, true);
+// Get member data
+$member_data = and_prepare_member_data_for_dashboard();
+$contact_id     = $member_data['ContactId'];
+$account_id     = $member_data['AccountId'];
+$user_profile   = $member_data['user_profile'];
+$user_data      = $member_data['user_data'];
+$sf_org_data    = $member_data['org_data'];
+$opportunities  = $member_data['opportunities'];
 
-// get WP User Role
-$wp_user_roles = get_userdata($wp_user_id)->roles ?? array();
+$first_name = $user_data['FirstName'] ?? '';
+$member_hours_remain = $sf_org_data['hours_remain'] ?? '';
 
-// get Salesforce Contact ID
-$contact_id = $wp_user_meta['ContactId'] ?? '';
-if (empty($contact_id)) {
-    $contact_id = $user_data->records[0]->ContactId;
-}
-// get Salesforce Account ID
-$account_id = $wp_user_meta['AccountId'] ?? '';
-if (empty($account_id)) {
-    $account_id = $user_data->records[0]->AccountId;
-}
-// get Salesforce member profile
-$user_profile = '';
-$is_member = $wp_user_meta['Members__c'] ?? false;
-$is_non_member = $wp_user_meta['Non_Members__c'] ?? false;
-$is_primary_member = $wp_user_meta['Primary_Members__c'] ?? false;
-
-if ($is_member == true || in_array('MEMBERS', $wp_user_roles)) {
-    $user_profile = 'MEMBERS';
-}
-elseif ($is_non_member == true || in_array('NON_MEMBERS', $wp_user_roles)) {
-    $user_profile = 'NON_MEMBERS';
-}
-elseif ($is_primary_member == true || in_array('PRIMARY_MEMBERS', $wp_user_roles)) {
-    $user_profile = 'PRIMARY_MEMBERS';
-}
-
-global $contact_id, $account_id, $user_profile;
+global $contact_id, $account_id, $user_profile, $sf_org_data, $opportunities;
 ?>
 
 <?php if(isset($_COOKIE['userId']) && is_user_logged_in()): ?>
     <div class="main-dashboard container">
         <div class="dashboard welcome">
             <div class="container">
-                <?php 
-                    $firstname = $user_data->records[0]->FirstName;
-                    echo '<h1>Welcome back, '.$firstname.'</h1>';
-                ?>
-                <?php if ($organisationData['hours_remain'] && $user_profile == 'PRIMARY_MEMBERS'): ?>
-                    <h3>You have <?php echo $organisationData['hours_remain']; ?> hours remaining</h3>
+                <h1><?php echo 'Welcome back, '. $first_name; ?></h1>
+                <?php if (!empty($member_hours_remain) && $user_profile == 'PRIMARY_MEMBERS'): ?>
+                    <h3>You have <?php echo $member_hours_remain ?> hours remaining</h3>
                 <?php endif; ?>
             </div>
         </div>

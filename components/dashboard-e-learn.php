@@ -2,20 +2,16 @@
 
 if( get_row_layout() == 'dashboard_e_learn' ):
 
-    global $contact_id, $account_id, $user_profile;
+    global $contact_id, $account_id, $user_profile, $sf_org_data, $opportunities;
 
     $e_learn_heading = get_sub_field('e_learn_heading');
     $e_learns_fields_title = get_sub_field('e_learns_fields_title');
     $e_learn_cta = get_sub_field('e_learn_cta');
-    $organisationData = getAccountMember();
-    $user_data = getUser($_COOKIE['userId']);
-    $opportunities = getOpportunity();
     $elearns_arr = array();
 
-    if (isset($opportunities->records)) {
-        foreach ($opportunities->records as $opportunity) {
+    if (!empty($opportunities)) {
+        foreach ($opportunities as $opportunity) {
             $elearns_by_opportunity_id = getElearnsByOpportunityId($opportunity->Id);
-
             if (isset($elearns_by_opportunity_id->records)) {
                 foreach ($elearns_by_opportunity_id->records as $elearn){
                     $elearns_arr[] = $elearn;
@@ -134,6 +130,7 @@ if( get_row_layout() == 'dashboard_e_learn' ):
                                 <div><span class="material-icons">arrow_forward</span></div>
                                 <?php echo $e_learn_cta['cta_text']; ?></a>
                             </a>
+                        </div>
                     </div>
                 </div>
             </div>

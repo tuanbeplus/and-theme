@@ -1,8 +1,6 @@
 <?php
-
 global $account_id;
 $user_id = $_COOKIE['userId'];
-
 // Get submissions survey from backend
 $all_submissions = get_user_submissions_exist($user_id, $account_id);
 
@@ -43,6 +41,7 @@ if( get_row_layout() == 'dashboard_submissions' && !empty($all_submissions) ):
                           ?>
                         </ul>
                     </div>
+                </div>
             </div>
         </div>
     </section>

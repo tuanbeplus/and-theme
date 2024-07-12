@@ -262,7 +262,7 @@ function sf_query_object_metadata($sql) {
  * get Salesforce object data by object name & ID
  * 
  */
-function sf_get_object_metadata($obj_name, $obj_id) {
+function sf_get_object_metadata($obj_name, $record_id) {
 
 	$sf_access_token = get_field('salesforce_api_access_token', 'option');
 	$sf_endpoint_url = get_field('salesforce_endpoint_url', 'option');
@@ -270,7 +270,7 @@ function sf_get_object_metadata($obj_name, $obj_id) {
 	$curl = curl_init();
 
 	curl_setopt_array($curl, array(
-		CURLOPT_URL => $sf_endpoint_url.'/services/data/'.$sf_api_ver.'/sobjects\/'. $obj_name .'/'. $obj_id,
+		CURLOPT_URL => $sf_endpoint_url.'/services/data/'.$sf_api_ver.'/sobjects\/'. $obj_name .'/'. $record_id,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => '',
 		CURLOPT_MAXREDIRS => 10,
@@ -449,9 +449,11 @@ function getContacts($contact_id = '')
   	return $response;
 }
 
-function getOpportunity()
+function getOpportunity($account_id='')
 {
-  	$account_id = getUser($_COOKIE['userId'])->records[0]->AccountId;
+	if (empty($account_id)) {
+		$account_id = getUser($_COOKIE['userId'])->records[0]->AccountId;
+	}
 
   	$sql = "SELECT FIELDS(ALL) 
 			FROM Opportunity 
@@ -540,30 +542,29 @@ function getOpportunityContact($contact_id='')
 	return $response;
 }
 
-function getAccountMember($account_id = null)
+function getAccountMember($account_id='')
 {
-  	$account_id = getUser($_COOKIE['userId'])->records[0]->AccountId;
-
-  	$sql = "SELECT FIELDS(ALL) FROM Account WHERE Id = '". $account_id ."'  LIMIT 200";
-
-	$response = sf_query_object_metadata($sql);
+	if (empty($account_id)) {
+		$account_id = getUser($_COOKIE['userId'])->records[0]->AccountId;
+	}
+	$org_data = sf_get_object_metadata('Account', $account_id);
 
 	return array(
-		'Id'  => $response->records[0]->Id,
-		'Name' => $response->records[0]->Name,
-		'manager' => $response->records[0]->OwnerId,
+		'Id'  	  => $org_data->Id ?? '',
+		'Name' 	  => $org_data->Name ?? '',
+		'manager' => $org_data->OwnerId ?? '',
 		'tasks' => array(
-			'network' => $response->records[0]->Maintains_an_Employee_Network__c,
-			'action_plan' => $response->records[0]->Accessibility_Action_Plan_in_place__c,
-			'workplace' => $response->records[0]->Workplace_Adjustment_Policy_or_Procedure__c,
-			'review' => $response->records[0]->Recruitment_Review__c
+			'network' 	  => $org_data->Maintains_an_Employee_Network__c ?? '',
+			'action_plan' => $org_data->Accessibility_Action_Plan_in_place__c ?? '',
+			'workplace'   => $org_data->Workplace_Adjustment_Policy_or_Procedure__c ?? '',
+			'review' 	  => $org_data->Recruitment_Review__c ?? '',
 		),
-		'manager_phone' => $response->records[0]->Organisation_Owner_Phone__c,
-		'manager_email' => $response->records[0]->Organisation_Owner_Email__c,
-		'hours_remain' => $response->records[0]->Memb_Hours_Remain_Org__c,
-		'renewal' => $response->records[0]->Membership_Renewal_Month__c,
-		'membership_level' => $response->records[0]->Membership_Level__c,
-		'membership_status' => $response->records[0]->Membership_Status__c,
+		'manager_phone' 	=> $org_data->Organisation_Owner_Phone__c ?? '',
+		'manager_email' 	=> $org_data->Organisation_Owner_Email__c ?? '',
+		'hours_remain'  	=> $org_data->Memb_Hours_Remain_Org__c ?? '',
+		'renewal' 			=> $org_data->Membership_Renewal_Month__c ?? '',
+		'membership_level'  => $org_data->Membership_Level__c ?? '',
+		'membership_status' => $org_data->Membership_Status__c ?? '',
 	);
 }
 
@@ -655,4 +656,62 @@ function get_elearn_modules_purchased($modules, $bundles)
 			echo '<span>DCR Program Bundle</span><span>, </span>';
 		}
 	}
+}
+
+/**
+ * Prepare data User, Organisation, Opportunities for Dashboard modules
+ * 
+ * @return array Array of Member data
+ * 
+ */
+function and_prepare_member_data_for_dashboard() {
+	// Get User ID
+	$sf_user_id = $_COOKIE['userId'];
+	$wp_user_id = get_current_user_id();
+	
+	// Get User Data
+	$user_data_obj = sf_get_object_metadata('User', $sf_user_id);
+	$user_data = json_decode(json_encode($user_data_obj), true);
+	if (empty($user_data)) {
+		$wp_user_meta_json = get_user_meta($wp_user_id, '__salesforce_user_meta', true);
+		$user_data = json_decode($wp_user_meta_json, true);
+	}
+	// Get Organisation Data
+	$org_data = getAccountMember($user_data['AccountId']);
+
+	// Get Org Opportunities
+	$opportunities = array();
+	$opp_response = getOpportunity($user_data['AccountId']);
+	if (isset($opp_response->records)) {
+		$opportunities = $opp_response->records;
+	}
+
+	// get WP User Role
+	$wp_user_roles = get_userdata($wp_user_id)->roles ?? array();
+
+	// get Salesforce member profile
+	$user_profile = '';
+	$is_member = $user_data['Members__c'] ?? false;
+	$is_non_member = $user_data['Non_Members__c'] ?? false;
+	$is_primary_member = $user_data['Primary_Members__c'] ?? false;
+
+	if ($is_member == true || in_array('MEMBERS', $wp_user_roles)) {
+		$user_profile = 'MEMBERS';
+	}
+	elseif ($is_non_member == true || in_array('NON_MEMBERS', $wp_user_roles)) {
+		$user_profile = 'NON_MEMBERS';
+	}
+	elseif ($is_primary_member == true || in_array('PRIMARY_MEMBERS', $wp_user_roles)) {
+		$user_profile = 'PRIMARY_MEMBERS';
+	}
+
+	return array(
+		'Id' 			=> $sf_user_id,
+		'ContactId' 	=> $user_data['ContactId'] ?? '',
+		'AccountId' 	=> $user_data['AccountId'] ?? '',
+		'user_profile' 	=> $user_profile,
+		'user_data' 	=> $user_data,
+		'org_data' 		=> $org_data,
+		'opportunities' => $opportunities,
+	);
 }

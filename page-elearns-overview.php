@@ -10,49 +10,18 @@ const GENERAL_MEMBER = '00e9q000000Lqn7AAC';
 const NONE_MEMBER = '00e9q000000LrVRAA0';
 const PRIMARY_MEMBER = '00e9q000000LrVSAA0';
 
-global $sf_user_id;
-$organisationData = getAccountMember();
+// Get member data
+$member_data = and_prepare_member_data_for_dashboard();
+$contact_id     = $member_data['ContactId'];
+$account_id     = $member_data['AccountId'];
+$user_profile   = $member_data['user_profile'];
+$sf_org_data    = $member_data['org_data'];
+$opportunities  = $member_data['opportunities'];
 
-$wp_user_id = get_current_user_id();
-$user_data = getUser($_COOKIE['userId']);
-$wp_user_meta_json = get_user_meta($wp_user_id, '__salesforce_user_meta', true);
-$wp_user_meta = json_decode($wp_user_meta_json, true);
-
-// get WP User Role
-$wp_user_roles = get_userdata($wp_user_id)->roles ?? array();
-
-// get Salesforce Contact ID
-$contact_id = $wp_user_meta['ContactId'] ?? '';
-if (empty($contact_id)) {
-    $contact_id = $user_data->records[0]->ContactId;
-}
-// get Salesforce Account ID
-$account_id = $wp_user_meta['AccountId'] ?? '';
-if (empty($account_id)) {
-    $account_id = $user_data->records[0]->AccountId;
-}
-// get Salesforce member profile
-$user_profile = '';
-$is_member = $wp_user_meta['Members__c'] ?? false;
-$is_non_member = $wp_user_meta['Non_Members__c'] ?? false;
-$is_primary_member = $wp_user_meta['Primary_Members__c'] ?? false;
-
-if ($is_member == true || in_array('MEMBERS', $wp_user_roles)) {
-    $user_profile = 'MEMBERS';
-}
-elseif ($is_non_member == true || in_array('NON_MEMBERS', $wp_user_roles)) {
-    $user_profile = 'NON_MEMBERS';
-}
-elseif ($is_primary_member == true || in_array('PRIMARY_MEMBERS', $wp_user_roles)) {
-    $user_profile = 'PRIMARY_MEMBERS';
-}
-
-$opportunities = getOpportunity();
 $elearns_arr = array();
-if (isset($opportunities->records)) {
-    foreach ($opportunities->records as $opportunity) {
+if (!empty($opportunities)) {
+    foreach ($opportunities as $opportunity) {
         $elearns_by_opportunity_id = getElearnsByOpportunityId($opportunity->Id);
-
         if (isset($elearns_by_opportunity_id->records)) {
             foreach ($elearns_by_opportunity_id->records as $elearn){
                 $elearns_arr[] = $elearn;
@@ -61,11 +30,10 @@ if (isset($opportunities->records)) {
     }
 }
 ?>
-
 <?php if($_COOKIE['userId']): ?>
     <!-- E-learn loading -->
     <div class="elearn-loading-wrapper container" style="">
-        <p class="loading-corprorate-name"><?php echo $organisationData['Name']; ?></p>
+        <p class="loading-corprorate-name"><?php echo $sf_org_data['Name']; ?></p>
         <img class="img-loading" src="/wp-content/themes/and-theme/assets/imgs/handshake_loading.png" alt="Handshake E-learn loading">
         <p class="loading-description">We're taking you to your e-learn lorem ipsum dolor</p>
     </div>
@@ -75,7 +43,7 @@ if (isset($opportunities->records)) {
         <div class="container" style="padding:0;">
             <div class="elearn-headline">
                 <div class="container">
-                    <h1 class="__title"><?php echo $organisationData['Name']; ?> eLearns overview</h1>
+                    <h1 class="__title"><?php echo $sf_org_data['Name']; ?> eLearns overview</h1>
                 </div>
                 <?php if( have_rows('page_builder') ): ?>
                     <?php while ( have_rows('page_builder') ) : the_row(); ?>

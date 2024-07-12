@@ -3,10 +3,9 @@
 <?php
 
 if( get_row_layout() == 'dashboard_relationship_manager' ):
-
+    global $sf_org_data;
     $relationship_manager_heading = get_sub_field('relationship_manager_heading');
-    $organisationData = getAccountMember();
-    $user_data = getUser($organisationData['manager'])->records[0]->Name;
+    $manager_name = getUser($sf_org_data['manager'])->records[0]->Name;
     ?>
     <section class="dashboard membership relationship-manager">
         <div class="container">
@@ -25,13 +24,13 @@ if( get_row_layout() == 'dashboard_relationship_manager' ):
                     <div class="col-12 header relationship-manager">
                         <div class="inside">
                             <p>Your relationship manager is:</p>
-                            <p class="manager-name"><?php echo $user_data; ?></p>
+                            <p class="manager-name"><?php echo $manager_name; ?></p>
                             <ul>
                                 <li>
-                                    <a href="tel:<?php echo $organisationData['manager_phone']; ?>"><?php echo $organisationData['manager_phone']; ?></a>
+                                    <a href="tel:<?php echo $sf_org_data['manager_phone']; ?>"><?php echo $sf_org_data['manager_phone']; ?></a>
                                 </li>
                                 <li>
-                                    <a href="mailto:<?php echo $organisationData['manager_email']; ?>">Contact your Relationship Manager</a>
+                                    <a href="mailto:<?php echo $sf_org_data['manager_email']; ?>">Contact your Relationship Manager</a>
                                 </li>
                             </ul>
                         </div>
