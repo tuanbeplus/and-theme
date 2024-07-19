@@ -4,7 +4,7 @@ $product   = wc_get_product( $product_id );
 $image_id  = $product->get_image_id();
 $image_url = wp_get_attachment_image_url( $image_id, 'large' );
 if (!$image_url) {
-    $image_url  = '/wp-content/uploads/woocommerce-placeholder-300x300.png';
+    $image_url  = AND_IMG_URI .'woo-product-placeholder-img.webp';
 }
 ?>
 <li class="product-item product">

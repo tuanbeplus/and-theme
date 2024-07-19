@@ -1,6 +1,9 @@
 <?php
 add_action( 'init', 'sf_get_object_data_from_salesforce', 10 );
 function sf_get_object_data_from_salesforce() {
+  /**
+   * Get messages from Events Object
+   */
   if(isset($_GET['action']) && $_GET['action'] == 'event-change') {
     
     // wp_remote_post('https://43220378982f26ae3cb65f4454b5273d.m.pipedream.net', [
@@ -43,9 +46,12 @@ function sf_get_object_data_from_salesforce() {
     ppsf_return_webhook();
   }
 
+  /**
+   * Get messages from Product2 Object
+   */
   if(isset($_GET['action']) && $_GET['action'] == 'product-change') {
     
-    // wp_remote_post('https://43220378982f26ae3cb65f4454b5273d.m.pipedream.net', [
+    // wp_remote_post('https://c0111d95b6b317c924030392870b96bd.m.pipedream.net', [
     //   'body'    => file_get_contents('php://input'),
     // ]);
 
@@ -94,12 +100,12 @@ function sf_get_object_data_from_salesforce() {
 
 function ppsf_return_webhook() {
   echo '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
-  <soapenv:Body>
-  <notificationsResponse xmlns="http://soap.sforce.com/2005/09/outbound">
-  <Ack>true</Ack>
-  </notificationsResponse>
-  </soapenv:Body>
-  </soapenv:Envelope>';
+    <soapenv:Body>
+    <notificationsResponse xmlns="http://soap.sforce.com/2005/09/outbound">
+    <Ack>true</Ack>
+    </notificationsResponse>
+    </soapenv:Body>
+    </soapenv:Envelope>';
   die;
 }
 
@@ -153,25 +159,5 @@ function and_update_role_base_prices_wc_product($sf_product_data) {
         }
       }
     }
-
-    $regular_price = get_post_meta( $product_id, '_regular_price', true );
-    $member_price = get_post_meta( $product_id, 'product_role_based_price_MEMBERS', true );
-    $primary_member_price = get_post_meta( $product_id, 'product_role_based_price_PRIMARY_MEMBERS', true );
-
-    $to = 'tom@ysnstudios.com';
-    $subject = 'Product Role Base Prices has been updated';
-    $message = 'Product Name: ' . get_the_title($product_id);
-    $message .= '<br>';
-    $message .= 'Woo Product ID: ' . $product_id;
-    $message .= '<br>';
-    $message .= 'SF Product2 ID: ' . $sf_product2_id;
-    $message .= '<br>';
-    $message .= '_regular_price: ' . $regular_price;
-    $message .= '<br>';
-    $message .= 'product_role_based_price_MEMBERS: ' . $member_price;
-    $message .= '<br>';
-    $message .= 'product_role_based_price_PRIMARY_MEMBERS: ' . $primary_member_price;
-    wp_mail($to, $subject, $message);
   }
 }
-
