@@ -95,7 +95,14 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$menuTitle = '<a href="/about-us">About us</a>';
 			}
 			$output .= "{$n}{$indent}<ul$class_names $labelledby role=\"menu\">$n";
-			$output .= "<div class='top-area'><div class='close'><img src='/wp-content/themes/and-theme/assets/imgs/the-close.svg' alt='Close'/><span>Close</span></div></div>";
+			$output .= "<div class='top-area'>
+							<div class='close'>
+								<button type='button'>
+									<img src='/wp-content/themes/and-theme/assets/imgs/the-close.svg' alt=''/>
+									<span>Close</span>
+								</button>
+							</div>
+						</div>";
 		}
 
 		/**
@@ -211,6 +218,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 				$atts['aria-expanded'] = 'false';
 				$atts['class']         = 'dropdown-toggle nav-link';
 				$atts['id']            = 'menu-item-dropdown-' . $item->ID;
+				$atts['role']          = 'button';
 			} else {
 				$atts['href'] = ! empty( $item->url ) ? $item->url : '#';
 				// For items in dropdowns use .dropdown-item instead of .nav-link.

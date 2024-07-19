@@ -221,8 +221,13 @@ jQuery.curCSS = function (element, prop, val) {
         let target = $(this.getAttribute('href'));
         if( target.length ) {
             e.preventDefault();
+            let offset = 24; 
+            let admin_bar = $('#wpadminbar');
+            if (admin_bar.length > 0) {
+                offset = offset + admin_bar.outerHeight();
+            }
             $('html, body').stop().animate({
-                scrollTop: target.offset().top - 24
+                scrollTop: target.offset().top - offset
             }, 300);
         }
     });
@@ -230,6 +235,19 @@ jQuery.curCSS = function (element, prop, val) {
     // Find all target blank anchor tag and add External link Icon
     $('.text-content-block a[target=_blank]').each(function() {
         $(this).append('<span class="external-link-icon" role="img" aria-label="External"></span>')
+    });
+
+    // Stop propagation Nav dropdown menu
+    $(document).on('click', '#main-nav ul li .dropdown-menu', function(e){
+        e.stopPropagation()
+    });
+
+    // Press SPACE to trigger Nav menu item
+    $('#main-nav ul li a[role=button]').on('keydown', function(event) {
+        if (event.key === ' ') { // Check if the pressed key is "space"
+            event.preventDefault(); // Prevent the default action
+            $(this).click(); // Trigger the click event
+        }
     });
 
 })(window, jQuery);

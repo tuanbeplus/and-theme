@@ -11,6 +11,7 @@ const PRIMARY_MEMBER = '00e9q000000LrVSAA0';
 
 // Get member data
 $member_data = and_prepare_member_data_for_dashboard();
+$user_id        = $member_data['Id'];
 $contact_id     = $member_data['ContactId'];
 $account_id     = $member_data['AccountId'];
 $user_profile   = $member_data['user_profile'];
@@ -21,7 +22,10 @@ $opportunities  = $member_data['opportunities'];
 $first_name = $user_data['FirstName'] ?? '';
 $member_hours_remain = $sf_org_data['hours_remain'] ?? '';
 
-global $contact_id, $account_id, $user_profile, $sf_org_data, $opportunities;
+$saturn_assessments_list = get_assessments_related_saturn_products();
+$assessments_accessible_list = get_assessments_on_dashboard($user_id, $account_id, $saturn_assessments_list);
+
+global $contact_id, $account_id, $user_profile, $sf_org_data, $opportunities, $assessments_accessible_list;
 ?>
 
 <?php if(isset($_COOKIE['userId']) && is_user_logged_in()): ?>

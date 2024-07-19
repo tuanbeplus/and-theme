@@ -23,13 +23,16 @@ if( get_row_layout() == 'dashboard_submissions' && !empty($all_submissions) ):
                         </div>
                     </div>
                     <div class="col-12 the-details">
-                        <ul>
+                        <ul class="submissions-list">
                           <?php
                             if ( !empty( $all_submissions ) ) {
                                 // Show submissions
                                 foreach ($all_submissions as $submission_id) { ?>
                                     <li>
-                                        <a href="<?php echo get_permalink($submission_id) ?>" target="_blank" style="color:#A22F2C;">
+                                        <a href="<?php echo get_permalink($submission_id) ?>" target="_blank">
+                                            <span class="external-link-icon" role="img" aria-label="External, opens in a new tab">
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                            </span>
                                             <?php echo get_the_title($submission_id); ?>
                                         </a>
                                     </li>

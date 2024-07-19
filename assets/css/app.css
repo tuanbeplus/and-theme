@@ -5154,21 +5154,27 @@ header {
             position: relative;
             z-index: 9999; }
             header ul li.dropdown .dropdown-menu .top-area .close {
+              width: fit-content;
               opacity: 1;
               float: none;
               text-shadow: none;
               margin: 0;
               padding: 0;
               cursor: pointer; }
-              header ul li.dropdown .dropdown-menu .top-area .close img {
+              header ul li.dropdown .dropdown-menu .top-area .close button {
                 margin-top: 20px;
+                font-family: "Avenir-Medium";
+                background-color: transparent;
+                border: none;
+              }
+              header ul li.dropdown .dropdown-menu .top-area .close img {
                 position: relative;
                 top: 1px; }
               header ul li.dropdown .dropdown-menu .top-area .close span {
                 font-size: 1.125rem;
                 color: #fff;
-                font-weight: normal;
-                margin-left: 14px; }
+                font-family: "Avenir-Medium";
+                margin-left: 8px; }
             header ul li.dropdown .dropdown-menu .top-area h3 {
               color: #fff;
               font-size: 36px;
@@ -5202,6 +5208,7 @@ header {
               position: absolute;
               left: 0px; }
             header ul li.dropdown .dropdown-menu li a {
+              width: fit-content;
               color: #fff;
               font-size: 1.125rem;
               font-family: "Avenir-Roman";

@@ -410,6 +410,7 @@ function and_custom_nav_menu_atts($atts, $item, $args) {
         // Add custom attribute and value 
         $atts['aria-expanded'] = 'false';
         $atts['aria-controls'] = 'genrenal-search';
+        $atts['role']          = 'button';
     }
     return $atts;
 }
