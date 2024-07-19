@@ -22,8 +22,10 @@ $opportunities  = $member_data['opportunities'];
 $first_name = $user_data['FirstName'] ?? '';
 $member_hours_remain = $sf_org_data['hours_remain'] ?? '';
 
+$assessments_for_all_users = get_assessments_accessible_all_users();
 $saturn_assessments_list = get_assessments_related_saturn_products();
-$assessments_accessible_list = get_assessments_on_dashboard($user_id, $account_id, $saturn_assessments_list);
+$merged_assessments = array_unique(array_merge($assessments_for_all_users, $saturn_assessments_list));
+$assessments_accessible_list = get_assessments_on_dashboard($user_id, $account_id, $merged_assessments);
 
 global $contact_id, $account_id, $user_profile, $sf_org_data, $opportunities, $assessments_accessible_list;
 ?>
