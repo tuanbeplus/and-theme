@@ -239,7 +239,14 @@ jQuery.curCSS = function (element, prop, val) {
 
     // Stop propagation Nav dropdown menu
     $(document).on('click', '#main-nav ul li .dropdown-menu', function(e){
-        e.stopPropagation()
+        e.stopPropagation();
+    });
+    // Click button Close to trigger Hide Dropdown menu
+    $(document).on('click', '#main-nav .dropdown-menu .btn-close-dropdown-menu', function(e){
+        e.preventDefault();
+        let main_nav_item = $(this).closest('#main-nav ul li.menu-item-has-children.show')
+        let btn_show_hide_dropdown = main_nav_item.find('a[data-toggle=dropdown][role=button]')
+        btn_show_hide_dropdown.click()
     });
 
     // Press SPACE to trigger Nav menu item

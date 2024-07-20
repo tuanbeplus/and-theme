@@ -97,7 +97,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$output .= "{$n}{$indent}<ul$class_names $labelledby role=\"menu\">$n";
 			$output .= "<div class='top-area'>
 							<div class='close'>
-								<button type='button'>
+								<button class='btn-close-dropdown-menu' type='button'>
 									<img src='". AND_IMG_URI ."the-close.svg' alt=''/>
 									<span>Close</span>
 								</button>
