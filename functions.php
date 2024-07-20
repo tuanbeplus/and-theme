@@ -549,7 +549,7 @@ function and_add_security_header() {
  */
 function and_wpseo_stylesheet_url($s)
 {
-    return str_replace('/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl', '/wp-content/themes/and-theme/yoast/css/and-sitemap.xsl', $s);
+    return str_replace('/wp-content/plugins/wordpress-seo/css/main-sitemap.xsl', get_template_directory_uri().'/yoast/css/and-sitemap.xsl', $s);
 }
 add_filter('wpseo_stylesheet_url', 'and_wpseo_stylesheet_url');
 

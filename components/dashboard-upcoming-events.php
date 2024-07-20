@@ -15,7 +15,7 @@ if( get_row_layout() == 'dashboard_upcoming_events' ):
                     <div class="inside">
                         <div class="row">
                             <div class="col-md-12 title">
-                                <img src="/wp-content/themes/and-theme/assets/imgs/upcoming-events.svg" />
+                                <img src="<?php echo AND_IMG_URI. 'upcoming-events.svg' ?>" />
                                 <h2><?php echo $upcoming_events_heading; ?></h2>
                             </div>
                         </div>

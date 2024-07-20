@@ -82,7 +82,7 @@ $program_id = get_field('stepping_into_program_id','options');
                     </div>
 
                     <div class="logo" style="visibility: hidden;">
-                        <img src="/wp-content/themes/and-theme/assets/imgs/examp.jpg" alt="Example"/>
+                        <img src="<?php echo AND_IMG_URI. 'examp.jpg' ?>" alt="Example"/>
                     </div>
 
                     <div class="title">

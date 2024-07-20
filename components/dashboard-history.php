@@ -13,7 +13,7 @@ if( get_row_layout() == 'dashboard_history' ):
                         <div class="inside">
                             <div class="row">
                                 <div class="col-md-6 title">
-                                    <img src="/wp-content/themes/and-theme/assets/imgs/tasks.svg" alt="history" />
+                                    <img src="<?php echo AND_IMG_URI. 'tasks.svg' ?>" alt="history" />
                                     <h2><?php echo $history_heading; ?></h2>
                                 </div>
                             </div>

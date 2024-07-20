@@ -98,7 +98,7 @@ if ( ! class_exists( 'WP_Bootstrap_Navwalker' ) ) {
 			$output .= "<div class='top-area'>
 							<div class='close'>
 								<button type='button'>
-									<img src='/wp-content/themes/and-theme/assets/imgs/the-close.svg' alt=''/>
+									<img src='". AND_IMG_URI ."the-close.svg' alt=''/>
 									<span>Close</span>
 								</button>
 							</div>

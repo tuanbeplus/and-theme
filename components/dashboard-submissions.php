@@ -16,7 +16,7 @@ if( get_row_layout() == 'dashboard_submissions' && !empty($all_submissions) ):
                         <div class="inside">
                             <div class="row">
                                 <div class="col-md-6 title">
-                                    <img src="/wp-content/themes/and-theme/assets/imgs/tasks.svg" alt="Submissions"/>
+                                    <img src="<?php echo AND_IMG_URI. 'tasks.svg' ?>" alt="Submissions"/>
                                     <h2><?php echo $submissions_heading; ?></h2>
                                 </div>
                             </div>

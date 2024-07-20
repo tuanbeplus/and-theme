@@ -31,7 +31,7 @@ if( get_row_layout() == 'dashboard_e_learn' ):
                         <div class="inside">
                             <div class="row">
                                 <div class="col-md-6 title">
-                                    <img src="/wp-content/themes/and-theme/assets/imgs/tasks.svg" alt="e-learn"/>
+                                    <img src="<?php echo AND_IMG_URI. 'tasks.svg' ?>" alt="e-learn"/>
                                     <h2><?php echo $e_learn_heading; ?></h2>
                                 </div>
                             </div>

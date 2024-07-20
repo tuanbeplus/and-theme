@@ -49,7 +49,7 @@ get_header();
                   $link_value = get_sub_field('bt_link');
                   // Do something...
                   ?>
-                  <li class="limk-item"><a href="<?php echo $link_value; ?>"><img src="/wp-content/themes/and-theme/assets/imgs/igon.jpg" alt="Facebook" /><?php echo $name_value; ?></a></li>
+                  <li class="limk-item"><a href="<?php echo $link_value; ?>"><img src="<?php echo AND_IMG_URI. 'igon.jpg' ?>" alt="Facebook" /><?php echo $name_value; ?></a></li>
                   <?php
 
               // End loop.

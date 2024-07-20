@@ -5966,8 +5966,9 @@ blockquote {
   border-color: #000 !important; }
 
 .current-opportunities .search .button {
+  color: transparent;
   background: url("/wp-content/themes/and-theme/assets/imgs/chev.svg") no-repeat;
-  background-position: 10px 16px; }
+  background-position: 6px 18px; }
   .current-opportunities .search .button:after {
     display: none; }
 

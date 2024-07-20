@@ -29,7 +29,7 @@ if ( get_row_layout() == 'dashboard_index' && !empty($index_assessments_list) ) 
                         <div class="inside">
                             <div class="row">
                                 <div class="col-md-6 title">
-                                    <img src="/wp-content/themes/and-theme/assets/imgs/DCR Icon.svg" alt="Index"/>
+                                    <img src="<?php echo AND_IMG_URI. 'DCR Icon.svg' ?>" alt="Index"/>
                                     <h2><?php echo $index_heading; ?></h2>
                                 </div>
                             </div>
