@@ -2008,13 +2008,11 @@ button#place_order:hover {
   color: #717171;
 }
 .add-attendees-container input[type=text]:-moz-read-only, .add-attendees-container input[type=email]:-moz-read-only {
-  opacity: 0.6;
-  background: #f4f4f4;
+  background: #f6f6f6;
 }
 .add-attendees-container input[type=text]:read-only,
 .add-attendees-container input[type=email]:read-only {
-  opacity: 0.6;
-  background: #f4f4f4;
+  background: #f6f6f6;
 }
 .add-attendees-container .btn-submit {
   padding: 12px 24px;
@@ -2049,6 +2047,13 @@ button#place_order:hover {
   background-color: #f9f9f9;
 }
 
+.add-attendees-table td:first-of-type {
+  padding-right: 0.5em !important;
+  width: auto !important;
+}
+.add-attendees-table td:last-of-type {
+  width: auto !important;
+}
 .add-attendees-table .__remove-item {
   text-wrap: nowrap;
   color: var(--accent-color);
@@ -2107,6 +2112,9 @@ button#place_order:hover {
 
 .footer-form {
   display: flex;
+}
+.footer-form .message * {
+  font-size: 1rem;
 }
 .footer-form .buttons {
   margin-left: auto;

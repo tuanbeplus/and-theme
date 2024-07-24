@@ -369,3 +369,55 @@ function pp_hide_woocommerce_products_from_search($args, $post_type) {
   }
   return $args;
 }
+
+/**
+ * Update billing data in user meta before checkout page
+ */
+function pp_update_billing_data_before_checkout( $checkout ) {
+  // Get the current user
+  $user_id = get_current_user_id();
+  if ( $user_id > 0 ) {
+    $sf_user_id = get_user_meta($user_id, '__salesforce_user_id', true);
+    $sf_account_id = get_user_meta($user_id, '__salesforce_account_id', true);
+
+    $sf_user_data = ppsf_get_user($sf_user_id) ?? array();
+    $sf_org_data = ppsf_get_account($sf_account_id) ?? array();
+
+    if (!empty($sf_user_data)) {
+      $first_name = $sf_user_data['FirstName'] ?? '';
+      $last_name = $sf_user_data['LastName'] ?? '';
+      // Update billing First Name
+      if (!empty($first_name)) {
+        $updated = update_user_meta( $user_id, 'billing_first_name', $first_name );
+      }
+      // Update billing Last Name
+      if (!empty($last_name)) {
+        $updated = update_user_meta( $user_id, 'billing_last_name', $last_name );
+      }
+    }
+    if (!empty($sf_org_data)) {
+      $org_name = $sf_org_data['Name'] ?? '';
+      // Update billing Company Name
+      if (!empty($org_name)) {
+        $updated = update_user_meta( $user_id, 'billing_company', $org_name );
+      }
+    }
+  }
+}
+add_action( 'woocommerce_checkout_init', 'pp_update_billing_data_before_checkout' );
+
+/**
+ * Customize Billing details form fields on Checkout page
+ */
+function pp_custom_woocommerce_checkout_fields( $fields ) {
+  // Change the fields
+  $fields['billing']['billing_company']['label'] = 'Company (Organisation Name)';
+  $fields['billing']['billing_company']['required'] = true; // Make it required to remove "(optional)"
+  $fields['billing']['billing_first_name']['custom_attributes'] = array('readonly' => 'readonly');
+  $fields['billing']['billing_last_name']['custom_attributes'] = array('readonly' => 'readonly');
+  $fields['billing']['billing_company']['custom_attributes'] = array('readonly' => 'readonly');
+
+  return $fields;
+}
+add_filter( 'woocommerce_checkout_fields' , 'pp_custom_woocommerce_checkout_fields' );
+

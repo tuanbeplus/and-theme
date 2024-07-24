@@ -126,10 +126,13 @@ if (empty($event_variations)) return;
       </div>
       <?php } ?>
       <div class="footer-form">
+        <div class="message">
+          <p>Please click save to add the attendees.</p>
+        </div>
         <div class="buttons">
           <input name="order_id" type="hidden" value="<?php echo $order_id; ?>" />
           <button type="submit" class="pp-button btn-submit"><?php _e('Save Attendees', 'pp') ?></button>
-          <!-- <button type="button" class="pp-button btn-next-step btn-not-active"><?php _e('Next Step', 'pp') ?></button> -->
+          <!-- <button type="button" class="pp-button btn-next-step btn-not-active">Next Step</button> -->
         </div>
       </div>
     </form>

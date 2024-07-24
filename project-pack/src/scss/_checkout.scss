@@ -406,8 +406,7 @@ button#place_order {
     }
 
     &:read-only {
-      opacity: .6;
-      background: #f4f4f4;
+      background: #f6f6f6;
     }
   }
   .btn-submit {
@@ -452,6 +451,14 @@ button#place_order {
 }
 
 .add-attendees-table {
+
+  td:first-of-type {
+    padding-right: 0.5em!important;
+    width: auto!important;
+  }
+  td:last-of-type {
+    width: auto!important;
+  }
 
   .__remove-item {
     text-wrap: nowrap;
@@ -521,7 +528,9 @@ button#place_order {
 
 .footer-form {
   display: flex;
-
+  .message *{
+    font-size: 1rem;
+  }
   .buttons {
     margin-left: auto;
     display: flex;

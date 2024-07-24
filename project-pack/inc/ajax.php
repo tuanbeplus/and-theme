@@ -281,6 +281,7 @@ function pp_ajax_save_attendees_to_order() {
     if(!isset($_POST['contact_id'][$item_key])) continue;
     
     $course_information = wc_get_order_item_meta($item_key, 'course_information', true);
+
     $eventID = $course_information['event_parent']['sf_event_id'];
 
     $c_IDs = $_POST['contact_id'][$item_key];
@@ -319,7 +320,7 @@ function pp_ajax_save_attendees_to_order() {
 
   pp_save_attendees_to_order($order_id, $__SF_CONTACT_FULL);
   pp_log('----------------------------- '. "\n" . 'Event Data: ' . wp_json_encode($__SF_CONTACT_FULL) . "\n" . '-----------------------------');
-  
+
   wp_send_json([
     'success' => true,
   ]);
