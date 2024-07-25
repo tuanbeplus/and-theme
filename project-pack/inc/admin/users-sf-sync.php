@@ -97,16 +97,14 @@ function pp_ajax_request_sf_user_data() {
     'Primary_Members__c' => $Primary_Members__c,
   ) = $response ;
 
-  // Customize Salesforce User's ProfileID
+  // Determine the appropriate ProfileId based on membership status
   $ProfileId = '';
-  if ($Members__c == true) {
-    $ProfileId = '00e9q000000Lqn7AAC';
-  }
-  elseif ($Non_Members__c == true) {
-    $ProfileId = '00e9q000000LrVRAA0';
-  }
-  elseif ($Primary_Members__c == true) {
-    $ProfileId = '00e9q000000LrVSAA0';
+  if ($Members__c) {
+    $ProfileId = get_field('members_id', 'option');
+  } elseif ($Primary_Members__c) {
+    $ProfileId = get_field('primary_members_id', 'option');
+  } elseif ($Non_Members__c) {
+    $ProfileId = get_field('non_members_id', 'option');
   }
 
   $accountInfo = ppsf_get_account($AccountId);
