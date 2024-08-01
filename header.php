@@ -17,9 +17,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="<?php echo AND_IMG_URI.'apple-touch-icon-1.png'; ?>">
-    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo AND_IMG_URI.'favicon-32x32-1.png'; ?>">
-    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo AND_IMG_URI.'favicon-16x16-1.png'; ?>">
 <?php wp_head();
 
 $colourScheme = get_field('colour_scheme');
