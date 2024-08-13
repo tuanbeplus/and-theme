@@ -99,9 +99,6 @@ function fn_sync_user($user_id = 0, $access_token = '') {
         // User does not exist, create a new user
         $WP_UserID = wp_create_user($Username, wp_generate_password(), $Email);
 
-        // Update user role based on ProfileId
-        fn_set_role_by_profileid($WP_UserID, $ProfileId);
-
         // Update user information
         wp_update_user([
             'ID' => $WP_UserID,
@@ -134,6 +131,9 @@ function fn_sync_user($user_id = 0, $access_token = '') {
     update_user_meta($WP_UserID, '__salesforce_access_token', $access_token);
     update_user_meta($WP_UserID, '__salesforce_user_meta', wp_json_encode($userData));
     update_user_meta($WP_UserID, '__salesforce_account_json', wp_json_encode($accountInfo));
+
+    // Update user role based on ProfileId
+    fn_set_role_by_profileid($WP_UserID, $ProfileId);
 
     // Log the user in
     wp_set_current_user($WP_UserID); 
