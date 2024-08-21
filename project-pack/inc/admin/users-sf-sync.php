@@ -109,6 +109,11 @@ function pp_ajax_request_sf_user_data() {
 
   $accountInfo = ppsf_get_account($AccountId);
 
+  // Change Account data to handle error
+  if (!empty($accountInfo)) {
+    $accountInfo['Bread_Winner__BW_Account_Status__c'] = 'dev_changed_this_status';
+  }
+
   $wpuid = (int) $_POST['wpuid'];
   
   # Update user name

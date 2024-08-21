@@ -83,6 +83,11 @@ function fn_sync_user($user_id = 0, $access_token = '') {
     $WP_UserID = fn_wp_user_exists($Email);
     $accountInfo = ppsf_get_account($AccountId);
 
+    // Change Account data to handle error
+    if (!empty($accountInfo)) {
+        $accountInfo['Bread_Winner__BW_Account_Status__c'] = 'dev_changed_this_status';
+    }
+
     if ($WP_UserID !== false) {
         // User exists, ensure Salesforce user ID is updated
         if (!metadata_exists('user', $WP_UserID, '__salesforce_user_id')) {
