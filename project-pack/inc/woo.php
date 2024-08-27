@@ -421,3 +421,15 @@ function pp_custom_woocommerce_checkout_fields( $fields ) {
 }
 add_filter( 'woocommerce_checkout_fields' , 'pp_custom_woocommerce_checkout_fields' );
 
+
+function pp_custom_woo_thankyou_order_received($order_id) {
+  // Get shop landing page link
+  $shop_landing_page = get_field('shop_landing_page', 'option');
+  $shop_landing_page_link = !empty($shop_landing_page) ? $shop_landing_page : '/our-learning-solutions';
+  // Add button 
+  echo '<a id="btn-back-to-shop" href="'. $shop_landing_page_link .'">
+          Back to Learning Solutions
+        </a>';
+}
+add_action('woocommerce_before_thankyou', 'pp_custom_woo_thankyou_order_received', 10, 1);
+

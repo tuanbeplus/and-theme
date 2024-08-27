@@ -1,7 +1,7 @@
 .woocommerce-order-received {
   
   .woocommerce-thankyou-order-received {
-    margin-bottom: 1rem;
+    margin-bottom: 30px;
   }
 
   .woocommerce-order-details__title,
@@ -13,6 +13,29 @@
   address {
     padding: 1rem !important;
     line-height: 1.5rem;
+  }
+
+  #btn-back-to-shop {
+    float: right;
+    position: relative;
+    top: -10px;
+    padding: 10px 22px;
+    color: white;
+    border-radius: 1px;
+    font-size: 1rem;
+    font-family: "Avenir-Medium";
+    background: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    &:hover {
+      text-decoration: none;
+      opacity: 0.8;
+    }
+  }
+
+  @media(max-width: 767px) {
+    .woocommerce-order {
+      margin-top: 24px;
+    }
   }
 }
 
@@ -47,13 +70,13 @@ p.order-again {
   text-align: right;
 
   a.button {
-    padding: 12px 24px;
+    padding: 10px 22px;
     color: white;
     border-radius: 1px;
     font-size: 16px;
     font-family: "Avenir-Medium";
     background: var(--accent-color);
-
+    border: 2px solid var(--accent-color);
     &:hover {
       opacity: .8;
       background: var(--accent-color);

@@ -4,10 +4,10 @@
 */
 get_header();
 
-// Profile member
-const GENERAL_MEMBER = '00e9q000000Lqn7AAC';
-const NONE_MEMBER = '00e9q000000LrVRAA0';
-const PRIMARY_MEMBER = '00e9q000000LrVSAA0';
+// Profile Members
+const MEMBERS_ID = '00e9q000000Lqn7AAC';
+const PRIMARY_MEMBERS_ID = '00e9q000000LrVSAA0';
+const NON_MEMBERS_ID = '00e9q000000LrVRAA0';
 
 // Get member data
 $member_data = and_prepare_member_data_for_dashboard();

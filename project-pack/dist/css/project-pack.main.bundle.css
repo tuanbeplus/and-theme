@@ -2254,7 +2254,7 @@ body.__show-pp-popup-add-new-contact .pp-popup-add-new-contact {
 }
 
 .woocommerce-order-received .woocommerce-thankyou-order-received {
-  margin-bottom: 1rem;
+  margin-bottom: 30px;
 }
 .woocommerce-order-received .woocommerce-order-details__title,
 .woocommerce-order-received .woocommerce-column__title {
@@ -2264,6 +2264,27 @@ body.__show-pp-popup-add-new-contact .pp-popup-add-new-contact {
 .woocommerce-order-received address {
   padding: 1rem !important;
   line-height: 1.5rem;
+}
+.woocommerce-order-received #btn-back-to-shop {
+  float: right;
+  position: relative;
+  top: -10px;
+  padding: 10px 22px;
+  color: white;
+  border-radius: 1px;
+  font-size: 1rem;
+  font-family: "Avenir-Medium";
+  background: var(--accent-color);
+  border: 2px solid var(--accent-color);
+}
+.woocommerce-order-received #btn-back-to-shop:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}
+@media (max-width: 767px) {
+  .woocommerce-order-received .woocommerce-order {
+    margin-top: 24px;
+  }
 }
 
 ul.woocommerce-thankyou-order-details {
@@ -2291,12 +2312,13 @@ p.order-again {
   text-align: right;
 }
 p.order-again a.button {
-  padding: 12px 24px;
+  padding: 10px 22px;
   color: white;
   border-radius: 1px;
   font-size: 16px;
   font-family: "Avenir-Medium";
   background: var(--accent-color);
+  border: 2px solid var(--accent-color);
 }
 p.order-again a.button:hover {
   opacity: 0.8;
