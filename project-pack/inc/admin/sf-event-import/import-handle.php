@@ -457,6 +457,7 @@ function ppsf_event_validate_products_import_exists() {
   $products = get_posts([
     'post_type' => 'product',  
     'post_status' => 'any',
+    'posts_per_page' => -1,
     'meta_query' => [
       [
         'key' => '__sf_product_id', // meta key name here
