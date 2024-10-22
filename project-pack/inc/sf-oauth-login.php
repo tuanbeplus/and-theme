@@ -1,6 +1,28 @@
 <?php
-function fn_wp_user_exists($email = '') {
-    return email_exists($email);
+/**
+ * Get WP User ID by Salesforce User ID.
+ *
+ * @param string $sf_user_id The Salesforce user ID.
+ * 
+ * @return int|false The user ID on success, false on failure.
+ * 
+ */
+function fn_wp_user_exists($sf_user_id = '') {
+    // Query users based on the meta key __salesforce_user_id
+    $wp_users = get_users(array(
+        'meta_key'   => '__salesforce_user_id',
+        'meta_value' => $sf_user_id,
+        'number'     => 1, // Limit to 1 result for efficiency
+        'fields'     => 'ID', // Only retrieve user IDs for efficiency
+    ));
+
+    // Check if any user is found and return the user ID or false
+    if (!empty($wp_users)) {
+        return $wp_users[0]; // Return the user ID
+    }
+	else {
+		return false; // User does not exist
+	}
 }
   
 function fn_salesforce_access_token() {
@@ -43,12 +65,12 @@ function fn_update_customer_billing($userId, $args = []) {
 /**
  * Sync Salesforce User to WordPress
  *
- * @param int $user_id The Salesforce user ID.
+ * @param int $sf_user_id The Salesforce user ID.
  * @param string $access_token The Salesforce access token.
  */
-function fn_sync_user($user_id = 0, $access_token = '') {
+function fn_sync_user($sf_user_id = 0, $access_token = '') {
     // Retrieve Salesforce user data
-    $userData = fn_get_salesforce_user($user_id);
+    $userData = fn_get_salesforce_user($sf_user_id);
 
     // Extract relevant data from the user data array
     $Username           = $userData['Username'];
@@ -80,7 +102,7 @@ function fn_sync_user($user_id = 0, $access_token = '') {
     }
 
     // Check if the user already exists in WordPress
-    $WP_UserID = fn_wp_user_exists($Email);
+    $WP_UserID = fn_wp_user_exists($sf_user_id);
     $accountInfo = ppsf_get_account($AccountId);
 
     // Change Account data to handle error
@@ -89,9 +111,16 @@ function fn_sync_user($user_id = 0, $access_token = '') {
     }
 
     if ($WP_UserID !== false) {
+        // Update user information
+        wp_update_user([
+            'ID' => $WP_UserID,
+            'first_name' => $FirstName,
+            'last_name' => $LastName,
+            'user_email' => $Email,
+        ]);
         // User exists, ensure Salesforce user ID is updated
         if (!metadata_exists('user', $WP_UserID, '__salesforce_user_id')) {
-            update_user_meta($WP_UserID, '__salesforce_user_id', $user_id);
+            update_user_meta($WP_UserID, '__salesforce_user_id', $sf_user_id);
         }
         // Update billing information
         fn_update_customer_billing($WP_UserID, [
@@ -112,7 +141,7 @@ function fn_sync_user($user_id = 0, $access_token = '') {
         ]);
 
         // Update user metadata
-        update_user_meta($WP_UserID, '__salesforce_user_id', $user_id);
+        update_user_meta($WP_UserID, '__salesforce_user_id', $sf_user_id);
 
         // Update billing information
         fn_update_customer_billing($WP_UserID, [

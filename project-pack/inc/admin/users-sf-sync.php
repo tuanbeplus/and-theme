@@ -122,6 +122,7 @@ function pp_ajax_request_sf_user_data() {
     'first_name' => $FirstName,
     'last_name' => $LastName,
     'display_name' => $FirstName . ' ' . $LastName,
+    'user_email' => $Email,
   ]);
 
   # Update user meta
