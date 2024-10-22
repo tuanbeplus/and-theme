@@ -432,3 +432,32 @@ function and_refresh_sf_access_token_once_per_day() {
 }
 add_action('init', 'and_refresh_sf_access_token_once_per_day');
 
+/**
+ * Create an Apple Remote Management JSON file and write data to it.
+ */
+function and_create_apple_remote_management_file() {
+    // Define the path to the .well-known directory
+    $upload_dir = wp_upload_dir(); // Gets the WordPress uploads directory
+    $well_known_dir = ABSPATH . '.well-known'; // Define the .well-known directory in your root
+
+    // Ensure the .well-known directory exists
+    if (!file_exists($well_known_dir)) {
+        // Create the directory if it doesn't exist
+        wp_mkdir_p($well_known_dir);
+    }
+    // Define the file path
+    $file_path = $well_known_dir . '/com.apple.remotemanagement';
+    // Get the data to write to the file (from ACF option, for example)
+    $json_data = get_field('apple_remote_management_json', 'option');
+
+    // If the data exists, create and write the file
+    if (!empty($json_data)) {
+        // Write the JSON data to the file
+        file_put_contents($file_path, $json_data);
+    } else {
+        // Handle the case where there is no data
+        file_put_contents($file_path, json_encode(array('message' => 'No data found')));
+    }
+}
+add_action('init', 'and_create_apple_remote_management_file');
+
