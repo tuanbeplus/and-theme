@@ -433,27 +433,36 @@ function and_refresh_sf_access_token_once_per_day() {
 add_action('init', 'and_refresh_sf_access_token_once_per_day');
 
 /**
- * Create an Apple Remote Management JSON data.
+ * Create and send Apple Remote Management JSON data.
  */
 function and_send_apple_remote_management_json() {
-    // Check for a specific query variable or custom URL
-    if ($_SERVER['REQUEST_URI'] == '/.well-known/com.apple.remotemanagement') {
-        // Custom Content Type
+    // Check if the request is for the correct path
+    $current_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    
+    // Match the exact URI to prevent unnecessary processing
+    if (strpos($current_uri, '/.well-known/com.apple.remotemanagement') === 0) {
+        
+        // Set the content type to JSON
         header('Content-Type: application/json');
+        
+        // Ensure the HTTP status is 200 OK
+        status_header(200);
 
-        // Get the data to write to the file (from ACF option, for example)
+        // Retrieve the JSON data from ACF (or another source)
         $json_data = get_field('apple_remote_management_json', 'option');
 
-        // If the data exists, create and write the file
+        // Check if the data exists and is not empty
         if (!empty($json_data)) {
-            // Write the JSON data to the file
+            // Output the JSON data (already sanitized by ACF)
             echo $json_data;
         } else {
-            // Handle the case where there is no data
+            // Return a default message in case of no data
             echo json_encode(array('message' => 'No data found'));
         }
-        exit; // Stop further processing
+
+        // Stop further execution of WordPress
+        exit;
     }
 }
-add_action('wp', 'and_send_apple_remote_management_json');
+add_action('template_redirect', 'and_send_apple_remote_management_json');
 
