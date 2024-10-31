@@ -90,3 +90,59 @@ function ppwc_get_event_data_by_product_variation_id($variation_id) {
     'event_child' => $wp_event_child_id ? pp_get_event_data_by_id((int) $wp_event_child_id) : '',
   ];
 }
+
+// Added by Tap
+function ppwc_get_tax_rates_for_gst() {
+  // Get all tax rates for the "Standard" tax class
+  $tax_rates = WC_Tax::get_rates_for_tax_class(''); // Leave empty for "Standard" tax rates
+
+  // Get tax rates for GST
+  $gst_rate = 0;
+  foreach ($tax_rates as $rate_id => $rate) {
+    if ( $rate->tax_rate_name == 'GST' ) {
+      $gst_rate = (float)$rate->tax_rate;
+    } 
+  }
+  return $gst_rate;
+}
+
+// Added by Tap
+function ppwc_show_gst_price($gst_rate, $p_price, $only_value = false) {
+  $gst_price_html = '';
+  if ( $gst_rate > 0 ) {
+    $gst_price = wc_price( round((float)$p_price * $gst_rate / 100, 1) );
+    if ($only_value ) {
+      $gst_price_html = $gst_price;
+    } else {
+      $gst_price_html = '(GST: '.$gst_price.')';
+    }
+  }
+  return $gst_price_html;
+}
+
+// Added by Tap
+add_action( 'and_widget_shopping_cart_total_tax', 'ppwc_display_total_tax_in_cart' );
+function ppwc_display_total_tax_in_cart() {
+  if ( wc_tax_enabled() && ! WC()->cart->display_prices_including_tax() ) {
+    $taxable_address = WC()->customer->get_taxable_address();
+    $estimated_text  = '';
+
+    if ( WC()->customer->is_customer_outside_base() && ! WC()->customer->has_calculated_shipping() ) {
+      $estimated_text = sprintf( ' <small>' . esc_html__( '(estimated for %s)', 'woocommerce' ) . '</small>', WC()->countries->estimated_for_prefix( $taxable_address[0] ) . WC()->countries->countries[ $taxable_address[0] ] );
+    }
+
+    if ( 'itemized' === get_option( 'woocommerce_tax_total_display' ) ) {
+      foreach ( WC()->cart->get_tax_totals() as $code => $tax ) { 
+        ?>
+          <strong><?php echo esc_html( $tax->label ) . $estimated_text; ?>:</strong>
+          <span class="woocommerce-Price-amount amount"><?php echo wp_kses_post( $tax->formatted_amount ); ?></span>
+        <?php
+      }
+    } else {
+      ?>
+        <strong><?php echo esc_html( WC()->countries->tax_or_vat() ) . $estimated_text; ?></strong>
+        <span class="woocommerce-Price-amount amount"><?php wc_cart_totals_taxes_total_html(); ?></span>
+      <?php
+    }
+  }
+}

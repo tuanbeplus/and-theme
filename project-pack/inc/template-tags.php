@@ -254,10 +254,32 @@ function pp_product_single_widget_on_this_page_tag($product) {
 }
 
 function pp_product_single_widget_buy_tag($product) {
+  $gst_price_html = '';
+  $gst_rate = ppwc_get_tax_rates_for_gst();
+  if ( $gst_rate > 0 ) {
+      $p_price = '';
+      if ( $product->is_type('variable') ) {
+          $available_variations = $product->get_available_variations();
+          if(isset($available_variations[0])) {
+              $first_variation = $available_variations[0];
+              if ( $first_variation ) $p_price = $first_variation['display_price'];
+          }
+      } else {
+          $p_price = $product->get_price();
+      }
+      if ( $p_price ) {
+          $gst_price_html = ppwc_show_gst_price($gst_rate, $p_price, true);
+      }
+  }
+
   $buyItems = apply_filters( 'pp/product_single_buy_items', [
     'product_price' => [
       'label' => __('Price:', 'pp'),
       'value' => $product->get_price_html(),
+    ],
+    'product_gst_price' => [
+      'label' => __('GST:', 'pp'),
+      'value' => $gst_price_html,
     ]
   ], $product );
   ?>
@@ -336,7 +358,6 @@ function pp_product_variable_choose_options_tag($product) {
   }
   
   $variations = $product->get_available_variations();
-  // echo '<pre>'; print_r($variations); echo '</pre>';
   if(!$variations || count($variations) <= 0) return;
   ?>
   <div id="PRODUCT_BLOCK_CONTENT_CHOOSE_OPTIONS" class="pp__block-content product-variable-options">
@@ -352,15 +373,19 @@ function pp_product_variable_choose_options_tag($product) {
         data-variations='<?php echo esc_attr(json_encode($variations)); ?>'>
         <div class="options">
           <?php 
+            $gst_rate = ppwc_get_tax_rates_for_gst();
+
             $allEventData = array();
             foreach($variations as $_index => $item) {
               $product_variation = new WC_Product_Variation($item['variation_id']);
+
               // echo $product_variation->get_price_html();
               $eventData = ppwc_get_event_data_by_product_variation_id($item['variation_id']);
-              $eventData['price_html']   = $item['price_html'];
-              $eventData['is_in_stock']  = $item['is_in_stock'];
-              $eventData['attributes']   = $item['attributes'];
-              $eventData['variation_id'] = $item['variation_id']; 
+              $eventData['display_price'] = ppwc_show_gst_price($gst_rate, $item['display_price']);
+              $eventData['price_html']    = $item['price_html'];
+              $eventData['is_in_stock']   = $item['is_in_stock'];
+              $eventData['attributes']    = $item['attributes'];
+              $eventData['variation_id']  = $item['variation_id']; 
               $allEventData[] = $eventData;
             }
             
@@ -384,9 +409,16 @@ function pp_product_variable_choose_options_tag($product) {
                     <label class="product-variation-item-label" <?php echo (!$event['is_in_stock']) ? '' : 'tabindex="0"'; ?>>
                       <input name="product_variation[]" type="checkbox" style="display: none;" value="<?php echo $event['variation_id']; ?>">
                       <h4>
-                        <?php echo implode(' — ', $event['attributes']); ?> 
-                        <?php echo ! empty($event['price_html']) ? "<span class=\"pp-amount\">{$event['price_html']}</span>" : '' ?>
-                        <?php echo pp_woo_remaining_seats_available($event); ?>
+                        <span class="p-attributes">
+                          <?php echo implode(' — ', $event['attributes']); ?> 
+                        </span>
+                        <span class="p-price-seats">
+                          <span>
+                            <?php echo ! empty($event['price_html']) ? "<span class=\"pp-amount\">{$event['price_html']}</span>" : '' ?>
+                            <?php echo ! empty($event['display_price']) ? "<span class=\"price--gst\">{$event['display_price']}</span>" : '' ?>
+                          </span>
+                          <?php echo pp_woo_remaining_seats_available($event); ?>
+                        </span>
                       </h4>
                       <div class="schedule-course">
                         <div class="time-box schedule-course_start <?php echo (empty($eventData['event_child']) ? '__full' : '') ?>">
@@ -394,8 +426,6 @@ function pp_product_variable_choose_options_tag($product) {
                             <span class="pp__checkbox-fake-ui-box"></span>
                           </div>
                           <div>
-                            <!-- <div class="__date"><?php //echo pp_date_format($item['start_date']) ?></div>
-                            <div class="__time"><?php //echo $item['start_time'] ?></div> -->
                             <div class="__date"><?php echo $event['event_parent']['workshop_event_date_text__c'] ?></div>
                             <div class="__time"><?php echo $event['event_parent']['workshop_times__c'] ?></div>
                           </div>
