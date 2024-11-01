@@ -21,32 +21,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $product;
 
-$gst_price_html = '';
-$gst_rate = ppwc_get_tax_rates_for_gst();
-if ( $gst_rate > 0 ) {
-    $p_price = '';
-    if ( $product->is_type('variable') ) {
-        $available_variations = $product->get_available_variations();
-        if(isset($available_variations[0])) {
-            $first_variation = $available_variations[0];
-            if ( $first_variation ) $p_price = $first_variation['display_price'];
-        }
-    } else {
-        $p_price = $product->get_price();
-    }
-    if ( $p_price ) {
-        $gst_price_html = ppwc_show_gst_price($gst_rate, $p_price);
-    }
-}
 ?>
 <div class="item-bottom">
     <?php if ( $price_html = $product->get_price_html() ) : ?>
-        <span class="price">
-            <?php 
-            echo $price_html; 
-            if ( $gst_price_html ) echo ' <span class="price--gst">'.$gst_price_html.'</span>'; 
-            ?>
-        </span>
+        <span class="price"><?php echo $price_html; ?></span>
     <?php endif; ?>
     <div class="item-button">
     <?php 

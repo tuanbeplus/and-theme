@@ -26,7 +26,6 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 		<?php
 		do_action( 'woocommerce_before_mini_cart_contents' );
 
-		$gst_rate = ppwc_get_tax_rates_for_gst();
 		foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 			// echo '<pre>'; print_r($cart_item); echo '</pre>';
 			$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
@@ -57,7 +56,6 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 					$sf_event_start_date = $cart_item['course_information']['event_parent']['startdatetime'] ?? '';
 					$sf_event_start_date = strtotime($sf_event_start_date);
 					$strtotime_now = strtotime('now');
-					$gst_price = ppwc_show_gst_price($gst_rate, $_product->get_price());
 					?>
 					<?php if (!empty($sf_event_start_date) && $sf_event_start_date < $strtotime_now): ?>
 						<div class="event-out-date">
@@ -71,7 +69,7 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 							<h4><?php echo $product_name ?></h4>
 							<?php do_action( 'pp/mini_cart_item_after_title', $cart_item, $_product ) ?>
 							<?php echo wc_get_formatted_cart_item_data( $cart_item ); ?>
-							<?php echo apply_filters( 'woocommerce_widget_cart_item_quantity', '<span class="quantity">' . sprintf( '%s &times; %s  %s', $cart_item['quantity'], $product_price, $gst_price ) . '</span>', $cart_item, $cart_item_key ); ?>
+							<?php echo apply_filters( 'woocommerce_widget_cart_item_quantity', '<span class="quantity">' . sprintf( '%s &times; %s', $cart_item['quantity'], $product_price ) . '</span>', $cart_item, $cart_item_key ); ?>
 							<?php pp_cart_item_qtt_update_tag($_product, $cart_item, $cart_item_key); ?>
 						</div>
 					</div>
@@ -92,16 +90,6 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 		 * @hooked woocommerce_widget_shopping_cart_subtotal - 10
 		 */
 		do_action( 'woocommerce_widget_shopping_cart_total' );
-
-		?>
-	</p>
-
-	<p class="woocommerce-mini-cart__total-tax total-tax">
-		<?php
-		/**
-		 * Hook: and_widget_shopping_cart_total_tax.
-		 */
-		do_action( 'and_widget_shopping_cart_total_tax' );
 
 		?>
 	</p>
