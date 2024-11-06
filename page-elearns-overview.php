@@ -16,8 +16,9 @@ $contact_id     = $member_data['ContactId'];
 $account_id     = $member_data['AccountId'];
 $user_profile   = $member_data['user_profile'];
 $sf_org_data    = $member_data['org_data'];
-$opportunities  = $member_data['opportunities'];
 
+$elearn_opportunities = getOpportunitiesForElearn($account_id);
+$opportunities = isset($elearn_opportunities->records) ? $elearn_opportunities->records : array();
 $elearns_arr = array();
 if (!empty($opportunities)) {
     foreach ($opportunities as $opportunity) {
@@ -127,12 +128,14 @@ if (!empty($opportunities)) {
                                                         <span><?php 
                                                             echo $purchased_e_learns_fields[2]['fields_title'];
                                                             echo ': ';
-                                                            echo $elearn->Purchase_Date__c; ?>
+                                                            $purchase_date = new DateTime($elearn->Purchase_Date__c);
+                                                            echo $purchase_date->format('d/m/Y'); ?>
                                                         </span>
                                                         <span><?php 
                                                             echo $purchased_e_learns_fields[3]['fields_title'];
                                                             echo ': ';
-                                                            echo $elearn->Expiry_Date__c; ?>
+                                                            $expixy_date = new DateTime($elearn->Expiry_Date__c);
+                                                            echo $expixy_date->format('d/m/Y'); ?>
                                                         </span>
                                                     </li>
                                                     <?php
@@ -142,7 +145,7 @@ if (!empty($opportunities)) {
                                                 if ($user_profile == 'MEMBERS' || $user_profile == 'NON_MEMBERS') {
                                                     if ($elearn->Contact__c == $contact_id) {
                                                         $is_elearn_arr[] = $elearn->Id;
-                                                        ?>
+                                                        ?>  
                                                         <li elearn_id="<?php echo $elearn->Id;?>">
                                                             <span class="elearn-modules"><?php 
                                                                 echo $purchased_e_learns_fields[1]['fields_title']; 
@@ -152,12 +155,14 @@ if (!empty($opportunities)) {
                                                             <span><?php 
                                                                 echo $purchased_e_learns_fields[2]['fields_title'];
                                                                 echo ': ';
-                                                                echo $elearn->Purchase_Date__c; ?>
+                                                                $purchase_date = new DateTime($elearn->Purchase_Date__c);
+                                                                echo $purchase_date->format('d/m/Y'); ?>
                                                             </span>
                                                             <span><?php 
                                                                 echo $purchased_e_learns_fields[3]['fields_title'];
                                                                 echo ': ';
-                                                                echo $elearn->Expiry_Date__c; ?>
+                                                                $expixy_date = new DateTime($elearn->Expiry_Date__c);
+                                                                echo $expixy_date->format('d/m/Y'); ?>
                                                             </span>
                                                         </li>
                                                         <?php
@@ -254,14 +259,15 @@ if (!empty($opportunities)) {
                                                             <span><?php 
                                                                 echo $e_learn_usage_to_date_fields[1]['fields_title'];
                                                                 echo ': ';
-                                                                echo $elearn->Commenced_Date__c; ?>
+                                                                $commenced_date = new DateTime($elearn->Commenced_Date__c);
+                                                                echo $commenced_date->format('d/m/Y'); ?>
                                                             </span>
-
                                                             <?php if ($elearn->Completion_Date__c): ?>
                                                                 <span><?php 
                                                                     echo $e_learn_usage_to_date_fields[2]['fields_title'];
                                                                     echo ': ';
-                                                                    echo $elearn->Completion_Date__c; ?>
+                                                                    $completion_date = new DateTime($elearn->Completion_Date__c);
+                                                                    echo $completion_date->format('d/m/Y'); ?>
                                                                 </span>
                                                             <?php endif; ?>
                                                         </li>
@@ -282,14 +288,15 @@ if (!empty($opportunities)) {
                                                             <span><?php 
                                                                 echo $e_learn_usage_to_date_fields[1]['fields_title'];
                                                                 echo ': ';
-                                                                echo $elearn->Commenced_Date__c; ?>
+                                                                $commenced_date = new DateTime($elearn->Commenced_Date__c);
+                                                                echo $commenced_date->format('d/m/Y'); ?>
                                                             </span>
-
                                                             <?php if ($elearn->Completion_Date__c): ?>
                                                                 <span><?php 
                                                                     echo $e_learn_usage_to_date_fields[2]['fields_title'];
                                                                     echo ': ';
-                                                                    echo $elearn->Completion_Date__c; ?>
+                                                                    $completion_date = new DateTime($elearn->Completion_Date__c);
+                                                                    echo $completion_date->format('d/m/Y'); ?>
                                                                 </span>
                                                             <?php endif; ?>
                                                         </li>

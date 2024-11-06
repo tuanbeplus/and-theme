@@ -458,8 +458,26 @@ function getOpportunity($account_id='')
   	$sql = "SELECT FIELDS(ALL) 
 			FROM Opportunity 
 			WHERE RecordTypeId='0120I000000TONeQAO' 
+			AND AccountId='$account_id' 
 			AND IsClosed=false 
-			AND AccountId='".$account_id."' 
+			ORDER BY CreatedDate DESC
+			LIMIT 200";
+
+	$response = sf_query_object_metadata($sql);
+	
+	return $response;
+}
+
+function getOpportunitiesForElearn($account_id='')
+{
+	if (empty($account_id)) {
+		$account_id = getUser($_COOKIE['userId'])->records[0]->AccountId;
+	}
+
+  	$sql = "SELECT FIELDS(ALL) 
+			FROM Opportunity 
+			WHERE AccountId='$account_id' 
+			AND RecordTypeId='0120I000000TONeQAO' 
 			ORDER BY CreatedDate DESC
 			LIMIT 200";
 

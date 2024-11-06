@@ -2,12 +2,15 @@
 
 if( get_row_layout() == 'dashboard_e_learn' ):
 
-    global $contact_id, $account_id, $user_profile, $sf_org_data, $opportunities;
+    global $contact_id, $account_id, $user_profile, $sf_org_data;
 
     $e_learn_heading = get_sub_field('e_learn_heading');
     $e_learns_fields_title = get_sub_field('e_learns_fields_title');
     $e_learn_cta = get_sub_field('e_learn_cta');
     $elearns_arr = array();
+
+    $elearn_opportunities = getOpportunitiesForElearn($account_id);
+    $opportunities = isset($elearn_opportunities->records) ? $elearn_opportunities->records : array();
 
     if (!empty($opportunities)) {
         foreach ($opportunities as $opportunity) {
