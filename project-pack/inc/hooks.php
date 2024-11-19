@@ -105,34 +105,134 @@ add_action('wp_head', function() {
   // $product_variation = new WC_Product_Variation(19433);
   // $regular_price = $product_variation->regular_price;
   // var_dump($regular_price); 
-
   // global $current_user;
-
-  // $user_roles = $current_user->roles;
-  // $current_user_role = $user_roles[0];
-  // // print_r($user_roles);
-  // $product_variation = new WC_Product_Variation(19433);
-  // echo $product_variation->get_meta( 'product_role_based_price_' . $current_user_role );
-  // $product = wc_get_product(19375);
-  // $product = new WC_Product_Variation(19486);
-  // echo $product->get_sku() . 'dev';
 });
 
-// add_filter('woocommerce_product_variation_get_price', function($price = '', $product = null) {
-//   return $price;
-// }, 100, 2);
+/**
+ * Includes GST to price at Product single and displays original price for role-based pricing.
+ * 
+ * @author Tuan
+ */
+add_filter('woocommerce_get_price_html', function($price_html, $product) {
+  // Initialize price variables
+  $base_price = 0;
+  $original_price_html = '';
 
-add_filter('woocommerce_get_price_html', function($price, $_) {
-  if($_->is_type( 'variable' ) == true) {
-    $current_products = $_->get_available_variations();
-    // print_r($current_products[0]);
-    if(isset($current_products[0])) {
-      return $current_products[0]['price_html'];
+  // If the product is variable, get the price of the first variation
+  if ($product->is_type('variable')) {
+    $available_variations = $product->get_available_variations();
+    if (!empty($available_variations) && isset($available_variations[0]['display_price'])) {
+      $base_price = $available_variations[0]['display_price'];
+      $original_price = $product->get_variation_regular_price('min');
     }
+  } else {
+    // For other products, get the regular price and the original price
+    $base_price = (float) $product->get_price();
+    $original_price = (float) get_post_meta(get_the_ID(), '_regular_price', true);
   }
-  
-  return $price;
+
+  // Calculate GST for the base price
+  $gst_price = ppwc_calculator_product_gst($base_price);
+  $final_price = $base_price + $gst_price;
+
+  // Format the role-based price with GST
+  $role_based_price_html = wc_price($final_price);
+
+  // If there's a difference between original and role-based price, display both
+  if ($original_price && $original_price != $base_price) {
+    $original_price_html = '<del>' . wc_price($original_price + ppwc_calculator_product_gst($original_price)) . '</del> ';
+  }
+
+  // Combine the original and role-based prices for display
+  $price_html = $original_price_html . ' ' . $role_based_price_html;
+
+  return $price_html;
+
 }, 999, 2);
+
+/**
+ * Includes GST to price at Mini Cart items
+ * 
+ * @author Tuan
+ */
+add_filter('woocommerce_cart_item_price', function($price_html, $cart_item, $cart_item_key) {
+  // Get the product object from the cart item
+  $product = $cart_item['data'];
+  // Initialize price variable
+  $base_price = 0;
+
+  // If the product is variable, get the price of the first variation
+  if ($product->is_type('variable')) {
+    $available_variations = $product->get_available_variations();
+    if (!empty($available_variations) && isset($available_variations[0]['display_price'])) {
+      $base_price = $available_variations[0]['display_price'];
+    }
+  } else {
+    // For non-variable products, get the regular price
+    $base_price = (float) $product->get_price();
+  }
+
+  // Calculator the GST
+  $gst_price = ppwc_calculator_product_gst($base_price);
+
+  // Format the price for WooCommerce display
+  $price_html = wc_price($base_price + $gst_price);
+
+  return $price_html;
+
+}, 999, 3);
+
+/**
+ * Includes GST in the total price at Mini Cart
+ * 
+ * @author Tuan
+ */
+remove_action('woocommerce_widget_shopping_cart_total', 'woocommerce_widget_shopping_cart_subtotal');
+add_filter('woocommerce_widget_shopping_cart_total', function($total_html) {
+  // Get the cart object
+  $cart = WC()->cart;
+
+  // Get the subtotal excluding tax
+  $subtotal_ex_tax = $cart->get_subtotal();
+
+  // Calculate GST based on the subtotal
+  $gst_total = ppwc_calculator_product_gst($subtotal_ex_tax);
+
+  // Format the total with GST included
+  $total_html = wc_price($subtotal_ex_tax + $gst_total);
+
+  // Optionally add GST breakdown
+  $formatted_gst = wc_price($gst_total);
+
+  echo '<strong>Total</strong>
+        <span class="total-includes-tax">'. sprintf('%s <small>(includes %s GST)</small>', $total_html, $formatted_gst) .'</span>';
+
+}, 999);
+
+/**
+ * Includes GST in each product row's subtotal on the Cart page
+ * 
+ * @author Tuan
+ */
+add_filter('woocommerce_cart_item_subtotal', function($subtotal_html, $cart_item, $cart_item_key) {
+  // Get the product price from the cart item
+  $product = $cart_item['data'];
+  $base_price = $cart_item['line_subtotal'] / $cart_item['quantity'];
+
+  // Calculate GST for this product's base price
+  $gst_price = ppwc_calculator_product_gst($base_price);
+
+  // Calculate the total price including GST
+  $subtotal_with_gst = wc_price(($base_price + $gst_price) * $cart_item['quantity']);
+
+  // Format GST for display
+  $formatted_gst = wc_price($gst_price * $cart_item['quantity']);
+
+  // Return the new subtotal HTML with GST breakdown
+  return $subtotal_with_gst;
+
+}, 999, 3);
+
 
 add_action('pp/mini_cart_item_after_title', function($cart_item, $_product) {
   // echo '<pre>'; print_r($cart_item); echo '</pre>';
@@ -142,27 +242,84 @@ add_action('pp/mini_cart_item_after_title', function($cart_item, $_product) {
   
 }, 20, 2);
 
-add_filter('woocommerce_cart_item_name', 'pp_woo_cart_item_name', 90, 2);
-add_filter('woocommerce_order_item_name', 'pp_woo_order_item_name', 90, 2);
-
-function pp_woo_order_item_name($name, $item) {
-  $product_id = $item['product_id'];
-  return sprintf('<a href="%s">%s<a/>', get_the_permalink($product_id), get_the_title($product_id)) ;
-}
-
-function pp_woo_cart_item_name($name, $item) {
+/**
+ * Custom Cart item Product Name with event name & datetime
+ */
+function ppwc_custom_cart_item_name($name, $item) {
   $product_id = $item['product_id'] ?? '';
   $variation_id = $item['variation_id'] ?? '';
-  $event_name = $item['variation']['attribute_events'] ?? '';
-
-  if (!empty($product_id)) {
-    $product = '<a href="'.get_the_permalink($product_id).'">'. get_the_title($product_id) .'</a>';
-    if (!empty($variation_id) && !empty($event_name)) {
-      $product .= '<br><strong>Event:</strong> '. $event_name;
+  $events_data = $item['course_information'] ?? '';
+  $e_parent_name = '';
+  $e_child_name = '';
+  $product = '';
+  
+  if (!empty($events_data)) {
+    if (isset($events_data['event_parent'])) {
+      $e_parent_name = $events_data['event_parent']['post_title'] ?? '';
+    }
+    if (isset($events_data['event_child'])) {
+      $e_child_name = $events_data['event_child']['post_title'] ?? '';
     }
   }
+  if (!empty($product_id)) {
+    $product .= '<a href="'.get_the_permalink($product_id).'">'. get_the_title($product_id) .'</a>';
+  }
+  if (!empty($e_parent_name) || !empty($e_child_name)) {
+    $product .= '<p class="event-name"><strong>Events:</strong><br> '. $e_parent_name .'<br>'. $e_child_name .'</p>';
+  }
+
   return $product;
 }
+add_filter('woocommerce_cart_item_name', 'ppwc_custom_cart_item_name', 999, 2);
+
+/**
+ * Custom Order item Product Name with event name & datetime
+ */
+function ppwc_custom_order_item_name($name, $item) {
+  $product_id = $item['product_id'] ?? '';
+  $variation_id = $item['variation_id'] ?? '';
+  $events_data = $item['course_information'] ?? '';
+  $event_parent = $events_data['event_parent'] ?? '';
+  $event_child = $events_data['event_child'] ?? '';
+  $event_date = '';
+  $event_time = '';
+  $product = '';
+
+  if (!empty($product_id)) {
+    $product .= '<a href="'.get_the_permalink($product_id).'">'. get_the_title($product_id) .'</a>';
+  }
+  if (!empty($event_parent) || !empty($event_child)) {
+    $product .= '<p><strong>Events:</strong></p>';
+  }
+  if (!empty($event_parent)) {
+    $event_name = $event_parent['post_title'] ?? '';
+    $event_date = $event_parent['workshop_event_date_text__c'] ?? '';
+    $event_time = $event_parent['workshop_times__c'] ?? '';
+
+    if (!empty($event_name)) {
+      $product .= '<p class="event">
+                    <strong>'. $event_name .'</strong><br>
+                    <span class="time">'. $event_date .', '. $event_time .'<span>
+                  </p>';
+    }
+  }
+  if (!empty($event_child)) {
+    $event_name = $event_child['post_title'] ?? '';
+    $event_date = $event_child['workshop_event_date_text__c'] ?? '';
+    $event_time = $event_child['workshop_times__c'] ?? '';
+
+    if (!empty($event_name)) {
+      $product .= '<p class="event">
+                    <strong>'. $event_name .'</strong><br>
+                    <span class="time">'. $event_date .', '. $event_time .'<span>
+                  </p>';
+    }
+  }
+
+  return $product;
+}
+add_filter('woocommerce_order_item_name', 'ppwc_custom_order_item_name', 999, 2);
+
 
 // Remove variations of a product from the cart before checkout
 function remove_product_variations_before_checkout() {
@@ -223,16 +380,27 @@ function remove_product_variations_before_checkout() {
 add_action('wp_head', 'remove_product_variations_before_checkout');
 
 // Custom required login or register in Checkout page
-function and_custom_checkout_login_message() {
+function ppwc_custom_require_login_message() {
   $register_url = get_field('ecomm_register_url', 'option');
   ?>
-  <div class="required-login-wrapper">
-    <h3 class="heading">Please login or register to checkout.</h3>
-    <a href="/login" class="btn" role="button">Login</a>
-    <?php if (!empty($register_url)): ?>
-      <a href="<?php echo $register_url ?>" class="btn" role="button">Register</a>
-    <?php endif; ?>
+  <div class="woocommerce-checkout">
+    <div class="required-login-wrapper">
+      <h3 class="heading">Please login or register.</h3>
+      <a href="/login" class="btn" role="button">Login</a>
+      <?php if (!empty($register_url)): ?>
+        <a href="<?php echo $register_url ?>" class="btn" role="button">Register</a>
+      <?php endif; ?>
+    </div>
   </div>
   <?php
 }
-add_filter('woocommerce_checkout_must_be_logged_in_message', 'and_custom_checkout_login_message');
+add_filter('woocommerce_checkout_must_be_logged_in_message', 'ppwc_custom_require_login_message');
+
+// Redirect address billing edit pages to prevent access
+add_action('template_redirect', function() {
+  if ($_SERVER['REQUEST_URI'] == '/my-account/edit-address/billing/') {
+    wp_redirect(wc_get_account_endpoint_url('dashboard'));
+    exit;
+  }
+});
+

@@ -48,25 +48,15 @@
     }
   }
 
-  .required-login-wrapper {
-    margin-bottom: 80px;
-    text-align: center;
-    .heading {
-      margin-bottom: 24px;
-      font-size: 1.5rem;
-    }
-    .btn {
-      min-width: 132px;
-      margin-right: 20px;
-      padding: 10px 32px;
-      font-size: 1.125rem;
-      line-height: 120%;
-      background-color: #A22F2C;
-      border-radius: 30px;
-      font-family: "Avenir-Medium";
-    }
-  }
   .shop_table {
+    .cart_item {
+      .product-name {
+        text-decoration: none!important;
+        a {
+          text-decoration: underline;
+        }
+      }
+    }
     .amount {
       font-family: "Avenir-Heavy";
       * {
@@ -313,7 +303,8 @@ button#place_order {
   background: var(--accent-color);
   padding: 1.2rem;
   text-transform: capitalize;
-
+  border: none;
+  color: #fff;
   &:hover {
     opacity: .8;
   }
@@ -372,7 +363,6 @@ button#place_order {
 }
 
 .add-attendees-container {
-
   padding: 24px 32px;
   background: white;
   margin: 24px 0;
@@ -382,9 +372,26 @@ button#place_order {
     margin-bottom: 2em;
     padding-bottom: 2em;
 
+    .gr-events {
+      display: flex;
+      .and {
+        font-family: "Avenir-Heavy";
+        font-size: 1.2rem;
+        margin: 0 24px;
+      }
+    }
+
     .product-name {
       margin-bottom: .6em;
       font-size: 1.3em;
+      width: fit-content;
+      .event-time {
+        font-family: "Avenir-Roman";
+        font-weight: normal;
+        font-size: 0.925rem;
+        margin-top: 6px;
+        opacity: 0.8;
+      }
     }
   }
 
@@ -400,6 +407,7 @@ button#place_order {
     border-radius: 1px;
     border: solid 1px #c5c5c5;
     width: 100%;
+    transition: all 0s;
 
     &::placeholder {
       color: #717171;
@@ -417,7 +425,7 @@ button#place_order {
 
 .pp-table {
   border-collapse: collapse;
-  border: solid #e0e0e0;
+  border: solid #ccc;
   border-width: 1px 1px 0 1px;
   max-width: 100%;
   margin: 1.5em 0;
@@ -435,7 +443,7 @@ button#place_order {
 
   th, td {
     padding: .5em;
-    border: solid #e0e0e0;
+    border: solid #ccc;
     border-width: 0 1px 1px 0;
     box-sizing: border-box;
     font-size: 1rem;
@@ -540,10 +548,6 @@ button#place_order {
       margin-bottom: .5em;
     }
   }
-
-  .btn-next-step {
-    // background: black;
-  }
 }
 
 .pp-button {
@@ -552,11 +556,12 @@ button#place_order {
   border-radius: 1px;
   color: white;
   padding: 0.7em 1em;
+  font-family: "Avenir-Medium";
   transition: .3s ease;
   -webkit-transition: .3s ease;
 
   &:hover {
-    opacity: .6;
+    opacity: .8;
   }
 }
 
@@ -571,7 +576,7 @@ button#place_order {
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(1,1,1,.3);
+  background: rgba(1, 1, 1, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -582,7 +587,7 @@ button#place_order {
   -webkit-transition: .3s ease;
 
   &__inner {
-    width: 400px;
+    width: 420px;
     padding: 2em;
     border-radius: 3px;
     background: white;
@@ -605,7 +610,7 @@ body.__show-pp-popup-add-new-contact {
 .add-new-contact-form {
 
   h4 {
-    font-size: 1.2em;
+    font-size: 1.4em;
     margin-bottom: 1em;
   }
 
@@ -613,10 +618,19 @@ body.__show-pp-popup-add-new-contact {
     width: 100%;
     display: block;
     margin-bottom: .5em;
+    font-size: 0.975rem;
+    opacity: 1;
+    text-transform: none;
+    font-family: "Avenir-Medium";
+    .__label {
+      font-family: "Avenir-Heavy";
+      font-size: 0.925rem;
+    }
   }
 
   input[type=text], input[type=email] {
-    padding: 1em;
+    padding: 12px 14px;
+    transition: all 0s;
   }
 
   .buttons {
@@ -636,7 +650,7 @@ body.__show-pp-popup-add-new-contact {
 .pp-notification {
   padding: 1em;
   background: #6e297b1c;
-  border-left: solid 2px #6e297b;
+  border-left: solid 3px #6e297b;
   font-size: .9em;
   line-height: normal;
   margin-bottom: 1em;

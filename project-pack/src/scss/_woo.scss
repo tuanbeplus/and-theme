@@ -1,3 +1,47 @@
+.woocommerce {
+  a.button {
+    text-decoration: none;
+  }
+  .product_price del {
+    opacity: 0.8;
+  }
+  .product-name {
+    br {
+      margin-top: 3px;
+    }
+    .event-name, .event-time {
+      margin-top: 6px;
+      font-size: 0.925rem;
+    }
+  } 
+  .woocommerce-order-details {
+    .shop_table tfoot td {
+      font-family: "Avenir-Heavy";
+    }
+    .product-name {
+      font-size: 1rem;
+      border-right: 1px solid #eee;
+      a {
+        font-family: "Avenir-Medium";
+      }
+      p {
+        margin-top: 8px;
+        font-size: 0.975rem;
+      }
+      .event {
+        margin-top: 6px;
+        .time {
+          font-family: "Avenir-Roman";
+          font-size: 0.9rem;
+        }
+      }
+    }
+    .wc-item-meta {
+      display: none;
+    }
+  }
+}
+
 .shop-lading,
 .woocommerce-container {
   p {
@@ -216,6 +260,9 @@
       * {
         font-family: "Avenir-Heavy";
       }
+      del {
+        opacity: 0.6;
+      }
     }
     
     .item-list-info {
@@ -354,6 +401,16 @@
   margin-bottom: 3rem;
   position: relative;
 
+ .mini_cart_item {
+    .event-name, .event-time {
+      margin: 8px 0;
+      font-size: 0.9rem;
+      br {
+        margin-top: 3px;
+      }
+    }
+  } 
+
   .__remaining-seats {
     display: inline-block;
     margin-bottom: 8px;
@@ -370,6 +427,14 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
+    .total-includes-tax {
+      .woocommerce-Price-amount * {
+        font-family: "Avenir-Medium";
+      }
+      small * {
+        font-size: 1rem;
+      }
+    }
   }
 
   p.woocommerce-mini-cart__buttons {
@@ -379,21 +444,22 @@
     a {
       background: var(--accent-color);
       color: white;
-      padding: 8px 20px;
+      padding: 12px 20px;
       border-radius: 30px;
       display: inline-block;
-      text-decoration: none;
       font-size: 1rem;
-      width: 250px;
+      width: 200px;
       text-align: center;
       max-width: 100%;
-      line-height: 140% !important;
+      line-height: 1.2 !important;
       font-weight: normal !important;
+      font-family: "Avenir-Medium";
+      text-decoration: none;
 
       &:hover {
         background: var(--accent-color);
         color: white;
-        opacity: .7;
+        opacity: 0.8;
       }
 
       &:not(.checkout) {
@@ -716,4 +782,27 @@ table.shop_table {
 form.woocommerce-form-login,
 form.woocommerce-form-register {
   background: white;
+}
+
+// Require login message
+.required-login-wrapper {
+  margin-bottom: 70px;
+  text-align: center;
+  .heading {
+    margin-bottom: 24px;
+    font-size: 1.5rem;
+  }
+  .btn {
+    min-width: 140px;
+    margin-right: 20px;
+    padding: 10px 32px;
+    font-size: 1.125rem;
+    line-height: 120%;
+    background-color: #A22F2C;
+    border-radius: 30px;
+    font-family: "Avenir-Medium";
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
 }

@@ -64,17 +64,14 @@ add_filter( 'woocommerce_add_cart_item_data', 'pp_add_cart_item_data', 40, 3 );
 
 // ADD THE INFORMATION AS ORDER ITEM META DATA SO THAT IT CAN BE SEEN AS PART OF THE ORDER
 function pp_add_custom_field_to_order_item_meta( $item_id, $item_values, $item_key ) {
-
   if( isset($item_values['course_information']) )
     wc_update_order_item_meta( 
       $item_id, 
       'course_information', 
       $item_values['course_information'] );
 }
-
 add_action('woocommerce_add_order_item_meta','pp_add_custom_field_to_order_item_meta', 9, 3 );
 
-// add_filter( 'woocommerce_checkout_coupon_message', 'bt_rename_coupon_message_on_checkout' );
 
 add_action( 'pp/script_data', function($data = []) {
 
@@ -240,7 +237,7 @@ add_action('woocommerce_email_customer_details', function($order, $sent_to_admin
     $view_order_url = $order->get_view_order_url();
     ?>
     <div style="margin: 15px 0;">
-      <a href="<?php echo $view_order_url; ?>" style="color: white; font-size: 18px; 
+      <a href="<?php echo $view_order_url; ?>" style="color: white; font-size: 16px; 
         background: #6e3685; display: block; padding: 10px 30px; 
         border-radius: 3px; text-decoration: none; text-align: center;">
         <?php _e('You can add attendees here', 'pp'); ?>
@@ -425,7 +422,7 @@ add_filter( 'woocommerce_checkout_fields' , 'pp_custom_woocommerce_checkout_fiel
 function pp_custom_woo_thankyou_order_received($order_id) {
   // Get shop landing page link
   $shop_landing_page = get_field('shop_landing_page', 'option');
-  $shop_landing_page_link = !empty($shop_landing_page) ? $shop_landing_page : '/our-learning-solutions';
+  $shop_landing_page_link = !empty($shop_landing_page) ? $shop_landing_page : '/shop';
   // Add button 
   echo '<a id="btn-back-to-shop" href="'. $shop_landing_page_link .'">
           Back to Learning Solutions

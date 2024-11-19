@@ -34,6 +34,10 @@
     display: none;
   }
 
+  .woocommerce.add_to_cart_inline {
+    display: none;
+  }
+
   .item-button {
     position: relative;
   }
@@ -55,6 +59,7 @@
     font-size: 1.125rem !important;
     position: relative;
     text-align: left !important;
+    font-family: "Avenir-Medium";
 
     &:after {
       content: "" !important;
@@ -224,17 +229,18 @@
       margin-bottom: .5rem;
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
       font-family: "Avenir-Heavy";
       align-items: center;
 
       .pp-amount {
         margin-left: auto;
+        line-height: 1;
       }
 
       .__remaining-seats {
         margin-left: 6px;
         font-weight: normal;
+        white-space: nowrap;
       }
 
       .price, .__remaining-seats {

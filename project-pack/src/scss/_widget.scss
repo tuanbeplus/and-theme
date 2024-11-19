@@ -34,16 +34,18 @@
     }
 
     tr:last-child {
-
       > * {
         border-bottom: none;
       }
     }
-
+    .__label {
+      font-family: "Avenir-Heavy";
+    }
     .__value {
       text-align: right;
       padding-right: 0;
       width: 72% !important;
+      font-family: "Avenir-Medium";
     }
   }
 
@@ -111,6 +113,7 @@
 
       a {
         color: white !important;
+        font-family: "Avenir-Medium";
       }
 
       svg {

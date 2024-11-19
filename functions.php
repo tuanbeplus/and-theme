@@ -243,6 +243,12 @@ function wp_bootstrap_starter_scripts()
 
 	// Custom JS
 	wp_enqueue_script('custom-script', get_template_directory_uri() . '/assets/js/custom.js',array('jquery-ui'), rand(), true);
+	// Localize admin ajax
+    wp_localize_script( 'custom-script', 'ajax_object',
+        array( 
+            'ajax_url' => admin_url('admin-ajax.php'),
+        )
+    );
 
 }
 add_action('wp_enqueue_scripts', 'wp_bootstrap_starter_scripts');
@@ -334,6 +340,11 @@ require get_template_directory() . '/inc/hook.php';
 require get_template_directory() . '/inc/custom-page-sidebar.php';
 
 /**
+ * ClearXP webhook functions
+ */
+require get_template_directory() . '/inc/clearxp-webhook.php';
+
+/**
  * Load custom WordPress nav walker.
  */
 if (!class_exists('wp_bootstrap_navwalker')) {
@@ -380,7 +391,8 @@ function getParentDetails()
 		$postType = get_post_type($post);
 		$postType = str_replace('_', '-', $postType);
 		$page = get_page_by_path($postType);
-		$colourScheme = get_field('colour_scheme', $page->ID);
+		$page_id = isset($page->ID) ? $page->ID : '';
+		$colourScheme = get_field('colour_scheme', $page_id);
 	}
 
 	return $page;

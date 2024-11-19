@@ -47,34 +47,20 @@ global $contact_id, $account_id, $user_profile, $sf_org_data, $opportunities, $a
                 if( have_rows('page_builder') ):
                     // loop through the rows of data
                 while ( have_rows('page_builder') ) : the_row();
-                    // Primary Members
+                    // Only Primary Members
                     if ($user_profile == 'PRIMARY_MEMBERS') { 
                         get_template_part('components/dashboard-tasks');
                         get_template_part('components/dashboard-opportunities');
-                        get_template_part('components/dashboard-submissions');
-                        get_template_part('components/dashboard-e-learn');
-                        get_template_part('components/dashboard-index');
-                        get_template_part('components/dashboard-dcr');
-                        get_template_part('components/dashboard-resources');
                         get_template_part('components/dashboard-history');
                     }
-                    // Members
-                    elseif ($user_profile == 'MEMBERS') { 
-                        get_template_part('components/dashboard-submissions');
-                        get_template_part('components/dashboard-e-learn');
-                        get_template_part('components/dashboard-index');
-                        get_template_part('components/dashboard-dcr');
-                        get_template_part('components/dashboard-resources');
-                    }
-                    // Non Members
-                    elseif ($user_profile == 'NON_MEMBERS') { 
-                        get_template_part('components/dashboard-submissions');
-                        get_template_part('components/dashboard-e-learn');
-                        get_template_part('components/dashboard-index');
-                        get_template_part('components/dashboard-dcr');
-                        get_template_part('components/dashboard-resources');
-                    }
-                    endwhile;
+                    get_template_part('components/dashboard-submissions');
+                    get_template_part('components/dashboard-e-learn');
+                    get_template_part('components/dashboard-index');
+                    get_template_part('components/dashboard-dcr');
+                    get_template_part('components/dashboard-resources');
+                    get_template_part('components/dashboard-shop');
+
+                endwhile;
                 else :
                     // no layouts found
                 endif;
@@ -87,24 +73,16 @@ global $contact_id, $account_id, $user_profile, $sf_org_data, $opportunities, $a
             if( have_rows('page_builder') ):
                 // loop through the rows of data
                 while ( have_rows('page_builder') ) : the_row();
-                    // Primary Members
+                    // Only Primary Members
                     if ($user_profile == 'PRIMARY_MEMBERS') { 
-                        get_template_part('components/dashboard-upcoming-events');
                         get_template_part('components/dashboard-membership');
-                        get_template_part('components/dashboard-advertisement');
                     }
-                    // Members
-                    elseif ($user_profile == 'MEMBERS') { 
-                        get_template_part('components/dashboard-upcoming-events');
+                    else {
                         get_template_part('components/dashboard-relationship-manager');
-                        get_template_part('components/dashboard-advertisement');
                     }
-                    // Non Members
-                    elseif ($user_profile == 'NON_MEMBERS') { 
-                        get_template_part('components/dashboard-upcoming-events');
-                        get_template_part('components/dashboard-relationship-manager');
-                        get_template_part('components/dashboard-advertisement');
-                    }
+                    get_template_part('components/dashboard-upcoming-events');
+                    get_template_part('components/dashboard-advertisement');
+                    
                 endwhile;
             else :
                 // no layouts found

@@ -396,6 +396,44 @@ form.tribe-tickets__tickets-form {
   bottom: 30px;
 }
 
+.woocommerce a.button {
+  text-decoration: none;
+}
+.woocommerce .product_price del {
+  opacity: 0.8;
+}
+.woocommerce .product-name br {
+  margin-top: 3px;
+}
+.woocommerce .product-name .event-name, .woocommerce .product-name .event-time {
+  margin-top: 6px;
+  font-size: 0.925rem;
+}
+.woocommerce .woocommerce-order-details .shop_table tfoot td {
+  font-family: "Avenir-Heavy";
+}
+.woocommerce .woocommerce-order-details .product-name {
+  font-size: 1rem;
+  border-right: 1px solid #eee;
+}
+.woocommerce .woocommerce-order-details .product-name a {
+  font-family: "Avenir-Medium";
+}
+.woocommerce .woocommerce-order-details .product-name p {
+  margin-top: 8px;
+  font-size: 0.975rem;
+}
+.woocommerce .woocommerce-order-details .product-name .event {
+  margin-top: 6px;
+}
+.woocommerce .woocommerce-order-details .product-name .event .time {
+  font-family: "Avenir-Roman";
+  font-size: 0.9rem;
+}
+.woocommerce .woocommerce-order-details .wc-item-meta {
+  display: none;
+}
+
 .shop-lading p,
 .woocommerce-container p {
   margin-bottom: 1em;
@@ -592,6 +630,9 @@ form.tribe-tickets__tickets-form {
 .product-card-style .product-item .price * {
   font-family: "Avenir-Heavy";
 }
+.product-card-style .product-item .price del {
+  opacity: 0.6;
+}
 .product-card-style .product-item .item-list-info {
   padding: 0;
   margin: 0;
@@ -703,6 +744,13 @@ form.tribe-tickets__tickets-form {
   margin-bottom: 3rem;
   position: relative;
 }
+.pp-minicart .mini_cart_item .event-name, .pp-minicart .mini_cart_item .event-time {
+  margin: 8px 0;
+  font-size: 0.9rem;
+}
+.pp-minicart .mini_cart_item .event-name br, .pp-minicart .mini_cart_item .event-time br {
+  margin-top: 3px;
+}
 .pp-minicart .__remaining-seats {
   display: inline-block;
   margin-bottom: 8px;
@@ -718,6 +766,12 @@ form.tribe-tickets__tickets-form {
   align-items: center;
   justify-content: space-between;
 }
+.pp-minicart .woocommerce-mini-cart__total .total-includes-tax .woocommerce-Price-amount * {
+  font-family: "Avenir-Medium";
+}
+.pp-minicart .woocommerce-mini-cart__total .total-includes-tax small * {
+  font-size: 1rem;
+}
 .pp-minicart p.woocommerce-mini-cart__buttons {
   text-align: right;
   margin-top: 2.5rem;
@@ -725,21 +779,22 @@ form.tribe-tickets__tickets-form {
 .pp-minicart p.woocommerce-mini-cart__buttons a {
   background: var(--accent-color);
   color: white;
-  padding: 8px 20px;
+  padding: 12px 20px;
   border-radius: 30px;
   display: inline-block;
-  text-decoration: none;
   font-size: 1rem;
-  width: 250px;
+  width: 200px;
   text-align: center;
   max-width: 100%;
-  line-height: 140% !important;
+  line-height: 1.2 !important;
   font-weight: normal !important;
+  font-family: "Avenir-Medium";
+  text-decoration: none;
 }
 .pp-minicart p.woocommerce-mini-cart__buttons a:hover {
   background: var(--accent-color);
   color: white;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 .pp-minicart p.woocommerce-mini-cart__buttons a:not(.checkout) {
   display: none;
@@ -1013,6 +1068,28 @@ form.woocommerce-form-register {
   background: white;
 }
 
+.required-login-wrapper {
+  margin-bottom: 70px;
+  text-align: center;
+}
+.required-login-wrapper .heading {
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+}
+.required-login-wrapper .btn {
+  min-width: 140px;
+  margin-right: 20px;
+  padding: 10px 32px;
+  font-size: 1.125rem;
+  line-height: 120%;
+  background-color: #A22F2C;
+  border-radius: 30px;
+  font-family: "Avenir-Medium";
+}
+.required-login-wrapper .btn:last-of-type {
+  margin-right: 0;
+}
+
 .__sidebar-sticky {
   position: sticky;
   top: 40px;
@@ -1044,10 +1121,14 @@ form.woocommerce-form-register {
 .pp-widget .pp-wg-table tr:last-child > * {
   border-bottom: none;
 }
+.pp-widget .pp-wg-table .__label {
+  font-family: "Avenir-Heavy";
+}
 .pp-widget .pp-wg-table .__value {
   text-align: right;
   padding-right: 0;
   width: 72% !important;
+  font-family: "Avenir-Medium";
 }
 .pp-widget .pp-nav {
   padding: 0 1rem;
@@ -1106,6 +1187,7 @@ form.woocommerce-form-register {
 }
 .pp-widget .pp-nav .__cart a {
   color: white !important;
+  font-family: "Avenir-Medium";
 }
 .pp-widget .pp-nav .__cart svg {
   width: 80%;
@@ -1214,6 +1296,9 @@ body.__pp-offcanvas-active .pp-offcanvas__container {
 .pp-product-single-add-to-cart .price {
   display: none;
 }
+.pp-product-single-add-to-cart .woocommerce.add_to_cart_inline {
+  display: none;
+}
 .pp-product-single-add-to-cart .item-button {
   position: relative;
 }
@@ -1233,6 +1318,7 @@ body.__pp-offcanvas-active .pp-offcanvas__container {
   font-size: 1.125rem !important;
   position: relative;
   text-align: left !important;
+  font-family: "Avenir-Medium";
 }
 .pp-product-single-add-to-cart .pp-button-choose-slots:after,
 .pp-product-single-add-to-cart .add_to_cart_button:after,
@@ -1371,16 +1457,17 @@ body.__pp-offcanvas-active .pp-offcanvas__container {
   margin-bottom: 0.5rem;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
   font-family: "Avenir-Heavy";
   align-items: center;
 }
 .product-variable-options .product-variable-item h4 .pp-amount {
   margin-left: auto;
+  line-height: 1;
 }
 .product-variable-options .product-variable-item h4 .__remaining-seats {
   margin-left: 6px;
   font-weight: normal;
+  white-space: nowrap;
 }
 .product-variable-options .product-variable-item h4 .price, .product-variable-options .product-variable-item h4 .__remaining-seats {
   font-size: 1rem;
@@ -1535,6 +1622,13 @@ form.pp-form-product-variations .pp-button-variantion-submit:hover {
   stroke: var(--accent-color) !important;
 }
 
+.shop_table.cart thead .product-subtotal {
+  color: #fff;
+}
+.shop_table.cart thead .product-subtotal::after {
+  content: "Total";
+  color: #212529;
+}
 .shop_table.cart th.product-remove {
   width: 5%;
 }
@@ -1586,9 +1680,11 @@ form.pp-form-product-variations .pp-button-variantion-submit:hover {
   border-radius: 30px !important;
   font-weight: normal !important;
   font-size: 1rem !important;
-  padding: 0.7rem 1rem !important;
+  padding: 12px 20px !important;
   min-width: 180px;
-  height: 45px;
+  line-height: 1.1;
+  border: none;
+  font-family: "Avenir-Medium";
 }
 
 .coupon input[name=coupon_code] {
@@ -1611,7 +1707,7 @@ form.pp-form-product-variations .pp-button-variantion-submit:hover {
   }
 }
 .coupon .button {
-  background: var(--accent-color) !important;
+  background-color: var(--accent-color) !important;
   color: white !important;
   border-radius: 30px !important;
   font-weight: normal !important;
@@ -1645,27 +1741,39 @@ form.pp-form-product-variations .pp-button-variantion-submit:hover {
   font-size: 1.6rem;
   margin-bottom: 1rem;
 }
+.cart-collaterals .cart_totals .order-total .woocommerce-Price-amount * {
+  font-family: "Avenir-Heavy";
+}
 .cart-collaterals .cart_totals .wc-proceed-to-checkout .checkout-button {
   background: var(--accent-color);
-  font-family: "Avenir-Heavy";
+  font-family: "Avenir-Medium";
   letter-spacing: 0;
   font-size: 1.1rem;
   padding: 1.3rem;
+  color: #fff;
 }
 .cart-collaterals .cart_totals .wc-proceed-to-checkout .checkout-button:hover {
   opacity: 0.8 !important;
   background: var(--accent-color);
+  text-decoration: none;
 }
 
 .return-to-shop {
   margin-bottom: 3rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 .return-to-shop .button {
   background: var(--accent-color) !important;
   color: white !important;
   border-radius: 40px !important;
-  padding: 1rem 2rem !important;
+  padding: 12px 40px !important;
   font-family: "Avenir-Medium";
+  line-height: 1.2;
+}
+.return-to-shop .button:hover {
+  opacity: 0.8;
 }
 
 .woocommerce-checkout a {
@@ -1704,23 +1812,11 @@ form.pp-form-product-variations .pp-button-variantion-submit:hover {
 .woocommerce-checkout .woocommerce-message .button:hover {
   color: #fff !important;
 }
-.woocommerce-checkout .required-login-wrapper {
-  margin-bottom: 80px;
-  text-align: center;
+.woocommerce-checkout .shop_table .cart_item .product-name {
+  text-decoration: none !important;
 }
-.woocommerce-checkout .required-login-wrapper .heading {
-  margin-bottom: 24px;
-  font-size: 1.5rem;
-}
-.woocommerce-checkout .required-login-wrapper .btn {
-  min-width: 132px;
-  margin-right: 20px;
-  padding: 10px 32px;
-  font-size: 1.125rem;
-  line-height: 120%;
-  background-color: #A22F2C;
-  border-radius: 30px;
-  font-family: "Avenir-Medium";
+.woocommerce-checkout .shop_table .cart_item .product-name a {
+  text-decoration: underline;
 }
 .woocommerce-checkout .shop_table .amount {
   font-family: "Avenir-Heavy";
@@ -1925,6 +2021,8 @@ button#place_order {
   background: var(--accent-color);
   padding: 1.2rem;
   text-transform: capitalize;
+  border: none;
+  color: #fff;
 }
 button#place_order:hover {
   opacity: 0.8;
@@ -1984,9 +2082,26 @@ button#place_order:hover {
   margin-bottom: 2em;
   padding-bottom: 2em;
 }
+.add-attendees-container .__item .gr-events {
+  display: flex;
+}
+.add-attendees-container .__item .gr-events .and {
+  font-family: "Avenir-Heavy";
+  font-size: 1.2rem;
+  margin: 0 24px;
+}
 .add-attendees-container .__item .product-name {
   margin-bottom: 0.6em;
   font-size: 1.3em;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.add-attendees-container .__item .product-name .event-time {
+  font-family: "Avenir-Roman";
+  font-weight: normal;
+  font-size: 0.925rem;
+  margin-top: 6px;
+  opacity: 0.8;
 }
 .add-attendees-container .__status-icon {
   width: 30px;
@@ -1999,6 +2114,7 @@ button#place_order:hover {
   border-radius: 1px;
   border: solid 1px #c5c5c5;
   width: 100%;
+  transition: all 0s;
 }
 .add-attendees-container input[type=text]::-moz-placeholder, .add-attendees-container input[type=email]::-moz-placeholder {
   color: #717171;
@@ -2021,7 +2137,7 @@ button#place_order:hover {
 
 .pp-table {
   border-collapse: collapse;
-  border: solid #e0e0e0;
+  border: solid #ccc;
   border-width: 1px 1px 0 1px;
   max-width: 100%;
   margin: 1.5em 0;
@@ -2037,7 +2153,7 @@ button#place_order:hover {
 }
 .pp-table th, .pp-table td {
   padding: 0.5em;
-  border: solid #e0e0e0;
+  border: solid #ccc;
   border-width: 0 1px 1px 0;
   box-sizing: border-box;
   font-size: 1rem;
@@ -2124,17 +2240,19 @@ button#place_order:hover {
   margin-left: 1em;
   margin-bottom: 0.5em;
 }
+
 .pp-button {
   background: #6e297b;
   border: none;
   border-radius: 1px;
   color: white;
   padding: 0.7em 1em;
+  font-family: "Avenir-Medium";
   transition: 0.3s ease;
   -webkit-transition: 0.3s ease;
 }
 .pp-button:hover {
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 .btn-not-active {
@@ -2148,7 +2266,7 @@ button#place_order:hover {
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(1, 1, 1, 0.3);
+  background: rgba(1, 1, 1, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2159,7 +2277,7 @@ button#place_order:hover {
   -webkit-transition: 0.3s ease;
 }
 .pp-popup-add-new-contact__inner {
-  width: 400px;
+  width: 420px;
   padding: 2em;
   border-radius: 3px;
   background: white;
@@ -2175,16 +2293,25 @@ body.__show-pp-popup-add-new-contact .pp-popup-add-new-contact {
 }
 
 .add-new-contact-form h4 {
-  font-size: 1.2em;
+  font-size: 1.4em;
   margin-bottom: 1em;
 }
 .add-new-contact-form label {
   width: 100%;
   display: block;
   margin-bottom: 0.5em;
+  font-size: 0.975rem;
+  opacity: 1;
+  text-transform: none;
+  font-family: "Avenir-Medium";
+}
+.add-new-contact-form label .__label {
+  font-family: "Avenir-Heavy";
+  font-size: 0.925rem;
 }
 .add-new-contact-form input[type=text], .add-new-contact-form input[type=email] {
-  padding: 1em;
+  padding: 12px 14px;
+  transition: all 0s;
 }
 .add-new-contact-form .buttons {
   margin-top: 1.5em;
@@ -2200,7 +2327,7 @@ body.__show-pp-popup-add-new-contact .pp-popup-add-new-contact {
 .pp-notification {
   padding: 1em;
   background: rgba(110, 41, 123, 0.1098039216);
-  border-left: solid 2px #6e297b;
+  border-left: solid 3px #6e297b;
   font-size: 0.9em;
   line-height: normal;
   margin-bottom: 1em;
@@ -2336,6 +2463,10 @@ p.order-again a.button:hover {
 .woocommerce-account .page-container {
   margin-bottom: 3rem;
 }
+.woocommerce-account .woocommerce-MyAccount-content a {
+  color: var(--accent-color);
+  font-family: "Avenir-Medium";
+}
 .woocommerce-account .woocommerce-MyAccount-content mark {
   font-family: "Avenir-Heavy";
 }
@@ -2344,6 +2475,27 @@ p.order-again a.button:hover {
 }
 .woocommerce-account .woocommerce-MyAccount-content table.shop_table .woocommerce-Price-amount * {
   font-family: "Avenir-Heavy";
+}
+.woocommerce-account .woocommerce-MyAccount-content .woocommerce-info .woocommerce-Button {
+  float: right;
+  padding: 10px 24px;
+  border: none;
+  font-size: 1rem;
+  text-decoration: none;
+  background-color: #6e297b;
+  color: #fff;
+}
+.woocommerce-account .woocommerce-MyAccount-content .woocommerce-info .woocommerce-Button:hover {
+  opacity: 0.8;
+}
+.woocommerce-account .woocommerce-Address .woocommerce-Address-title {
+  margin: 12px 0;
+}
+.woocommerce-account .woocommerce-Address address {
+  font-size: 1.125rem;
+}
+.woocommerce-account .woocommerce-Address .edit {
+  display: none;
 }
 .woocommerce-account .woocommerce-order-details h2 {
   margin: 24px 0;
@@ -2359,10 +2511,20 @@ p.order-again a.button:hover {
 .woocommerce-account .woocommerce-customer-details address p {
   margin-top: 8px;
 }
+.woocommerce-account .woocommerce-customer-details--phone, .woocommerce-account .woocommerce-customer-details--email {
+  margin-top: 8px;
+}
+.woocommerce-account .woocommerce-customer-details--phone::before, .woocommerce-account .woocommerce-customer-details--email::before {
+  margin-top: -3px;
+}
 
 .woocommerce-MyAccount-navigation ul {
   border: solid 1px #eee;
   background: white;
+}
+.woocommerce-MyAccount-navigation ul .woocommerce-MyAccount-navigation-link--downloads,
+.woocommerce-MyAccount-navigation ul .woocommerce-MyAccount-navigation-link--edit-account {
+  display: none;
 }
 .woocommerce-MyAccount-navigation ul li:not(:last-child) {
   border-bottom: solid 1px #eee;
@@ -2383,10 +2545,12 @@ p.order-again a.button:hover {
 
 table.woocommerce-orders-table.woocommerce-MyAccount-orders .button {
   margin-right: 8px;
+  padding: 10px 20px;
   background: var(--accent-color2);
   color: white;
   font-size: 1rem;
   font-family: "Avenir-Medium";
+  border-radius: 4px;
 }
 table.woocommerce-orders-table.woocommerce-MyAccount-orders th {
   font-family: "Avenir-Heavy";

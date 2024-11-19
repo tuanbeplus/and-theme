@@ -90,3 +90,75 @@ function ppwc_get_event_data_by_product_variation_id($variation_id) {
     'event_child' => $wp_event_child_id ? pp_get_event_data_by_id((int) $wp_event_child_id) : '',
   ];
 }
+
+/**
+ * Get the Tax rate for GST
+ * 
+ * @return float Tax rate
+ * @author Tap
+ */
+function ppwc_get_tax_rates_for_gst() {
+  // Get all tax rates for the "Standard" tax class
+  $tax_rates = WC_Tax::get_rates_for_tax_class(''); // Leave empty for "Standard" tax rates
+  // Get tax rates for GST
+  $gst_rate = 0;
+  foreach ($tax_rates as $rate_id => $rate) {
+    if ( $rate->tax_rate_name == 'GST' ) {
+      $gst_rate = (float)$rate->tax_rate;
+    } 
+  }
+  return $gst_rate;
+}
+
+/**
+ * Calculator GST from product price
+ * 
+ * @param float $p_price  Product price
+ * @return float    GST
+ * @author Tap
+ */
+function ppwc_calculator_product_gst($p_price) {
+  $gst_price = 0;
+  $gst_rate = ppwc_get_tax_rates_for_gst();
+  if ( isset($gst_rate) && $gst_rate > 0 ) {
+    $gst_price = round((float)$p_price * $gst_rate / 100, 1);
+  }
+  return $gst_price;
+}
+
+/**
+ * Merge Event names
+ * 
+ * @param string $event_name_1  Event parent name
+ * @param string $event_name_2  Event child name
+ * @return string The final event name
+ */
+function ppwc_merge_event_names($event_name_1, $event_name_2) {
+  // Validate inputs
+  if (empty($event_name_1) && empty($event_name_2)) {
+    return ''; // Explicitly return an empty string
+  } 
+  elseif (empty($event_name_2)) {
+    return $event_name_1;
+  } 
+  elseif (empty($event_name_1)) {
+    return $event_name_2;
+  }
+  // Find the common base between the two strings
+  $common_base = '';
+  for ($i = 0; $i < min(strlen($event_name_1), strlen($event_name_2)); $i++) {
+    if ($event_name_1[$i] === $event_name_2[$i]) {
+      $common_base .= $event_name_1[$i];
+    } else {
+      break;
+    }
+  }
+  // Trim trailing spaces from the common base
+  $common_base = rtrim($common_base);
+  // Extract the differing parts
+  $part1 = trim(str_replace($common_base, '', $event_name_1));
+  $part2 = trim(str_replace($common_base, '', $event_name_2));
+
+  // Merge the strings and trim the final result
+  return trim($common_base . ' ' . $part1 . ' & ' . $part2);
+}

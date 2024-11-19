@@ -189,6 +189,9 @@ $menu_items = isset($custom_page_sidebar['menu_items']) ? $custom_page_sidebar['
             <div class="row">
                 <?php
                     $parentDetails = getParentDetails();
+                    $parentId = isset($parentDetails->ID) ? $parentDetails->ID : '';
+                    $paretnUrl = get_permalink($parentId) ?? '';
+                    $parentTitle = isset($parentDetails->post_title) ? $parentDetails->post_title : '';
 
                     if( have_rows('page_builder') ):
                         // loop through the rows of data
@@ -205,18 +208,20 @@ $menu_items = isset($custom_page_sidebar['menu_items']) ? $custom_page_sidebar['
                         // no layouts found
                     endif;
                 ?>
+                <?php if (!empty($parentId) && !empty($paretnUrl)): ?>
                 <section class="col-12 back-page bottom">
                     <div class="container">
                         <div class="row">
                             <div class="col-12 col-md-6 text-content-block">
-                                <a href="<?php echo get_permalink($parentDetails->ID); ?>" class="btn circle dark-red">
+                                <a href="<?php echo $paretnUrl; ?>" class="btn circle dark-red">
                                     <span class="material-icons">arrow_back</span>
-                                    <span class="text"><?php echo $parentDetails->post_title; ?></span>
+                                    <span class="text"><?php echo $parentTitle; ?></span>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </section>
+                <?php endif; ?>
             </div>
 
         </div>

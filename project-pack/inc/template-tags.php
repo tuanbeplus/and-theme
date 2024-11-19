@@ -373,9 +373,13 @@ function pp_product_variable_choose_options_tag($product) {
               <div class="month-bucket">
                 <span class="month__name"><?php echo $monthName ?? ''; ?></span>
                 <?php foreach ($monthBucket as $event): 
-                      $upcomingEvents[] = $event;
-                      // echo '<pre>'; print_r($event); echo '</pre>';
-                      $old_class = ((isset($event['__OLD_EVENT']) && $event['__OLD_EVENT']) == 1 ? '__old-event __disable' : '');
+                    $upcomingEvents[] = $event;
+                    // echo '<pre>'; print_r($event); echo '</pre>';
+                    $old_class = ((isset($event['__OLD_EVENT']) && $event['__OLD_EVENT']) == 1 ? '__old-event __disable' : '');
+                    $event_name = '';
+                    $e_parent_name = $event['event_parent']['post_title'] ?? '';
+                    $e_child_name = $event['event_child']['post_title'] ?? '';
+                    $event_name = ppwc_merge_event_names($e_parent_name, $e_child_name);
                   ?>
                   <div class="<?php echo $old_class; ?> option-block product-variable-item product-variable-item__id-<?php echo $event['variation_id'] ?> <?php echo $event['is_in_stock'] ? '' : '__disable'; ?>">
                     <?php if(!$event['is_in_stock']) {
@@ -384,7 +388,7 @@ function pp_product_variable_choose_options_tag($product) {
                     <label class="product-variation-item-label" <?php echo (!$event['is_in_stock']) ? '' : 'tabindex="0"'; ?>>
                       <input name="product_variation[]" type="checkbox" style="display: none;" value="<?php echo $event['variation_id']; ?>">
                       <h4>
-                        <?php echo implode(' — ', $event['attributes']); ?> 
+                        <strong><?php echo $event_name; ?></strong>
                         <?php echo ! empty($event['price_html']) ? "<span class=\"pp-amount\">{$event['price_html']}</span>" : '' ?>
                         <?php echo pp_woo_remaining_seats_available($event); ?>
                       </h4>

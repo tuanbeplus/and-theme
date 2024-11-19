@@ -368,6 +368,17 @@ function pp_ajax_set_product_price() {
   // wp_send_json($_POST);
   ppsf_set_product_price($_POST['data']['productParentID'], $_POST['data']['prices']);
 }
-
 add_action('wp_ajax_pp_ajax_set_product_price', 'pp_ajax_set_product_price');
 add_action('wp_ajax_nopriv_pp_ajax_set_product_price', 'pp_ajax_set_product_price');
+
+/**
+ * Ajax action send Cart items count
+ */
+function pp_ajax_get_cart_contents_count() {
+  // Get the current cart item count
+  $count = WC()->cart->get_cart_contents_count();
+  // Send the count back as a response
+  wp_send_json_success($count);
+}
+add_action('wp_ajax_pp_ajax_get_cart_contents_count', 'pp_ajax_get_cart_contents_count');
+add_action('wp_ajax_nopriv_pp_ajax_get_cart_contents_count', 'pp_ajax_get_cart_contents_count');

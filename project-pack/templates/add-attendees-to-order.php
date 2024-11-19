@@ -31,7 +31,7 @@ if (empty($event_variations)) return;
         $course_information = $item->get_meta('course_information');
         // $__SF_CONTACT_FULL = $item->get_meta('__SF_CONTACT_FULL'); 
         // echo '<pre>'; print_r($course_information); echo '</pre>';
-        $event_title = $course_information['event_parent']['post_title'] ?? '';
+        
 
         // echo '<pre>'; print_r($__SF_CONTACT_FULL); echo '</pre>';
         $product_id = $item['product_id'];
@@ -41,9 +41,37 @@ if (empty($event_variations)) return;
 
         if(!isset($course_information) || empty($course_information)) continue;
         // print_r([$product_id, $variation_id, $quantity]);
+
+        $event_parent = $course_information['event_parent'] ?? '';
+        $e_parent_title = $event_parent['post_title'] ?? '';
+        $e_parent_date = $event_parent['workshop_event_date_text__c'] ?? '';
+        $e_parent_time = $event_parent['workshop_times__c'] ?? '';
+
+        $event_child = $course_information['event_child'] ?? '';
+        $e_child_title = $event_child['post_title'] ?? '';
+        $e_child_date = $event_child['workshop_event_date_text__c'] ?? '';
+        $e_child_time = $event_child['workshop_times__c'] ?? '';
       ?>
       <div class="__item">
-        <h4 class="product-name"><?php echo $event_title; ?></h4>
+        <div class="gr-events">
+          <?php if (!empty($event_parent) && !empty($e_parent_title)): ?>
+            <h4 class="product-name">
+              <?php echo $e_parent_title; ?>
+              <?php if (!empty($e_parent_date) && !empty($e_parent_time)): ?>
+                <p class="event-time"><?php echo $e_parent_date .', '. $e_parent_time; ?></p>
+              <?php endif; ?>
+            </h4>
+          <?php endif; ?>
+          <?php if (!empty($event_child) && !empty($e_child_title)): ?>
+            <p class="and">&</p>
+            <h4 class="product-name">
+              <?php echo $e_child_title; ?>
+              <?php if (!empty($e_child_date) && !empty($e_child_time)): ?>
+                <p class="event-time"><?php echo $e_child_date .', '. $e_child_time; ?></p>
+              <?php endif; ?>
+            </h4>
+          <?php endif; ?>
+        </div>
         <table class="pp-table add-attendees-table">
           <thead>
             <tr>

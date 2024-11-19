@@ -1030,9 +1030,3 @@ body:not(.theme-preset-active) footer#colophon {
     font-size: 75%;
   }
 }
-
-
-/* Custom Woo */
-.woocommerce .__sidebar .pp-product-single-add-to-cart .product.add_to_cart_inline {
-  display: none;
-}

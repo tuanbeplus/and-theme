@@ -146,6 +146,35 @@ import { doTippyGlobal, notificationGlobal } from "./general";
     });
   }
 
+  // Update quantity cart at Button Mini Cart after ajax complete
+  $(document).ajaxComplete(function(event, xhr, settings) {
+    const miniCartBtn_Top = $('a.__mini-cart-button');
+    const miniCartBtn_Sidebar = $('.pp-nav__item.__cart a');
+    // The AJAX add to cart request has completed
+    if (settings.url.indexOf('wc-ajax=add_to_cart') !== -1
+    || settings.url.indexOf('wc-ajax=remove_from_cart') !== -1
+    || settings.url.indexOf('wc-ajax=get_refreshed_fragments') !== -1 
+    ) {
+      $.ajax({
+        url: wc_add_to_cart_params.ajax_url, // WooCommerce's default AJAX URL
+        type: 'GET',
+        data: {
+            action: 'pp_ajax_get_cart_contents_count'
+        },
+        success: function(response) {
+          if (response.success) {
+            const cartCount = response.data;
+            miniCartBtn_Top.find('.quantity-cart').text(cartCount);
+            miniCartBtn_Sidebar.find('.quantity-cart').text(cartCount);
+          }
+          else {
+            console.log("Update quantity at button Mini Cart failed!");
+          }
+        }
+      });
+    }
+  });
+
   $(() => {
     qttUpdateFn();
     afterAjaxUpdateCart();
