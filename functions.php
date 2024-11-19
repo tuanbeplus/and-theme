@@ -342,7 +342,7 @@ require get_template_directory() . '/inc/custom-page-sidebar.php';
 /**
  * ClearXP webhook functions
  */
-require get_template_directory() . '/inc/clearxp-webhook.php';
+// require get_template_directory() . '/inc/clearxp-webhook.php';
 
 /**
  * Load custom WordPress nav walker.
@@ -552,6 +552,11 @@ function and_add_security_header() {
     header( "Referrer-Policy: strict-origin-when-cross-origin" );
     header( "Permissions-Policy: geolocation=self" );
     header( "Access-Control-Allow-Origin: *" );
+
+	// header("Cross-Origin-Embedder-Policy: unsafe-none");
+	// header("Cross-Origin-Opener-Policy: same-origin-allow-popups");
+	// header("Cross-Origin-Resource-Policy: cross-origin");
+	
 	if(get_the_ID() == '11' || get_the_ID() == '18192') {
 		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 		header("Cache-Control: post-check=0, pre-check=0", false);
