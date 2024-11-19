@@ -144,6 +144,9 @@ function ppwc_merge_event_names($event_name_1, $event_name_2) {
   elseif (empty($event_name_1)) {
     return $event_name_2;
   }
+  if ($event_name_1 == $event_name_2) {
+    return $event_name_1;
+  }
   // Find the common base between the two strings
   $common_base = '';
   for ($i = 0; $i < min(strlen($event_name_1), strlen($event_name_2)); $i++) {
