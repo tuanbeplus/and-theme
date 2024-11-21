@@ -182,8 +182,13 @@ function pp_product_landing_v2_group_per_term_template($term, $params) {
   return ob_get_clean();
 }
 
-function pp_saleforce_current_user_metadata() {
-  $user = wp_get_current_user();
+function pp_saleforce_current_user_metadata($user_id = null) {
+  if($user_id != null) {
+    $user = get_userdata($user_id);
+  } else {
+    $user = wp_get_current_user();
+  }
+  
   if(!$user) return;
 
   $__salesforce_account_json = get_user_meta($user->ID, '__salesforce_account_json', true);

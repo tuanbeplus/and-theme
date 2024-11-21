@@ -34,6 +34,11 @@ function pp_admin_enqueue_scripts() {
   wp_localize_script('pp-admin-script', 'PP_ADMIN_DATA', [
     'PRICEBOOK2_BASE_PRICE_ID' => ppsf_base_Pricebook2_base_price_id(),
   ]);
+
+  wp_localize_script( 'pp-admin-script', 'PP_DATA', apply_filters( 'pp/script_data', [
+    'ajax_url' => admin_url('admin-ajax.php'),
+    'lang' => [],
+  ] ) );
 }
 
 add_action( 'admin_enqueue_scripts', 'pp_admin_enqueue_scripts' );

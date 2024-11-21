@@ -74,6 +74,10 @@
   }
 
   const onEmailUpdate = () => {
+    setTimeout(() => {
+      console.log($(`${ FORM_ID } input[name^="email"]`).length);
+    }, 1000)
+
     $('body').on('change', `${ FORM_ID } input[name^="email"]`, async function(e) {
       const email = e.target.value;
       const sfEventID = $(this).data('event-parent-id');
@@ -188,6 +192,10 @@
       if(pass != true) return;
 
       console.log(pass, $form.serialize());
+      $form.find('button[type="submit"]').css({
+        opacity: .1,
+        PointerEvent: 'none',
+      })
       // let data = $form.serialize() + '&action=pp_ajax_save_attendees_in_cart';
       let data = $form.serialize() + '&action=pp_ajax_save_attendees_to_order';
       //pp_ajax_save_attendees_in_cart
@@ -325,5 +333,6 @@
   }
 
   $(init)
+  // $(w).on('load', init)
 
 })(window, jQuery)

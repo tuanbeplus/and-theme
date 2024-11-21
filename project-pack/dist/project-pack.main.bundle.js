@@ -3314,6 +3314,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   };
   var onEmailUpdate = function onEmailUpdate() {
+    setTimeout(function () {
+      console.log($("".concat(FORM_ID, " input[name^=\"email\"]")).length);
+    }, 1000);
     $('body').on('change', "".concat(FORM_ID, " input[name^=\"email\"]"), /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
         var email, sfEventID, isEmail, $table, $tr, $td, dup, _yield$findEmailSales, contact, joined;
@@ -3451,9 +3454,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _context3.abrupt("return");
             case 5:
               console.log(pass, $form.serialize());
+              $form.find('button[type="submit"]').css({
+                opacity: .1,
+                PointerEvent: 'none'
+              });
               // let data = $form.serialize() + '&action=pp_ajax_save_attendees_in_cart';
               data = $form.serialize() + '&action=pp_ajax_save_attendees_to_order'; //pp_ajax_save_attendees_in_cart
-              _context3.next = 9;
+              _context3.next = 10;
               return $.ajax({
                 type: 'POST',
                 url: ajax_url,
@@ -3462,7 +3469,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   console.log(err);
                 }
               });
-            case 9:
+            case 10:
               _yield$$$ajax = _context3.sent;
               success = _yield$$$ajax.success;
               if (success == true) {
@@ -3472,7 +3479,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               } else {
                 alert('External Error: Please try again!');
               }
-            case 12:
+            case 13:
             case "end":
               return _context3.stop();
           }
@@ -3630,6 +3637,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     // stepUiController(2);
   };
   $(init);
+  // $(w).on('load', init)
 })(window, jQuery);
 
 /***/ }),
@@ -4705,6 +4713,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     });
   };
+
   var onClickButtonBookingSlot = function onClickButtonBookingSlot() {
     $(document.body).on('click', '.pp-button-book-slot', function () {
       var $btn = $(this);

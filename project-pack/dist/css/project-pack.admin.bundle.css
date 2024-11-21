@@ -1,3 +1,617 @@
+:root {
+  --site-container-width: 1400px;
+  --site-container-spacing: 20px;
+  --accent-color: #6e3685;
+  --accent-color2: #A22F2C;
+  --primary-font-normal: "Avenir-Roman";
+  --primary-font-medium: "Avenir-Medium";
+  --primary-font-heavy: "Avenir-Heavy";
+}
+
+.woocommerce-checkout a {
+  width: -moz-fit-content;
+  width: fit-content;
+  color: var(--accent-color);
+}
+.woocommerce-checkout a:hover {
+  color: var(--accent-color);
+  opacity: 0.95;
+}
+.woocommerce-checkout form label {
+  opacity: 1;
+}
+.woocommerce-checkout .woocommerce-form-coupon-toggle .showcoupon {
+  margin-top: 6px;
+  display: flex;
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+.woocommerce-checkout .woocommerce-form-coupon-toggle .showcoupon::after {
+  content: "\f347";
+  font-family: dashicons;
+  font-size: 1.125rem;
+}
+.woocommerce-checkout .woocommerce-message .empty-cart-message {
+  margin-top: 30px;
+}
+.woocommerce-checkout .woocommerce-message .button {
+  float: none;
+  margin-top: 10px;
+  font-family: "Avenir-Medium";
+  color: #fff;
+  background-color: #6e3685 !important;
+}
+.woocommerce-checkout .woocommerce-message .button:hover {
+  color: #fff !important;
+}
+.woocommerce-checkout .shop_table .cart_item .product-name {
+  text-decoration: none !important;
+}
+.woocommerce-checkout .shop_table .cart_item .product-name a {
+  text-decoration: underline;
+}
+.woocommerce-checkout .shop_table .amount {
+  font-family: "Avenir-Heavy";
+}
+.woocommerce-checkout .shop_table .amount * {
+  font-family: "Avenir-Heavy";
+}
+.woocommerce-checkout .shop_table .product-total .amount {
+  font-family: "Avenir-Medium";
+}
+.woocommerce-checkout .shop_table .product-total .amount * {
+  font-family: "Avenir-Medium";
+}
+@media (max-width: 767px) {
+  .woocommerce-checkout .required-login-wrapper {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+  .woocommerce-checkout .required-login-wrapper .btn {
+    margin-top: 20px;
+    font-size: 1rem;
+  }
+}
+
+form.woocommerce-checkout {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+form.woocommerce-checkout .woocommerce-NoticeGroup-checkout {
+  width: 100%;
+}
+form.woocommerce-checkout #customer_details {
+  width: 48% !important;
+}
+form.woocommerce-checkout #customer_details h3 {
+  margin-bottom: 1rem;
+}
+form.woocommerce-checkout .pp-order-review {
+  width: 48%;
+  margin-bottom: 1.68rem;
+}
+form.woocommerce-checkout .pp-order-review h3 {
+  margin-bottom: 1rem;
+}
+form.woocommerce-checkout .pp-order-review .pp-order-review__inner {
+  position: sticky;
+  top: 40px;
+}
+@media (max-width: 768px) {
+  form.woocommerce-checkout #customer_details,
+  form.woocommerce-checkout .pp-order-review {
+    width: 100% !important;
+  }
+}
+
+#customer_details {
+  display: inline-block;
+}
+#customer_details .col-12 {
+  padding: 0 !important;
+}
+#customer_details > * {
+  margin-bottom: 1.5rem;
+}
+#customer_details:before, #customer_details::after {
+  display: none;
+}
+#customer_details .col-1,
+#customer_details .col-2 {
+  float: none;
+  width: 100%;
+  max-width: initial;
+}
+#customer_details input[type=text],
+#customer_details input[type=tel],
+#customer_details input[type=password],
+#customer_details input[type=email],
+#customer_details textarea {
+  width: 100%;
+  border-color: #c5c5c5;
+  border-radius: 0;
+  height: 46px;
+  color: black;
+}
+#customer_details input[type=text]::-moz-placeholder, #customer_details input[type=tel]::-moz-placeholder, #customer_details input[type=password]::-moz-placeholder, #customer_details input[type=email]::-moz-placeholder, #customer_details textarea::-moz-placeholder {
+  color: black;
+}
+#customer_details input[type=text]::placeholder,
+#customer_details input[type=tel]::placeholder,
+#customer_details input[type=password]::placeholder,
+#customer_details input[type=email]::placeholder,
+#customer_details textarea::placeholder {
+  color: black;
+}
+#customer_details textarea {
+  height: 180px;
+}
+#customer_details .form-row .control-label,
+#customer_details .form-row .woocommerce-input-wrapper {
+  width: 100%;
+}
+#customer_details .form-row .selectric {
+  border-radius: 0;
+  border-color: #ddd;
+}
+#customer_details .form-row .selectric .label {
+  margin-left: 0;
+}
+#customer_details .form-row .button,
+#customer_details .form-row .select2-selection--single,
+#customer_details .form-row .select2-selection__rendered,
+#customer_details .form-row .select2-selection__arrow {
+  height: 46px !important;
+  line-height: 46px !important;
+  border-radius: 0;
+}
+#customer_details .form-row .control-label {
+  width: 100%;
+  text-transform: initial;
+  font-size: 1rem;
+  color: black;
+  opacity: 1;
+  font-weight: normal;
+}
+
+.checkout_coupon.woocommerce-form-coupon {
+  border-radius: 0 !important;
+  background: white;
+  border-color: #ddd !important;
+}
+.checkout_coupon.woocommerce-form-coupon p {
+  margin-bottom: 1rem;
+}
+.checkout_coupon.woocommerce-form-coupon .form-row {
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+.checkout_coupon.woocommerce-form-coupon input[name=coupon_code] {
+  height: 40px;
+  padding: 0 1rem;
+  border: solid 1px #777;
+  border-radius: 40px;
+  font-size: 1rem;
+}
+.checkout_coupon.woocommerce-form-coupon input[name=coupon_code]::-moz-placeholder {
+  color: black;
+}
+.checkout_coupon.woocommerce-form-coupon input[name=coupon_code]::placeholder {
+  color: black;
+}
+.checkout_coupon.woocommerce-form-coupon button[name=apply_coupon] {
+  height: 40px;
+  border-radius: 40px;
+  background: var(--accent-color);
+  color: white;
+  font-weight: normal;
+  font-size: 1rem;
+  min-width: 220px;
+  max-width: 100%;
+}
+.checkout_coupon.woocommerce-form-coupon button[name=apply_coupon]:hover {
+  opacity: 0.8;
+}
+
+table.woocommerce-checkout-review-order-table th, table.woocommerce-checkout-review-order-table td {
+  font-size: 1rem;
+  line-height: normal !important;
+}
+table.woocommerce-checkout-review-order-table th.product-name {
+  width: 70%;
+}
+table.woocommerce-checkout-review-order-table td.product-name {
+  text-decoration: underline;
+}
+table.woocommerce-checkout-review-order-table td:last-of-type {
+  display: table-cell !important;
+}
+
+#payment {
+  border-radius: 1px !important;
+  border: 1px solid #d3ced2;
+}
+#payment .woocommerce-privacy-policy-text {
+  margin-bottom: 1rem;
+  line-height: normal !important;
+}
+#payment .woocommerce-privacy-policy-text p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+#payment .wc_payment_method label {
+  font-size: 1rem;
+  font-family: "Avenir-Medium";
+  text-transform: none;
+}
+
+button#place_order {
+  width: 100%;
+  font-size: 1.125rem;
+  font-family: "Avenir-Heavy";
+  background: var(--accent-color);
+  padding: 1.2rem;
+  text-transform: capitalize;
+  border: none;
+  color: #fff;
+}
+button#place_order:hover {
+  opacity: 0.8;
+}
+
+.woocommerce form .form-row.woocommerce-invalid .select2-container,
+.woocommerce form .form-row.woocommerce-invalid input.input-text,
+.woocommerce form .form-row.woocommerce-invalid select {
+  border-color: #a00 !important;
+}
+
+.step-checkout-bar {
+  display: none;
+}
+.step-checkout-bar .step-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.step-checkout-bar .step-list .__line {
+  border-bottom: solid 1px #999;
+}
+.step-checkout-bar .step-list li {
+  width: 100%;
+}
+.step-checkout-bar .step-list .step-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1em 2em;
+  opacity: 0.4;
+}
+.step-checkout-bar .step-list .step-item.__active {
+  opacity: 1;
+  font-family: "Avenir-Heavy";
+}
+.step-checkout-bar .step-list .step-item .__icon {
+  display: inline-flex;
+  width: 36px;
+  line-height: 0;
+  margin-right: 8px;
+}
+.step-checkout-bar .step-list .step-item .__icon svg {
+  width: 100%;
+}
+.step-checkout-bar .step-list .step-item .__label {
+  line-height: 1.3em;
+}
+
+.add-attendees-container {
+  padding: 24px 32px;
+  background: white;
+  margin: 24px 0;
+}
+.add-attendees-container .__item {
+  border-bottom: solid 1px #ddd;
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+}
+.add-attendees-container .__item .gr-events {
+  display: flex;
+}
+.add-attendees-container .__item .gr-events .and {
+  font-family: "Avenir-Heavy";
+  font-size: 1.2rem;
+  margin: 0 24px;
+}
+.add-attendees-container .__item .product-name {
+  margin-bottom: 0.6em;
+  font-size: 1.3em;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.add-attendees-container .__item .product-name .event-time {
+  font-family: "Avenir-Roman";
+  font-weight: normal;
+  font-size: 0.925rem;
+  margin-top: 6px;
+  opacity: 0.8;
+}
+.add-attendees-container .__status-icon {
+  width: 30px;
+  display: inline-block;
+}
+.add-attendees-container input[type=text],
+.add-attendees-container input[type=email] {
+  padding: 0.6em 1em;
+  color: #2a2a2a;
+  border-radius: 1px;
+  border: solid 1px #c5c5c5;
+  width: 100%;
+  transition: all 0s;
+}
+.add-attendees-container input[type=text]::-moz-placeholder, .add-attendees-container input[type=email]::-moz-placeholder {
+  color: #717171;
+}
+.add-attendees-container input[type=text]::placeholder,
+.add-attendees-container input[type=email]::placeholder {
+  color: #717171;
+}
+.add-attendees-container input[type=text]:-moz-read-only, .add-attendees-container input[type=email]:-moz-read-only {
+  background: #f6f6f6;
+}
+.add-attendees-container input[type=text]:read-only,
+.add-attendees-container input[type=email]:read-only {
+  background: #f6f6f6;
+}
+.add-attendees-container .btn-submit {
+  padding: 12px 24px;
+  font-family: "Avenir-Medium";
+}
+
+.pp-table {
+  border-collapse: collapse;
+  border: solid #ccc;
+  border-width: 1px 1px 0 1px;
+  max-width: 100%;
+  margin: 1.5em 0;
+  background: white;
+  font-size: 1em;
+  width: 100%;
+}
+.pp-table .pp-table {
+  margin: 0;
+}
+.pp-table th {
+  font-family: "Avenir-Medium";
+}
+.pp-table th, .pp-table td {
+  padding: 0.5em;
+  border: solid #ccc;
+  border-width: 0 1px 1px 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+.pp-table thead th {
+  text-align: left;
+  background-color: #f9f9f9;
+}
+
+.add-attendees-table td:first-of-type {
+  padding-right: 0.5em !important;
+  width: auto !important;
+}
+.add-attendees-table td:last-of-type {
+  width: auto !important;
+}
+.add-attendees-table .__remove-item {
+  text-wrap: nowrap;
+  color: var(--accent-color);
+  text-decoration: none;
+  border-bottom: solid 1px;
+}
+.add-attendees-table .__remove-item:hover {
+  opacity: 0.8;
+}
+.add-attendees-table td, .add-attendees-table th {
+  position: relative;
+}
+.add-attendees-table td.show-error-message, .add-attendees-table th.show-error-message {
+  background: #FF5722;
+}
+.add-attendees-table td.show-error-message .error-message, .add-attendees-table th.show-error-message .error-message {
+  visibility: visible;
+  opacity: 1;
+}
+.add-attendees-table tr.__loading {
+  pointer-events: none;
+}
+.add-attendees-table tr.__loading td > * {
+  opacity: 0.4;
+}
+.add-attendees-table tr.__loading td:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../../images/loading.svg) no-repeat center center;
+  background-size: 30px;
+  z-index: 3;
+}
+.add-attendees-table tr.__invalid__ {
+  border-left: solid 2px #f55724;
+  background: rgba(245, 87, 36, 0.0705882353);
+}
+.add-attendees-table .error-message {
+  position: absolute;
+  width: 100%;
+  background: #FF5722;
+  color: white;
+  padding: 0.5em;
+  left: 0;
+  top: 100%;
+  z-index: 9;
+  visibility: hidden;
+  opacity: 0;
+  font-family: "Avenir-Heavy";
+  transition: 0.3s ease;
+  -webkit-transition: 0.3s ease;
+}
+
+.footer-form {
+  display: flex;
+}
+.footer-form .message * {
+  font-size: 1rem;
+}
+.footer-form .buttons {
+  margin-left: auto;
+  display: flex;
+}
+.footer-form .buttons > * {
+  margin-left: 1em;
+  margin-bottom: 0.5em;
+}
+
+.pp-button {
+  background: #6e297b;
+  border: none;
+  border-radius: 1px;
+  color: white;
+  padding: 0.7em 1em;
+  font-family: "Avenir-Medium";
+  transition: 0.3s ease;
+  -webkit-transition: 0.3s ease;
+}
+.pp-button:hover {
+  opacity: 0.8;
+}
+
+.btn-not-active {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.pp-popup-add-new-contact {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(1, 1, 1, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s ease;
+  -webkit-transition: 0.3s ease;
+}
+.pp-popup-add-new-contact__inner {
+  width: 420px;
+  padding: 2em;
+  border-radius: 3px;
+  background: white;
+  box-shadow: 0 0 10px 0 rgba(1, 1, 1, 0.1);
+}
+.pp-popup-add-new-contact__inner .btn-close {
+  background: black;
+}
+
+body.__show-pp-popup-add-new-contact .pp-popup-add-new-contact {
+  visibility: visible;
+  opacity: 1;
+}
+
+.add-new-contact-form h4 {
+  font-size: 1.4em;
+  margin-bottom: 1em;
+}
+.add-new-contact-form label {
+  width: 100%;
+  display: block;
+  margin-bottom: 0.5em;
+  font-size: 0.975rem;
+  opacity: 1;
+  text-transform: none;
+  font-family: "Avenir-Medium";
+}
+.add-new-contact-form label .__label {
+  font-family: "Avenir-Heavy";
+  font-size: 0.925rem;
+}
+.add-new-contact-form input[type=text], .add-new-contact-form input[type=email] {
+  padding: 12px 14px;
+  transition: all 0s;
+}
+.add-new-contact-form .buttons {
+  margin-top: 1.5em;
+  display: flex;
+}
+.add-new-contact-form .buttons > * {
+  margin-left: 0.5em;
+}
+.add-new-contact-form .buttons > *:first-child {
+  margin-left: auto;
+}
+
+.pp-notification {
+  padding: 1em;
+  background: rgba(110, 41, 123, 0.1098039216);
+  border-left: solid 3px #6e297b;
+  font-size: 0.9em;
+  line-height: normal;
+  margin-bottom: 1em;
+}
+
+.pp-form-loading {
+  pointer-events: none;
+}
+.pp-form-loading > * {
+  opacity: 0.5;
+}
+.pp-form-loading:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../../images/loading.svg) no-repeat center center;
+  background-size: 30px;
+  z-index: 3;
+}
+.pp-form-loading button[type=submit] {
+  opacity: 0.6;
+}
+
+.woocommerce .simplify-embedded-payment-form {
+  margin: 40px auto 24px;
+  padding: 0 12px;
+  display: block;
+  background-color: #fff;
+}
+.woocommerce .button.cancel {
+  margin: 32px 0;
+  padding: 12px 24px;
+  background-color: #6e3685;
+  color: #fff;
+  font-size: 1rem;
+  font-family: "Avenir-Medium";
+}
+.woocommerce .button.cancel:hover {
+  background-color: #6e3685;
+  color: #fff;
+  opacity: 0.8;
+}
+.woocommerce ul.order_details li strong {
+  margin-top: 8px;
+}
+.woocommerce ul.order_details li strong * {
+  font-family: "Avenir-Heavy";
+}
+
 #PP_EVENT_IMPORT_PAGE {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -415,4 +1029,55 @@ table.events-table tr.__old {
   display: block;
   position: absolute;
   left: -22px;
+}
+
+.add-attendees-modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: rgba(1, 1, 1, 0.4);
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s ease;
+  -webkit-transition: 0.3s ease;
+}
+.add-attendees-modal__inner {
+  width: 700px;
+  max-width: 100%;
+  background: white;
+  border-radius: 2px;
+  margin-top: 5vw;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: relative;
+}
+.add-attendees-modal__close {
+  font-size: 12px;
+  background: black;
+  color: white;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
+  border-radius: 30px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+}
+.add-attendees-modal .gr-events {
+  align-items: center;
+}
+
+body.add-attendees-modal__open .add-attendees-modal {
+  visibility: visible;
+  opacity: 1;
 }

@@ -108,3 +108,39 @@ function pp_custom_woocommerce_au_states( $states ) {
 
   return $states;
 }
+
+function woo_order_add_attendees_custom_box() {
+	$screens = [ 'shop_order' ];
+	foreach ( $screens as $screen ) {
+		add_meta_box(
+			'add_attendees_id',                 // Unique ID
+			'Add Attendees',                    // Box title
+			'woo_order_add_attendees_html',      // Content callback, must be of type callable
+			$screen                             // Post type
+		);
+	}
+}
+add_action( 'add_meta_boxes', 'woo_order_add_attendees_custom_box' );
+
+function woo_order_add_attendees_html($post) {
+  // print_r($post);
+  ?>
+  <div>
+    <button class="button" type="button" onClick="javascript: document.body.classList.toggle('add-attendees-modal__open')">Open Attendees Config</button>
+  </div>
+  <?php
+}
+
+add_action( 'admin_footer', function() {
+  if(!isset($_GET['post'])) return;
+  $posttype = get_post_type($_GET['post']);
+  if($posttype != 'shop_order') return;
+  ?>
+  <div class="add-attendees-modal">
+    <div class="add-attendees-modal__inner">
+      <span class="add-attendees-modal__close" onClick="javascript: document.body.classList.toggle('add-attendees-modal__open')">✕</span>
+      <?php echo do_shortcode("[add_attendees_to_order order_id={$_GET['post']}]") ?>
+    </div>
+  </div>
+  <?php
+} );

@@ -5,10 +5,11 @@
 // var_dump($atts);
 $order_id = (int) $atts['order_id'];
 $order = wc_get_order($order_id);
-$sf_user_metadata = pp_saleforce_current_user_metadata();
+$sf_user_metadata = pp_saleforce_current_user_metadata($order->user_id);
+// print_r($sf_user_metadata);
 $account_id = isset($sf_user_metadata['account_id']) ? $sf_user_metadata['account_id'] : '';
 $account_name = isset($sf_user_metadata['salesforce_account']['Name']) ? $sf_user_metadata['salesforce_account']['Name'] : '';
-$attendees = pp_get_attendees_by_order($order_id);
+$attendees = pp_get_attendees_by_order($order_id); 
 // echo '<pre>'; print_r($attendees); echo '</pre>'; 
 
 $event_variations = array();
