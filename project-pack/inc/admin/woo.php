@@ -109,39 +109,76 @@ function pp_custom_woocommerce_au_states( $states ) {
   return $states;
 }
 
+// Add meta box only if the order contains workshops
 function woo_order_add_attendees_custom_box() {
-	$screens = [ 'shop_order' ];
-	foreach ( $screens as $screen ) {
-		add_meta_box(
-			'add_attendees_id',                 // Unique ID
-			'Add Attendees',                    // Box title
-			'woo_order_add_attendees_html',      // Content callback, must be of type callable
-			$screen                             // Post type
-		);
-	}
+  $post_id = get_the_ID();
+  if (!$post_id) {
+    return;
+  }
+  // Get the order
+  $order = wc_get_order($post_id);
+  if (!$order) {
+    return;
+  }
+  // Check if the order contains workshop products
+  if (!woo_order_contains_workshops($order)) {
+    return;
+  }
+  // Add meta box
+  add_meta_box(
+    'add_attendees_id',                 // Unique ID
+    'Add Attendees',                    // Box title
+    'woo_order_add_attendees_html',    // Content callback
+    'shop_order'                        // Post type
+  );
 }
-add_action( 'add_meta_boxes', 'woo_order_add_attendees_custom_box' );
+add_action('add_meta_boxes', 'woo_order_add_attendees_custom_box');
 
+// Helper function to check if an order contains workshops
+function woo_order_contains_workshops($order) {
+  foreach ($order->get_items() as $item) {
+    $product = $item->get_product(); // Get the product object
+    if ($product) {
+      // Get the product ID (parent ID for variations)
+      $product_id = $product->get_parent_id() ? $product->get_parent_id() : $product->get_id();
+      // Fetch the category slugs for the product
+      $category_slugs = wp_get_post_terms($product_id, 'product_cat', ['fields' => 'slugs']);
+      if (in_array('workshops', $category_slugs, true)) {
+        return true; // Contains workshop products
+      }
+    }
+  }
+  return false; // No workshop products found
+}
+
+// Content of the meta box
 function woo_order_add_attendees_html($post) {
-  // print_r($post);
   ?>
   <p>Click to open the Add Attendees area.</p>
   <div>
-    <button class="button" type="button" onClick="javascript: document.body.classList.toggle('add-attendees-modal__open')">Open Attendees Config</button>
+    <button class="button" type="button" onclick="javascript: document.body.classList.toggle('add-attendees-modal__open')">
+      Open Attendees Config
+    </button>
   </div>
   <?php
 }
 
-add_action( 'admin_footer', function() {
-  if(!isset($_GET['post'])) return;
-  $posttype = get_post_type($_GET['post']);
-  if($posttype != 'shop_order') return;
+// Add modal markup to the admin footer
+add_action('admin_footer', function () {
+  $post_id = filter_input(INPUT_GET, 'post', FILTER_SANITIZE_NUMBER_INT);
+  if (!$post_id) {
+    return;
+  }
+  $post_type = get_post_type($post_id);
+  if ($post_type !== 'shop_order') {
+    return;
+  }
   ?>
   <div class="add-attendees-modal">
     <div class="add-attendees-modal__inner">
-      <span class="add-attendees-modal__close" onClick="javascript: document.body.classList.toggle('add-attendees-modal__open')">✕</span>
-      <?php echo do_shortcode("[add_attendees_to_order order_id={$_GET['post']}]") ?>
+      <span class="add-attendees-modal__close" onclick="javascript: document.body.classList.toggle('add-attendees-modal__open')">✕</span>
+      <?php echo do_shortcode('[add_attendees_to_order order_id=' . esc_attr($post_id) . ']'); ?>
     </div>
   </div>
   <?php
-} );
+});
