@@ -125,6 +125,7 @@ add_action( 'add_meta_boxes', 'woo_order_add_attendees_custom_box' );
 function woo_order_add_attendees_html($post) {
   // print_r($post);
   ?>
+  <p>Click to open the Add Attendees area.</p>
   <div>
     <button class="button" type="button" onClick="javascript: document.body.classList.toggle('add-attendees-modal__open')">Open Attendees Config</button>
   </div>

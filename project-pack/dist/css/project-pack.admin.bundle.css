@@ -1038,7 +1038,7 @@ table.events-table tr.__old {
   width: 100%;
   height: 100%;
   z-index: 9999;
-  background: rgba(1, 1, 1, 0.4);
+  background: rgba(1, 1, 1, 0.6);
   display: flex;
   justify-content: center;
   overflow: auto;
@@ -1048,33 +1048,102 @@ table.events-table tr.__old {
   -webkit-transition: 0.3s ease;
 }
 .add-attendees-modal__inner {
-  width: 700px;
+  width: 900px;
   max-width: 100%;
   background: white;
   border-radius: 2px;
-  margin-top: 5vw;
+  margin-top: 8vw;
   height: -moz-fit-content;
   height: fit-content;
   position: relative;
 }
 .add-attendees-modal__close {
-  font-size: 12px;
-  background: black;
+  font-size: 14px;
+  background-color: #1d2327;
   color: white;
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   display: flex;
   justify-content: center;
   align-items: center;
   line-height: 0;
   border-radius: 30px;
   position: absolute;
-  right: 5px;
-  top: 5px;
+  right: 12px;
+  top: 12px;
   cursor: pointer;
+}
+.add-attendees-modal__close:hover {
+  opacity: 0.8;
 }
 .add-attendees-modal .gr-events {
   align-items: center;
+}
+.add-attendees-modal .add-attendees-container {
+  margin: 0;
+  padding: 40px;
+}
+.add-attendees-modal .add-attendees-container input[type=text], .add-attendees-modal .add-attendees-container input[type=email] {
+  line-height: 1.2;
+}
+.add-attendees-modal .add-attendees-container .__item .gr-events .and {
+  margin: 0 30px 0 0px;
+}
+.add-attendees-modal .add-attendees-container .__item .product-name {
+  margin: 0;
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+.add-attendees-modal .add-attendees-container .pp-table {
+  margin-top: 0;
+}
+.add-attendees-modal .add-attendees-container .footer-form .message p {
+  margin: 0;
+}
+.add-attendees-modal .add-attendees-container .footer-form .btn-submit {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  background-color: #1d2327;
+}
+.add-attendees-modal .add-attendees-container .pp-popup-add-new-contact__inner {
+  padding: 32px;
+  border-radius: 0;
+}
+.add-attendees-modal .add-attendees-container .pp-popup-add-new-contact .add-new-contact-form .__title {
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+.add-attendees-modal .add-attendees-container .pp-popup-add-new-contact .add-new-contact-form .pp-notification {
+  font-size: 14px;
+  line-height: 1.3;
+}
+.add-attendees-modal .add-attendees-container .pp-popup-add-new-contact .add-new-contact-form label {
+  margin-bottom: 12px;
+}
+.add-attendees-modal .add-attendees-container .pp-popup-add-new-contact .add-new-contact-form label .__label {
+  margin-bottom: 4px;
+  display: block;
+  font-family: inherit;
+  font-size: 15px;
+}
+.add-attendees-modal .add-attendees-container .pp-popup-add-new-contact .add-new-contact-form .buttons {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+.add-attendees-modal .add-attendees-container .pp-popup-add-new-contact .add-new-contact-form .buttons .pp-button {
+  padding: 12px 20px;
+  font-family: inherit;
+  font-weight: 600;
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  background-color: #1d2327;
+}
+.add-attendees-modal .add-attendees-container .pp-popup-add-new-contact .add-new-contact-form .buttons .pp-button.btn-close {
+  background-color: #444;
 }
 
 body.add-attendees-modal__open .add-attendees-modal {

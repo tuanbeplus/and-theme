@@ -4713,7 +4713,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     });
   };
-
   var onClickButtonBookingSlot = function onClickButtonBookingSlot() {
     $(document.body).on('click', '.pp-button-book-slot', function () {
       var $btn = $(this);

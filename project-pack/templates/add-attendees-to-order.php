@@ -169,7 +169,7 @@ if (empty($event_variations)) return;
     <div class="pp-popup-add-new-contact">
       <div class="pp-popup-add-new-contact__inner">
         <form action="" class="pp-form add-new-contact-form">
-          <h4><?php _e('Add Contact Information', 'pp') ?></h4>
+          <h4 class="__title"><?php _e('Add Contact Information', 'pp') ?></h4>
           <div class="pp-notification"><?php _e('Currently, there is no information about this email account, please create a new contact information first.', 'pp') ?></div>
           <label>
             <span class="__label"><?php _e('Email', 'pp') ?></span>
