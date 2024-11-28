@@ -526,7 +526,7 @@ function getTasks()
 
 function getUser($userId = '')
 {
-  	$sql = "SELECT FIELDS(ALL) FROM User WHERE Id = '". $userId ."' LIMIT 200";
+  	$sql = "SELECT FIELDS(ALL) FROM User WHERE IsActive = true AND Id = '". $userId ."' LIMIT 200";
 
 	$response = sf_query_object_metadata($sql);
 
@@ -535,7 +535,7 @@ function getUser($userId = '')
 
 function getUserByEmail($email)
 {
-  	$sql = "SELECT FIELDS(ALL) FROM User WHERE Email = '". $email ."' LIMIT 200";
+  	$sql = "SELECT FIELDS(ALL) FROM User WHERE IsActive = true AND Email = '". $email ."' LIMIT 200";
 
 	$response = sf_query_object_metadata($sql);
 
