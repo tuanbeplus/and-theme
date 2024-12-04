@@ -229,6 +229,11 @@ function ppsf_update_role_base_price_product_variation($variation_id, $product_p
       // Get UnitPrice
       $unit_price = ppsf_get_unitprice_from_pricebook_entry($pricebook2_id, $sf_product2_id);
       
+      // Non-Members
+      if (!empty($role_name) && $role_name == 'regular_price') {
+        update_post_meta($variation_id, '_price', $unit_price);
+        update_post_meta($variation_id, '_regular_price', $unit_price);
+      }
       // Members
       if (!empty($role_name) && $role_name == 'MEMBERS') {
         update_post_meta($variation_id, 'product_role_based_price_MEMBERS', $unit_price);

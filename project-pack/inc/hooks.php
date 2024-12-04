@@ -61,10 +61,7 @@ add_action('init', function() {
   if(!isset($_GET['__debug'])) return;
   // print_r(get_field('__role-based_pricing', 'option'));
   // echo ppsf_base_Pricebook2_base_price_id();
-  // echo '<pre>'; print_r(get_post_meta(19406)); echo '</pre>'; 
-  // echo '<pre>'; print_r(get_post_meta(19406, 'product_role_based_price', true)); echo '</pre>'; 
-  // echo '<pre>'; print_r(get_post_meta(19406, 'product_role_based_price_PRIMARY_MEMBERS', true)); echo '</pre>'; 
-  // echo '<pre>'; print_r(get_post_meta(19406, 'product_role_based_price_MEMBERS', true)); echo '</pre>'; 
+  // echo '<pre>'; print_r(get_post_meta(19406)); echo '</pre>';  
 });
 
 add_action('PPSF::AFTER_UPDATE_REGULAR_PRICE_PRODUCT_CHILD_EACH', 'ppsf_update_role_based_pricing', 20, 3);
@@ -121,9 +118,9 @@ add_filter('woocommerce_get_price_html', function($price_html, $product) {
   // If the product is variable, get the price of the first variation
   if ($product->is_type('variable')) {
     $available_variations = $product->get_available_variations();
-    if (!empty($available_variations) && isset($available_variations[0]['display_price'])) {
-      $base_price = $available_variations[0]['display_price'];
-      $original_price = $product->get_variation_regular_price('min');
+    if (!empty($available_variations) && isset($available_variations[0])) {
+      $base_price = $available_variations[0]['display_price'] ?? 0;
+      $original_price = $product->get_variation_regular_price('max');
     }
   } else {
     // For other products, get the regular price and the original price
@@ -165,7 +162,7 @@ add_filter('woocommerce_cart_item_price', function($price_html, $cart_item, $car
   if ($product->is_type('variable')) {
     $available_variations = $product->get_available_variations();
     if (!empty($available_variations) && isset($available_variations[0]['display_price'])) {
-      $base_price = $available_variations[0]['display_price'];
+      $base_price = $available_variations[0]['display_price'] ?? 0;
     }
   } else {
     // For non-variable products, get the regular price
