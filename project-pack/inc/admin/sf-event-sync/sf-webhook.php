@@ -131,6 +131,7 @@ function and_update_role_base_prices_wc_product($sf_product_data) {
     // Get Role Base Prices from Theme settings
     $role_based_list = get_field('__role-based_pricing', 'option');
     // Get Member Prices
+    $price = get_post_meta( $product_id, '_price', true );
     $regular_price = get_post_meta( $product_id, '_regular_price', true );
     $member_price = get_post_meta( $product_id, 'product_role_based_price_MEMBERS', true );
     $primary_member_price = get_post_meta( $product_id, 'product_role_based_price_PRIMARY_MEMBERS', true );
@@ -147,6 +148,7 @@ function and_update_role_base_prices_wc_product($sf_product_data) {
         
         // Non-members
         if ($regular_price == '' && !empty($role_name) && $role_name == 'regular_price') {
+          update_post_meta($product_id, '_price', $unit_price);
           update_post_meta($product_id, '_regular_price', $unit_price);
         }
         // Members 
