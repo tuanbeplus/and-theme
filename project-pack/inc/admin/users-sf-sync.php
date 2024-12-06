@@ -30,7 +30,12 @@ function pp_user_column_value( $val, $column_name, $user_id ) {
         <?php _e('Pull User Data', 'pp') ?>
       </button>
       <br />
-      <div>Last updated: <span class="ppsf-user-last-update"><?php echo get_user_meta( $user_id, '__sf_last_updated_userinfo', true ) ?></span></div>
+      <?php 
+      $last_updated = get_user_meta( $user_id, '__sf_last_updated_userinfo', true );
+      if (!empty($last_updated)):
+      ?>
+        <div>Last updated: <span class="ppsf-user-last-update"><?php echo $last_updated; ?></span></div>
+      <?php endif; ?>
       <?php
       return ob_get_clean();
   }
@@ -68,7 +73,7 @@ function pp_user_table_row_update_fragment($wpuid) {
 
 function pp_ajax_request_sf_user_data() {
   // wp_send_json( $_POST );
-  $response = ppsf_get_user($_POST['sfuid']);
+  $response = ppsf_get_salesforce_user($_POST['sfuid']);
 
   if(isset($response[0]) && isset($response[0]['errorCode'])) {
     wp_send_json( [
@@ -127,22 +132,23 @@ function pp_ajax_request_sf_user_data() {
 
   # Update user meta
   pp_update_user_meta($wpuid, [
+    'billing_first_name' => $FirstName ?? '',
+    'billing_last_name' => $LastName ?? '',
+    'billing_email' => $Email ?? '',
+    'billing_phone' => $Phone ?? '',
+    'billing_company' => $accountInfo['Name'] ?? '',
     'billing_address_1' => $accountInfo['BillingStreet'] ?? '',
     // 'billing_address_2' => '',
     'billing_city' => $accountInfo['BillingCity'] ?? '',
-    'billing_company' => $accountInfo['Name'] ?? '',
     'billing_country' => $accountInfo['BillingCountry'] ?? '',
-    'billing_email' => $Email ?? '',
-    'billing_first_name' => $FirstName ?? '',
-    'billing_last_name' => $LastName ?? '',
-    'billing_phone' => $Phone ?? '',
     'billing_postcode' => $accountInfo['BillingPostalCode'] ?? '',
     'billing_state' => $accountInfo['BillingState'] ?? '',
-    '__sf_last_updated_userinfo' => current_time('mysql'), // last updated timestamp
     'salesforce_contact_id' => $ContactId ?? '',
     '__salesforce_account_id' => $AccountId ?? '',
     '__salesforce_profile_id' => $ProfileId ?? '',
-    '__salesforce_account_json' => wp_json_encode( $accountInfo )
+    '__salesforce_user_meta' => wp_json_encode($response) ?? '',
+    '__salesforce_account_json' => wp_json_encode( $accountInfo ),
+    '__sf_last_updated_userinfo' => current_time('mysql'), // last updated timestamp
   ]);
 
   # Update user role
@@ -157,7 +163,6 @@ function pp_ajax_request_sf_user_data() {
     'updated_columns' => pp_user_table_row_update_fragment($wpuid),
   ] );
 } 
-
 add_action('wp_ajax_pp_ajax_request_sf_user_data', 'pp_ajax_request_sf_user_data');
 add_action('wp_ajax_nopriv_pp_ajax_request_sf_user_data', 'pp_ajax_request_sf_user_data');
 

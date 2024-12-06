@@ -438,19 +438,14 @@ add_action('init', 'and_refresh_sf_access_token_once_per_day');
 function and_send_apple_remote_management_json() {
     // Check if the request is for the correct path
     $current_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    
     // Match the exact URI to prevent unnecessary processing
     if (strpos($current_uri, '/.well-known/com.apple.remotemanagement') === 0) {
-        
         // Set the content type to JSON
         header('Content-Type: application/json');
-        
         // Ensure the HTTP status is 200 OK
         status_header(200);
-
         // Retrieve the JSON data from ACF (or another source)
         $json_data = get_field('apple_remote_management_json', 'option');
-
         // Check if the data exists and is not empty
         if (!empty($json_data)) {
             // Output the JSON data (already sanitized by ACF)
@@ -459,10 +454,88 @@ function and_send_apple_remote_management_json() {
             // Return a default message in case of no data
             echo json_encode(array('message' => 'No data found'));
         }
-
         // Stop further execution of WordPress
         exit;
     }
 }
 add_action('template_redirect', 'and_send_apple_remote_management_json');
+
+// Add the "Export Users" button next to the "Add New" button in WP Admin Users Page
+function and_add_export_users_button() {
+    // Check if the current user has the capability to manage users
+    if (current_user_can('manage_options')) {
+        $export_url = admin_url('admin-post.php?action=export_wp_users_csv');
+        ?>
+        <a href="<?php echo esc_url($export_url); ?>" class="button" style="margin: 0 16px;">
+            Export Users to CSV
+        </a>
+        <?php
+    }
+}
+add_action('restrict_manage_users', 'and_add_export_users_button', 10);
+
+// Handle the export of WP users to CSV
+function and_export_wp_users_to_csv() {
+    if (!current_user_can('manage_options')) {
+        wp_die('Unauthorized access.');
+    }
+    // Get all users
+    $users = get_users();
+    // Prepare CSV headers
+    $csv_headers = array(
+        'WP User ID', 
+        'Username', 
+        'Full Name',
+        'Email', 
+        'Roles', 
+        'Organisation', 
+        'Salesforce User ID', 
+        'Salesforce Contact ID'
+    );
+    // Create a file pointer in memory
+    $csv_output = fopen('php://output', 'w');
+    // Send appropriate headers to trigger CSV download
+    header('Content-Type: text/csv');
+    header('Content-Disposition: attachment; filename="ADN Users '. date('d-m-Y') .'.csv"');
+    header('Pragma: no-cache');
+    header('Expires: 0');
+
+    // Output the CSV headers
+    fputcsv($csv_output, $csv_headers);
+    // Loop through users and output their data in CSV format
+    foreach ($users as $user) {
+        $list_roles = $user->roles ?? array();
+        $new_list_roles = array();
+        if (!empty($list_roles)) {
+            $wp_roles_class = wp_roles();
+            foreach ($list_roles as $role) {
+                if (isset($wp_roles_class->roles[$role])) {
+                    $new_list_roles[] = $wp_roles_class->roles[$role]['name'] ?? '';
+                }
+            }
+        }
+        $org_data = get_user_meta($user->ID, '__salesforce_account_json', true);
+        $org_name = !empty($org_data) ? json_decode($org_data, true)['Name'] ?? '' : '';
+        $first_name = get_user_meta($user->ID, 'first_name', true);
+        $last_name = get_user_meta($user->ID, 'last_name', true);
+        $full_name = trim($first_name) .' '. trim($last_name) ?? '';
+        // Prepare users data
+        $user_data = array(
+            $user->ID,
+            $user->user_login,
+            $full_name,
+            $user->user_email,
+            implode(', ', $new_list_roles),
+            $org_name,
+            get_user_meta($user->ID, '__salesforce_user_id', true),
+            get_user_meta($user->ID, 'salesforce_contact_id', true),
+        );
+
+        fputcsv($csv_output, $user_data);
+    }
+    // Close the file pointer
+    fclose($csv_output);
+    exit;
+}
+add_action('admin_post_export_wp_users_csv', 'and_export_wp_users_to_csv');
 

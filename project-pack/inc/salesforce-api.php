@@ -44,6 +44,73 @@ function ppsf_get_user($uid) {
 }
 
 /**
+ * Get Salesforce User data by ID
+ * 
+ * @param string $sf_uid Salesforce User ID
+ * @return array User data
+ */
+function ppsf_get_salesforce_user($sf_uid = 0) {
+  list(
+    'endpoint' => $endpoint,
+    'version' => $version,
+  ) = ppsf_api_info();
+
+  $url = $endpoint . '/services/data/'. $version .'/sobjects/User/' . $sf_uid;
+  $result = ppsf_remote_post($url);
+  $result_arr = json_decode(wp_remote_retrieve_body($result), true); 
+  // Check for errors in the response
+  if (!empty($result_arr) && isset($result_arr[0]['errorCode'])) {
+    // Prepare error info for logging
+    $error_info = array(
+      'salesforce_api' => isset($result_arr[0]) ? $result_arr[0] : $result_arr
+    );
+    fn_user_login_error_log('salesforce_user_not_found', $error_info);
+  }
+  // Define the keys to keep
+  $keys_to_keep = array(
+    'attributes', 
+    'IsActive', 
+    'Id', 
+    'Username', 
+    'LastName', 
+    'FirstName', 
+    'Name', 
+    'Email', 
+    'ContactId', 
+    'AccountId', 
+    'Members__c', 
+    'Non_Members__c', 
+    'Primary_Members__c', 
+    'Phone', 
+    'MobilePhone', 
+    'Address',
+    'Title', 
+    'Street', 
+    'City', 
+    'State', 
+    'PostalCode', 
+    'Country', 
+    'Latitude', 
+    'Longitude', 
+    'GeocodeAccuracy',
+    'BadgeText', 
+    'TimeZoneSidKey', 
+    'LocaleSidKey', 
+    'LanguageLocaleKey', 
+    'ManagerId', 
+    'LastLoginDate', 
+    'CreatedDate', 
+    'CreatedById', 
+    'LastModifiedDate', 
+    'LastModifiedById', 
+  );
+  // Filter the response data
+  $result_filter = array_intersect_key($result_arr, array_flip($keys_to_keep));
+
+  return $result_filter ?? array();
+}
+
+/**
  * Object Account (label: Organisation)
  * Get Account information by Account ID
  * 
