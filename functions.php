@@ -174,7 +174,6 @@ add_action('widgets_init', 'wp_bootstrap_starter_widgets_init');
  */
 function wp_bootstrap_starter_scripts()
 {
-	wp_enqueue_script('save-data-entries', get_template_directory_uri() . '/assets/js/save_data_entries.js',array('jquery'), '1.0.0', true);
 	// load bootstrap css
 	if (get_theme_mod('cdn_assets_setting') === 'yes') {
 		wp_enqueue_style('wp-bootstrap-starter-bootstrap-css', 'https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css');
@@ -207,24 +206,6 @@ function wp_bootstrap_starter_scripts()
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
-	}
-
-	if ( is_page_template('page-templates/quiz-template.php') || is_page_template('page-templates/quiz-html-template.php') ){
-		wp_enqueue_style('quiz-css', get_template_directory_uri() . '/assets/scss/custom.css?r=' . rand());
-	}
-
-	if ( is_page_template('page-templates/quiz-html-template.php') ) {
-		wp_enqueue_style('quiz-html', get_template_directory_uri() . '/assets/scss/quiz-custom.css?r=' . rand());
-		wp_enqueue_script('jquery-validate', get_template_directory_uri() . '/assets/js/jquery.validate.min.js',array('jquery'), '1.0.1', true);
-		wp_enqueue_script('quiz-html-js', get_template_directory_uri() . '/assets/js/quiz-html-template.js',array('jquery'), '1.0.1', true);
-	}
-
-	if ( is_page_template('page-templates/quiz-template.php') ) {
-		wp_enqueue_script('quiz-js', get_template_directory_uri() . '/assets/js/quiz-template.js',array('jquery'), '1.0.1', true);
-		wp_localize_script( 'quiz-js', 'PJ_Global', apply_filters( 'pj/wp_localize_script/PJ_Global', [
-       'ajax_url' => admin_url( 'admin-ajax.php' ),
-       'user_info' => wp_get_current_user(),
-    ] ) );
 	}
 
 	wp_enqueue_style('app-css', get_template_directory_uri() . '/assets/css/app.css?r=' . rand());
@@ -394,7 +375,6 @@ function getParentDetails()
 		$page_id = isset($page->ID) ? $page->ID : '';
 		$colourScheme = get_field('colour_scheme', $page_id);
 	}
-
 	return $page;
 }
 
@@ -427,11 +407,9 @@ function campaigns_save_post()
 
 add_action('save_post_new_campaign', 'campaigns_save_post');
 
-
 /**
  * Load in the post types
  */
-
 require get_template_directory() . '/post-types/about-us.php';
 require get_template_directory() . '/post-types/how-we-can-help-you.php';
 require get_template_directory() . '/post-types/resources.php';
@@ -443,97 +421,68 @@ require get_template_directory() . '/post-types/students-and-jobseekers.php';
 /**
  * Login to Salesforce to get a Session Token using CURL
  */
-function doLogin()
-{
-
+function doLogin() {
 	$state = $_SESSION['state'];
-
 	// Set the POST url to call
 	$postURL = 'https://login.salesforce.com/services/oauth2/token';
-
 	$fields = $_POST;
-
 	// Header options
 	$headerOpts = array('Content-type: application/x-www-form-urlencoded');
-
 	// Create the params for the POST request from the supplied fields
 	$params = "";
-
 	foreach ($fields as $key => $value) {
 		$params .= $key . '=' . $value . '&';
 	}
-
 	$params = rtrim($params, '&');
-
 	var_dump($params);
-
-
 	// Open the connection
 	$ch = curl_init();
-
 	// Set the url, number of POST vars, POST data etc
 	curl_setopt($ch, CURLOPT_URL, $postURL);
 	curl_setopt($ch, CURLOPT_POST, count($fields));
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, $headerOpts);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
 	// Execute POST
 	$result = curl_exec($ch);
-
-
 	// Close the connection
 	curl_close($ch);
-
-
-
 	//record the results into state
 	$typeString = gettype($result);
 	$resultArray = json_decode($result, true);
-
 	$state->error = $resultArray["error"];
 	$state->errorDescription = $resultArray["error_description"];
-
-
 	var_dump($state->error);
-
 	// If there are any errors return false
 	if ($state->error != null) {
 		die('error');
 
 		return false;
 	}
-
 	$state->instanceURL = $resultArray["instance_url"];
 	$state->token = $resultArray["access_token"];
-
 	// If we are logging in via an Authentication Code, we want to store the
 	// resulting Refresh Token
 	if (!$isViaRefreshToken) {
 		$state->refreshToken = $resultArray["refresh_token"];
 	}
-
 	// Extract the user Id
 	if ($resultArray["id"] != null) {
 		$trailingSlashPos = strrpos($resultArray["id"], '/');
 
 		$state->userId = substr($resultArray["id"], $trailingSlashPos + 1);
 	}
-
 	// verify the signature
 	$baseString = $resultArray["id"] . $resultArray["issued_at"];
 	$signature = base64_encode(hash_hmac('SHA256', $baseString, getClientSecret(), true));
-
 	if ($signature != $resultArray["signature"]) {
 		$state->error = 'Invalid Signature';
 		$state->errorDescription = 'Failed to verify OAUTH signature.';
 
 		return false;
 	}
-
 	// Debug that we've logged in via the appropriate method
 	echo "<pre>Logged in " . ($isViaRefreshToken ? "via refresh token" : "via authorisation code") . "</pre>";
-
 	return true;
 }
 add_action('wp_ajax_nopriv_doLogin', 'doLogin');
@@ -586,234 +535,6 @@ function swd_admin_post_thumbnail_add_label($content, $post_id, $thumbnail_id)
 }
 add_filter('admin_post_thumbnail_html', 'swd_admin_post_thumbnail_add_label', 10, 3);
 
-
-// Function get cookie ajax
-add_action( 'wp_ajax_get_cookie_share', 'get_cookie_share' );
-add_action( 'wp_ajax_nopriv_get_cookie_share', 'get_cookie_share' );
-function get_cookie_share(){
-   $cookie = array();
-   // Time of user's visit
-   $visit_time = date('F j, Y g:i a');
-   unset($_POST['action']);
-   // Check if cookie is already set
-
-   $cookies = array(
-  	 'clientid'
-   );
-   $resetcookie=0;
-
-   foreach ($cookies as $k) {
-  	 if(isset($_POST[$k]) && $_POST[$k]) {
-  		 if(!$resetcookie){
-          clearCookies($cookies);
-          $resetcookie = 1;
-        }
-  		 setcookie($k,  $_POST[$k] , time()+(60*10));
-  		 $cookie[$k] = $_POST[$k];
-  	 }else{
-  		 if(isset($_COOKIE[$k]) && $_COOKIE[$k]) {
-  			 $cookie[$k] = $_COOKIE[$k];
-  		 }
-  	 }
-   }
-   if($_POST['clientid']){
-  	 $cookie['clientid'] = $_POST['clientid'];
-  	 //setcookie('clientid',  $cid , time()+(60*10));
-   }
-   wp_send_json($cookie);
-}
-function clearCookies($cookies) {
-    $past = time() - 3600;
-    foreach ( $cookies as $key => $value ) {
-       $value = '';
-        setcookie( $key, $value, $past );
-        setcookie( $key, $value, $past, '/' );
-    }
-}
-
-add_action( 'gform_after_submission_9', 'access_entry_via_field', 10, 2 );
-function access_entry_via_field( $entry, $form ) {
-		echo "<div id='wrapperTablePrint'>";
-			?>
-			<style media="screen">
-			#printTable {
-			 border-radius: 16px;
-			 background: #dfdfdf;
-			 overflow: hidden;
-			 border: 1px solid #dfdfdf;
-			}
-			#printTable .heading {
-			 font-size: 14px;
-			 font-weight: bold;
-			 text-shadow: 0 1px 0 #fff;
-			 text-align: left;
-			 padding: 12px;
-			}
-			#printTable .label {
-			 font-weight: 700;
-			 background-color: #eaf2fa;
-			 border-bottom: 1px solid #fff;
-			 line-height: 150%;
-			 padding: 7px 7px;
-			}
-			#printTable .label td {
-			 width: 100% !important;
-			}
-			#printTable .value {
-			 border-bottom: 1px solid #dfdfdf;
-			 padding: 7px 7px 7px 40px;
-			 line-height: 150%;
-			 background: #fff;
-			}
-			</style>
-			<?php
-			echo "<table class='ss-print widefat fixed entry-detail-view' id='printTable'>";
-				$title_form = $form['title'];
-				$id_entry = $entry['id'];
-
-				echo "<thead class='heading'>". $title_form ." : # ". $id_entry;
-					echo '<th id="details">'. $title_form .' : Entry #  '. $id_entry .'</th>';
-					echo '<th style="width:auto; font-size:10px; text-align: right;"></th>';
-				echo "</thead>";
-
-		    foreach ( $form['fields'] as $field ) {
-					// print_r( $field );
-					$label = $field->label;
-					$value = rgar( $entry, (string) $field->id );
-
-					if ( !empty($value)) {
-						echo "<tr class='label entry-view-field-name'><td>". $label ."</td></tr>";
-						echo "<tr class='value entry-view-field-value'><td>&nbsp;&nbsp;&nbsp;". $value ."</td></tr>";
-					}
-		    }
-
-			echo "</table>";
-		echo "</div>";
-}
-
-function and_create_entry_table(){
-	 global $wpdb;
-	 $table_name_sp = $wpdb->prefix . 'and_data_entries_gform';
-	 $charset_collate = $wpdb->get_charset_collate();
-
-	 require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-
-	 $sql =
-	 "CREATE TABLE IF NOT EXISTS {$table_name_sp} (
-	 id bigint(20) NOT NULL AUTO_INCREMENT,
-	 username longtext DEFAULT NULL,
-	 data longtext DEFAULT NULL,
-	 date datetime NOT NULL,
-	 PRIMARY KEY  (id)
-	 ) " . $charset_collate;
-	 dbDelta( $sql );
-
-	 $row = $wpdb->get_results(  "SELECT COLUMN_NAME FROM $table_name_sp.COLUMNS
-	 WHERE table_name = $table_name_sp AND column_name = 'step'"  );
-	 if(empty($row)){
-   	$wpdb->query("ALTER TABLE $table_name_sp ADD step INT(10) NULL");
-	 }
-}
-// add_action('init', 'and_create_entry_table');
-
-// add_action('wp_ajax_control_data_entry_gform', 'control_data_entry_gform'); // wp_ajax_{action}
-// add_action('wp_ajax_nopriv_control_data_entry_gform', 'control_data_entry_gform'); // wp_ajax_nopriv_{action}
-function control_data_entry_gform(){
-	global $wpdb;
-	$table_name = $wpdb->prefix. 'and_data_entries_gform';
-
-	$arrayEntry = $_POST['arrayEntry'];
-
-	echo "<pre>";
-	print_r($arrayEntry);
-	echo "</pre>";
-
-	$insertData = $wpdb->insert( $table_name,
-		array(
-			'username' => $_POST['userId'],
-			'data' => serialize($arrayEntry),
-			'date' => current_time( 'mysql', 1 ),
-			'step' => $_POST['step'],
-		),
-		array(
-			'%s',
-			'%s',
-		)
-	);
-
-	die();
-}
-
-// add_action('wp_ajax_and_apply_data_to_form', 'and_apply_data_to_form'); // wp_ajax_{action}
-// add_action('wp_ajax_nopriv_and_apply_data_to_form', 'and_apply_data_to_form'); // wp_ajax_nopriv_{action}
-function and_apply_data_to_form(){
-	global $wpdb;
-	$username = $_POST['usernameId'];
-
-  $table_name = $wpdb->prefix. "and_data_entries_gform";
-  $lastArr = $wpdb->get_results( "SELECT * FROM $table_name WHERE username = '{$username}' ORDER BY date DESC LIMIT 1" );
-	// print_r($results);
-	// $lastArr = $results;
-	// print_r($lastArr);
-	if ( !empty($lastArr) ) {
-
-		$arrSend = [];
-	  foreach ($lastArr as $key => $value) {
-			// $arrSend['id']       = $value->id;
-	    $arrSend['username'] = $value->username;
-	    // $arrSend['data']     = $value->data;
-			// $arrSend['data']     = json_encode(unserialize($value->data));
-	    // $arrSend['date']     = $value->date;
-			$arrSend['step']     = $value->step;
-	  }
-
-		wp_send_json($arrSend);
-
-	}
-
-	die();
-}
-
-// add_action('wp_ajax_and_clear_data_gform', 'and_clear_data_gform'); // wp_ajax_{action}
-// add_action('wp_ajax_nopriv_and_clear_data_gform', 'and_clear_data_gform'); // wp_ajax_nopriv_{action}
-function and_clear_data_gform(){
-	$userID = $_POST['userID'];
-
-	global $wpdb;
-	$table_name = $wpdb->prefix. "and_data_entries_gform";
-	$wpdb->delete( $table_name, [ 'username' => $userID ], [ '%s' ] );
-
-	die();
-}
-
-// add_action('wp_ajax_and_save_data_next_step', 'and_save_data_next_step'); // wp_ajax_{action}
-// add_action('wp_ajax_nopriv_and_save_data_next_step', 'and_save_data_next_step'); // wp_ajax_nopriv_{action}
-function and_save_data_next_step(){
-	$username = $_POST['userId'];
-	$data     = $_POST['data'];
-	$num_step = $_POST['currentPage'];
-
-	global $wpdb;
-	$table_name = $wpdb->prefix. 'and_data_entries_gform';
-
-	if ( $username != '' || $username != null ) {
-		$insertData = $wpdb->insert( $table_name,
-			array(
-				'username' => $username,
-				'data' => serialize($data),
-				'date' => current_time( 'mysql', 1 ),
-				'step' => $num_step,
-			),
-			array(
-				'%s',
-				'%s',
-			)
-		);
-	}
-
-	die();
-}
-
 /**
  * [list_searcheable_acf list all the custom fields we want to include in our search query]
  * @return [array] [list of custom fields]
@@ -841,7 +562,6 @@ function list_searcheable_acf(){
  * @param  [object]                 $wp_query []
  * @return [query-part/string]      $where    [the "where" part of the search query as we customized]
  */
-
 add_filter( 'posts_search', 'and_advanced_custom_search', 500, 2 );
 function and_advanced_custom_search( $where, $wp_query ) {
 	global $wpdb;
@@ -903,7 +623,6 @@ function and_advanced_custom_search( $where, $wp_query ) {
 	endforeach;
 	return $where;
 }
-
 
 /**
  * Get posts array for component
