@@ -538,4 +538,3 @@ function and_export_wp_users_to_csv() {
     exit;
 }
 add_action('admin_post_export_wp_users_csv', 'and_export_wp_users_to_csv');
-

@@ -154,6 +154,7 @@ function fn_sync_and_auto_login_user($sf_user_info=[], $access_token='') {
     if (is_wp_error($WP_UserID) || !is_user_logged_in() || get_current_user_id() != $WP_UserID) {
         $error_info = array(
             'wp_error' => $WP_UserID,
+            'wp_error_message' => $WP_UserID->get_error_message(),
             'info' => $sf_user_info,
         );
         echo sf_login_error_messages('wp_login_failed', $error_info); // Alert message
@@ -388,19 +389,18 @@ add_action('wp_logout', function (){
  */
 function sf_login_error_messages($error_name, $info=[]) {
     if (empty($error_name)) return;
+    $wp_error_message = isset($info['wp_error_message']) ? $info['wp_error_message'] : "Authorization with ADN failed.";
     $messages = array(
         'request_token_failed' => "Your access token is invalid. Please try again or contact support.",
         'user_info_not_found'   => "We could not retrieve your user information. Please try again or contact support.",
-        'wp_login_failed'       => "Authorization with ADN failed. Please try again or contact support.",
+        'wp_login_failed'       => $wp_error_message . " Please try again or contact support.",
     );
     $message = isset($messages[$error_name]) ? $messages[$error_name] : "Unknown error.";
 
     // Sanitize for JavaScript output
     $safe_message = esc_js($message);
     $redirect_url = esc_url(home_url('/?error=' . $error_name));
-    if (is_array($info)) {
-        $info['alert_message'] = $message;
-    }
+
     // Log error to system
     fn_user_login_error_log($error_name, $info);
 
@@ -411,31 +411,32 @@ function sf_login_error_messages($error_name, $info=[]) {
 }
 
 /**
- * Function to log members login errors
+ * Function to log members' login errors.
  *
  * @param string $error_code Error code related to the login error.
- * @param array  $user_info  Additional information about the user.
+ * @param array  $info       Additional information about the user.
  */
-function fn_user_login_error_log($error_code='', $info=[]) {
+function fn_user_login_error_log($error_code = '', $info = []) {
     // Exit if required parameters are not provided.
     if (empty($error_code)) {
         return;
     }
-    // Define the logs directory and file path.
-    $logs_dir = WP_CONTENT_DIR . '/users-login-logs';
-    $log_file_path = $logs_dir . '/login-error-logs-' . wp_date('m-Y') . '.log';
+    // Get the WordPress uploads directory.
+    $upload_dir = wp_upload_dir();
+    $log_dir_path = $upload_dir['basedir'] . '/users-login-logs';
+    $log_file_path = $log_dir_path . '/login-error-logs-' . wp_date('m-Y') . '.log';
 
     // Create the logs directory if it doesn't exist.
-    if (!file_exists($logs_dir)) {
-        if (!mkdir($logs_dir, 0755, true) && !is_dir($logs_dir)) {
-            error_log('Failed to create logs directory: ' . $logs_dir);
+    if (!file_exists($log_dir_path)) {
+        if (!mkdir($log_dir_path, 0755, true) && !is_dir($log_dir_path)) {
+            error_log('Failed to create log directory: ' . $log_dir_path);
             return;
         }
     }
     // Prepare the log message with the current timestamp.
     $log_message  = PHP_EOL;
-    $log_message .= "[" . esc_html($error_code) . "] at [" . wp_date('d-m-Y H:i:s') . "]" . PHP_EOL;
-    $log_message .= json_encode($info, JSON_UNESCAPED_SLASHES) . PHP_EOL;
+    $log_message .= "[" . sanitize_text_field($error_code) . "] at [" . wp_date('d-m-Y H:i:s') . "]" . PHP_EOL;
+    $log_message .= json_encode($info, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . PHP_EOL;
 
     // Append the log message to the file.
     $result = file_put_contents($log_file_path, $log_message, FILE_APPEND | LOCK_EX);
@@ -445,4 +446,3 @@ function fn_user_login_error_log($error_code='', $info=[]) {
         error_log('Failed to write to log file: ' . $log_file_path);
     }
 }
-

@@ -8,13 +8,28 @@ require( __DIR__ . '/import-handle.php' );
 
 add_action('init', 'pp_register_sfevent_cpt');
 function pp_register_sfevent_cpt() {
-  $args = [
-    'public'    => true,
-    'label'     => __( 'SF Events', 'pp' ),
-    'menu_icon' => 'dashicons-block-default',
-    'supports'  => ['title', 'editor'],
-    'exclude_from_search'=> true,
-  ];
+  $labels = array(
+    'name'                  => __('Salesforce Events', 'pp'),
+    'singular_name'         => __('Event', 'pp'),
+    'add_new'               => __('Add New Event', 'pp'),
+    'add_new_item'          => __('Add New Event', 'pp'),
+    'edit_item'             => __('Edit Event', 'pp'),
+    'new_item'              => __('New Event', 'pp'),
+    'view_item'             => __('View Event', 'pp'),
+    'search_items'          => __('Search Events', 'pp'),
+    'not_found'             => __('No events found', 'pp'),
+    'not_found_in_trash'    => __('No events found in Trash', 'pp'),
+    'menu_name'             => __('Salesforce Events', 'pp'),
+  );
+  $args = array(
+    'labels'                => $labels,
+    'public'                => true,
+    'menu_icon'             => 'dashicons-editor-table',
+    'supports'              => ['title', 'editor', 'thumbnail', 'custom-fields'],
+    'exclude_from_search'   => true,
+    'capability_type'       => 'post',
+    'map_meta_cap'          => true,
+  );
   register_post_type( 'sf-event', $args );
 }
 

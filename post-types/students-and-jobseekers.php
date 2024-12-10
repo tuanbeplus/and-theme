@@ -32,7 +32,7 @@ function register_students_jobseekers() {
         'show_in_nav_meacps'    => true,
         'show_in_admin_bar'    => true,
         'menu_position'        => 20,
-        'menu_icon'            => 'dashicons-block-default',
+        'menu_icon'            => 'dashicons-portfolio',
         'can_export'           => true,
         'has_archive'          => true,
         'exclude_from_search'  => false,
