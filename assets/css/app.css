@@ -5877,10 +5877,6 @@ blockquote {
   padding: 0px 0; }
   .error404 .breadcrumbs-top {
     display: none; }
-  .error404 h2 {
-    float: left;
-    margin-top: 150px;
-    position: relative; }
     .error404 h2 span {
       display: block;
       color: #A1A1A1; }
@@ -6405,3 +6401,21 @@ form {
     width: calc(80% - 8px) !important; }
   .gform_wrapper .gform_footer {
     width: calc(80% - 8px) !important; } }
+
+body.error404 .error-404 {
+  margin-top: 60px;
+}
+body .error-404 .search-form input[type="submit"] {
+  font-family: "Avenir-Medium";
+  font-weight: normal;
+}
+body .error-404 .search-form label {
+  opacity: 1;
+}
+body .error-404 .search-form input[type="search"] {
+  border: 1px solid #111;
+  color: #212529 ;
+}
+body .error-404 .search-form input[type="search"]::placeholder {
+  color: #333;
+}

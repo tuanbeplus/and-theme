@@ -7,14 +7,24 @@
  * @package WP_Bootstrap_Starter
  */
 
+// List of post types to hide their archives
+$post_types_hidden = array('assessments', 'submissions', 'dcr_submissions', 'reports', 'dcr_reports');
+// Get the queried post type
+$post_type = get_query_var('post_type');
+// Check if the current archive is for a hidden post type
+if (in_array($post_type, $post_types_hidden)) {
+    // Trigger the 404 template
+    global $wp_query;
+    $wp_query->set_404();
+    status_header(404);
+    include(get_query_template('404'));
+    exit;
+}
+
 get_header(); ?>
 
 	<section id="primary">
 		<main id="main" class="site-main" role="main">
-
-        <?php if (is_post_type_archive('assessments') || is_post_type_archive('submissions') || is_post_type_archive('reports') || is_post_type_archive('members')): ?>
-            <?php get_template_part( '404' ); exit(); ?>
-        <?php else: ?>
 
 		<?php
 		if ( have_posts() ) : ?>
@@ -75,7 +85,6 @@ get_header(); ?>
         endif; ?>
                 </div>
             </div>
-        <?php endif; ?>
 
         <section class="back-page">
             <div class="container">
