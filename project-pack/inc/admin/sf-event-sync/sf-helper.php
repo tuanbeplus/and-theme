@@ -1,13 +1,36 @@
 <?php
+
 /** 
- * Function to log data
+ * Function to log Salesforce Webhook data
  */
 function sf_log_data( $data ) {
-  $file = SF_DIR . 'sf-sync-log.txt';
-  $current = file_get_contents($file);
-  $datetime = date('Y-m-d H:i:s');
-  $current = "\nDate Time: {$datetime}\n Data: {$data} \n" . $current;
-  file_put_contents($file, $current);
+  if (empty($data)) {
+    return;
+  }
+  // Get the WordPress uploads directory.
+  $upload_dir = wp_upload_dir();
+  $log_dir_path = $upload_dir['basedir'] . '/sf-sync-logs';
+  $log_file_path = $log_dir_path . '/sf-sync-logs-' . wp_date('m-Y') . '.log';
+
+  // Create the logs directory if it doesn't exist.
+  if (!file_exists($log_dir_path)) {
+    if (!mkdir($log_dir_path, 0755, true) && !is_dir($log_dir_path)) {
+      error_log('Failed to create log directory: ' . $log_dir_path);
+      return;
+    }
+  }
+  // Prepare the log message with the current timestamp.
+  $log_message  = PHP_EOL;
+  $log_message .= "[" . wp_date('d-m-Y H:i:s') . "]" . PHP_EOL;
+  $log_message .= $data . PHP_EOL;
+
+  // Append the log message to the file.
+  $result = file_put_contents($log_file_path, $log_message, FILE_APPEND | LOCK_EX);
+
+  // Log to WordPress debug log if file writing fails.
+  if ($result === false) {
+    error_log('Failed to write to log file: ' . $log_file_path);
+  }
 }
 
 /**
@@ -63,6 +86,17 @@ function and_push_event_data_to_salesforce($post_id, $post, $update){
       $response = curl_exec($curl);
       curl_close($curl);
       // echo $response;
+
+      $log_data = array(
+        'post_id'            => $post_id ?? '',
+        'sf_event_id'        => $sf_event_id ?? '',
+        'Subject'            => get_the_title($post_id) ?? '',
+        'remaining_seats__c' => $remaining_seats__c ?? '',
+        'StartDateTime'      => $startdatetime ?? '',
+        'EndDateTime'        => $enddatetime ?? '',
+      );
+
+      sf_log_data('[Event][PUSH]' . wp_json_encode($log_data));
   }
 }
 
@@ -138,14 +172,13 @@ function and_pull_event_data_from_salesforce($event_fields){
           "ID" => (int) $event_id,
           "post_title" => $value
         ];
-        sf_log_data(wp_json_encode( $post_args ));
         wp_update_post($post_args);
+        sf_log_data('[Event][PULL]' . wp_json_encode( $post_args ));
       } else {
         update_post_meta($event_id, strtolower($name), $value);
       }
     }
   }
-  
   ob_get_clean();
 }
 
@@ -325,6 +358,8 @@ function and_event_acf_button_ajax_handle($field, $post_id){
     foreach($custom_fields as $name => $value) {
       update_post_meta($post_id, $name, $value);
     }
+
+    sf_log_data('[Event][MANUAL_PULL]' . wp_json_encode( $event_data ));
     
     wp_send_json_success("Success! Event has synced from Salesforce.");
     

@@ -41,7 +41,7 @@ function sf_get_object_data_from_salesforce() {
     and_pull_event_data_from_salesforce($requiredData);
 
     $response = json_encode($requiredData);
-    sf_log_data($response);
+    sf_log_data('[Event][OUTBOUND_MESSAGE]' . $response);
     
     ppsf_return_webhook();
   }
@@ -91,7 +91,7 @@ function sf_get_object_data_from_salesforce() {
     }
 
     $response = json_encode($requiredData);
-    sf_log_data($response);
+    sf_log_data('[Product2][OUTBOUND_MESSAGE]' . $response);
     
     ppsf_return_webhook();
     
