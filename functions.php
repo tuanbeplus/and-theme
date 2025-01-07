@@ -494,7 +494,7 @@ add_action('wp_ajax_doLogin', 'doLogin');
 add_action( 'send_headers', 'and_add_security_header', 99 );
 function and_add_security_header() {
     header( "Content-Security-Policy: upgrade-insecure-requests" );
-    header( "Strict-Transport-Security: max-age=31536000" );
+    header( "Strict-Transport-Security: max-age=31536000; includeSubDomains" );
     header( "X-Xss-Protection: 1; mode=block" );
     header( "X-Frame-Options: SAMEORIGIN" );
     header( "X-Content-Type-Options: nosniff" );
@@ -566,58 +566,59 @@ add_filter( 'posts_search', 'and_advanced_custom_search', 500, 2 );
 function and_advanced_custom_search( $where, $wp_query ) {
 	global $wpdb;
 
-	if ( empty( $where ))
+	if ( empty( $where ) ) {
 		return $where;
+	}
 
 	// get search expression
-	$terms = $wp_query->query_vars[ 's' ];
+	$terms = $wp_query->query_vars['s'];
 
 	// explode search expression to get search terms
 	$exploded = explode( ' ', $terms );
-	if( $exploded === FALSE || count( $exploded ) == 0 )
+	if ( $exploded === FALSE || count( $exploded ) == 0 )
 		$exploded = array( 0 => $terms );
 
-	// reset search in order to rebuilt it as we whish
+	// reset search in order to rebuild it as we wish
 	$where = '';
 
 	// get searcheable_acf, a list of advanced custom fields you want to search content in
 	$list_searcheable_acf = list_searcheable_acf();
-	foreach( $exploded as $tag ) :
+	foreach ( $exploded as $tag ) :
 		$where .= " 
 			AND (
-			(wp_posts.post_title LIKE '%$tag%')
-			OR (wp_posts.post_content LIKE '%$tag%')
+			({$wpdb->posts}.post_title LIKE '%$tag%')
+			OR ({$wpdb->posts}.post_content LIKE '%$tag%')
 			OR EXISTS (
-				SELECT * FROM wp_postmeta
-					WHERE post_id = wp_posts.ID
+				SELECT * FROM {$wpdb->postmeta}
+					WHERE post_id = {$wpdb->posts}.ID
 					AND (";
-		foreach ($list_searcheable_acf as $searcheable_acf) :
-			if ($searcheable_acf == $list_searcheable_acf[0]):
+		foreach ( $list_searcheable_acf as $searcheable_acf ) :
+			if ( $searcheable_acf == $list_searcheable_acf[0] ) :
 				$where .= " (meta_key LIKE '%" . $searcheable_acf . "%' AND meta_value LIKE '%$tag%') ";
 			else :
 				$where .= " OR (meta_key LIKE '%" . $searcheable_acf . "%' AND meta_value LIKE '%$tag%') ";
 			endif;
 		endforeach;
-			$where .= ")
+		$where .= ")
 			)
 			OR EXISTS (
-				SELECT * FROM wp_comments
-				WHERE comment_post_ID = wp_posts.ID
+				SELECT * FROM {$wpdb->comments}
+				WHERE comment_post_ID = {$wpdb->posts}.ID
 				AND comment_content LIKE '%$tag%'
 			)
 			OR EXISTS (
-				SELECT * FROM wp_terms
-				INNER JOIN wp_term_taxonomy
-				ON wp_term_taxonomy.term_id = wp_terms.term_id
-				INNER JOIN wp_term_relationships
-				ON wp_term_relationships.term_taxonomy_id = wp_term_taxonomy.term_taxonomy_id
+				SELECT * FROM {$wpdb->terms}
+				INNER JOIN {$wpdb->term_taxonomy}
+				ON {$wpdb->term_taxonomy}.term_id = {$wpdb->terms}.term_id
+				INNER JOIN {$wpdb->term_relationships}
+				ON {$wpdb->term_relationships}.term_taxonomy_id = {$wpdb->term_taxonomy}.term_taxonomy_id
 				WHERE (
 				taxonomy = 'post_tag'
 					OR taxonomy = 'category'                
 					OR taxonomy = 'myCustomTax'
 				)
-				AND object_id = wp_posts.ID
-				AND wp_terms.name LIKE '%$tag%'
+				AND object_id = {$wpdb->posts}.ID
+				AND {$wpdb->terms}.name LIKE '%$tag%'
 			)
 		)";
 	endforeach;
