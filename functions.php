@@ -493,8 +493,14 @@ add_action('wp_ajax_doLogin', 'doLogin');
  */
 add_action( 'send_headers', 'and_add_security_header', 99 );
 function and_add_security_header() {
+	if (!is_ssl()) {
+        // Ensure the HSTS header is not sent for HTTP requests
+        header_remove("Strict-Transport-Security");
+    } else {
+        // Add HSTS header only for HTTPS
+        header("Strict-Transport-Security: max-age=31536000; includeSubDomains; preload");
+    }
     header( "Content-Security-Policy: upgrade-insecure-requests" );
-    header( "Strict-Transport-Security: max-age=31536000; includeSubDomains" );
     header( "X-Xss-Protection: 1; mode=block" );
     header( "X-Frame-Options: SAMEORIGIN" );
     header( "X-Content-Type-Options: nosniff" );
@@ -502,9 +508,9 @@ function and_add_security_header() {
     header( "Permissions-Policy: geolocation=self" );
     header( "Access-Control-Allow-Origin: *" );
 
-	// header("Cross-Origin-Embedder-Policy: unsafe-none");
-	// header("Cross-Origin-Opener-Policy: same-origin-allow-popups");
-	// header("Cross-Origin-Resource-Policy: cross-origin");
+	header("Cross-Origin-Embedder-Policy: unsafe-none");
+	header("Cross-Origin-Opener-Policy: same-origin-allow-popups");
+	header("Cross-Origin-Resource-Policy: cross-origin");
 	
 	if(get_the_ID() == '11' || get_the_ID() == '18192') {
 		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
