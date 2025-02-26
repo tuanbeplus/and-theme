@@ -101,10 +101,17 @@ function pp_and_woo_auto_complete_order( $order_id ) {
       $qty = $item_obj->get_quantity();
   
       if(!isset($course_information['event_parent']['sf_event_id'])) continue;
-      $eventID = $course_information['event_parent']['sf_event_id'];
-  
-      // Update Remaining_Seats
-      pp_update_wp_event_push_Remaining_Seats__c($qty, $eventID);
+      $parent_eventID = $course_information['event_parent']['sf_event_id'];
+
+      // Update Remaining_Seats at parent event
+      pp_update_wp_event_push_Remaining_Seats__c($qty, $parent_eventID);
+
+      $child_eventID = $course_information['event_child']['sf_event_id'] ?? '';
+      if (!empty($child_eventID)) {
+        // Update Remaining_Seats at child event
+        pp_update_wp_event_push_Remaining_Seats__c($qty, $child_eventID);
+      }
+
       update_post_meta($order_id, '_updated_remaining_seats', 'yes');
     }
   }
