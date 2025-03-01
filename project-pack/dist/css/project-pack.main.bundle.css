@@ -2517,6 +2517,19 @@ p.order-again a.button:hover {
 .woocommerce-account .woocommerce-customer-details--phone::before, .woocommerce-account .woocommerce-customer-details--email::before {
   margin-top: -3px;
 }
+.woocommerce-account a.woocommerce-button {
+  background-color: var(--accent-color2);
+  color: white;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-family: "Avenir-Medium";
+  border: none;
+  text-decoration: none;
+}
+.woocommerce-account a.woocommerce-button:hover {
+  opacity: 0.8;
+}
 
 .woocommerce-MyAccount-navigation ul {
   border: solid 1px #eee;

@@ -101,7 +101,6 @@ function ppsf_update_role_based_pricing($pid, $productParentId, $prices) {
 add_action('wp_head', function() {
   // $product_variation = new WC_Product_Variation(19433);
   // $regular_price = $product_variation->regular_price;
-  // var_dump($regular_price); 
   // global $current_user;
 });
 

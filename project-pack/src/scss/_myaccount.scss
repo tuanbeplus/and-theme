@@ -70,6 +70,19 @@
       }
     }
   }
+  a.woocommerce-button {
+    background-color: var(--accent-color2);
+    color: white;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-family: "Avenir-Medium";
+    border: none;
+    text-decoration: none;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 }
 
 .woocommerce-MyAccount-navigation {

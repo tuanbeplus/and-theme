@@ -264,9 +264,9 @@ function pp_ajax_save_attendees_in_cart() {
     'success' => true,
   ]);
 }
-
 add_action('wp_ajax_pp_ajax_save_attendees_in_cart', 'pp_ajax_save_attendees_in_cart');
 add_action('wp_ajax_nopriv_pp_ajax_save_attendees_in_cart', 'pp_ajax_save_attendees_in_cart');
+
 
 function pp_ajax_save_attendees_to_order() {
   global $woocommerce;
@@ -282,7 +282,8 @@ function pp_ajax_save_attendees_to_order() {
     
     $course_information = wc_get_order_item_meta($item_key, 'course_information', true);
 
-    $eventID = $course_information['event_parent']['sf_event_id'];
+    $event_parent_id = $course_information['event_parent']['sf_event_id'] ?? '';
+    $event_child_id = $course_information['event_child']['sf_event_id'] ?? '';
 
     $c_IDs = $_POST['contact_id'][$item_key];
     $c_emails = $_POST['email'][$item_key];
@@ -299,8 +300,11 @@ function pp_ajax_save_attendees_to_order() {
         continue; 
       }
       
-      $res = ppsf_add_EventRelation($eventID, $id); // and_create_an_event_relation_on_salesforce($eventID, $id);
+      $res = ppsf_add_EventRelation($event_parent_id, $id);
+      $res_child = ppsf_add_EventRelation($event_child_id, $id);
+
       $relation_id = isset($res['id']) ? $res['id'] : '';
+      $relation_id_child = isset($res_child['id']) ? $res_child['id'] : '';
       
       $item_data = [
         'item_key' => $item_key, 
@@ -310,6 +314,7 @@ function pp_ajax_save_attendees_to_order() {
         'lastname' => $c_lnames[$index],
         'account_id' => $c_organisations[$index],
         'relation_id' => $relation_id,
+        'relation_id_child' => $relation_id_child,
       ]; 
 
       array_push($__SF_CONTACT_FULL, $item_data);
@@ -325,15 +330,18 @@ function pp_ajax_save_attendees_to_order() {
     'success' => true,
   ]);
 }
-
 add_action('wp_ajax_pp_ajax_save_attendees_to_order', 'pp_ajax_save_attendees_to_order');
 add_action('wp_ajax_nopriv_pp_ajax_save_attendees_to_order', 'pp_ajax_save_attendees_to_order');
 
+/**
+ * Ajax action remove slot attendees
+ */
 function pp_ajax_remove_slot_attendees() {
-  // wp_send_json($_POST);
+  // return wp_send_json($_POST);
 
   // Remove from Salesforce
   ppsf_delete_EventRelation_record($_POST['rid']);
+  ppsf_delete_EventRelation_record($_POST['rid_child']);
 
   // Remove from order
   pp_remove_attendees_order($_POST['oid'], $_POST['rid']);
@@ -342,7 +350,6 @@ function pp_ajax_remove_slot_attendees() {
     'success' => true,
   ]); 
 }
-
 add_action('wp_ajax_pp_ajax_remove_slot_attendees', 'pp_ajax_remove_slot_attendees');
 add_action('wp_ajax_nopriv_pp_ajax_remove_slot_attendees', 'pp_ajax_remove_slot_attendees');
 

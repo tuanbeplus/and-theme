@@ -6,7 +6,6 @@
  * @since 1.0.0
  */
 
-// var_dump($template_data);
 ?>
 <div class="shop-lading">
 

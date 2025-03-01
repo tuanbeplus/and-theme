@@ -2,12 +2,17 @@
 /**
  * Woo 
  * 
- * @version 1.0.0
- * @since 1.0.0
+ * @version 2.2
+ * @since 2.2
  */
 
+/**
+ * Add custom cart fragments
+ * 
+ * @param array $fragments
+ * @return array
+ */
 function pp_woo_add_custom_cart_fragments($fragments) {
-
   ob_start();
   pp_woo_mini_cart_tag();
   $content = ob_get_clean();
@@ -16,6 +21,12 @@ function pp_woo_add_custom_cart_fragments($fragments) {
   return $fragments;
 }
 
+/**
+ * Add product minutes tag
+ * 
+ * @param array $cart_item
+ * @param object $product
+ */
 function pp_woo_product_minus_string_tag ($cart_item, $_product) {
   $minutes = get_field('minutes', $_product->get_id());
   if(empty($minutes)) return;
@@ -23,46 +34,40 @@ function pp_woo_product_minus_string_tag ($cart_item, $_product) {
 }
 
 /**
- * Preare data course
+ * Preare data course information
  * 
+ * @param array $cart_item_data
+ * @param int $product_id
+ * @param int $variation_id
+ * @return array
  */
 function pp_add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
 
   if(!$variation_id) return $cart_item_data;
 
-  // $start_date = get_post_meta($variation_id, 'start_date', true);
-  // $start_time = get_post_meta($variation_id, 'start_time', true);
-  // $end_date = get_post_meta($variation_id, 'end_date', true);
-  // $end_time = get_post_meta($variation_id, 'end_time', true);
-
   $wp_event_parent_id = get_post_meta($variation_id, 'wp_parent_event_id', true);
   $wp_event_child_id = get_post_meta($variation_id, 'wp_child_event_id', true);
-
-  // if(! $wp_event_parent_id && ! $start_time && ! $end_date && ! $end_time) {
-  //   return $cart_item_data;
-  // }
 
   $variation = wc_get_product($variation_id);
   $variation->get_formatted_name();
 
   $cart_item_data['course_information'] = [
-    'name' => $variation->get_name(), // wp_strip_all_tags($variation->get_formatted_name()),
+    'name' => $variation->get_name(),
     'event_parent' => pp_get_event_data_by_id((int) $wp_event_parent_id),
     'event_child' => pp_get_event_data_by_id((int) $wp_event_child_id), 
-
-    // 'start_date' => $start_date,
-    // 'start_time' => $start_time,
-    // 'end_date' => $end_date,
-    // 'end_time' => $end_time,
   ];
 
-  // wp_send_json( $cart_item_data ); die;
   return $cart_item_data;
 }
-
 add_filter( 'woocommerce_add_cart_item_data', 'pp_add_cart_item_data', 40, 3 );
 
-// ADD THE INFORMATION AS ORDER ITEM META DATA SO THAT IT CAN BE SEEN AS PART OF THE ORDER
+/**
+ * Add custom field to order item meta
+ * 
+ * @param int $item_id
+ * @param array $item_values
+ * @param int $item_key
+ */
 function pp_add_custom_field_to_order_item_meta( $item_id, $item_values, $item_key ) {
   if( isset($item_values['course_information']) )
     wc_update_order_item_meta( 
@@ -83,17 +88,20 @@ add_action( 'pp/script_data', function($data = []) {
   return $data;
 } );
 
+/**
+ * Hook to auto complete order to push remaining seats to Salesforce
+ * 
+ * @param int $order_id
+ */
 add_action( 'woocommerce_thankyou', 'pp_and_woo_auto_complete_order' );
 function pp_and_woo_auto_complete_order( $order_id ) { 
   if ( ! $order_id ) {
     return;
   }
-
   $order = wc_get_order( $order_id );
   $_updated_remaining_seats = get_post_meta($order_id, '_updated_remaining_seats', true);
   if($_updated_remaining_seats != 'yes') {
     foreach ($order->get_items() as $item_id => $item_obj) {
-
       $__SF_CONTACT_FULL = wc_get_order_item_meta( $item_id, '__SF_CONTACT_FULL', true );
       $course_information = wc_get_order_item_meta( $item_id, 'course_information', true );
   
@@ -121,17 +129,32 @@ function pp_and_woo_auto_complete_order( $order_id ) {
   }
 }
 
+/**
+ * Get attendees by order
+ * 
+ * @param int $order_id
+ * @return array
+ */
 function pp_get_attendees_by_order($order_id) {
   $__ATTENDEES = get_post_meta($order_id, '__ATTENDEES', true);
   return empty($__ATTENDEES) ? [] : array_values($__ATTENDEES);
 }
 
+/**
+ * Save attendees to order
+ * 
+ * @param int $order_id
+ * @param array $data
+ */
 function pp_save_attendees_to_order($order_id, $data = []) {
   update_post_meta($order_id, '__ATTENDEES', $data);
 }
 
 /**
+ * Add attendees to order by item data
  * 
+ * @param int $order_id
+ * @param array $item_data
  */
 function pp_add_attendees_order($order_id, $item_data = []) {
   // $order = wc_get_order( $order_id );
@@ -140,44 +163,65 @@ function pp_add_attendees_order($order_id, $item_data = []) {
   update_post_meta($order_id, '__ATTENDEES', array_values($__ATTENDEES));
 }
 
+/**
+ * Remove attendees from order by attendees id
+ * 
+ * @param int $order_id
+ * @param string $attendees_id
+ */
 function pp_remove_attendees_order($order_id, $attendees_id) {
   $__ATTENDEES = pp_get_attendees_by_order($order_id);
   $found_key = array_search($attendees_id, array_column($__ATTENDEES, 'relation_id'));
-  
-  if($found_key === false) return; 
-  unset($__ATTENDEES[$found_key]);
+  $found_key_child = array_search($attendees_id, array_column($__ATTENDEES, 'relation_id_child'));
+  if($found_key === false && $found_key_child === false) return; 
+  if($found_key !== false) {
+    unset($__ATTENDEES[$found_key]);
+  }
+  if($found_key_child !== false) {
+    unset($__ATTENDEES[$found_key_child]);
+  }
   update_post_meta($order_id, '__ATTENDEES', array_values($__ATTENDEES));
 }
 
+/**
+ * Get attendees order by email
+ * 
+ * @param int $order_id
+ * @param string $email
+ * @return array
+ */
 function pp_get_attendees_order_by_email($order_id, $email) {
-  $__ATTENEES = pp_get_attendees_by_order($order_id);
+  $__ATTENDEES = pp_get_attendees_by_order($order_id);
   $found_key = array_search($email, array_column($__ATTENDEES, 'email'));
   return $found_key === false ? [] : $__ATTENDEES[$found_key];
 }
 
+/**
+ * Add event information to order item meta
+ * 
+ * @param int $item_id
+ * @param array $item
+ * @param object $product
+ */
 add_action( 'woocommerce_after_order_itemmeta', function($item_id, $item, $product) {
-  # echo '<pre>'; print_r($item['course_information']); echo '</pre>'; 
   if(!isset($item['course_information'])) return;
-  // var_dump($item['__SF_CONTACT_FULL']);
   ?>
   <table cellspacing="0" class="display_meta">
+    <?php if(!empty($item['course_information']['event_parent'])): ?>
     <tr>
-      <th>Event Parent (#<?php echo $item['course_information']['event_parent']['sf_event_id'] ?>)</th>
+      <th>Event Parent (#<?php echo $item['course_information']['event_parent']['sf_event_id'] ?? '' ?>)</th>
       <td><?php echo $item['course_information']['event_parent']['workshop_event_date_text__c'] . ' | ' . $item['course_information']['event_parent']['workshop_times__c'] ?> </td>
     </tr>
+    <?php endif; ?>
+    <?php if(!empty($item['course_information']['event_child'])): ?>
     <tr>
-      <th>Event Child (#<?php echo $item['course_information']['event_child']['sf_event_id'] ?>)</th>
+      <th>Event Child (#<?php echo $item['course_information']['event_child']['sf_event_id'] ?? '' ?>)</th>
       <td><?php echo $item['course_information']['event_child']['workshop_event_date_text__c'] . ' | ' . $item['course_information']['event_child']['workshop_times__c'] ?> </td>
     </tr>
+    <?php endif; ?>
   </table>
   <?php
 }, 10, 3 );
-
-// add_action('init', function() {
-//   global$woocommerce;
-//   $items = $woocommerce->cart->get_cart();
-//   echo '<pre>'; print_r($items); echo '</pre>'; 
-// });
 
 /**
  * Checkout custom
@@ -197,7 +241,6 @@ function ppwc_step_add_seats_contact_form() {
  * End checkout custom
  */
 
-//  do_action( 'woocommerce_thankyou', $order->get_id() );
 add_action('woocommerce_thankyou', 'pp_form_add_attendees_to_order', 90);
 add_action('woocommerce_view_order', 'pp_form_add_attendees_to_order', 90);
 
@@ -412,6 +455,9 @@ add_action( 'woocommerce_checkout_init', 'pp_update_billing_data_before_checkout
 
 /**
  * Customize Billing details form fields on Checkout page
+ * 
+ * @param array $fields
+ * @return array
  */
 function pp_custom_woocommerce_checkout_fields( $fields ) {
   // Change the fields
@@ -425,7 +471,11 @@ function pp_custom_woocommerce_checkout_fields( $fields ) {
 }
 add_filter( 'woocommerce_checkout_fields' , 'pp_custom_woocommerce_checkout_fields' );
 
-
+/**
+ * Customize Thank you page
+ * 
+ * @param int $order_id
+ */
 function pp_custom_woo_thankyou_order_received($order_id) {
   // Get shop landing page link
   $shop_landing_page = get_field('shop_landing_page', 'option');

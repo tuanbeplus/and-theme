@@ -3291,6 +3291,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     $tr.find('input[name^="organisation"]').val(organisationIdDefault);
     $tr.find('input[name^="contact_id"]').val('');
     $tr.find('input[name^="relation_id"]').val('');
+    $tr.find('input[name^="relation_id_child"]').val('');
     $tr.find('.organisation-text').text(organisationTextDefault);
   };
   var setStatus = function setStatus($tr, status) {
@@ -3314,9 +3315,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   };
   var onEmailUpdate = function onEmailUpdate() {
-    setTimeout(function () {
-      console.log($("".concat(FORM_ID, " input[name^=\"email\"]")).length);
-    }, 1000);
+    // setTimeout(() => {
+    //   console.log($(`${ FORM_ID } input[name^="email"]`).length);
+    // }, 1000)
+
     $('body').on('change', "".concat(FORM_ID, " input[name^=\"email\"]"), /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e) {
         var email, sfEventID, isEmail, $table, $tr, $td, dup, _yield$findEmailSales, contact, joined;
@@ -3511,7 +3513,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   };
   var removeSlot = function removeSlot() {
     $(document.body).on('attendees:remove_slot', /*#__PURE__*/function () {
-      var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(e, order_id, EventRelation_Id, cb) {
+      var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(e, order_id, EventRelation_Id, EventRelation_Id_Child, cb) {
         var res;
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
           while (1) switch (_context4.prev = _context4.next) {
@@ -3523,7 +3525,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 data: {
                   action: 'pp_ajax_remove_slot_attendees',
                   oid: order_id,
-                  rid: EventRelation_Id
+                  rid: EventRelation_Id,
+                  rid_child: EventRelation_Id_Child
                 },
                 error: function error(e) {
                   console.log(e);
@@ -3539,7 +3542,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee4);
       }));
-      return function (_x5, _x6, _x7, _x8) {
+      return function (_x5, _x6, _x7, _x8, _x9) {
         return _ref5.apply(this, arguments);
       };
     }());
@@ -3550,12 +3553,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var std = $(this).find('.__std').text();
       var _this$dataset = this.dataset,
         rid = _this$dataset.rid,
+        ridChild = _this$dataset.ridChild,
         orderId = _this$dataset.orderId;
       var $tr = $(this).closest('tr.__slot-item');
-      // console.log(rid, orderId);
-
+      console.log(rid, ridChild, orderId);
       $tr.addClass('__loading');
-      $(document.body).trigger('attendees:remove_slot', [orderId, rid, function (_ref6) {
+      $(document.body).trigger('attendees:remove_slot', [orderId, rid, ridChild, function (_ref6) {
         var success = _ref6.success;
         if (success == true) {
           resetSlotItem($tr);
@@ -3621,7 +3624,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }, _callee5);
         }));
-        function onSubmit(_x9, _x10) {
+        function onSubmit(_x10, _x11) {
           return _onSubmit.apply(this, arguments);
         }
         return onSubmit;

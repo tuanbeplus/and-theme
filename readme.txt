@@ -3,6 +3,7 @@
 Tags: blog, custom-menu, featured-images, threaded-comments, translation-ready, right-sidebar, custom-background, e-commerce, theme-options, sticky-post, full-width-template
 Requires at least: 4.0
 Tested up to: 4.7
+Version: 2.2
 
 Copyright (c) 2024 YSN! All Rights Reserved
 

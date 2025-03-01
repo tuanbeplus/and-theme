@@ -2,10 +2,16 @@
 /**
  * WooCommerce Helpers Functions 
  * 
- * @since 1.0.0
+ * @since 2.2
  * @author Mike
  */
 
+/**
+ * Create variable product
+ * 
+ * @param array $args
+ * @return int
+ */
 function ppwc_event_create_variable_product($args = []) {
   $default = [
     'junction_id' => 0,
@@ -34,6 +40,13 @@ function ppwc_event_create_variable_product($args = []) {
   return $product->get_id();
 }
 
+/**
+ * Add variation product
+ * 
+ * @param array $args
+ * @param int $parent_id
+ * @return int
+ */
 function ppwc_event_add_variation_product($args = [], $parent_id) {
   $default = [
     'name' => $parent_event['Subject'],
@@ -68,6 +81,12 @@ function ppwc_event_add_variation_product($args = [], $parent_id) {
   return $variation->get_id();
 }
 
+/**
+ * Add product attribute options
+ * 
+ * @param int $pid
+ * @param string $name
+ */
 function ppwc_add_product_attr_opts($pid, $name) {
   $attributes = get_post_meta($pid, '_product_attributes', true);
 
@@ -79,11 +98,15 @@ function ppwc_add_product_attr_opts($pid, $name) {
   update_post_meta($pid, '_product_attributes', $attributes);
 }
 
+/**
+ * Get event data by product variation id
+ * 
+ * @param int $variation_id
+ * @return array
+ */
 function ppwc_get_event_data_by_product_variation_id($variation_id) {
   $wp_event_parent_id = get_post_meta($variation_id, 'wp_parent_event_id', true);
   $wp_event_child_id = get_post_meta($variation_id, 'wp_child_event_id', true);
-
-  // if(!$wp_event_parent_id && !$wp_event_child_id) return;
 
   return [
     'event_parent' => $wp_event_parent_id ? pp_get_event_data_by_id((int) $wp_event_parent_id) : '',
@@ -95,7 +118,6 @@ function ppwc_get_event_data_by_product_variation_id($variation_id) {
  * Get the Tax rate for GST
  * 
  * @return float Tax rate
- * @author Tap
  */
 function ppwc_get_tax_rates_for_gst() {
   // Get all tax rates for the "Standard" tax class
@@ -115,7 +137,6 @@ function ppwc_get_tax_rates_for_gst() {
  * 
  * @param float $p_price  Product price
  * @return float    GST
- * @author Tap
  */
 function ppwc_calculator_product_gst($p_price) {
   $gst_price = 0;
@@ -138,30 +159,15 @@ function ppwc_merge_event_names($event_name_1, $event_name_2) {
   if (empty($event_name_1) && empty($event_name_2)) {
     return ''; // Explicitly return an empty string
   } 
-  elseif (empty($event_name_2)) {
+  elseif (!empty($event_name_1) && empty($event_name_2)) {
     return $event_name_1;
   } 
-  elseif (empty($event_name_1)) {
+  elseif (empty($event_name_1) && !empty($event_name_2)) {
     return $event_name_2;
   }
-  if ($event_name_1 == $event_name_2) {
+  if ($event_name_1 === $event_name_2) {
     return $event_name_1;
   }
-  // Find the common base between the two strings
-  $common_base = '';
-  for ($i = 0; $i < min(strlen($event_name_1), strlen($event_name_2)); $i++) {
-    if ($event_name_1[$i] === $event_name_2[$i]) {
-      $common_base .= $event_name_1[$i];
-    } else {
-      break;
-    }
-  }
-  // Trim trailing spaces from the common base
-  $common_base = rtrim($common_base);
-  // Extract the differing parts
-  $part1 = trim(str_replace($common_base, '', $event_name_1));
-  $part2 = trim(str_replace($common_base, '', $event_name_2));
-
-  // Merge the strings and trim the final result
-  return trim($common_base . ' ' . $part1 . ' & ' . $part2);
+  // Default: combine event names
+  return trim($event_name_1 . '<br>& ' . $event_name_2);
 }

@@ -507,7 +507,6 @@ function pp_ajax_ppsf_event_product_import() {
 add_action( 'init', function() {
   if(!isset($_GET['__test_event_import'])) return;
   // $WpEventId, $productParentId
-  var_dump(ppsf_event_validate_products_import_exists());
 } );
 
 /**

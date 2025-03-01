@@ -388,7 +388,7 @@ function pp_product_variable_choose_options_tag($product) {
                     <label class="product-variation-item-label" <?php echo (!$event['is_in_stock']) ? '' : 'tabindex="0"'; ?>>
                       <input name="product_variation[]" type="checkbox" style="display: none;" value="<?php echo $event['variation_id']; ?>">
                       <h4>
-                        <strong><?php echo $event_name; ?></strong>
+                        <strong style="margin-right:10px;"><?php echo $event_name; ?></strong>
                         <?php echo ! empty($event['price_html']) ? "<span class=\"pp-amount\">{$event['price_html']}</span>" : '' ?>
                         <?php echo pp_woo_remaining_seats_available($event); ?>
                       </h4>
@@ -445,9 +445,6 @@ function groupAndSortEventsByMonth($eventsArray, $sortDirection = 'ASC') {
   }
 
   // Sorting events by date and time
-  // echo '<pre>'; print_r($eventsArray); echo '</pre>'; return;
-  // if(is_array($eventsArray)) return [];
-
   $eventsArray = array_filter($eventsArray, function($v, $k) {
     return !empty($v['event_parent']['startdatetime']) ? true : false;
   }, ARRAY_FILTER_USE_BOTH);
@@ -461,8 +458,6 @@ function groupAndSortEventsByMonth($eventsArray, $sortDirection = 'ASC') {
       return ($sortDirection === 'ASC') ? ($dateA - $dateB) : ($dateB - $dateA);
   });
   
-  // echo '<pre>'; print_r($eventsArray); echo '</pre>'; return [];
-
   // Group events by month
   foreach ($eventsArray as $event) {
     $dateTimeString = $event['event_parent']['startdatetime'];
@@ -480,7 +475,6 @@ function groupAndSortEventsByMonth($eventsArray, $sortDirection = 'ASC') {
     $convertedDateTime = strtotime($dateTimeUtc->format('Y-m-d H:i:s P'));
 
     $monthKey = date('F', $convertedDateTime);
-    
     
     // Just Add future Events
     if ($convertedDateTime > strtotime('now')) {

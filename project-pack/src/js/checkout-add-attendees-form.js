@@ -46,6 +46,7 @@
     $tr.find('input[name^="organisation"]').val(organisationIdDefault);
     $tr.find('input[name^="contact_id"]').val('');
     $tr.find('input[name^="relation_id"]').val('');
+    $tr.find('input[name^="relation_id_child"]').val('');
     $tr.find('.organisation-text').text(organisationTextDefault);
   }
 
@@ -74,9 +75,9 @@
   }
 
   const onEmailUpdate = () => {
-    setTimeout(() => {
-      console.log($(`${ FORM_ID } input[name^="email"]`).length);
-    }, 1000)
+    // setTimeout(() => {
+    //   console.log($(`${ FORM_ID } input[name^="email"]`).length);
+    // }, 1000)
 
     $('body').on('change', `${ FORM_ID } input[name^="email"]`, async function(e) {
       const email = e.target.value;
@@ -238,7 +239,7 @@
   }
 
   const removeSlot = () => {
-    $(document.body).on('attendees:remove_slot', async function(e, order_id, EventRelation_Id, cb) {
+    $(document.body).on('attendees:remove_slot', async function(e, order_id, EventRelation_Id, EventRelation_Id_Child, cb) {
       // console.log('__tigger', order_id, EventRelation_Id);
       const res = await $.ajax({
         type: 'POST',
@@ -247,13 +248,13 @@
           action: 'pp_ajax_remove_slot_attendees',
           oid: order_id,
           rid: EventRelation_Id,
+          rid_child: EventRelation_Id_Child,
         },
         error: (e) => {
           console.log(e);
           alert('Internal Error: Please reload page and try again!')
         }
       });
-
       cb(res);
     })
 
@@ -263,12 +264,12 @@
       if(!r) return;
 
       let std = $(this).find('.__std').text();
-      const { rid, orderId } = this.dataset; 
+      const { rid, ridChild, orderId } = this.dataset; 
       let $tr = $(this).closest('tr.__slot-item');
-      // console.log(rid, orderId);
+      console.log(rid, ridChild, orderId);
 
       $tr.addClass('__loading')
-      $(document.body).trigger('attendees:remove_slot', [orderId, rid, ({ success }) => {
+      $(document.body).trigger('attendees:remove_slot', [orderId, rid, ridChild, ({ success }) => {
         if(success == true) {
           resetSlotItem($tr);
           setStatus($tr, false);

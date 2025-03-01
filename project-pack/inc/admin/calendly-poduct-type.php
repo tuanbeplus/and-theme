@@ -163,7 +163,6 @@ add_action( 'init', function() {
 
 	// $order=wc_get_order(30799);
 	// foreach ( $order->get_items() as $item_id => $item ) {
-	// 	var_dump($item['item_meta']);
 	// }
 } );
 

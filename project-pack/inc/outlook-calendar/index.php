@@ -27,8 +27,7 @@ function pp_button_outlook_order_action( $actions, $order ){
   
   return $actions;
 }
-
-add_filter('woocommerce_my_account_my_orders_actions' , 'pp_button_outlook_order_action' ,10 , 2 );
+// add_filter('woocommerce_my_account_my_orders_actions' , 'pp_button_outlook_order_action' ,10 , 2 );
 
 add_filter( 'pp/script_data', function($data) {
   $currentUserID = get_current_user_id();

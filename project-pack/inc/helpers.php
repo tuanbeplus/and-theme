@@ -82,8 +82,6 @@ function pp_product_landing_load_init($params = []) {
       $case = 'PRODUCT_NO_TERM_WIDTH_KEYWORDS_TEMPLATE';
     }
   }
-  // var_dump($params);
-  // echo $case;
 
   switch ($case) {
     case 'PRODUCT_WITH_TERM_TEMPLATE':
@@ -182,6 +180,12 @@ function pp_product_landing_v2_group_per_term_template($term, $params) {
   return ob_get_clean();
 }
 
+/**
+ * Get Salesforce user metadata
+ * 
+ * @param int $user_id
+ * @return array
+ */
 function pp_saleforce_current_user_metadata($user_id = null) {
   if($user_id != null) {
     $user = get_userdata($user_id);
@@ -268,8 +272,15 @@ function pp_get_wp_Pricebook2() {
   return get_option('__PP_PRICEBOOK2');
 }
 
-function pp_update_wp_event_push_Remaining_Seats__c($qty, $wpEventId) {
-  $postId = ppsf_find_event_by_sfevent_id($wpEventId);
+/**
+ * Update wp event push Remaining Seats__c
+ * 
+ * @param int $qty
+ * @param string $sfEventId
+ * @return void
+ */
+function pp_update_wp_event_push_Remaining_Seats__c($qty, $sfEventId) {
+  $postId = ppsf_find_event_by_sfevent_id($sfEventId);
   if(!$postId && $postId == 0) return;
 
   $total_seats = get_field('total_number_of_seats__c', (int) $postId);
@@ -280,6 +291,13 @@ function pp_update_wp_event_push_Remaining_Seats__c($qty, $wpEventId) {
   update_field('remaining_seats__c', $new_seats_number, $postId);
 }
 
+/**
+ * Validate update cart qtt
+ * 
+ * @param int $cart_item_key
+ * @param int $qtt_number
+ * @return bool
+ */
 function pp_validate_update_cart_qtt($cart_item_key, $qtt_number) {
   if($qtt_number == 0) return true;
   $cart_item = WC()->cart->get_cart_item($cart_item_key);
