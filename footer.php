@@ -20,7 +20,7 @@ $linkedin = get_field('linkedin', 'option');
 $youtube = get_field('youtube', 'option');
 $footer_logo = get_field('footer_logo', 'option');
 $footerLinks = get_field('footer_links', 'option');
-
+$helpdesk_info = get_field('helpdesk_info', 'option');
 ?>
 <?php if(!is_page_template( 'blank-page.php' ) && !is_page_template( 'blank-page-with-container.php' )): ?>
 
@@ -57,19 +57,24 @@ $footerLinks = get_field('footer_links', 'option');
                     </div>
                 </div>
                 <div class="social col-12">
-                    <h2>Follow us</h2>
-                    <a href="<?php echo $facebook; ?>" target="_blank">
-                        <img src="<?php echo AND_IMG_URI.'facebook.svg'; ?>" alt="Facebook" />
-                    </a>
-                    <a href="<?php echo $twitter; ?>" target="_blank">
-                        <img src="<?php echo AND_IMG_URI.'social-icons-x.svg'; ?>" alt="Twitter" style="width:30px" />
-                    </a>
-                    <a href="<?php echo $linkedin; ?>" target="_blank">
-                        <img src="<?php echo AND_IMG_URI.'linkedin.svg'; ?>" alt="LinkedIn" />
-                    </a>
-                    <a href="<?php echo $youtube; ?>" target="_blank">
-                        <img src="<?php echo AND_IMG_URI.'youtube.svg'; ?>" alt="YouTube" />
-                    </a>
+                    <div class="helpdesk-info">
+                        <?php echo $helpdesk_info; ?>
+                    </div>
+                    <div>
+                        <h2>Follow us</h2>
+                        <a href="<?php echo $facebook; ?>" target="_blank">
+                            <img src="<?php echo AND_IMG_URI.'facebook.svg'; ?>" alt="Facebook" />
+                        </a>
+                        <a href="<?php echo $twitter; ?>" target="_blank">
+                            <img src="<?php echo AND_IMG_URI.'social-icons-x.svg'; ?>" alt="Twitter" style="width:30px" />
+                        </a>
+                        <a href="<?php echo $linkedin; ?>" target="_blank">
+                            <img src="<?php echo AND_IMG_URI.'linkedin.svg'; ?>" alt="LinkedIn" />
+                        </a>
+                        <a href="<?php echo $youtube; ?>" target="_blank">
+                            <img src="<?php echo AND_IMG_URI.'youtube.svg'; ?>" alt="YouTube" />
+                        </a>
+                    </div>
                 </div>
                 <div class="col-12 bottom">
                     <div class="row">

@@ -5432,8 +5432,24 @@ footer.site-footer {
     footer.site-footer .site-info .detail a {
       text-decoration: underline; }
   footer.site-footer .social {
-    text-align: right;
-    margin-top: 20px; }
+    margin-top: 30px; 
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  footer.site-footer .helpdesk-info {
+    max-width: 600px;
+  }
+  footer.site-footer .helpdesk-info p {
+    margin-right: 0 !important;
+  }
+  footer.site-footer .helpdesk-info a {
+    margin-right: 0 !important;
+    font-family: "Avenir-Heavy";
+    text-decoration: none;
+    text-underline-offset: 2px;
+  }
     footer.site-footer .social h2 {
       margin-right: 20px;
       display: inline-block;
@@ -5533,6 +5549,9 @@ footer.site-footer {
       max-width: 30%; } }
 
 @media (max-width: 990px) {
+  footer.site-footer .social {
+    gap: 40px;
+  }
   footer.site-footer .site-info .row .detail {
     flex: 0 0 30%;
     max-width: 30%; }
@@ -5556,8 +5575,6 @@ footer.site-footer {
       border-top: 1px solid #787878 !important;
       padding-top: 30px;
       text-align: left; }
-      footer.site-footer .social p {
-        display: none; }
     footer.site-footer .bottom {
       margin-top: 30px; }
       footer.site-footer .bottom hr {
