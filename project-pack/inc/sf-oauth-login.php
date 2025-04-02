@@ -139,8 +139,8 @@ function fn_sync_and_auto_login_user($sf_user_info=[], $access_token='') {
     update_user_meta($WP_UserID, '__salesforce_account_id', $AccountId);
     update_user_meta($WP_UserID, '__salesforce_profile_id', $ProfileId);
     update_user_meta($WP_UserID, '__salesforce_access_token', $access_token);
-    update_user_meta($WP_UserID, '__salesforce_user_meta', wp_json_encode($userData));
-    update_user_meta($WP_UserID, '__salesforce_account_json', wp_json_encode($accountInfo));
+    update_user_meta($WP_UserID, '__salesforce_user_meta', wp_json_encode($userData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    update_user_meta($WP_UserID, '__salesforce_account_json', wp_json_encode($accountInfo, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     update_user_meta($WP_UserID, '__sf_last_updated_userinfo', current_time('mysql'));
 
     // Update user role based on ProfileId
