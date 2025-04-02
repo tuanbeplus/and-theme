@@ -146,8 +146,8 @@ function pp_ajax_request_sf_user_data() {
     'salesforce_contact_id' => $ContactId ?? '',
     '__salesforce_account_id' => $AccountId ?? '',
     '__salesforce_profile_id' => $ProfileId ?? '',
-    '__salesforce_user_meta' => wp_json_encode($response) ?? '',
-    '__salesforce_account_json' => wp_json_encode( $accountInfo ),
+    '__salesforce_user_meta' => wp_json_encode($response, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?? '',
+    '__salesforce_account_json' => wp_json_encode($accountInfo, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?? '',
     '__sf_last_updated_userinfo' => current_time('mysql'), // last updated timestamp
   ]);
 
