@@ -538,3 +538,29 @@ function and_export_wp_users_to_csv() {
     exit;
 }
 add_action('admin_post_export_wp_users_csv', 'and_export_wp_users_to_csv');
+
+/**
+ * Customize WP admin login logo
+ */
+function adn_custom_wp_login_logo() { 
+    ?>
+    <style type="text/css">
+        #login h1 a, .login h1 a {
+            background-image: url("/wp-content/uploads/2024/03/new-and-logo-sgv-min.png");
+            width: auto;
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 100px;
+        }
+    </style>
+    <?php 
+}
+add_action('login_enqueue_scripts', 'adn_custom_wp_login_logo', 999);
+
+/**
+ * Change WP admin login logo URL
+ */
+function adn_custom_wp_login_logo_url() {
+    return home_url();
+}
+add_filter('login_headerurl', 'adn_custom_wp_login_logo_url', 999);
