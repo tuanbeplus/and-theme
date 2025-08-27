@@ -7,8 +7,8 @@ get_header();
 
 $positions = getOpenPositions();
 $program_id = get_field('stepping_into_program_id','options');
-$sf_community_url = get_field('salesforce_community_url','options');
-$sf_community_url = !empty($sf_community_url) ? $sf_community_url : 'https://ausdn.my.site.com';
+$ipa_form_url = get_field('internship_program_application_form_url','options');
+$ipa_form_url = !empty($ipa_form_url) ? $ipa_form_url : 'https://ausdn.my.site.com/forms/s/andforms?formtype=stepping_into_application&programid=a0kOn00000HFvKVIA1';
 ?>
 
 <div class="col-12 current-opportunities">
@@ -104,7 +104,7 @@ $sf_community_url = !empty($sf_community_url) ? $sf_community_url : 'https://aus
                         <a href="<?php echo $position->Position_Description_Public_URL__c; ?>" target="_blank" style="color:#663077;">View job description</a>
                     </div>
 
-                    <a href="<?php echo $sf_community_url ?>/forms/s/andforms?formtype=stepping_into_application&programid=<?php echo $program_id; ?>" target="_blank" class="cta" style="display: inline-block;
+                    <a href="<?php echo esc_url($ipa_form_url) ?>" target="_blank" class="cta" style="display: inline-block;
                       color: #fff;
                       padding: 10px 25px;
                       background: #663077;

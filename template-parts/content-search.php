@@ -6,15 +6,23 @@
  *
  * @package WP_Bootstrap_Starter
  */
+
 $keysearch = $_GET['s'] ? trim($_GET['s']) : '';
 $key_highligh = "<b>".$keysearch."</b>";
 
 //Content
 $page_builder = get_field('page_builder');
 $content = '';
-foreach ($page_builder as $key => $builder) {
-	if($builder['acf_fc_layout'] == 'single_column_content'){
-		$content = $builder['content'];
+
+$post_type = get_post_type();
+
+if ($post_type == 'resource-media') {
+	$content = get_field('description');
+} else {
+	foreach ($page_builder as $key => $builder) {
+		if($builder['acf_fc_layout'] == 'single_column_content'){
+			$content = $builder['content'];
+		}
 	}
 }
 

@@ -172,7 +172,7 @@ $current_post_type = get_post_type();
                             <div class="sidebar-member-cta">
                                 <?php if (!isset($_COOKIE['lgi'])) : ?>
                                 <h2>Are you a member?</h2>
-                                <p>Login to see member exclusive content. <a href="/join-us/our-members/">Click here</a> to find out if you’re a member.</p>
+                                <p>Login to see member exclusive content. <a href="/join-us/our-members/">Find out if you’re a member.</a></p>
                                 <span class="member-login-cta"> <a href="/login" class="btn btn-primary">Log in</a> </span>
                                 <?php else : ?>
                                 <h2>Welcome back!</h2>

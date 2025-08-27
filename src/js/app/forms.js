@@ -2,7 +2,7 @@ $(function(){
 
     var $ajax = '/wp-admin/admin-ajax.php';
 
-    $('select:not([multiple])').selectric(); 
+    // $('select:not([multiple])').selectric(); 
 
     $(document).on('submit','form#salesforce-login',function(e){
 

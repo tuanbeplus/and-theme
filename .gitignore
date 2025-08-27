@@ -1,4 +1,19 @@
-node_modules
+# Node modules directory
+node_modules/
+
+# macOS system files
 .DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Environment files
 .env
+
+# Log files
 project-pack/inc/admin/sf-event-sync/sf-sync-log.txt

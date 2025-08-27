@@ -9,7 +9,6 @@
   $total_pages = ceil($total_results / $per_page);
   $start = ($current_page - 1) * $per_page + 1;
   $end = min($start + $per_page - 1, $total_results);
-
   ?>
 
   <p class="summary">
@@ -47,90 +46,86 @@ if (!empty($topic_text)) {
 }
 ?>
 
-
 <div class="facetwp-template" data-name="resource_media">
   <div class="resource-listing">
     <?php if ( have_posts() ) : ?>
       <?php while ( have_posts() ) : the_post(); ?>
         <?php
-          // Check if the resource is member-only and if the user is logged in.
-          $member_only = get_field('member_only');
-          $restricted = false;
-          if ($member_only) {
-            $restricted = !isset($_COOKIE['lgi']);
-          }
+        // Check if the resource is member-only and if the user is logged in.
+        $member_only = get_field('member_only');
+        $user = wp_get_current_user();
+        $roles = $user->roles ?? [];
+        $is_member = !empty(array_intersect(['MEMBERS', 'PRIMARY_MEMBERS'], $roles)) && !empty($_COOKIE['lgi']);
+
+        // Determine media access based on membership and resource type.
+        $media_access = $member_only ? $is_member : true;
         ?>
         <div class="resource-item">
-            <div class="resource-item-thumbnail">
-              <?php if ( !$restricted ) : ?>
-                <?php $thumbnail = get_field('thumbnail'); ?>
-                <?php if ($content_type = get_field('content_type') ): ?>
-                  <!-- Print default image for external link -->
-                  <?php if ($content_type == 'external_website'): ?>
-                    <?php $image_path = get_template_directory_uri() . '/assets/imgs/web-link-thumbnail.png'; ?>
-                    <img src="<?php echo  $image_path; ?>" title="Web link" alt="Web link" class="tippy-added">
-                  <?php elseif (isset($thumbnail['url'])): ?>
-                    <img src="<?php echo esc_url( $thumbnail['url'] ); ?>" title="<?php echo esc_attr( $thumbnail['title'] ?? '' ); ?>" alt="<?php echo esc_attr( $thumbnail['alt'] ?? ''); ?>" class="tippy-added">
-                  <?php endif; ?>
+          <div class="resource-item-thumbnail">
+              <?php $thumbnail = get_field('thumbnail'); ?>
+              <?php if ($content_type = get_field('content_type') ): ?>
+                <!-- Print default image for external link -->
+                <?php if ($content_type == 'external_website'): ?>
+                  <?php $image_path = get_template_directory_uri() . '/assets/imgs/web-link-thumbnail.png'; ?>
+                  <img src="<?php echo  $image_path; ?>" title="Web link" alt="Web link" class="tippy-added">
+                <?php elseif (isset($thumbnail['url'])): ?>
+                  <img src="<?php echo esc_url( $thumbnail['url'] ); ?>" title="<?php echo esc_attr( $thumbnail['title'] ?? '' ); ?>" alt="<?php echo esc_attr( $thumbnail['alt'] ?? ''); ?>" class="tippy-added">
                 <?php endif; ?>
-              <?php else : ?>
-                <?php $image_path = get_template_directory_uri() . '/assets/imgs/member-only-thumbnail.jpg'; ?>
-                <img src="<?php echo  $image_path; ?>" title="Member content" alt="Member content" class="tippy-added">
+              <?php endif; ?>
+          </div>
+          <div class="resource-item-content">
+            <div class="resource-item-tags">
+              <?php if ( get_field('resource_topic') ): ?>
+                <div class="resource-item-topic">
+                  <?php the_field('resource_topic'); ?>
+                </div>
+              <?php endif; ?>
+              <?php if ( $is_featured = get_field('is_featured_media') ) : ?>
+                <?php if ( $is_featured) : ?>
+                  <div class="resource-featured">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                      <path d="M8.99994 13.695L3.71019 16.656L4.89144 10.71L0.440186 6.594L6.46044 5.88L8.99994 0.375L11.5394 5.88L17.5597 6.594L13.1084 10.71L14.2897 16.656L8.99994 13.695Z" fill="white"/>
+                    </svg>
+                    Featured resource
+                  </div>
+                <?php endif; ?>
+              <?php endif; ?>
+
+              <?php if ( $member_only ) : ?>
+                <div class="resource-item-member-exclusive">
+                  Member exclusive
+                </div>
               <?php endif; ?>
             </div>
-            <div class="resource-item-content">
-              <div class="resource-item-tags">
-                <?php if ( get_field('resource_topic') ): ?>
-                  <div class="resource-item-topic">
-                    <?php the_field('resource_topic'); ?>
-                  </div>
-                <?php endif; ?>
-                <?php if ( $is_featured = get_field('is_featured_media') ) : ?>
-                  <?php if ( $is_featured) : ?>
-                    <div class="resource-featured"> 
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                        <path d="M8.99994 13.695L3.71019 16.656L4.89144 10.71L0.440186 6.594L6.46044 5.88L8.99994 0.375L11.5394 5.88L17.5597 6.594L13.1084 10.71L14.2897 16.656L8.99994 13.695Z" fill="white"/>
-                      </svg> 
-                    Featured resource 
-                    </div>
-                  <?php endif; ?>
-                <?php endif; ?>
+            <h2 class="resource-item-title">
+              <?php the_title(); ?>
+            </h2>
+            <div class="resource-item-description">
+              <?php if (get_field('description')): ?>
+                <p>
+                  <?php the_field('description'); ?>
+                </p>
+              <?php endif; ?>
+            </div>
+            <?php if ($media_access): ?>
+              <div class="resource-item-links">
+                <?php if (have_rows('media')): ?>
+                  <ul class="media-list">
+                    <?php while (have_rows('media')): the_row(); ?>
+                      <li>
+                        <?php
+                        $media_file = get_sub_field('media_file');
 
-                <?php if ( $restricted ) : ?>
-                  <div class="resource-item-member-exclusive">
-                    Member exclusive
-                  </div>
-                 <?php endif; ?>
-              </div>
-              <h2 class="resource-item-title">
-                  <?php the_title(); ?>
-              </h2>
-              <div class="resource-item-description">
-                <?php if (get_field('description')): ?>
-                  <p>
-                    <?php the_field('description'); ?>
-                  </p>
-                <?php endif; ?>
-              </div>
-              <?php if (!$restricted): ?>
-                <div class="resource-item-links">
-                  <?php if (have_rows('media')): ?>
-                    <ul class="media-list">
-                      <?php while (have_rows('media')): the_row(); ?>
-                        <li>
-                          <?php
-                          $media_file = get_sub_field('media_file');
-
-                          // Convert filesize to human-readable format.
-                          $filesize = size_format($media_file['filesize'], 2);
-                          ?>
-                          <a href="<?php echo esc_url($media_file['url']) ?>"
-                             download rel="noopener noreferrer">
+                        // Convert filesize to human-readable format.
+                        $filesize = size_format($media_file['filesize'], 2);
+                        ?>
+                        <a href="<?php echo esc_url($media_file['url']) ?>"
+                           download rel="noopener noreferrer">
                           <span class="link-text">
                             <?php the_sub_field('media_text'); ?>
                             (<?php echo esc_html(strtoupper(pp_get_friendly_file_type($media_file['subtype']))) . ', ' . esc_html($filesize); ?>)
                           </span class="link-text">
-                            <span class="download-icon">
+                          <span class="download-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                  height="25" viewBox="0 0 24 25" fill="none">
                                <path
@@ -138,21 +133,21 @@ if (!empty($topic_text)) {
                                  fill="#663077"/>
                             </svg>
                           </span>
-                          </a>
-                        </li>
-                      <?php endwhile; ?>
-                    </ul>
-                  <?php endif; ?>
-                  <?php if (have_rows('links')): ?>
-                    <?php while (have_rows('links')): the_row(); ?>
-                      <ul class=" links-list">
-                        <?php $link = get_sub_field('link'); ?>
-                        <li>
-                          <a href="<?php echo esc_url($link['url']) ?>"
-                             target="_blank" rel="noopener noreferrer">
+                        </a>
+                      </li>
+                    <?php endwhile; ?>
+                  </ul>
+                <?php endif; ?>
+                <?php if (have_rows('links')): ?>
+                  <?php while (have_rows('links')): the_row(); ?>
+                    <ul class=" links-list">
+                      <?php $link = get_sub_field('link'); ?>
+                      <li>
+                        <a href="<?php echo esc_url($link['url']) ?>"
+                           target="_blank" rel="noopener noreferrer">
                             <span
                               class="link-text"> <?php echo esc_attr($link['title']) ?></span>
-                            <span class="external-link-icon">
+                          <span class="external-link-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                  height="24" viewBox="0 0 24 24" fill="none">
                               <path
@@ -160,16 +155,16 @@ if (!empty($topic_text)) {
                                 fill="#663077"/>
                             </svg>
                           </span>
-                          </a>
-                        </li>
-                      </ul>
-                    <?php endwhile; ?>
-                  <?php endif; ?>
-                </div>
-              <?php else : ?>
-                <div class="member-login-cta"><a href="/login">Log in to access member exclusive content</a></div>
-              <?php endif ?>
-            </div>
+                        </a>
+                      </li>
+                    </ul>
+                  <?php endwhile; ?>
+                <?php endif; ?>
+              </div>
+            <?php else : ?>
+              <div class="member-login-cta"><a href="/login">Log in to access member exclusive content</a></div>
+            <?php endif ?>
+          </div>
         </div>
 
       <?php endwhile; ?>
@@ -178,5 +173,3 @@ if (!empty($topic_text)) {
     <?php endif; ?>
   </div>
 </div>
-
-

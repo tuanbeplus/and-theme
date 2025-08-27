@@ -2,15 +2,14 @@
 
 if( get_row_layout() == 'single_column_content' ):
     $content = get_sub_field('content');
+    $member_content = get_sub_field('member_content');
     $contentPosition = get_sub_field('content_position');
     $alignLeft = get_sub_field('align_left');
     $whiteBackground = get_sub_field('white_background');
 
-    if(isset($_COOKIE['lgi'])) {
-         $content = get_sub_field('content');
-        $content .= get_sub_field('member_content');
-    } else {
-        $content = $content;
+    // If user is logged in and has a userId cookie, append member content if available
+    if (is_user_logged_in() && !empty($_COOKIE['userId']) && !empty($member_content)) {
+        $content .= $member_content;
     }
 
     $class = '';

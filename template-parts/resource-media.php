@@ -9,7 +9,6 @@ if ($member_only) {
 
 <div class="resource-item container">
     <div class="resource-item-thumbnail">
-    <?php if (!$restricted): ?>
       <?php $thumbnail = get_field('thumbnail'); ?>
       <?php if ($content_type = get_field('content_type') ): ?>
         <!-- Print default image for external link -->
@@ -20,10 +19,6 @@ if ($member_only) {
           <img src="<?php echo esc_url( $thumbnail['url'] ); ?>" title="<?php echo esc_attr( $thumbnail['title'] ?? '' ); ?>" alt="<?php echo esc_attr( $thumbnail['alt'] ?? ''); ?>" class="tippy-added">
         <?php endif; ?>
       <?php endif; ?>
-    <?php else : ?>
-      <?php $image_path = get_template_directory_uri() . '/assets/imgs/member-only-thumbnail.jpg'; ?>
-      <img src="<?php echo  $image_path; ?>" title="Member content" alt="Member content" class="tippy-added">
-    <?php endif; ?>
 
     </div>
   <div class="resource-item-content">

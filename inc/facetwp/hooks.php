@@ -49,6 +49,10 @@ add_action('facetwp_scripts', function () {
 
 // Add a label to the selections.
 add_action('wp_head', function () {
+  // Only output if this is the Resources Listing template.
+  if (!is_page_template('components/page-resources-listing.php')) {
+    return;
+  }
   ?>
   <script>
     (function ($) {
@@ -77,8 +81,8 @@ add_action('wp_head', function () {
 
 
     /**
-  * Fix for fSelect dropdowns without modifying the original library
-  */
+    * Fix for fSelect dropdowns without modifying the original library
+    */
 
     (function () {
 

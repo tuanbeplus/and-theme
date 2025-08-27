@@ -3,6 +3,10 @@
     margin-bottom: 3rem;
   }
   .woocommerce-MyAccount-content {
+    h2#saved-cards {
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
     a {
       color: var(--accent-color);
       font-family: "Avenir-Medium";
@@ -18,6 +22,9 @@
         }
       }
     }
+    input[type=submit] {
+      font-family: "Avenir-Heavy";
+    }
     .woocommerce-info {
       .woocommerce-Button {
         float: right;
@@ -29,6 +36,38 @@
         color: #fff;
         &:hover {
           opacity: 0.8;
+        }
+      }
+    }
+    form#add_payment_method {
+      .form-row {
+        button[type=submit] {
+          padding: 12px;
+          font-size: 1rem;
+        }
+      }
+    }
+    .payment_methods {
+      .payment_method_pin_payments {
+        label {
+          opacity: 1;
+          text-transform: none;
+          font-size: 1rem;
+          line-height: 1.1;
+          margin-bottom: 6px;
+          font-family: "Avenir-Medium";
+        }
+        .form-row {
+          display: flex !important;
+          flex-direction: column !important;
+          input[type=text], input[type=tel] {
+            margin: 0 !important;
+            transition: all 0.2s;
+            font-size: 1rem !important;
+            &:focus {
+              border: none !important;
+            }
+          }
         }
       }
     }

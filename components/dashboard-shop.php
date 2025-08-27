@@ -6,7 +6,7 @@ $shop_heading = get_sub_field('shop_heading');
 $shop_heading = !empty($shop_heading) ? $shop_heading : 'Our learning solutions';
 $cta_text = get_sub_field('cta_text');
 $cta_text = !empty($cta_text) ? $cta_text : 'View our products';
-$cta_link = get_field('shop_landing_page', 'option');
+$cta_link = get_sub_field('cta_link');
 $cta_link = !empty($cta_link) ? $cta_link : '/shop/';
 ?>
 <section class="dashboard tasks shop">

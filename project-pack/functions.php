@@ -9,7 +9,7 @@
    */
   define('PP_DIR', get_stylesheet_directory() . '/project-pack/');
   define('PP_URI', get_stylesheet_directory_uri() . '/project-pack/');
-  define('PP_VER', '2.2');
+  define('PP_VER', time());
 }
 
 {

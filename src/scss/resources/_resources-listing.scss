@@ -110,6 +110,10 @@
 		font-style: normal;
 		font-weight: 800;
 		line-height: 31.2px; /* 130% */
+
+		a {
+			color: inherit;
+		}
 	}
 
 	.resource-item-description {

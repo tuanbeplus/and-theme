@@ -363,16 +363,18 @@
 
 #add_payment_method #payment ul.payment_methods li input, 
 .woocommerce-cart #payment ul.payment_methods li input, 
-.woocommerce-checkout #payment ul.payment_methods li input {
-  width: 14px;
-  height: 14px;
-  background-color: white;
-  border-radius: 14px;
-  vertical-align: middle;
-  border: 2px solid #fff !important;
-
-  &:checked {
-    border-color: black !important
+.woocommerce-checkout #payment ul.payment_methods li input{
+  &[type=radio] {
+    width: 14px;
+    height: 14px;
+    background-color: white;
+    border-radius: 14px;
+    // vertical-align: middle;
+    border: 2px solid #fff !important;
+    cursor: pointer;
+    &:checked {
+      border-color: black !important
+    }
   }
 }
 

@@ -98,8 +98,6 @@ $helpdesk_info = get_field('helpdesk_info', 'option');
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 
-<script type="text/javascript"  src="<?php echo get_template_directory_uri().'/assets/js/main.js?rand=2346236'; ?>"></script>
-
 <?php wp_footer(); ?>
 </body>
 </html>

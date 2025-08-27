@@ -83,7 +83,7 @@ $header_text = get_field('header_block_text', 'option');
               <?php if (!isset($_COOKIE['lgi'])) : ?>
                <div class="member-login-cta-text">
                   <h2>Are you a member?</h2>
-                  <p>Login to see member exclusive content. <a href="/join-us/our-members/">Click here</a> to find out if you’re a member.</p>
+                  <p>Login to see member exclusive content. <a href="/join-us/our-members/">Find out if you’re a member.</a></p>
                </div>
                 <div class="member-login-cta">
                   <a href="/login" class="btn btn-primary">Log in</a>
