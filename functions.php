@@ -210,6 +210,7 @@ function wp_bootstrap_starter_scripts()
 
 	wp_enqueue_style('app-css', get_template_directory_uri() . '/assets/css/app.css?r=' . rand());
 	wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/css/custom.css?r=' . rand());
+	wp_enqueue_style('resources-css', get_template_directory_uri() . '/assets/css/resources.css?r=' . rand());
 	wp_enqueue_style('jquery-ui', '//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css');
 
 	// Font Awesome
@@ -221,9 +222,11 @@ function wp_bootstrap_starter_scripts()
 	// Owl Carousel
 	wp_enqueue_style('owl-carousel', get_template_directory_uri() . '/assets/owl-carousel/owl.carousel.css?r=' . rand());
 	wp_enqueue_script('owl-carousel', get_template_directory_uri() . '/assets/owl-carousel/owl.carousel.js', array('jquery-ui'), rand(), true);
+	wp_enqueue_script('owl-carousel-thumbs', get_template_directory_uri() . '/assets/owl-carousel/owl.carousel2.thumbs.min.js', array('jquery-ui'), rand(), true);
 
 	// Custom JS
 	wp_enqueue_script('custom-script', get_template_directory_uri() . '/assets/js/custom.js',array('jquery-ui'), rand(), true);
+	wp_enqueue_script('resources-script', get_template_directory_uri() . '/assets/js/resources.js',array('jquery-ui'), rand(), true);
 	// Localize admin ajax
     wp_localize_script( 'custom-script', 'ajax_object',
         array( 
@@ -240,6 +243,7 @@ add_action('wp_enqueue_scripts', 'wp_bootstrap_starter_scripts');
  */
 function and_admin_enqueue_scripts()
 {
+
     wp_enqueue_style('admin-style', get_template_directory_uri() . '/assets/css/admin.css?r=' . rand());
 }
 add_action('admin_enqueue_scripts', 'and_admin_enqueue_scripts');
@@ -672,4 +676,29 @@ function get_template_posts_card($post_type, $posts) {
 		get_template_part('template-parts/posts-grid/posts-card-loop');
 		get_template_part('template-parts/posts-grid/posts-card-carousel');
 	}
+}
+
+require get_template_directory() . '/inc/facetwp/hooks.php';
+
+function theme_enqueue_jcarousel_assets() {
+  // Carousel stylesheet for resource carousel component.
+  wp_enqueue_style('and-jcarousel-css', get_template_directory_uri() . '/inc/assets/css/and-jcarousel.css');
+}
+add_action('wp_enqueue_scripts', 'theme_enqueue_jcarousel_assets');
+
+if (function_exists('acf_add_options_page')) {
+  acf_add_options_page([
+    'page_title' => 'Resource Topic Blocks',
+    'menu_title' => 'Resource Topic Blocks',
+    'menu_slug'  => 'resource-topic-blocks',
+    'capability' => 'edit_posts',
+    'redirect'   => false
+  ]);
+  acf_add_options_page([
+    'page_title' => 'Resource Listing Block',
+    'menu_title' => 'Resource Listing Block',
+    'menu_slug'  => 'resource-listing-header-block',
+    'capability' => 'edit_posts',
+    'redirect'   => false
+  ]);
 }

@@ -8,6 +8,8 @@ if( get_row_layout() == 'resources_data_feed' ):
     );
 
     $resources = get_posts($args);
+  $resourcesHtml = ''; // Initialize the variable
+  $feed = isset($feed) ? $feed : ''; // Define with default if not set
 
     foreach($resources as $resource) {
         $resourceImage = get_the_post_thumbnail_url($resource->ID);

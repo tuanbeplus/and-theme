@@ -315,3 +315,27 @@ function pp_validate_update_cart_qtt($cart_item_key, $qtt_number) {
 
   return true;
 }
+
+function pp_get_friendly_file_type($subtype) {
+  $mime_map = [
+    // Microsoft Office formats
+    'vnd.openxmlformats-officedocument.wordprocessingml.document' => 'WORD',
+    'msword' => 'WORD',
+    'vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'EXCEL',
+    'vnd.ms-excel' => 'EXCEL',
+    'vnd.openxmlformats-officedocument.presentationml.presentation' => 'POWERPOINT',
+    'vnd.ms-powerpoint' => 'POWERPOINT',
+
+    // PDF
+    'pdf' => 'PDF',
+
+    // Common formats
+    'jpeg' => 'JPG',
+    'png' => 'PNG',
+    'zip' => 'ZIP',
+    'plain' => 'TXT',
+    'csv' => 'CSV',
+  ];
+
+  return isset($mime_map[$subtype]) ? $mime_map[$subtype] : strtoupper($subtype);
+}

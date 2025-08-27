@@ -321,7 +321,7 @@ add_filter('woocommerce_order_item_name', 'ppwc_custom_order_item_name', 999, 2)
 function remove_product_variations_before_checkout() {
 
   // Check if it's the checkout page
-  if (is_checkout()) {
+  if ( function_exists('is_checkout') && is_checkout() ) {
     $item_removed_arr = array();
 
     // Get the cart

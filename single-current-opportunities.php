@@ -7,6 +7,8 @@ get_header();
 
 $positions = getOpenPositions();
 $program_id = get_field('stepping_into_program_id','options');
+$sf_community_url = get_field('salesforce_community_url','options');
+$sf_community_url = !empty($sf_community_url) ? $sf_community_url : 'https://ausdn.my.site.com';
 ?>
 
 <div class="col-12 current-opportunities">
@@ -97,16 +99,12 @@ $program_id = get_field('stepping_into_program_id','options');
                         <p>Citizenship requirements:  <?php echo $position->Candidate_Citizenship_Requirements__c !== null ? $position->Candidate_Citizenship_Requirements__c  : 'N/A'; ?></p>
                         <p>Year of study: <?php echo $position->Preferred_Year_of_Study__c !== null ? $position->Preferred_Year_of_Study__c  : 'N/A'; ?></p>
                     </div>
-<!--
-                    <div class="sub">
-                        Plus Fitness
-                    </div> -->
 
                     <div class="description">
                         <a href="<?php echo $position->Position_Description_Public_URL__c; ?>" target="_blank" style="color:#663077;">View job description</a>
                     </div>
 
-                    <a href="https://andau.force.com/forms/s/andforms?formtype=stepping_into_application&programid=<?php echo $program_id; ?>" target="_blank" class="cta" style="display: inline-block;
+                    <a href="<?php echo $sf_community_url ?>/forms/s/andforms?formtype=stepping_into_application&programid=<?php echo $program_id; ?>" target="_blank" class="cta" style="display: inline-block;
                       color: #fff;
                       padding: 10px 25px;
                       background: #663077;

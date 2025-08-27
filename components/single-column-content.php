@@ -31,7 +31,7 @@ if( get_row_layout() == 'single_column_content' ):
         }
         $html .= '
                 <div class="col-12 text-content-block">
-                    <div class="inner">
+                    <div class="inner single-column-content">
                     '.$content.'
                     </div>
                 </div>';
@@ -45,3 +45,23 @@ if( get_row_layout() == 'single_column_content' ):
             </div>
         </section>';
 endif;
+
+$resources = get_sub_field('resource_media');
+
+if ($resources) {
+  foreach ($resources as $post) {
+    setup_postdata($post);
+    get_template_part('template-parts/resource-media');
+  }
+  wp_reset_postdata();
+}
+
+$resources_members_only = get_sub_field('resource_media_members_only');
+if ($resources_members_only && isset($_COOKIE['lgi'])) {
+  foreach ($resources_members_only as $post) {
+    setup_postdata($post);
+    get_template_part('template-parts/resource-media');
+  }
+  wp_reset_postdata();
+}
+?>

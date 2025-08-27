@@ -117,60 +117,71 @@ $current_post_type = get_post_type();
                     endif;
                     ?>
                     <div class="col-md-12 col-lg-3 on-this-page sidebar <?php echo ($is_custom_menu == true) ? 'custom' : 'default'; ?>">
-                        <div class="inner">
-                            <h2><?php echo $menu_title; ?></h2>
-                            <ul>
-                                <!-- Custom links -->
-                                <?php echo $links; ?>
-                                <!-- /Custom links -->
-
-                                <?php if ($is_custom_menu == true): ?>
-                                    <?php if (!empty($menu_items)): ?>
-                                        <!-- Custom menu items -->
-                                        <?php foreach ($menu_items as $index => $item): ?>
-                                            <?php if (isset($item['custom_item'])): ?>
-                                            <li>
-                                                <a href="#point-<?php echo $index; ?>" id="<?php echo $index; ?>" class="circle dark-red">
-                                                    <span class="material-icons">arrow_forward</span>
-                                                    <span class="text"><?php echo $item['custom_item']; ?></span>
-                                                </a>
-                                            </li>
-                                            <?php endif; ?>
-                                        <?php endforeach; ?>
-                                        <!-- /Custom menu items -->
+                        <div class="inner resource-sidebar-inner">
+                            <div class="on-this-page-container">
+                                <h2><?php echo $menu_title; ?></h2>
+                                <ul>
+                                    <!-- Custom links -->
+                                    <?php echo $links; ?>
+                                    <!-- /Custom links -->
+    
+                                    <?php if ($is_custom_menu == true): ?>
+                                        <?php if (!empty($menu_items)): ?>
+                                            <!-- Custom menu items -->
+                                            <?php foreach ($menu_items as $index => $item): ?>
+                                                <?php if (isset($item['custom_item'])): ?>
+                                                <li>
+                                                    <a href="#point-<?php echo $index; ?>" id="<?php echo $index; ?>" class="circle dark-red">
+                                                        <span class="material-icons">arrow_forward</span>
+                                                        <span class="text"><?php echo $item['custom_item']; ?></span>
+                                                    </a>
+                                                </li>
+                                                <?php endif; ?>
+                                            <?php endforeach; ?>
+                                            <!-- /Custom menu items -->
+                                        <?php endif; ?>
                                     <?php endif; ?>
+                                    
+                                    <?php if($showOnPageMainCta == 'internship'){ ?>
+                                    <li class="yellow cta">
+                                        <a href="https://andau.force.com/forms/s/andforms?formtype=stepping_into_application&programid=<?php echo $program_id; ?>">
+                                            <img src="<?php echo AND_IMG_URI.'mail.svg'; ?>" alt="Mail icon"/>
+                                            <span class="text">Apply for an internship</span>
+                                        </a>
+                                    </li>
+                                    <?php } else if($showOnPageMainCta == 'apply-mentee') { ?>
+                                    <li class="member cta">
+                                        <a href="<?php echo get_field('mentee_cta','option'); ?>">
+                                            <img src="<?php echo AND_IMG_URI.'member-icon.svg'; ?>" alt="Member icon"/>
+                                            <span class="text">Apply to be a mentee</span>
+                                        </a>
+                                    </li>
+                                    <?php } else if($showOnPageMainCta == 'become-member' && !isset($_COOKIE['lgi'])) { ?>
+                                    <li class="member cta">
+                                        <a href="<?php echo get_field('become_member_cta','option'); ?>">
+                                            <img src="<?php echo AND_IMG_URI.'member-icon.svg'; ?>" alt="Member icon"/><span class="text">Become a member</span>
+                                        </a>
+                                    </li>
+                                    <?php } else { ?>
+                                        <li class="cta"></li>
+                                <?php } ?>
+                                </ul>
+                            </div>
+                            <?php if(!in_array($showOnPageMainCta, ['none', 'internship', 'apply-mentee', 'become-member'])) { ?>
+                            <div class="member-login-cta-wrapper sidebar-member-login-cta-wrapper">
+                            <div class="sidebar-member-cta">
+                                <?php if (!isset($_COOKIE['lgi'])) : ?>
+                                <h2>Are you a member?</h2>
+                                <p>Login to see member exclusive content. <a href="/join-us/our-members/">Click here</a> to find out if you’re a member.</p>
+                                <span class="member-login-cta"> <a href="/login" class="btn btn-primary">Log in</a> </span>
+                                <?php else : ?>
+                                <h2>Welcome back!</h2>
+                                <p>You are logged in - browse resources to see member exclusive content.</p>
                                 <?php endif; ?>
-                                
-                                <?php if($showOnPageMainCta == 'internship'){ ?>
-                                <li class="yellow cta">
-                                    <a href="https://andau.force.com/forms/s/andforms?formtype=stepping_into_application&programid=<?php echo $program_id; ?>">
-                                        <img src="<?php echo AND_IMG_URI.'mail.svg'; ?>" alt="Mail icon"/>
-                                        <span class="text">Apply for an internship</span>
-                                    </a>
-                                </li>
-                                <?php } else if($showOnPageMainCta == 'apply-mentee') { ?>
-                                <li class="member cta">
-                                    <a href="<?php echo get_field('mentee_cta','option'); ?>">
-                                        <img src="<?php echo AND_IMG_URI.'member-icon.svg'; ?>" alt="Member icon"/>
-                                        <span class="text">Apply to be a mentee</span>
-                                    </a>
-                                </li>
-                                <?php } else if($showOnPageMainCta == 'become-member' && !isset($_COOKIE['lgi'])) { ?>
-                                <li class="member cta">
-                                    <a href="<?php echo get_field('become_member_cta','option'); ?>">
-                                        <img src="<?php echo AND_IMG_URI.'member-icon.svg'; ?>" alt="Member icon"/><span class="text">Become a member</span>
-                                    </a>
-                                </li>
-                                <?php } else if($showOnPageMainCta !== 'none' && !isset($_COOKIE['lgi'])) { ?>
-                                <li class="member cta">
-                                    <a href="<?php echo get_field('member_cta','option'); ?>">
-                                        <img src="<?php echo AND_IMG_URI.'member-icon.svg'; ?>" alt="Member icon"/><span class="text">Login for Member content</span>
-                                    </a>
-                                </li>
-                                <?php } else { ?>
-                                    <li class="cta"></li>
-                            <?php } ?>
-                            </ul>
+                            </div>
+
+                            </div>
+                        <?php } ?>
                         </div>
                     </div>                    
                 <?php endif; ?>

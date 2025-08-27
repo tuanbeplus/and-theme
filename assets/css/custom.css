@@ -438,7 +438,7 @@ header #main-nav .navbar-nav li a {
 /* Header version 2 */
 
 header.version-2 {
-  padding: 30px 0 20px;
+  padding: 30px 0;
   background-color: #6e297b;
 }
 

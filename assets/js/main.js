@@ -18053,6 +18053,9 @@ function __guardMethod__(obj, methodName, transform) {
     });
 
     $(document).on("click", ".on-this-page a", function (e) {
+      // Exclude links inside .member-login-cta-wrapper
+      if ($(this).closest(".member-login-cta-wrapper").length) return;
+
       let body = $("body");
 
       if (!body.hasClass("single-submissions")) {
